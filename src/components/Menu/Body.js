@@ -122,7 +122,18 @@ function Body() {
         {key == 5 && <Table />}
         {key == 6 && <Table />} */}
 
-        {products?.length
+        {loading
+          ? [...Array(5).keys()].map((i) => (
+              <Skeleton
+                variant="rect"
+                height={100}
+                width={"100%"}
+                style={{
+                  marginTop: "20px",
+                }}
+              />
+            ))
+          : products?.length
           ? products?.map((product) => <Table data={product} />)
           : null}
       </div>
