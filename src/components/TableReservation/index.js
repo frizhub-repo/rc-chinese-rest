@@ -1,38 +1,64 @@
-import React from 'react'
+import React, { useState } from "react";
 import Navbar from "../Navbar";
 import Footer from "../../Footer";
 import About from "../About";
 import UserPhotos from "../UserPhotos";
 import Carousel from "react-multi-carousel";
 import Card from "./Card";
+import moduleName from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
 
+const useStyles = makeStyles({
+  tabsContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  tabs: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "50%",
+  },
+});
 
-function TableReservation(){
-    var scrollTo = function(ele){
-        let offsetTop  = document.getElementById(ele).offsetTop;
-        window.scrollTo({
-            top: offsetTop-100,
-            behavior: "smooth"
-        });
-    }
+function TableReservation() {
+  const classes = useStyles();
+  const [activeTab, setActiveTab] = useState(0);
+  var scrollTo = function (ele) {
+    let offsetTop = document.getElementById(ele).offsetTop;
+    window.scrollTo({
+      top: offsetTop - 100,
+      behavior: "smooth",
+    });
+  };
 
-    return(
-        <div>
-            <Navbar selected='Res'/>
-            <div className='mt-0 flex pl-36 items-center  h-96 justify-content-start' style={{background:'url(https://images.unsplash.com/photo-1452967712862-0cca1839ff27?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80) center center'}}>
-                <div className='border-l-4 py-4 px-2 rounded border-yellow-400 ml-24'>
-                    <h1 className='font-old text-white font-3xl text-left'>
-                        Table Reservation
-                    </h1>
+  return (
+    <div>
+      <Navbar selected="Res" />
+      <div
+        className="mt-0 flex pl-36 items-center  h-96 justify-content-start"
+        style={{
+          background:
+            "url(https://images.unsplash.com/photo-1452967712862-0cca1839ff27?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80) center center",
+        }}
+      >
+        <div className="border-l-4 py-4 px-2 rounded border-yellow-400 ml-24">
+          <h1 className="font-old text-white font-3xl text-left">
+            Table Reservation
+          </h1>
+        </div>
+      </div>
+      <h1 className="font-old text-3xl mt-8 mb-8">Table Reservation</h1>
+      <div className={classes.tabsContainer}>
+        <div className={classes.tabs}>
+          <label>Number of People</label>
+          <label>Date</label>
+          <label>Services</label>
+          <label>Promotions</label>
+        </div>
+      </div>
 
-
-
-                </div>
-            </div>
-            <h1 className='font-old text-3xl mt-8 mb-8'>
-                Table Reservation
-            </h1>
-            <section className='px-36 mt-8 flex justify-content-center'>
+      {/* <section className='px-36 mt-8 flex justify-content-center'>
 
                 <div className="text-gray-900   w-75 mb-2 	 px-0 py-0">
                     <div className="container ml-0 flex   py-0 px-0 md:flex-row flex-col ">
@@ -284,56 +310,68 @@ function TableReservation(){
                     </div>
 
                 </div>
+            </div> */}
+      <h1 className="font-old text-3xl mt-8" id={"photos"}>
+        {" "}
+        User photos
+      </h1>
+      <p className="text-sm text-gray-500 mt-8 px-44 mb-8">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl
+        eros, pulvinar facilisis justo mollis, auctor consequat urna. Morbi a
+        bibendum metus. Donec scelerisque sollicitudin enim eu venenatis. Duis
+        tincidunt laoreet ex, in pretium orci vestibulum eget.
+      </p>
+      <UserPhotos />
+      <div className="w-full flex justify-content-center">
+        <section
+          id="info"
+          className="text-gray-700 body-font w-75 px-44 mt-8 mb-8"
+        >
+          <div className="container  py-4 mx-auto w-full">
+            <div className="flex flex-col text-left w-full mb-4">
+              <h1
+                className="sm:text-3xl text-2xl font-medium font-old text-center  title-font mb-4 text-gray-900"
+                id="info"
+              >
+                Other informations
+              </h1>
+              <div className="w-full p-3 ">
+                <div className="mb-3">
+                  <h6 className="text-gold font-weight-bold text-xs">Info</h6>
+                  <p className="text-gray-500 text-xs font-weight-bold">
+                    info about the restaurant
+                  </p>
+                </div>
+                <div className="mb-3">
+                  <h6 className="text-gold font-weight-bold text-xs">Info</h6>
+                  <p className="text-gray-500 text-xs font-weight-bold">
+                    info about the restaurant
+                  </p>
+                </div>
+                <div className="mb-3">
+                  <h6 className="text-gold font-weight-bold text-xs">Info</h6>
+                  <p className="text-gray-500 text-xs font-weight-bold">
+                    info about the restaurant
+                  </p>
+                </div>
+                <div className="mb-3">
+                  <h6 className="text-gold font-weight-bold text-xs">Info</h6>
+                  <p className="text-gray-500 text-xs font-weight-bold">
+                    info about the restaurant
+                  </p>
+                </div>
+              </div>
             </div>
-            <h1 className='font-old text-3xl mt-8' id={'photos'}> User photos</h1>
-            <p className='text-sm text-gray-500 mt-8 px-44 mb-8'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros,
-                pulvinar facilisis justo mollis, auctor consequat urna. Morbi a bibendum metus.
-                Donec scelerisque sollicitudin enim eu venenatis. Duis tincidunt laoreet ex,
-                in pretium orci vestibulum eget.
-            </p>
-            <UserPhotos/>
-            <div className='w-full flex justify-content-center'>
-                <section id='info' className="text-gray-700 body-font w-75 px-44 mt-8 mb-8">
-                    <div className="container  py-4 mx-auto w-full">
-                        <div className="flex flex-col text-left w-full mb-4">
-                            <h1 className="sm:text-3xl text-2xl font-medium font-old text-center  title-font mb-4 text-gray-900" id='info'>Other informations</h1>
-                            <div className='w-full p-3 '>
-                                <div className='mb-3'>
-                                    <h6 className='text-gold font-weight-bold text-xs'>Info</h6>
-                                    <p className='text-gray-500 text-xs font-weight-bold'>info about the restaurant</p>
-                                </div>
-                                <div className='mb-3'>
-                                    <h6 className='text-gold font-weight-bold text-xs'>Info</h6>
-                                    <p className='text-gray-500 text-xs font-weight-bold'>info about the restaurant</p>
-                                </div>
-                                <div className='mb-3'>
-                                    <h6 className='text-gold font-weight-bold text-xs'>Info</h6>
-                                    <p className='text-gray-500 text-xs font-weight-bold'>info about the restaurant</p>
-                                </div>
-                                <div className='mb-3'>
-                                    <h6 className='text-gold font-weight-bold text-xs'>Info</h6>
-                                    <p className='text-gray-500 text-xs font-weight-bold'>info about the restaurant</p>
-                                </div>
+          </div>
+        </section>
+      </div>
 
-                            </div>
-                        </div>
-                    </div>
-
-                </section>
-
-            </div>
-
-            <div id='reviews'>
-                <About/>
-
-            </div>
-            <Footer/>
-        </div>
-
-
-
-    )
+      <div id="reviews">
+        <About />
+      </div>
+      <Footer />
+    </div>
+  );
 }
 
-export default TableReservation
+export default TableReservation;
