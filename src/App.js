@@ -9,6 +9,7 @@ import Menu from "./components/Menu";
 import Contact from "./components/Contact";
 import TableReservation from "./components/TableReservation";
 import Delivery from "./components/delivery";
+import Auth from './components/Auth';
 function App() {
   return (
     <div className="App">
@@ -19,6 +20,7 @@ function App() {
             <Route path='/contact' exact component={Contact}/>
           <Route path='/tableRes' exact component={TableReservation}/>
           <Route path='/delivery' exact component={Delivery}/>
+          <Route path="/auth" component={Auth} />
 
 
 
