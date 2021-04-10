@@ -5,8 +5,10 @@ import {
   TextField,
   FormControlLabel,
   Checkbox,
+  FormHelperText,
 } from "@material-ui/core";
 import SignaturesLogo from "../../images/SignaturesLogo.jpg";
+import { useForm } from "react-hook-form";
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -44,38 +46,66 @@ const useStyles = makeStyles((theme) => ({
   changeCursor: {
     cursor: "pointer",
   },
+  helperText: {
+    marginLeft: "15px",
+    color: "red",
+  },
 }));
 
 export default function SignIn({ setActiveStep }) {
   const classes = useStyles();
+  const { register, handleSubmit, errors } = useForm();
+  const signinwithpayload = (data) => {
+    console.log(data);
+  };
+
   return (
     <Box>
       <Box className={classes.logo}>
         <img src={SignaturesLogo} width="50%" height="50%" />
       </Box>
-      <Box>
+      <form onSubmit={handleSubmit(signinwithpayload)}>
         <Box className={classes.txtFieldSpacing}>
           <TextField
-            id="email"
-            name="email"
             placeholder="Email"
             fullWidth
             variant="outlined"
             className={`my_custom_text_field`}
+            name="email"
+            inputRef={register({
+              required: "Email Address required",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Invalid email address",
+              },
+            })}
+            error={errors?.email ? true : false}
           />
+          <FormHelperText className={classes.helperText}>
+            {errors?.email?.message}
+          </FormHelperText>
         </Box>
         <Box className={classes.txtFieldSpacing}>
           <TextField
-            id="password"
-            name="password"
             placeholder="Password"
             fullWidth
             variant="outlined"
             className={`my_custom_text_field`}
+            type="password"
+            name="password"
+            inputRef={register({
+              required: "Password required",
+              minLength: {
+                value: 8,
+                message: "Password must be 8 character",
+              },
+            })}
+            error={errors?.password ? true : false}
           />
+          <FormHelperText className={classes.helperText}>
+            {errors?.password?.message}
+          </FormHelperText>
         </Box>
-      </Box>
-      <Box>
         <FormControlLabel
           className={classes.keepMeSignedIn}
           control={
@@ -83,12 +113,10 @@ export default function SignIn({ setActiveStep }) {
           }
           label="Keep me Signed in"
         />
-      </Box>
-      <Box>
         <Button disableElevation className={classes.signInButton} type="submit">
           Log in
         </Button>
-      </Box>
+      </form>
       <Box className={classes.forgotPassword}>
         <Box className={classes.changeCursor}>Forgot Password?</Box>
         <Box className={classes.changeCursor} onClick={() => setActiveStep(1)}>
