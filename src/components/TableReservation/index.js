@@ -7,23 +7,91 @@ import Carousel from "react-multi-carousel";
 import Card from "./Card";
 import moduleName from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import { Box, CircularProgress } from "@material-ui/core";
+import NumberOfPeople from "./NumberOfPeople";
+import DayPicker from "react-day-picker";
+import "react-day-picker/lib/style.css";
+import TimePicker from "react-time-picker";
+import ServiceButton from "./ServiceButton";
+import dayjs from "dayjs";
+import { toast } from "react-toastify";
+import { reserveTable } from "../../api/customers";
+import SuccessModal from "./SuccessModal";
 
 const useStyles = makeStyles({
   tabsContainer: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    flexDirection: "column",
   },
   tabs: {
     display: "flex",
     justifyContent: "space-between",
-    width: "50%",
+    width: "40%",
+  },
+  activeText: {},
+  text: {
+    color: "rgba(219, 214, 213)",
+  },
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    marginTop: "20px",
+    marginBottom: "20px",
   },
 });
 
 function TableReservation() {
   const classes = useStyles();
   const [activeTab, setActiveTab] = useState(0);
+  const [number, setNumber] = useState(3);
+  const [selectedDay, setSelectedDay] = useState(Date.now());
+  const [time, setTime] = useState("12:00:00");
+  const [services, setServices] = useState("lunch");
+  const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  var isSameOrBefore = require("dayjs/plugin/isSameOrBefore");
+  dayjs.extend(isSameOrBefore);
+
+  const tableReserve = async () => {
+    try {
+      debugger;
+      const formatDate = dayjs(selectedDay).format("YYYY-MM-DD");
+      if (
+        !dayjs(dayjs().format("YYYY-MM-DD")).isSameOrBefore(dayjs(formatDate))
+      ) {
+        toast.error("Please provide correct date");
+      } else {
+        setLoading(true);
+        const res = await reserveTable({
+          startTime: formatDate + " " + time,
+          numberOfPeople: number,
+          services: services,
+        });
+        setLoading(false);
+        handleShow();
+      }
+    } catch (error) {
+      setLoading(false);
+      console.log({ error });
+    }
+  };
+
+  const modifiers = {
+    highlighted: selectedDay,
+  };
+
+  const modifiersStyles = {
+    highlighted: {
+      color: "white",
+      backgroundColor: "#ffc107",
+    },
+  };
+
   var scrollTo = function (ele) {
     let offsetTop = document.getElementById(ele).offsetTop;
     window.scrollTo({
@@ -51,11 +119,109 @@ function TableReservation() {
       <h1 className="font-old text-3xl mt-8 mb-8">Table Reservation</h1>
       <div className={classes.tabsContainer}>
         <div className={classes.tabs}>
-          <label>Number of People</label>
-          <label>Date</label>
-          <label>Services</label>
-          <label>Promotions</label>
+          <label
+            className={activeTab === 0 ? classes.activeText : classes.text}
+            onClick={() => setActiveTab(0)}
+          >
+            Number of People
+          </label>
+          <label
+            className={activeTab === 1 ? classes.activeText : classes.text}
+            onClick={() => setActiveTab(1)}
+          >
+            Date
+          </label>
+          <label
+            className={activeTab === 2 ? classes.activeText : classes.text}
+            onClick={() => setActiveTab(2)}
+          >
+            Services
+          </label>
+          <label
+            className={activeTab === 3 ? classes.activeText : classes.text}
+            onClick={() => setActiveTab(3)}
+          >
+            Schedule
+          </label>
+          {/* <label
+            className={activeTab === 3 ? classes.activeText : classes.text}
+            onClick={() => setActiveTab(3)}
+          >
+            Promotions
+          </label> */}
         </div>
+        {activeTab === 0 && (
+          <Box className={classes.container}>
+            <NumberOfPeople number={number} setNumber={setNumber} />
+          </Box>
+        )}
+        {activeTab === 1 && (
+          <DayPicker
+            onDayClick={(day) => {
+              debugger;
+              setSelectedDay(day);
+            }}
+            modifiers={modifiers}
+            modifiersStyles={modifiersStyles}
+            val
+          />
+        )}
+        {activeTab === 2 && (
+          <Box display="flex" flexWrap="wrap" width="35%">
+            <ServiceButton
+              services={services}
+              setServices={setServices}
+              data="breakfast"
+              text="Breakfast"
+            />
+            <ServiceButton
+              services={services}
+              setServices={setServices}
+              data="lunch"
+              text="Lunch"
+            />
+            <ServiceButton
+              services={services}
+              setServices={setServices}
+              data="dinner"
+              text="Dinner"
+            />
+          </Box>
+        )}
+        {activeTab === 3 && (
+          <>
+            <Box mt="18%" display="flex" flexDirection="column">
+              <TimePicker
+                onChange={(time) => {
+                  console.log({ time });
+                  setTime(time);
+                }}
+                value={time}
+                isOpen={true}
+              />
+            </Box>
+            <button
+              className="px-12 py-3 text-black text-center text-sm mb-12"
+              style={{
+                backgroundColor: "#ffc107",
+                color: "#fff",
+                width: "40%",
+                borderRadius: "6px",
+                marginTop: "20px",
+              }}
+              onClick={tableReserve}
+            >
+              {loading && (
+                <CircularProgress
+                  color="inherit"
+                  size={20}
+                  style={{ marginRight: "8px" }}
+                />
+              )}
+              Book Now
+            </button>
+          </>
+        )}
       </div>
 
       {/* <section className='px-36 mt-8 flex justify-content-center'>
@@ -370,6 +536,13 @@ function TableReservation() {
         <About />
       </div>
       <Footer />
+      <SuccessModal
+        show={show}
+        handleClose={handleClose}
+        date={selectedDay}
+        time={time}
+        peopleCount={number}
+      />
     </div>
   );
 }
