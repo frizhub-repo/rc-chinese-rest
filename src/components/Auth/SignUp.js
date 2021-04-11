@@ -7,6 +7,10 @@ import {
 } from "@material-ui/core";
 import SignaturesLogo from "../../images/SignaturesLogo.jpg";
 import { useForm } from "react-hook-form";
+import { customerSignUp } from "../../api/Auth";
+import axiosIntance from "../../utils/axios-configure";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -47,9 +51,20 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp({ setActiveStep }) {
   const classes = useStyles();
+  const history = useHistory();
   const { register, handleSubmit, errors } = useForm();
-  const signUpwithpayload = (data) => {
-    console.log(data);
+  const signUpwithpayload = async (data) => {
+    try {
+      const res = await customerSignUp(data);
+      if(res?.status === 200) {
+        axiosIntance.defaults.headers.common["Authorization"] = res?.data?.token;
+        localStorage.setItem("token", res?.data?.token);
+        toast.success("You have been sign up successfully");
+        history.push("/")
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
   };
 
   return (
