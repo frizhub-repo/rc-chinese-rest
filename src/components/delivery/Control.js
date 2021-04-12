@@ -37,8 +37,8 @@ function Control() {
   };
 
   return (
-    <section className="w-full ml-4 p-4 border border-gray-300">
-      <div className="mb-3">
+    <section className="w-full ml-4 p-2 border border-gray-300">
+      <div className="mb-3 mt-3">
         {minimum - total > 0 && (
           <p className="text-xs text-left text-gray-500 mt-1 mb-3">
             ${minimum - total} to reach the minimum order
@@ -61,7 +61,7 @@ function Control() {
         </p>
 
         {items.length > 0 && (
-          <div className=" w-full p-2 mt-2 ">
+          <div className=" w-full mt-2 ">
             {items.map((item) => {
               return (
                 <div className="flex justify-content-between w-full">
