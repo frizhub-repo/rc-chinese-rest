@@ -146,7 +146,7 @@ function Delivery() {
                     return (
                       <button
                         className={`${
-                            categoryIndex === index
+                          categoryIndex === index
                             ? "bg-yellow-400 text-white"
                             : "bg-white text-black"
                         } rounded-pill py-2 px-2 m-2`}
@@ -160,14 +160,7 @@ function Delivery() {
               <div className="flex flex-wrap w-full justify-content-center">
                 {productByCategory &&
                   productByCategory[categoryIndex]?.products.map((product) => {
-                    return (
-                      <Product
-                        image="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHJhdmlvbGl8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                        price={product.price}
-                        name={product.title}
-                        desc={product?.description}
-                      />
-                    );
+                    return <Product product={product} />;
                   })}
               </div>
             </div>
