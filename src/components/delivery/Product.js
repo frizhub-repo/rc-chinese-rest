@@ -16,7 +16,7 @@ function Product({ product }) {
         name: product.title,
         product: product._id,
         price: product.price,
-        quantity: count,
+        quantity: parseInt(count),
       };
       const total = count * product.price;
       setCount(0);

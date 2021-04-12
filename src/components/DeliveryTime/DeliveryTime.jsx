@@ -9,7 +9,7 @@ import { updateCustomerInfo } from "../../api/customers";
 import { toast } from "react-toastify";
 import { ReactHookFormSelect } from "../CustomComponents/StyledComponents";
 import { useForm } from "react-hook-form";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import MenuItem from "@material-ui/core/MenuItem";
 
 const useStyles = makeStyles({
@@ -24,16 +24,19 @@ const useStyles = makeStyles({
     flexDirection: "column",
   },
   btn: {
-    height: "40px",
-    background: "rgba(16, 185, 129,0.3)",
-    border: "1px solid rgba(16, 185, 129)",
-    marginTop: "20px",
+    borderRadius: "35px",
+    width: "200px",
+    // padding: "15px 20px",
+    backgroundColor: "#FDBD00",
+    color: "white",
+    marginTop: "30px",
+    fontSize: "22px",
     "&:hover": {
-      background: "rgba(16, 185, 129,0.3)",
+      backgroundColor: "#FDBD00",
+      color: "white",
     },
-    color: "rgba(16, 185, 129)",
+    height: "60px",
     textTransform: "capitalize",
-    padding: "20px 50px 20px 50px",
   },
 });
 
@@ -41,7 +44,7 @@ const DeliveryTime = () => {
   const classes = useStyles();
   const { register, handleSubmit, errors, control } = useForm();
   const [loading, setLoading] = useState(false);
-  //   const history = useHistory();
+  const history = useHistory();
 
   const addDeliveryTimeHandler = async (data) => {
     try {
@@ -50,7 +53,7 @@ const DeliveryTime = () => {
       const obj = { time: data?.time, note: data?.note ? data?.note : "" };
       await updateCustomerInfo({ deliveryInfo: obj });
       setLoading(false);
-      //   history.push("/");
+      history.push("/");
       toast.success("Your preference added successfully!");
     } catch (error) {
       setLoading(false);
@@ -85,6 +88,7 @@ const DeliveryTime = () => {
             control={control}
             error={!!errors?.time}
             defaultValue="as soon as possible"
+            className={`my_custom_text_field`}
           >
             <MenuItem value="as soon as possible">As soon as possible</MenuItem>
             <MenuItem value="other">Other</MenuItem>
@@ -115,6 +119,7 @@ const DeliveryTime = () => {
             rows={8}
             variant="outlined"
             inputRef={register}
+            className={`my_custom_text_field`}
           />
 
           <Box mt="15px">

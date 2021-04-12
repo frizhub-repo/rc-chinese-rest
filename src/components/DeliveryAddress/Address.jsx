@@ -12,10 +12,12 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import { ReactHookFormSelect } from "../CustomComponents/StyledComponents";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
-  container: {},
+  container: {
+    width: "50%",
+  },
   title: {
     fontWeight: "600",
     fontSize: "20px",
@@ -24,18 +26,22 @@ const useStyles = makeStyles({
     padding: "20px",
     display: "flex",
     flexDirection: "column",
+    padding: "80px 100px 80px 100px",
   },
   btn: {
-    height: "40px",
-    background: "rgba(16, 185, 129,0.3)",
-    border: "1px solid rgba(16, 185, 129)",
-    marginTop: "20px",
+    borderRadius: "35px",
+    width: "200px",
+    // padding: "15px 20px",
+    backgroundColor: "#FDBD00",
+    color: "white",
+    marginTop: "30px",
+    fontSize: "22px",
     "&:hover": {
-      background: "rgba(16, 185, 129,0.3)",
+      backgroundColor: "#FDBD00",
+      color: "white",
     },
-    color: "rgba(16, 185, 129)",
+    height: "60px",
     textTransform: "capitalize",
-    padding: "20px 50px 20px 50px",
   },
 });
 
@@ -43,7 +49,7 @@ const Address = () => {
   const { register, handleSubmit, errors, control } = useForm();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  //   const history = useHistory();
+  const history = useHistory();
 
   const addAddressHandler = async (data) => {
     try {
@@ -52,7 +58,7 @@ const Address = () => {
       await addDeliveryAddress(data);
       dispatch(addAddress(data));
       setLoading(false);
-      //   history.push("/deliveryTime");
+      history.push("/deliveryTime");
       toast.success("Address Added Successfully!");
     } catch (error) {
       setLoading(false);
@@ -71,6 +77,7 @@ const Address = () => {
             label="Name"
             name="name"
             variant="outlined"
+            className={`my_custom_text_field`}
             inputRef={register({
               required: "Name Required",
             })}
@@ -83,6 +90,7 @@ const Address = () => {
             label="Phone Number"
             name="phoneNumber"
             variant="outlined"
+            className={`my_custom_text_field`}
             inputRef={register({
               required: "Phone Number Required",
             })}
@@ -95,6 +103,7 @@ const Address = () => {
             label="Address Line 1"
             name="addressLine1"
             variant="outlined"
+            className={`my_custom_text_field`}
             inputRef={register({
               required: "Address Line 1 Required",
             })}
@@ -107,6 +116,7 @@ const Address = () => {
             label="Address Line 2"
             name="addressLine2"
             variant="outlined"
+            className={`my_custom_text_field`}
             inputRef={register}
             error={errors.addressLine2 ? true : false}
             helperText={errors?.addressLine2?.message}
@@ -118,23 +128,26 @@ const Address = () => {
               label="City"
               name="city"
               variant="outlined"
+              className={`my_custom_text_field`}
               inputRef={register({
                 required: "City Required",
               })}
               error={errors.city ? true : false}
               helperText={errors?.city?.message}
-              style={{ marginRight: "20px" }}
+              style={{ marginRight: "20px", width: "100%" }}
             />
             <TextField
               id="outlined-basic"
               label="State/Province"
               name="stateOrProvince"
               variant="outlined"
+              className={`my_custom_text_field`}
               inputRef={register({
                 required: "State/Province Required",
               })}
               error={errors.stateOrProvince ? true : false}
               helperText={errors?.stateOrProvince?.message}
+              style={{ width: "100%" }}
             />
           </Box>
           <Box display="flex" mb="4px">
@@ -143,23 +156,26 @@ const Address = () => {
               label="Zip/Postal Code"
               name="zipOrPostalCode"
               variant="outlined"
+              className={`my_custom_text_field`}
               inputRef={register({
                 required: "Zip/Postal Code Required",
               })}
               error={errors.zipOrPostalCode ? true : false}
               helperText={errors?.zipOrPostalCode?.message}
-              style={{ marginRight: "20px" }}
+              style={{ marginRight: "20px", width: "100%" }}
             />
             <TextField
               id="outlined-basic"
               label="Country"
               name="country"
               variant="outlined"
+              className={`my_custom_text_field`}
               inputRef={register({
                 required: "Country Required",
               })}
               error={errors.country ? true : false}
               helperText={errors?.country?.message}
+              style={{ width: "100%" }}
             />
           </Box>
 
@@ -176,6 +192,7 @@ const Address = () => {
             inputRef={register}
             variant="outlined"
             margin="normal"
+            className={`my_custom_text_field`}
             control={control}
             error={!!errors?.addressKey}
             defaultValue="other"
@@ -193,6 +210,7 @@ const Address = () => {
             multiline
             rows={5}
             style={{ marginTop: "12px" }}
+            className={`my_custom_text_field`}
             variant="outlined"
             inputRef={register}
             error={errors.message ? true : false}

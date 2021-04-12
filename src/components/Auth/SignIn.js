@@ -15,6 +15,7 @@ import axiosIntance from "../../utils/axios-configure";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router";
 import React, { useState } from "react";
+import { useRestaurantContext } from "../../Context/restaurantContext";
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -63,6 +64,7 @@ export default function SignIn({ setActiveStep }) {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, errors } = useForm();
+  const { setToken } = useRestaurantContext();
   const signinwithpayload = async (data) => {
     try {
       setLoading(true);
@@ -73,6 +75,7 @@ export default function SignIn({ setActiveStep }) {
         axiosIntance.defaults.headers.common["Authorization"] =
           res?.data?.token;
         localStorage.setItem("token", res?.data?.token);
+        setToken(res?.data?.token);
         toast.success("You have been sign in successfully");
         history.push("/");
       }

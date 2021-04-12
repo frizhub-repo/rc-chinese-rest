@@ -46,6 +46,32 @@ export default function (state = initialState, action) {
         items: [],
         total: 0,
       };
+    case "ADD_QUANTITY":
+      const product = state.items.map((item) => {
+        if (item.product === action.payload.product) {
+          state.total += item.price;
+          return { ...item, quantity: item.quantity + 1 };
+        } else {
+          return item;
+        }
+      });
+      return {
+        ...state,
+        items: product,
+      };
+    case "REMOVE_QUANTITY":
+      const products = state.items.map((item) => {
+        if (item.product === action.payload.product) {
+          state.total -= item.price;
+          return { ...item, quantity: item.quantity - 1 };
+        } else {
+          return item;
+        }
+      });
+      return {
+        ...state,
+        items: products,
+      };
     default:
       return state;
   }

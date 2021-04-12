@@ -1,45 +1,77 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import axiosIntance from "../../utils/axios-configure";
-import { removeItem, removeOrderItems } from "../../actions/index";
+import {
+  removeItem,
+  removeOrderItems,
+  addQuantity,
+  removeQuantity,
+} from "../../actions/index";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
+import { useRestaurantContext } from "../../Context/restaurantContext";
+import { Link } from "react-router-dom";
+import { Box, CircularProgress } from "@material-ui/core";
 
 function Control() {
   const disp = useDispatch();
+  const { token } = useRestaurantContext();
   const total = useSelector((state) => state.orders).total;
   const items = useSelector((state) => state.orders).items;
   const minimum = useSelector((state) => state.orders).minimum;
   const delivery = useSelector((state) => state.orders).delivery;
+  const [loading, setLoading] = useState(false);
   const orderNow = () => {
-    total > 0 &&
+    if (total > 0) {
+      setLoading(true);
       axiosIntance
         .post("/api/v1/orders/customers", { products: items })
         .then((res) => {
           toast.success("Order created successfully");
           disp(removeOrderItems());
           console.log(res);
+          setLoading(false);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          setLoading(false);
+          console.log(err);
+        });
+    }
   };
 
   return (
     <section className="w-full ml-4 p-4 border border-gray-300">
-      <div className="mb-3">
-        {minimum - total > 0 && (
-          <p className="text-xs text-left text-gray-500 mt-1 mb-3">
-            ${minimum - total} to reach the minimum order
+      {token ? (
+        <div className="mb-3">
+          {minimum - total > 0 && (
+            <p className="text-xs text-left text-gray-500 mt-1 mb-3">
+              ${minimum - total} to reach the minimum order
+            </p>
+          )}
+          <button
+            className="w-full rounded-pill  bg-yellow-500 text-white text-center text-xs py-2 mb-4  font-weight-light"
+            onClick={orderNow}
+            disabled={loading}
+          >
+            {loading && (
+              <CircularProgress
+                color="inherit"
+                size={20}
+                style={{ marginRight: "8px" }}
+              />
+            )}
+            ORDER NOW
+          </button>
+          <p className="text-xs text-center text-indigo-500 ">
+            If you have any food allergy please click here
           </p>
-        )}
-        <button
-          className="w-full rounded-pill  bg-yellow-500 text-white text-center text-xs py-2 mb-4  font-weight-light"
-          onClick={orderNow}
-        >
-          ORDER NOW
-        </button>
-        <p className="text-xs text-center text-indigo-500 ">
-          If you have any food allergy please click here
-        </p>
-      </div>
+        </div>
+      ) : (
+        <Link to="/auth">
+          <Box mb="10px">Please login to order!</Box>
+        </Link>
+      )}
       <div>
         <p className="text-black text-center p-2 text-xs border-2 border-red-500 rounded-pill  mt-1">
           Home delivery {total}
@@ -50,13 +82,34 @@ function Control() {
             {items.map((item) => {
               return (
                 <div className="flex justify-content-between w-full">
+                  <div
+                    style={{
+                      width: "15%",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <button>
+                      <ArrowDropUpIcon
+                        style={{ cursor: "pointer" }}
+                        onClick={() => disp(addQuantity(item))}
+                      />
+                    </button>
+                    <button disabled={item.quantity > 1 ? false : true}>
+                      <ArrowDropDownIcon
+                        style={{ cursor: "pointer" }}
+                        onClick={() => disp(removeQuantity(item))}
+                      />
+                    </button>
+                  </div>
                   <div className="w-1/6 px-1">
                     <p className="text-xs text-left ">x{item.quantity}</p>
                     <button
                       className="text-xs text-left border-0 bg-white text-black"
                       style={{ verticalAlign: "sub" }}
+                      onClick={() => disp(removeItem(item))}
                     >
-                      Edit
+                      Delete
                     </button>
                   </div>
                   <div className="flex-grow-1 flex justify-content-between px-1 w-full">
@@ -64,9 +117,6 @@ function Control() {
                       <p className="text-gray-500 text-left text-xs mb-1">
                         {item.name}
                       </p>
-                      <button className="text-xs text-left border-0 bg-white text-black" onClick={() => disp(removeItem(item))}>
-                        Delete
-                      </button>
                     </div>
                     <div className="flex-grow-1 ml-4">
                       <p className="text-black mb-0  text-xs text-right">
