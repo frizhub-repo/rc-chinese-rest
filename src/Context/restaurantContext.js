@@ -1,6 +1,6 @@
 import jwtDecode from "jwt-decode";
 import React, { useState, useEffect } from "react";
-import axiosInstance from "../axios-configured";
+import axiosInstance from "../utils/axios-configure";
 
 const RestaurantContext = React.createContext();
 

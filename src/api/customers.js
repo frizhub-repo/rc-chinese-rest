@@ -7,3 +7,11 @@ export const addContactUs = (payload) => {
 export const reserveTable = (payload) => {
   return axiosIntance.post("/api/v1/reservations/create/customers", payload);
 };
+
+export const addDeliveryAddress = (payload) => {
+  return axiosIntance.patch("/api/v1/customers/add-delivery-address", payload);
+};
+
+export const updateCustomerInfo = (payload) => {
+  return axiosIntance.patch("/api/v1/customers", payload);
+};

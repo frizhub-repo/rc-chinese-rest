@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
-// import { useRestaurantContext } from "../../Context/restaurantContext";
+import { useRestaurantContext } from "../../Context/restaurantContext";
 import { makeStyles } from "@material-ui/styles";
 import SuccessIcon from "../../Assets/IconComponents/SuccessIcon";
 import dayjs from "dayjs";
@@ -43,7 +43,7 @@ export default function SuccessModal({
   time,
   peopleCount,
 }) {
-  //   const { customerData: user } = useRestaurantContext();
+  const { customerData: user } = useRestaurantContext();
   const classes = useStyles();
   return (
     <Modal
@@ -73,7 +73,9 @@ export default function SuccessModal({
         </div>
         <div className={classes.infoBox}>
           <label className={classes.textColor}>Name</label>
-          <label>{/* {user.firstName} {user.lastName} */}</label>
+          <label>
+            {user.firstName} {user.lastName}
+          </label>
         </div>
         <div className={classes.infoBox}>
           <label className={classes.textColor}>Status</label>
