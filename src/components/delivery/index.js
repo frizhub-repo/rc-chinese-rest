@@ -7,6 +7,20 @@ import Control from "./Control";
 import Product from "./Product";
 import { getProductByCategory } from "../../actions/productAction";
 import { useDispatch, useSelector } from "react-redux";
+import Box from "@material-ui/core/Box";
+import Skeleton from "@material-ui/lab/Skeleton";
+
+function Media() {
+  return (
+    <Box width={210} marginRight={0.5} my={5}>
+      <Skeleton variant="rect" width={210} height={150} />
+      <Box pt={0.5}>
+        <Skeleton />
+        <Skeleton width="60%" />
+      </Box>
+    </Box>
+  );
+}
 
 function Delivery() {
   const [categoryIndex, setCategoryIndex] = useState(0);
@@ -158,6 +172,7 @@ function Delivery() {
                   })}
               </div>
               <div className="flex flex-wrap w-full justify-content-center">
+                {!productByCategory.length && [1, 2, 3, 4, 5, 6].map(() => <Media />)}
                 {productByCategory &&
                   productByCategory[categoryIndex]?.products.map((product) => {
                     return <Product product={product} />;

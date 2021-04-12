@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import axiosIntance from "../../utils/axios-configure";
@@ -17,16 +17,23 @@ function Control() {
   const items = useSelector((state) => state.orders).items;
   const minimum = useSelector((state) => state.orders).minimum;
   const delivery = useSelector((state) => state.orders).delivery;
+  const [loading, setLoading] = useState(false);
   const orderNow = () => {
-    total > 0 &&
+    if(total > 0) {
+      setLoading(true)
       axiosIntance
         .post("/api/v1/orders/customers", { products: items })
         .then((res) => {
           toast.success("Order created successfully");
           disp(removeOrderItems());
           console.log(res);
+          setLoading(false)
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          setLoading(false)
+          console.log(err);
+        });
+      }
   };
 
   return (
@@ -40,6 +47,7 @@ function Control() {
         <button
           className="w-full rounded-pill  bg-yellow-500 text-white text-center text-xs py-2 mb-4  font-weight-light"
           onClick={orderNow}
+          disabled={loading}
         >
           ORDER NOW
         </button>
