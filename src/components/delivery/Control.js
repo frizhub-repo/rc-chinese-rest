@@ -78,7 +78,7 @@ function Control() {
         </p>
 
         {items.length > 0 && (
-          <div className=" w-full p-2 mt-2 ">
+          <div className=" w-full mt-2 ">
             {items.map((item) => {
               return (
                 <div className="flex justify-content-between w-full">
