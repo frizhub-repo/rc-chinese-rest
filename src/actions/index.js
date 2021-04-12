@@ -15,3 +15,11 @@ export const removeItem = (key) => {
 export const removeOrderItems = () => {
   return { type: "REMOVE_ORDER_ITEMS" };
 };
+
+export const addQuantity = (product) => {
+  return { type: "ADD_QUANTITY", payload: product };
+};
+
+export const removeQuantity = (product) => {
+  return { type: "REMOVE_QUANTITY", payload: product };
+};

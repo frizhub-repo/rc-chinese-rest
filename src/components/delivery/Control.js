@@ -2,7 +2,14 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import axiosIntance from "../../utils/axios-configure";
-import { removeItem, removeOrderItems } from "../../actions/index";
+import {
+  removeItem,
+  removeOrderItems,
+  addQuantity,
+  removeQuantity,
+} from "../../actions/index";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 
 function Control() {
   const disp = useDispatch();
@@ -50,13 +57,34 @@ function Control() {
             {items.map((item) => {
               return (
                 <div className="flex justify-content-between w-full">
+                  <div
+                    style={{
+                      width: "15%",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <button>
+                      <ArrowDropUpIcon
+                        style={{ cursor: "pointer" }}
+                        onClick={() => disp(addQuantity(item))}
+                      />
+                    </button>
+                    <button disabled={item.quantity > 1 ? false : true}>
+                      <ArrowDropDownIcon
+                        style={{ cursor: "pointer" }}
+                        onClick={() => disp(removeQuantity(item))}
+                      />
+                    </button>
+                  </div>
                   <div className="w-1/6 px-1">
                     <p className="text-xs text-left ">x{item.quantity}</p>
                     <button
                       className="text-xs text-left border-0 bg-white text-black"
                       style={{ verticalAlign: "sub" }}
+                      onClick={() => disp(removeItem(item))}
                     >
-                      Edit
+                      Delete
                     </button>
                   </div>
                   <div className="flex-grow-1 flex justify-content-between px-1 w-full">
@@ -64,9 +92,6 @@ function Control() {
                       <p className="text-gray-500 text-left text-xs mb-1">
                         {item.name}
                       </p>
-                      <button className="text-xs text-left border-0 bg-white text-black" onClick={() => disp(removeItem(item))}>
-                        Delete
-                      </button>
                     </div>
                     <div className="flex-grow-1 ml-4">
                       <p className="text-black mb-0  text-xs text-right">
