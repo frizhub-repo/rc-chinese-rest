@@ -6,6 +6,7 @@ import {
   FormControlLabel,
   Checkbox,
   FormHelperText,
+  CircularProgress,
 } from "@material-ui/core";
 import SignaturesLogo from "../../images/SignaturesLogo.jpg";
 import { useForm } from "react-hook-form";
@@ -13,6 +14,7 @@ import { customerSignIn } from "../../api/Auth";
 import axiosIntance from "../../utils/axios-configure";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router";
+import React, { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -59,17 +61,23 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn({ setActiveStep }) {
   const classes = useStyles();
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit, errors } = useForm();
   const signinwithpayload = async (data) => {
     try {
+      setLoading(true);
       const res = await customerSignIn(data);
-      if(res?.status === 200) {
-        axiosIntance.defaults.headers.common["Authorization"] = res?.data?.token;
+      setLoading(false);
+
+      if (res?.status === 200) {
+        axiosIntance.defaults.headers.common["Authorization"] =
+          res?.data?.token;
         localStorage.setItem("token", res?.data?.token);
         toast.success("You have been sign in successfully");
-        history.push("/")
+        history.push("/");
       }
     } catch (error) {
+      setLoading(false);
       toast.error(error?.response?.data?.message);
     }
   };
@@ -129,6 +137,13 @@ export default function SignIn({ setActiveStep }) {
           label="Keep me Signed in"
         />
         <Button disableElevation className={classes.signInButton} type="submit">
+          {loading && (
+            <CircularProgress
+              color="inherit"
+              size={20}
+              style={{ marginRight: "8px" }}
+            />
+          )}
           Log in
         </Button>
       </form>

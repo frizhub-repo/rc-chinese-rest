@@ -23,6 +23,7 @@ function App() {
           <Route path="/delivery" exact component={Delivery} />
           <Route path="/deliveryAddress" component={DeliveryAddress} />
           <Route path="/deliveryTime" component={DeliveryTime} />
+          <Route path="/auth" component={Auth} />
         </Switch>
       </Router>
     </div>
