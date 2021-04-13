@@ -27,6 +27,8 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     padding: "80px 100px 80px 100px",
+    borderRadius: "25px",
+    border: "1px solid rgba(0,0,0,0.5)",
   },
   btn: {
     borderRadius: "35px",

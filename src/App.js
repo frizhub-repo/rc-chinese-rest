@@ -10,6 +10,7 @@ import Delivery from "./components/delivery";
 import Auth from "./components/Auth";
 import DeliveryAddress from "./components/DeliveryAddress";
 import DeliveryTime from "./components/DeliveryTime";
+import Payment from "./components/Payment";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/deliveryAddress" component={DeliveryAddress} />
           <Route path="/deliveryTime" component={DeliveryTime} />
           <Route path="/auth" component={Auth} />
+          <Route path="/payment" component={Payment} />
         </Switch>
       </Router>
     </div>

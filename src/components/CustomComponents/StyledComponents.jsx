@@ -1,11 +1,11 @@
 import { withStyles } from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
-
 import React from "react";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import { Controller } from "react-hook-form";
+import { Checkbox } from "@material-ui/core";
 
 export const ReactHookFormSelect = ({
   name,
@@ -52,3 +52,13 @@ export const StyledMenu = withStyles({
     {...props}
   />
 ));
+
+export const YellowCheckBox = withStyles({
+  root: {
+    color: "#FFCC00",
+    "&$checked": {
+      color: "#FFCC00",
+    },
+  },
+  checked: {},
+})((props) => <Checkbox color="default" {...props} />);
