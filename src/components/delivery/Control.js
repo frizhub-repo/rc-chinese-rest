@@ -102,7 +102,7 @@ function Control() {
                       />
                     </button>
                   </div>
-                  <div className="w-1/6 px-1">
+                  <div className="px-1" style={{ width: "15%" }}>
                     <p className="text-xs text-left ">x{item.quantity}</p>
                     <button
                       className="text-xs text-left border-0 bg-white text-black"
@@ -112,23 +112,18 @@ function Control() {
                       Delete
                     </button>
                   </div>
-                  <div
-                    className="flex-grow-1 flex justify-content-between px-1 "
-                    style={{ width: "70%" }}
-                  >
-                    <div>
-                      <p className="text-gray-500 text-left text-xs mb-1">
-                        {item.name}
-                      </p>
-                    </div>
-                    <div className="flex-grow-1 ml-4">
-                      <p className="text-black mb-0  text-xs text-right">
-                        ${item.price}
-                      </p>
-                      <p className="text-indigo-500 text-xs text-right">
-                        Ingredients
-                      </p>
-                    </div>
+                  <div style={{ width: "40%" }}>
+                    <p className="text-gray-500 text-left text-xs mb-1">
+                      {item.name}
+                    </p>
+                  </div>
+                  <div style={{ width: "30%" }}>
+                    <p className="text-black mb-0  text-xs text-right">
+                      ${item.price}
+                    </p>
+                    <p className="text-indigo-500 text-xs text-right">
+                      Ingredients
+                    </p>
                   </div>
                 </div>
               );

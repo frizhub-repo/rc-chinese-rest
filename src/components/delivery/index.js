@@ -12,7 +12,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 
 function Media() {
   return (
-    <Box width={210} marginRight={0.5} my={5}>
+    <Box width={210} marginRight="20px" my={5}>
       <Skeleton variant="rect" width={210} height={150} />
       <Box pt={0.5}>
         <Skeleton />
@@ -154,25 +154,35 @@ function Delivery() {
                   sollicitudin enim eu venenatis.
                 </p>
               </div>
-              <div className="flex p-2 flex-wrap bg-black my-2">
-                {productByCategory &&
-                  productByCategory.map((item, index) => {
-                    return (
-                      <button
-                        className={`${
-                          categoryIndex === index
-                            ? "bg-yellow-400 text-white"
-                            : "bg-white text-black"
-                        } rounded-pill py-2 px-2 m-2`}
-                        onClick={() => setCategoryIndex(index)}
-                      >
-                        {item?.name}
-                      </button>
-                    );
-                  })}
-              </div>
+              {!productByCategory.length ? (
+                <Skeleton
+                  variant="rect"
+                  height={300}
+                  style={{ marginBottom: "20px" }}
+                />
+              ) : (
+                <div className="flex p-2 flex-wrap bg-black my-2">
+                  {productByCategory &&
+                    productByCategory.map((item, index) => {
+                      return (
+                        <button
+                          className={`${
+                            categoryIndex === index
+                              ? "bg-yellow-400 text-white"
+                              : "bg-white text-black"
+                          } rounded-pill py-2 px-2 m-2`}
+                          onClick={() => setCategoryIndex(index)}
+                        >
+                          {item?.name}
+                        </button>
+                      );
+                    })}
+                </div>
+              )}
+
               <div className="flex flex-wrap w-full justify-content-center">
-                {!productByCategory.length && [1, 2, 3, 4, 5, 6].map(() => <Media />)}
+                {!productByCategory.length &&
+                  [1, 2, 3, 4, 5, 6].map(() => <Media />)}
                 {productByCategory &&
                   productByCategory[categoryIndex]?.products.map((product) => {
                     return <Product product={product} />;
