@@ -70,8 +70,8 @@ export default function SignUp({ setActiveStep }) {
           res?.data?.token;
         localStorage.setItem("token", res?.data?.token);
         setToken(res?.data?.token);
-        toast.success("You have been sign up successfully");
-        history.push("/");
+        toast.success("Registration successful!");
+        history.push("/deliveryAddress");
       }
     } catch (error) {
       setLoading(false);

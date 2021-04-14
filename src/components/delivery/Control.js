@@ -41,7 +41,7 @@ function Control() {
   };
 
   return (
-    <section className="w-full ml-4 p-4 border border-gray-300">
+    <section className="w-full ml-4 p-3 border border-gray-300">
       {token ? (
         <div className="mb-3">
           {minimum - total > 0 && (
@@ -112,7 +112,10 @@ function Control() {
                       Delete
                     </button>
                   </div>
-                  <div className="flex-grow-1 flex justify-content-between px-1 w-full">
+                  <div
+                    className="flex-grow-1 flex justify-content-between px-1 "
+                    style={{ width: "70%" }}
+                  >
                     <div>
                       <p className="text-gray-500 text-left text-xs mb-1">
                         {item.name}

@@ -60,7 +60,7 @@ const Address = () => {
       await addDeliveryAddress(data);
       dispatch(addAddress(data));
       setLoading(false);
-      history.push("/deliveryTime");
+      history.push("/");
       toast.success("Address Added Successfully!");
     } catch (error) {
       setLoading(false);
