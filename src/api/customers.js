@@ -15,3 +15,7 @@ export const addDeliveryAddress = (payload) => {
 export const updateCustomerInfo = (payload) => {
   return axiosIntance.patch("/api/v1/customers", payload);
 };
+
+export const getReservationsList = () => {
+  return axiosIntance.get("/api/v1/reservations/customers");
+};

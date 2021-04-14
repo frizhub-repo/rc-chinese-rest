@@ -11,6 +11,7 @@ import Auth from "./components/Auth";
 import DeliveryAddress from "./components/DeliveryAddress";
 import DeliveryTime from "./components/DeliveryTime";
 import Payment from "./components/Payment";
+import Profile from "./components/Profile";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/deliveryTime" component={DeliveryTime} />
           <Route path="/auth" component={Auth} />
           <Route path="/payment" component={Payment} />
+          <Route path="/profile" component={Profile} />
         </Switch>
       </Router>
     </div>
