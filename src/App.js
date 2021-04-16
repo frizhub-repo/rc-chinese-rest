@@ -12,6 +12,7 @@ import DeliveryAddress from "./components/DeliveryAddress";
 import DeliveryTime from "./components/DeliveryTime";
 import Payment from "./components/Payment";
 import Profile from "./components/Profile";
+import OrdersReceived from "./components/Orders/OrdersReceived";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/auth" component={Auth} />
           <Route path="/payment" component={Payment} />
           <Route path="/profile" component={Profile} />
+          <Route path="/ordersreceived" component={OrdersReceived} />
         </Switch>
       </Router>
     </div>
