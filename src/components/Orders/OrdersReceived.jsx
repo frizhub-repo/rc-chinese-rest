@@ -4,10 +4,10 @@ import Navbar from "../Navbar";
 import Footer from "../../Footer";
 import WizardProcess from './WizardProcess';
 import { Box, Grid, Card, Button } from '@material-ui/core';
-import { BiEdit, BiWebcam } from "react-icons/bi";
-import { FiMapPin } from "react-icons/fi";
-import { RiFacebookBoxLine } from "react-icons/ri";
-import { GrGooglePlus, GrTwitter } from "react-icons/gr";
+// import { BiEdit, BiWebcam } from "react-icons/bi";
+// import { FiMapPin } from "react-icons/fi";
+// import { RiFacebookBoxLine } from "react-icons/ri";
+// import { GrGooglePlus, GrTwitter } from "react-icons/gr";
 import Tables from './Tables';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
@@ -82,7 +82,7 @@ function OrdersReceived() {
                 <label style={{fontSize:"2rem", fontWeight:"600", marginTop:"2rem"}}>Starters Cafe</label>
                 <label style={{fontSize:"1.5rem", color:"grey"}}>Chinese / Thai</label>
                 <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
-                <FiMapPin style={{height:"30px", width:"30px", marginBottom:"10px", color:"#cadafa"}} />
+                {/* <FiMapPin style={{height:"30px", width:"30px", marginBottom:"10px", color:"#cadafa"}} /> */}
                 <label style={{fontSize:"1.5rem", color:"grey"}}>135 New town wards Roads, Belfast, Bt4</label>
                 </div>
                 </div>
@@ -105,7 +105,7 @@ function OrdersReceived() {
     <Box style={{display:"flex"}}>
     <div style={{height:"179px", width:"100px",display:"flex", justifyContent:"center", alignItems:"center"}}>
         <div>
-            <BiWebcam style={{height:"40px", width:"40px"}} />
+            {/* <BiWebcam style={{height:"40px", width:"40px"}} /> */}
             </div>
     </div>
     <div style={{display:"flex", flexDirection:"column", alignItems:"flex-start", justifyContent:"center"}}>
@@ -119,7 +119,7 @@ function OrdersReceived() {
 <Box style={{display:"flex"}}>
     <div style={{height:"179px", width:"100px",display:"flex", justifyContent:"center", alignItems:"center"}}>
         <div>
-        <BiEdit style={{height:"40px", width:"40px"}} />
+        {/* <BiEdit style={{height:"40px", width:"40px"}} /> */}
         </div>
     </div>
     <div style={{display:"flex", flexDirection:"column", alignItems:"flex-start", justifyContent:"center"}}>
