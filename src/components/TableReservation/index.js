@@ -62,7 +62,6 @@ function TableReservation() {
 
   const tableReserve = async () => {
     try {
-      debugger;
       const formatDate = dayjs(selectedDay).format("YYYY-MM-DD");
       if (
         !dayjs(dayjs().format("YYYY-MM-DD")).isSameOrBefore(dayjs(formatDate))
@@ -79,6 +78,7 @@ function TableReservation() {
         handleShow();
       }
     } catch (error) {
+      toast.error("Table Reservation is not available at the moment!");
       setLoading(false);
       console.log({ error });
     }
