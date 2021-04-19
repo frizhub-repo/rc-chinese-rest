@@ -20,6 +20,7 @@ function Table({ data }) {
                   "pulvinar facilisis justo mollis"
                 }
                 price={product?.price}
+                currency={product?.currency}
               />
             ))
           : null}

@@ -4,6 +4,7 @@ import {
   Button,
   TextField,
   FormHelperText,
+  CircularProgress,
 } from "@material-ui/core";
 import SignaturesLogo from "../../images/SignaturesLogo.jpg";
 import { useForm } from "react-hook-form";
@@ -11,6 +12,8 @@ import { customerSignUp } from "../../api/Auth";
 import axiosIntance from "../../utils/axios-configure";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router";
+import React, { useState } from "react";
+import { useRestaurantContext } from "../../Context/restaurantContext";
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -53,16 +56,30 @@ export default function SignUp({ setActiveStep }) {
   const classes = useStyles();
   // const history = useHistory();
   const { register, handleSubmit, errors } = useForm();
+  const [loading, setLoading] = useState(false);
+  const { setToken } = useRestaurantContext();
+
   const signUpwithpayload = async (data) => {
     try {
+      setLoading(true);
       const res = await customerSignUp(data);
-      if(res?.status === 200) {
-        axiosIntance.defaults.headers.common["Authorization"] = res?.data?.token;
+      setLoading(false);
+
+      if (res?.status === 200) {
+        axiosIntance.defaults.headers.common["Authorization"] =
+          res?.data?.token;
         localStorage.setItem("token", res?.data?.token);
+<<<<<<< HEAD
         toast.success("You have been sign up successfully");
         // history.push("/")
+=======
+        setToken(res?.data?.token);
+        toast.success("Registration successful!");
+        history.push("/deliveryAddress");
+>>>>>>> 8003a4b81f53bf99e1f6bc169f025327d70e2fd8
       }
     } catch (error) {
+      setLoading(false);
       toast.error(error?.response?.data?.message);
     }
   };
@@ -179,6 +196,13 @@ export default function SignUp({ setActiveStep }) {
           </FormHelperText>
         </Box>
         <Button disableElevation className={classes.signUpButton} type="submit">
+          {loading && (
+            <CircularProgress
+              color="inherit"
+              size={20}
+              style={{ marginRight: "8px" }}
+            />
+          )}
           Sign Up
         </Button>
       </form>

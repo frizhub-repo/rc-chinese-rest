@@ -17,6 +17,8 @@ import dayjs from "dayjs";
 import { toast } from "react-toastify";
 import { reserveTable } from "../../api/customers";
 import SuccessModal from "./SuccessModal";
+import { useRestaurantContext } from "../../Context/restaurantContext";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   tabsContainer: {
@@ -53,13 +55,13 @@ function TableReservation() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const { token } = useRestaurantContext();
 
   var isSameOrBefore = require("dayjs/plugin/isSameOrBefore");
   dayjs.extend(isSameOrBefore);
 
   const tableReserve = async () => {
     try {
-      debugger;
       const formatDate = dayjs(selectedDay).format("YYYY-MM-DD");
       if (
         !dayjs(dayjs().format("YYYY-MM-DD")).isSameOrBefore(dayjs(formatDate))
@@ -76,6 +78,7 @@ function TableReservation() {
         handleShow();
       }
     } catch (error) {
+      toast.error("Table Reservation is not available at the moment!");
       setLoading(false);
       console.log({ error });
     }
@@ -200,26 +203,32 @@ function TableReservation() {
                 isOpen={true}
               />
             </Box>
-            <button
-              className="px-12 py-3 text-black text-center text-sm mb-12"
-              style={{
-                backgroundColor: "#ffc107",
-                color: "#fff",
-                width: "40%",
-                borderRadius: "6px",
-                marginTop: "20px",
-              }}
-              onClick={tableReserve}
-            >
-              {loading && (
-                <CircularProgress
-                  color="inherit"
-                  size={20}
-                  style={{ marginRight: "8px" }}
-                />
-              )}
-              Book Now
-            </button>
+            {token ? (
+              <button
+                className="px-12 py-3 text-black text-center text-sm mb-12"
+                style={{
+                  backgroundColor: "#ffc107",
+                  color: "#fff",
+                  width: "40%",
+                  borderRadius: "6px",
+                  marginTop: "20px",
+                }}
+                onClick={tableReserve}
+              >
+                {loading && (
+                  <CircularProgress
+                    color="inherit"
+                    size={20}
+                    style={{ marginRight: "8px" }}
+                  />
+                )}
+                Book Now
+              </button>
+            ) : (
+              <Link to="/auth">
+                <Box mt="20px">Please login to reserve your table</Box>
+              </Link>
+            )}
           </>
         )}
       </div>

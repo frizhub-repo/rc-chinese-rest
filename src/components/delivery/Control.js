@@ -10,51 +10,68 @@ import {
 } from "../../actions/index";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
+import { useRestaurantContext } from "../../Context/restaurantContext";
+import { Link } from "react-router-dom";
+import { Box, CircularProgress } from "@material-ui/core";
 
 function Control() {
   const disp = useDispatch();
+  const { token } = useRestaurantContext();
   const total = useSelector((state) => state.orders).total;
   const items = useSelector((state) => state.orders).items;
   const minimum = useSelector((state) => state.orders).minimum;
   const delivery = useSelector((state) => state.orders).delivery;
   const [loading, setLoading] = useState(false);
   const orderNow = () => {
-    if(total > 0) {
-      setLoading(true)
+    if (total > 0) {
+      setLoading(true);
       axiosIntance
         .post("/api/v1/orders/customers", { products: items })
         .then((res) => {
           toast.success("Order created successfully");
           disp(removeOrderItems());
           console.log(res);
-          setLoading(false)
+          setLoading(false);
         })
         .catch((err) => {
-          setLoading(false)
+          setLoading(false);
           console.log(err);
         });
-      }
+    }
   };
 
   return (
-    <section className="w-full ml-4 p-2 border border-gray-300">
-      <div className="mb-3 mt-3">
-        {minimum - total > 0 && (
-          <p className="text-xs text-left text-gray-500 mt-1 mb-3">
-            ${minimum - total} to reach the minimum order
+    <section className="w-full ml-4 p-3 border border-gray-300">
+      {token ? (
+        <div className="mb-3">
+          {minimum - total > 0 && (
+            <p className="text-xs text-left text-gray-500 mt-1 mb-3">
+              ${minimum - total} to reach the minimum order
+            </p>
+          )}
+          <button
+            className="w-full rounded-pill  bg-yellow-500 text-white text-center text-xs py-2 mb-4  font-weight-light"
+            onClick={orderNow}
+            disabled={loading}
+          >
+            {loading && (
+              <CircularProgress
+                color="inherit"
+                size={20}
+                style={{ marginRight: "8px" }}
+              />
+            )}
+            ORDER NOW
+          </button>
+          <p className="text-xs text-center text-indigo-500 ">
+            If you have any food allergy please click here
           </p>
-        )}
-        <button
-          className="w-full rounded-pill  bg-yellow-500 text-white text-center text-xs py-2 mb-4  font-weight-light"
-          onClick={orderNow}
-          disabled={loading}
-        >
-          ORDER NOW
-        </button>
-        <p className="text-xs text-center text-indigo-500 ">
-          If you have any food allergy please click here
-        </p>
-      </div>
+        </div>
+      ) : (
+        <Link to="/auth">
+          <Box mb="10px">Please login to order!</Box>
+        </Link>
+      )}
       <div>
         <p className="text-black text-center p-2 text-xs border-2 border-red-500 rounded-pill  mt-1">
           Home delivery {total}
@@ -85,7 +102,7 @@ function Control() {
                       />
                     </button>
                   </div>
-                  <div className="w-1/6 px-1">
+                  <div className="px-1" style={{ width: "15%" }}>
                     <p className="text-xs text-left ">x{item.quantity}</p>
                     <button
                       className="text-xs text-left border-0 bg-white text-black"
@@ -95,20 +112,18 @@ function Control() {
                       Delete
                     </button>
                   </div>
-                  <div className="flex-grow-1 flex justify-content-between px-1 w-full">
-                    <div>
-                      <p className="text-gray-500 text-left text-xs mb-1">
-                        {item.name}
-                      </p>
-                    </div>
-                    <div className="flex-grow-1 ml-4">
-                      <p className="text-black mb-0  text-xs text-right">
-                        ${item.price}
-                      </p>
-                      <p className="text-indigo-500 text-xs text-right">
-                        Ingredients
-                      </p>
-                    </div>
+                  <div style={{ width: "40%" }}>
+                    <p className="text-gray-500 text-left text-xs mb-1">
+                      {item.name}
+                    </p>
+                  </div>
+                  <div style={{ width: "30%" }}>
+                    <p className="text-black mb-0  text-xs text-right">
+                      ${item.price}
+                    </p>
+                    <p className="text-indigo-500 text-xs text-right">
+                      Ingredients
+                    </p>
                   </div>
                 </div>
               );
