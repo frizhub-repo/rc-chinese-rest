@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn({ setActiveStep }) {
   const classes = useStyles();
-  const history = useHistory();
+  // const history = useHistory();
   const { register, handleSubmit, errors } = useForm();
   const signinwithpayload = async (data) => {
     try {
@@ -67,7 +67,7 @@ export default function SignIn({ setActiveStep }) {
         axiosIntance.defaults.headers.common["Authorization"] = res?.data?.token;
         localStorage.setItem("token", res?.data?.token);
         toast.success("You have been sign in successfully");
-        history.push("/")
+        // history.push("/")
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);

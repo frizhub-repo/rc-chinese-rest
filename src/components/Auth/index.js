@@ -31,7 +31,7 @@ function Auth() {
   return (
     <div>
       <Dialog
-        maxWidth="xs"
+        // maxWidth="xs"
         scroll="body"
         aria-labelledby="customized-dialog-title"
         open={true}

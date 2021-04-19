@@ -11,8 +11,9 @@
   border-radius: 30px;
 }
 
-.customDesign .MuiDialog-paperWidthXs {
-  max-width: 470px;
+.customDesign .MuiPaper-rounded {
+  width: 100%;
+  max-width: 550px;
   border-radius: 30px;
 }
 
