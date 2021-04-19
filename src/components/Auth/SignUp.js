@@ -69,14 +69,9 @@ export default function SignUp({ setActiveStep }) {
         axiosIntance.defaults.headers.common["Authorization"] =
           res?.data?.token;
         localStorage.setItem("token", res?.data?.token);
-<<<<<<< HEAD
-        toast.success("You have been sign up successfully");
-        // history.push("/")
-=======
         setToken(res?.data?.token);
         toast.success("Registration successful!");
-        history.push("/deliveryAddress");
->>>>>>> 8003a4b81f53bf99e1f6bc169f025327d70e2fd8
+        // history.push("/deliveryAddress");
       }
     } catch (error) {
       setLoading(false);
