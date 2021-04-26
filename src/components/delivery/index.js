@@ -173,7 +173,7 @@ function Delivery() {
                           } rounded-pill py-2 px-2 m-2`}
                           onClick={() => setCategoryIndex(index)}
                         >
-                          {item?.name}
+                          {item?.category?.name}
                         </button>
                       );
                     })}

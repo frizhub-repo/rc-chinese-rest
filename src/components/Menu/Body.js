@@ -71,7 +71,7 @@ function Body() {
               />
             ))
           : menus?.length
-          ? menus[key]?.category?.map((data) => <Table data={data} />)
+          ? menus[key]?.items?.map((data) => <Table data={data} />)
           : null}
       </div>
     </div>

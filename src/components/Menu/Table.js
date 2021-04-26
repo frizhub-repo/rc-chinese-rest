@@ -8,18 +8,15 @@ function Table({ data }) {
         className="text-gray-900 text-lg text-left font-weight-bold"
         style={{ marginTop: "10px", marginLeft: "5px" }}
       >
-        {data?.name}
+        {data?.category?.name}
       </h2>
       <div className=" flex flex-wrap   border-yellow-400 border-b-4  z-10 -mt-1    ">
         {data?.products?.length
           ? data?.products?.map((product) => (
               <Item
                 name={product?.title}
-                desc={
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros, \n" +
-                  "pulvinar facilisis justo mollis"
-                }
-                price={product?.price}
+                desc={product?.description}
+                price={product?.sizes?.[0]?.price}
                 currency={product?.currency}
               />
             ))

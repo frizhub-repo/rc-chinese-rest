@@ -15,10 +15,10 @@ function Product({ product }) {
       const item = {
         name: product.title,
         product: product._id,
-        price: product.price,
+        price: product?.sizes?.[0]?.price,
         quantity: parseInt(count),
       };
-      const total = count * product.price;
+      const total = count * product?.sizes?.[0]?.price;
       setCount(0);
       disp(addItem(item));
       disp(setTotal(total));
@@ -61,7 +61,7 @@ function Product({ product }) {
         </h2>
         <div className="flex justify-content-between">
           <p className="mt-1 font-weight-bold text-yellow-400">
-            ${product.price}
+            ${product?.sizes?.[0]?.price}
           </p>
           <input
             value={count}
