@@ -13,6 +13,8 @@ import DeliveryTime from "./components/DeliveryTime";
 import Payment from "./components/Payment";
 import Profile from "./components/Profile";
 import OrdersReceived from "./components/Orders/OrdersReceived";
+import ExistingAddress from "./components/ExistingAddress";
+import OrderSummary from "./components/Orders/OrderSummary";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
           <Route path="/payment" component={Payment} />
           <Route path="/profile" component={Profile} />
           <Route path="/ordersreceived" component={OrdersReceived} />
+          <Route path="/chooseAddress" exact component={ExistingAddress} />
+          <Route path="/order/summary" exact component={OrderSummary} />
         </Switch>
       </Router>
     </div>

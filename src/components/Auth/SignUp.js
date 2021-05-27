@@ -54,10 +54,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp({ setActiveStep }) {
   const classes = useStyles();
-  // const history = useHistory();
+  const history = useHistory();
   const { register, handleSubmit, errors } = useForm();
   const [loading, setLoading] = useState(false);
-  const { setToken } = useRestaurantContext();
+  const { setToken, customerData } = useRestaurantContext();
 
   const signUpwithpayload = async (data) => {
     try {
@@ -72,6 +72,14 @@ export default function SignUp({ setActiveStep }) {
         setToken(res?.data?.token);
         toast.success("Registration successful!");
         // history.push("/deliveryAddress");
+        if (window.localStorage.getItem("redirectToOrder")) {
+          window.localStorage.removeItem("redirectToOrder");
+          customerData?.addresses?.length
+            ? history.push("/deliveryAddress")
+            : history.push("/deliveryAddress");
+        } else {
+          history.push("/");
+        }
       }
     } catch (error) {
       setLoading(false);
