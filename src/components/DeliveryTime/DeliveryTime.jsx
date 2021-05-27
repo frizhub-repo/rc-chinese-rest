@@ -11,6 +11,7 @@ import { ReactHookFormSelect } from "../CustomComponents/StyledComponents";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import MenuItem from "@material-ui/core/MenuItem";
+import { addDeliveryItem } from "../../actions";
 
 const useStyles = makeStyles({
   container: {},
@@ -47,16 +48,17 @@ const DeliveryTime = () => {
   const { register, handleSubmit, errors, control } = useForm();
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const dispatch = useDispatch();
 
-  const addDeliveryTimeHandler = async (data) => {
+  const addDeliveryTimeHandler = (data) => {
     try {
-      debugger;
-      setLoading(true);
-      const obj = { time: data?.time, note: data?.note ? data?.note : "" };
-      await updateCustomerInfo({ deliveryInfo: obj });
-      setLoading(false);
-      history.push("/");
-      toast.success("Your preference added successfully!");
+      dispatch(
+        addDeliveryItem({
+          time: data.time ? data.time : "as soon as possible",
+          note: data.note ? data.note : "",
+        })
+      );
+      history.push("/order/summary");
     } catch (error) {
       setLoading(false);
       console.log({ error });
@@ -120,6 +122,7 @@ const DeliveryTime = () => {
             multiline
             rows={8}
             variant="outlined"
+            placeholder="I am allergic to gluten"
             inputRef={register}
             className={`my_custom_text_field`}
           />

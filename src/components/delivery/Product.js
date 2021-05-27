@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addItem, setTotal } from "../../actions";
 import productImg from "../../images/productImg.jpeg";
+import AddBoxIcon from "@material-ui/icons/AddBox";
+import RemoveIcon from "@material-ui/icons/IndeterminateCheckBox";
+import { Box } from "@material-ui/core";
 
 function Product({ product }) {
   const disp = useDispatch();
@@ -63,7 +66,7 @@ function Product({ product }) {
           <p className="mt-1 font-weight-bold text-yellow-400">
             ${product?.sizes?.[0]?.price}
           </p>
-          <input
+          {/* <input
             value={count}
             type="number"
             min="0"
@@ -71,7 +74,26 @@ function Product({ product }) {
             className={
               " border border-gray-300  p-1 rounded max-w-24 mr-1 ml-0 text-xs w-12"
             }
-          />
+          /> */}
+          <Box
+            display="flex"
+            alignItems="center"
+            style={{ gap: "5px", fontSize: "18px" }}
+          >
+            {count > 0 ? (
+              <RemoveIcon
+                onClick={() => setCount(count - 1)}
+                style={{ color: "#FFBE02", cursor: "pointer" }}
+              />
+            ) : (
+              <RemoveIcon style={{ color: "#FFBE02" }} />
+            )}
+            {count}
+            <AddBoxIcon
+              onClick={() => setCount(count + 1)}
+              style={{ color: "#FFBE02", cursor: "pointer" }}
+            />
+          </Box>
         </div>
       </div>
     </div>

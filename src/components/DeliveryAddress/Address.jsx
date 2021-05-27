@@ -13,6 +13,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import { ReactHookFormSelect } from "../CustomComponents/StyledComponents";
 import { useHistory } from "react-router-dom";
+import { addOrderAddress } from "../../actions";
 
 const useStyles = makeStyles({
   container: {
@@ -51,6 +52,7 @@ const Address = () => {
   const { register, handleSubmit, errors, control } = useForm();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const { refetchCustomerHandler } = useRestaurantContext();
   const history = useHistory();
 
   const addAddressHandler = async (data) => {
@@ -59,9 +61,10 @@ const Address = () => {
       setLoading(true);
       await addDeliveryAddress(data);
       dispatch(addAddress(data));
+      dispatch(addOrderAddress(data));
+      refetchCustomerHandler();
       setLoading(false);
-      history.push("/");
-      toast.success("Address Added Successfully!");
+      history.push("/deliveryTime");
     } catch (error) {
       setLoading(false);
       console.log({ error });

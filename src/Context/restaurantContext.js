@@ -10,6 +10,11 @@ export function RestaurantProvider({ children }) {
   );
   const [restaurant, setRestaurant] = useState({});
   const [customerData, setCustomerData] = useState({});
+  const [refetchCustomer, setRefetchCustomer] = useState(false);
+
+  const refetchCustomerHandler = () => {
+    setRefetchCustomer(!refetchCustomer);
+  };
 
   useEffect(async () => {
     if (token) {
@@ -35,7 +40,13 @@ export function RestaurantProvider({ children }) {
 
   return (
     <RestaurantContext.Provider
-      value={{ token, setToken, restaurant, customerData }}
+      value={{
+        token,
+        setToken,
+        restaurant,
+        customerData,
+        refetchCustomerHandler,
+      }}
     >
       {children}
     </RestaurantContext.Provider>
@@ -63,9 +74,8 @@ async function fetchRestaurantInfo() {
 
 async function fetchCustomerInfo() {
   try {
-    axiosInstance.defaults.headers.common[
-      "Authorization"
-    ] = window.localStorage.getItem("token");
+    axiosInstance.defaults.headers.common["Authorization"] =
+      window.localStorage.getItem("token");
     const res = await axiosInstance.get("/api/v1/customers");
     return res?.data;
   } catch (error) {

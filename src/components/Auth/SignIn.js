@@ -61,10 +61,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn({ setActiveStep }) {
   const classes = useStyles();
-  // const history = useHistory();
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, errors } = useForm();
-  const { setToken } = useRestaurantContext();
+  const { setToken, customerData } = useRestaurantContext();
   const signinwithpayload = async (data) => {
     try {
       setLoading(true);
@@ -77,7 +77,14 @@ export default function SignIn({ setActiveStep }) {
         localStorage.setItem("token", res?.data?.token);
         setToken(res?.data?.token);
         toast.success("You have been sign in successfully");
-        // history.push("/")
+        if (window.localStorage.getItem("redirectToOrder")) {
+          window.localStorage.removeItem("redirectToOrder");
+          customerData?.addresses?.length
+            ? history.push("/deliveryAddress")
+            : history.push("/deliveryAddress");
+        } else {
+          history.push("/");
+        }
       }
     } catch (error) {
       setLoading(false);
