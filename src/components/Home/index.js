@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
-import Hero from "./Hero";
-import food from "../../images/food-rounded.png";
+import HeroCard from "./HeroCard";
 import Footer from "../../Footer";
 import UserPhotos from "../UserPhotos";
 import About from "../About";
-import WeirdPhotos from "../WeirdPhotos";
 import { getGoogleMyBusinessLocations } from "../../api/public";
+import { useStyles } from "./MainStyles";
+import productImg from "../../images/productImg.jpeg";
 
 function Home() {
+  const classes = useStyles();
   const [openingHours, setOpeningHours] = useState([]);
 
   useEffect(() => {
@@ -22,44 +23,37 @@ function Home() {
     };
     getGMBLocation();
   }, []);
-  
+
   return (
     <div>
       <Navbar selected={"Home"} />
-      <Hero />
-
-      <WeirdPhotos />
-
-      <section className="h-72 text-gray-700 body-font mt-8 px-36 mb-44 ">
-        <div className="container mx-auto flex px-5 py-18  md:flex-row flex-col items-center">
-          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
-            <img
-              className="object-cover object-center rounded"
-              alt="hero"
-              src="https://dummyimage.com/720x600"
-            />
+      <div className="container">
+        <div className="row row-offset-12">
+          <div className="col-md-6 mt-20">
+            <HeroCard />
           </div>
-          <div className="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
-            <h1 className="font-old sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
-              About us
-            </h1>
-            <p className="mb-8 leading-relaxed text-xs text-left">
-              Copper mug try-hard pitchfork pour-over freegan heirloom neutra
-              air plant cold-pressed tacos poke beard tote bag. Heirloom echo
-              park mlkshk tote bag selvage hot chicken authentic tumeric
-              truffaut hexagon try-hard chambray.
+          <div className="col-md-6 mt-20">
+            <h3 className={classes.headingStyles}>SOMETHING ABOUT US</h3>
+            <p className={classes.paraStyles}>
+              Meals are generally served and eaten on the premises, but many
+              restaurants also offer take-out and food delivery services.
+              Restaurants vary greatly in apparance and offerings, including a
+              wide variety of cuisines and services models ranging from
+              inexpensive fast food restaurants and cafeterias, to mid-priced
+              family restaurants, to high-priced luxury establishments.
             </p>
-            <div className="flex justify-center">
-              <button className="ml-4 inline-flex rounded-pill text-gray-900 bg-yellow-400 border-0 py-2 px-6 focus:outline-none  rounded text-sm mb-12">
-                Know more
-              </button>
-            </div>
+          </div>
+
+          <div className="col-6 mt-10">
+            {" "}
+            <HeroCard />
+          </div>
+          <div className={`col-sm-6 mt-10 ${classes.roundedImage}`}>
+            <img src={productImg} className="rounded-circle" />
           </div>
         </div>
-      </section>
+      </div>
 
-      <About />
-      <UserPhotos />
       <div className="flex mt-0 h-96">
         <div className="w-1/2   p-0">
           <iframe
