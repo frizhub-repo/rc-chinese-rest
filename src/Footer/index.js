@@ -2,8 +2,23 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="text-white bg-gray-900 px-24 body-font divide-2 divide-y divide-white">
-      <div className="container px-5 py-20 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-no-wrap flex-wrap flex-col"></div>
+    <footer
+      style={{ background: "#280813", height: "250px" }}
+      className=" px-24 body-font divide-2 divide-y divide-white"
+    >
+      <div
+        style={{ background: "#280813" }}
+        className="container px-5 py-20 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-no-wrap flex-wrap flex-col"
+      ></div>
+      <div style={{ background: "#280813" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "20px",
+          }}
+        ></div>
+      </div>
     </footer>
   );
 }

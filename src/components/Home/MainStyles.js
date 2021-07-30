@@ -88,13 +88,19 @@ export const useStyles = makeStyles((theme) => ({
     color: "black",
   },
   root5: {
-    backgroundColor: "#280813",
-    width: "400px",
-    height: "60px",
+    backgroundColor: "white",
+    width: "410px",
+    height: "80px",
     color: "white",
     borderRadius: "0px",
     borderTopRightRadius: "15px",
     borderBottomRightRadius: "15px",
+    textAlign: "center",
+  },
+  bookButtonClss: {
+    backgroundImage:
+      "linear-gradient(left, #280813, #280813 20%, transparent 20%, transparent 100%)",
+    borderRadius: "15px",
   },
   textStyles: {
     display: "flex",
@@ -102,12 +108,20 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     fontSize: "x-large",
     marginTop: "10px",
+    color: "white",
+  },
+  newTextStyles: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "x-large",
+    marginTop: "10px",
+    color: "black",
   },
   containerTwo: {
     display: "flex",
     alignItems: "center",
-    marginTop: "20px",
-    marginBottom: "30px",
+    justifyContent: "center",
 
     [theme.breakpoints.down("md")]: {
       position: "relative",
@@ -264,9 +278,18 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   img: {
-    width: "55px",
-    height: "55px",
-    marginTop: "13px",
+    width: "38px",
+    height: "38px",
+  },
+  imageDiv: {
+    backgroundColor: "#EA9C0D",
+    width: "75px",
+    height: "75px",
+    borderRadius: "50%",
+    border: "2px solid black",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   textStyle: {
     color: "#280813",
@@ -276,6 +299,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   pStyles: {
     fontStyle: "italic",
+    color: "#EA9C0D",
   },
 
   title: {
@@ -308,9 +332,7 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: "bolder",
     marginTop: "15px",
   },
-  pStyles: {
-    float: "left",
-  },
+
   imgStyles: {
     height: "54px",
     width: "60px",
@@ -328,10 +350,12 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "30px",
   },
   root7: {
-    width: "575px",
-    height: "363px",
-    border: "2px solid #62BA81",
-    borderRadius: "15px",
+    width: "280px",
+    height: "234px",
+    borderRadius: "50%",
+    backgroundColor: "#EA9C0D",
+    borderLeft: "30px solid #280813",
+    borderRight: "30px solid #280813",
     [theme.breakpoints.down("sm")]: {
       width: "318px",
       height: "445px",
@@ -350,21 +374,22 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
-    fontSize: "21px",
-    color: "#EA9C0D",
+    fontSize: "10px",
+    color: "white",
     textAlign: "center",
+    lineHeight: "18px",
   },
   lineStyles: {
     width: "520px",
     height: "3px",
-    backgroundColor: "#EA9C0D",
+    backgroundColor: "white",
     marginBottom: "20px",
   },
   extraStyle7: {
     backgroundColor: "#280813",
     borderRadius: "0px",
     height: "70px",
-    width: "1300px",
+    width: "1250px",
     borderTopRightRadius: "15px",
     borderTopLeftRadius: "15px",
     boxShadow:
@@ -382,7 +407,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
 
     borderRadius: "0px",
-    width: "1300px",
+    width: "1250px",
     height: "740px",
     borderBottomRightRadius: "15px",
     borderBottomLeftRadius: "15px",
@@ -591,26 +616,26 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
   nameStyles: {
-    width: "300px",
+    width: "280px",
     [theme.breakpoints.down("md")]: {
       width: "230px",
     },
   },
   emailStyles: {
-    width: "380px",
+    width: "360px",
     [theme.breakpoints.down("md")]: {
       width: "260px",
     },
   },
   messageStyles: {
-    width: "700px",
+    width: "670px",
     marginTop: "-70px",
     [theme.breakpoints.down("md")]: {
       width: "514px",
     },
   },
   nameDivStyles: {
-    width: "300px",
+    width: "280px",
     borderRadius: "0px",
     borderBottomRightRadius: "15px",
     borderBottomLeftRadius: "15px",
@@ -622,7 +647,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   emailDivStyles: {
-    width: "380px",
+    width: "360px",
     borderRadius: "0px",
     borderBottomRightRadius: "15px",
     borderBottomLeftRadius: "15px",
@@ -634,7 +659,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   messageDivStyles: {
-    width: "700px",
+    width: "670px",
     borderRadius: "0px",
     borderBottomRightRadius: "15px",
     borderBottomLeftRadius: "15px",
@@ -675,7 +700,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#280813",
-    width: "700px",
+    width: "670px",
     height: "70px",
     marginLeft: "18px",
     color: "white",
@@ -716,7 +741,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   addressCard: {
     backgroundColor: "white",
-    width: "522px",
+    width: "510px",
     height: "237px",
     marginLeft: "20px",
     color: "white",
@@ -801,7 +826,7 @@ export const useStyles = makeStyles((theme) => ({
     color: "#10B981",
     fontSize: "20px",
   },
-  pStyles: {
+  pStyles2: {
     color: "#F59E0B",
   },
   media: {
@@ -836,6 +861,18 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
     marginLeft: "20px",
+    [theme.breakpoints.down("md")]: {
+      width: "396px",
+    },
+  },
+  media3Home: {
+    width: "1000px",
+    height: "305px",
+    borderRadius: "15px",
+    boxShadow:
+      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    marginLeft: "100px",
+    marginBottom: "20px",
     [theme.breakpoints.down("md")]: {
       width: "396px",
     },
@@ -916,7 +953,6 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: "10px",
     marginTop: "15px",
     textAlign: "center",
-    color: "white",
   },
   colorSt: {
     backgroundColor: "#646464",
@@ -962,7 +998,7 @@ export const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
   },
 
-  additionInfoImgContainer: {
+  additionInfoImgContaine2r: {
     left: "0",
     height: "45px",
     boxShadow: "rgba(73, 38, 38, 0.5) 0px 1px 4px",
@@ -975,7 +1011,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     scrollbarWidth: "thin",
   },
-  textFont: {
+  textFont222: {
     fontSize: "20px",
     color: "black",
     textTransform: "uppercase",
@@ -983,7 +1019,7 @@ export const useStyles = makeStyles((theme) => ({
     position: "relative",
     right: "20px",
   },
-  textFont2: {
+  textFont22: {
     fontSize: "20px",
     color: "black",
     textTransform: "uppercase",
@@ -991,7 +1027,7 @@ export const useStyles = makeStyles((theme) => ({
     position: "relative",
     right: "65px",
   },
-  mImgStyles: {
+  mImgStyles2: {
     width: "30px",
     height: "30px",
     position: "relative",
@@ -1063,5 +1099,382 @@ export const useStyles = makeStyles((theme) => ({
   roundedImage: {
     width: "400px",
     height: "400px",
+  },
+  roundedCircle: {
+    borderRadius: "50%",
+    height: "360px",
+    width: "360px",
+  },
+  extraStyleForC7: {
+    backgroundColor: "#280813",
+    borderRadius: "0px",
+    height: "60px",
+    width: "1010px",
+    borderTopRightRadius: "15px",
+    borderTopLeftRadius: "15px",
+    boxShadow:
+      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    [theme.breakpoints.down("md")]: {
+      width: "982px",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "357px",
+      position: "relative",
+      left: "82",
+    },
+  },
+  extraStyleForC8: {
+    backgroundColor: "white",
+
+    borderRadius: "0px",
+    width: "1010px",
+    height: "460px",
+    borderBottomRightRadius: "15px",
+    borderBottomLeftRadius: "15px",
+    boxShadow:
+      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    [theme.breakpoints.down("md")]: {
+      width: "982px",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "357px",
+      position: "relative",
+      left: "82",
+    },
+  },
+  circleButton: {
+    width: "120px",
+    height: "120px",
+    backgroundColor: "white",
+    borderRadius: "50%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    alignItems: "center",
+    boxShadow:
+      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+  },
+  flexOne: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  titltedText: {},
+  bookImage: {
+    width: "40px",
+    height: "40px",
+  },
+  container2: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "20px",
+    fontWeight: "bold",
+    fontSize: "70px",
+    fontFamily: "Roboto",
+  },
+  container2d: {
+    display: "grid",
+    gridTemplateColumns: "207px 207px",
+    gridRowGap: "1px",
+    gridColumnGap: "1px",
+  },
+  textStyles2: {
+    color: "white",
+  },
+  root22: {
+    backgroundColor: "#62BA81",
+    width: "110px",
+    height: "120px",
+    color: "white",
+    borderRadius: "0px",
+    borderTopLeftRadius: "15px",
+    borderBottomLeftRadius: "15px",
+    boxShadow:
+      " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
+  },
+  root3: {
+    background: "linear-gradient(90deg, #6d6b67 40%, #EA9C0D 30%)",
+    width: "750px",
+    height: "400px",
+    marginTop: "5px",
+    marginBottom: "40px",
+    borderRadius: "15px",
+
+    color: "white",
+  },
+  root42: {
+    backgroundColor: "#62BA81",
+    width: "362px",
+    height: "60px",
+    color: "white",
+    borderRadius: "0px",
+    borderTopRightRadius: "15px",
+    boxShadow:
+      " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
+  },
+  root52: {
+    backgroundColor: "#EA9C0D",
+    width: "362px",
+    height: "60px",
+    color: "white",
+    borderRadius: "0px",
+    borderBottomRightRadius: "15px",
+    boxShadow:
+      " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
+  },
+  img2d: {
+    width: "60px",
+    height: "60px",
+    marginTop: "13px",
+    marginLeft: "10px",
+  },
+  aboutUsText: {
+    color: "#F59E0B",
+    fontFamily: "Roboto",
+    fontStyle: "normal",
+    textAlign: "center",
+  },
+  headingStyle2: {
+    fontSize: "72px",
+    lineHeight: "84px",
+  },
+  paraStyles2: {
+    fontSize: "30px",
+    lineHeight: "35px",
+    marginLeft: "27px",
+  },
+  root62: {
+    backgroundColor: "#EA9C0D",
+    width: "362px",
+    height: "60px",
+    color: "white",
+    borderRadius: "0px",
+    boxShadow:
+      " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
+    borderBottom: "1px solid grey",
+  },
+  closedStyles: {
+    backgroundColor: "#CB0E0E",
+
+    width: "362px",
+    height: "60px",
+    color: "white",
+    borderRadius: "0px",
+    boxShadow:
+      " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
+    borderBottom: "1px solid grey",
+  },
+  timingCardStyles: {
+    backgroundColor: "#EA9C0D",
+    width: "210px",
+    height: "50px",
+    color: "white",
+    borderRadius: "0px",
+  },
+  addStyles: {
+    backgroundColor: "#BA2211",
+  },
+  addStyles2: {
+    borderBottomLeftRadius: "15px",
+  },
+  addStyles3: {
+    borderBottomRightRadius: "15px",
+  },
+  typoStyles4: {
+    textAlign: "center",
+    color: "white",
+    fontSize: "16px",
+    fontWeight: "bold",
+  },
+  timingCardStyles2: {
+    backgroundColor: "#62BA81",
+    width: "418px",
+    height: "120px",
+    color: "white",
+    borderRadius: "0px",
+    borderTopLeftRadius: "15px",
+    borderTopRightRadius: "15px",
+  },
+  timingCardContect: {},
+  timingCardContect2: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  img22: {
+    width: "80px",
+    height: "80px",
+    marginTop: "-5px",
+  },
+  //section 3 styles start here
+  s3MainDiv: { marginTop: "30px" },
+  s3InnerDiv: { display: "flex", flexDirection: "column", width: "550px" },
+  s3FirstCard: {
+    backgroundColor: "white",
+    width: "434px",
+    height: "80px",
+    borderRadius: "0px 0px 15px 15px",
+    boxShadow:
+      " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
+  },
+  s3FirstCardImage: { height: "280px", width: "401px" },
+  carouselDiv: {
+    display: "flex",
+    width: "575px",
+    position: "relative",
+  },
+  carouselLeftCard2: {
+    height: "338px",
+    width: "188px",
+    backgroundColor: "#F59E0B",
+    boxSizing: "border-box",
+    border: "1px solid rgba(0, 0, 0, 0.4)",
+    boxShadow: "inset 4px 0px 4px 4px rgba(0, 0, 0, 0.4)",
+    borderRadius: "70%",
+    marginTop: "3px",
+  },
+  carouselRightCard2: {
+    height: "338px",
+    width: "188px",
+    backgroundColor: "#F59E0B",
+    boxSizing: "border-box",
+    border: "1px solid rgba(0, 0, 0, 0.4)",
+    boxShadow: "inset -4px 0px 4px 4px rgba(0, 0, 0, 0.4)",
+    borderRadius: "70%",
+    marginTop: "3px",
+  },
+  carouselInnerCard: {
+    backgroundColor: "#10B981",
+    height: "338px",
+    width: "460px",
+    borderRadius: "30px",
+    position: "absolute",
+    left: "58px",
+    top: "3px",
+    boxShadow:
+      " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
+  },
+  carouselCardImageDiv: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "50px",
+  },
+  carouselCardImage: { height: "130px", width: "130px" },
+  whiteBar: {
+    width: "550px",
+    height: "5px",
+    backgroundColor: "white",
+    marginTop: "10px",
+    borderRadius: "5px",
+  },
+  text: { color: "white" },
+  mainDiv: {
+    margin: "30px 0px 30px",
+  },
+  divFlexStyles: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  divFlexStyles2: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around",
+  },
+  roundedCardStyles: {
+    backgroundColor: "#EA9C0D",
+    width: "60px",
+    height: "60px",
+    color: "white",
+    borderRadius: "50%",
+    marginLeft: "800px",
+    boxShadow:
+      " 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)",
+  },
+  flexDisplay: {
+    display: "flex",
+    flexWrap: "nowrap",
+    justifyContent: "space-around",
+  },
+  media32: {
+    width: "622px",
+    height: "370px",
+    borderRadius: "15px",
+    boxShadow:
+      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    marginTop: "70px",
+    marginRight: "-50px",
+  },
+  media5: {
+    width: "437px",
+    height: "300px",
+    borderRadius: "15px 15px 0px 0px",
+  },
+  flexRowStyle: {
+    display: "flex",
+    justifyContent: "space-around",
+  },
+  flexColStyle: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  pTextStyles: {
+    marginTop: "8px",
+    fontWeight: "bolder",
+  },
+  forwardArrow2: {
+    backgroundColor: "#F69D0B",
+    position: "absolute",
+    zIndex: 2,
+    top: "calc(50% - 15px)",
+    borderRadius: "50%",
+    width: 80,
+    height: 80,
+    left: 15,
+    cursor: "pointer",
+    color: "white",
+  },
+  backwordArrow2: {
+    backgroundColor: "#F69D0B",
+    position: "absolute",
+    zIndex: 2,
+    top: "calc(50% - 15px)",
+    width: 80,
+    height: 80,
+    borderRadius: "50%",
+    right: 15,
+    cursor: "pointer",
+    color: "white",
+  },
+  flexDStyles: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  indicatorStyles: {
+    background: "#F69D0B",
+    width: 30,
+    height: 30,
+    display: "inline-block",
+    margin: "0 8px",
+    borderRadius: "50%",
+    boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
+  },
+  indiExtra: {
+    background: "white",
+    width: 30,
+    height: 30,
+    display: "inline-block",
+    margin: "0 8px",
+    borderRadius: "50%",
+    boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
+    border: "2px solid #9b6408",
+  },
+
+  flexCoursel: {
+    width: "1086px",
+    height: "297px",
   },
 }));

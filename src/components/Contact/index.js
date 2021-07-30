@@ -167,8 +167,22 @@ function Contact() {
                 </button>
               </div>
               <div className={classes.addressStyles}>
-                <CardMedia className={classes.media3} image={map} />
-
+                <div className="flex mt-0 h-96 justify-content-center mb-10 border-10">
+                  <div className="w-1/2   p-0">
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      className=" w-full h-full object-cover "
+                      frameBorder="0"
+                      title="map"
+                      marginHeight="0"
+                      marginWidth="0"
+                      scrolling="no"
+                      src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
+                      style={{ height: "100%", width: "100%" }}
+                    ></iframe>
+                  </div>
+                </div>
                 <Card className={`${classes.addressCard}`}>
                   <CardContent>
                     <Typography className={classes.typostyles7}>

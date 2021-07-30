@@ -194,3 +194,73 @@
 <About />
 <UserPhotos /> */
 }
+
+//home compoenent
+{
+  /* <div className="w-1/2 bg-yellow-400 p-12">
+<h1 className="font-old text-4xl">Opening Days</h1>
+<h1 className=" text-3xl">We'll be available</h1>
+<div>
+  {openingHours.length > 0 &&
+    openingHours.map((item) => (
+      <div className="flex w-full justify-content-between   ">
+        <p className="text-left flex-grow text-lg font-weight-bold font-old">
+          {item?.openDay}
+        </p>
+        <p className="text-right text-white">
+          {item?.openTime} - {item?.closeTime}
+        </p>
+      </div>
+    ))}
+  {/* <div className="flex w-full justify-content-between   ">
+    <p className="text-left flex-grow text-lg font-weight-bold font-old">
+      Monday
+    </p>
+    <p className="text-right text-white">09:00-20:00</p>
+  </div>
+  <div className="flex w-full justify-content-between  ">
+    <p className="text-left flex-grow text-lg font-weight-bold font-old">
+      Tuesday
+    </p>
+    <p className="text-right text-white">09:00-20:00</p>
+  </div>
+  <div className="flex w-full justify-content-between  ">
+    <p className="text-left flex-grow text-lg font-weight-bold font-old">
+      Wednesday
+    </p>
+    <p className="text-right text-white">09:00-20:00</p>
+  </div>
+  <div className="flex w-full justify-content-between  ">
+    <p className="text-left flex-grow text-lg font-weight-bold font-old">
+      Thursday
+    </p>
+    <p className="text-right text-white text-white">09:00-20:00</p>
+  </div>
+  <div className="flex w-full justify-content-between ">
+    <p className="text-left flex-grow text-lg font-weight-bold font-old">
+      Friday
+    </p>
+    <p className="text-right text-white">09:00-20:00</p>
+  </div> */
+}
+// </div>
+// </div> */}
+
+{
+  /* <div className="flex mt-0 h-96">
+<div className="w-1/2   p-0">
+  <iframe
+    width="100%"
+    height="100%"
+    className=" w-full h-full object-cover "
+    frameBorder="0"
+    title="map"
+    marginHeight="0"
+    marginWidth="0"
+    scrolling="no"
+    src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
+    style={{ height: "100%", width: "100%" }}
+  ></iframe>
+</div>
+</div> */
+}

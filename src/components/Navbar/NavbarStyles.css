@@ -1,9 +1,8 @@
 @media screen and (min-width: 390px,) {
     .navbarStyles{
         display: flex;
-        flex-direction: column;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-between !important;
     
     }
     .headerStyles{
@@ -15,7 +14,10 @@
 
 .bgClass{
     background-color: #280813;
-    height: 70px;
+    height: 62px;
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
 }
 /* 
   ##Device = Desktops

@@ -33,6 +33,7 @@ const styles = {
     position: "relative",
     bottom: "20px",
     left: "20px",
+    outline: "none",
   },
   hover: {
     "&:hover": {
