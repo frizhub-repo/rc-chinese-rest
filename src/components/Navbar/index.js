@@ -1,10 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useRestaurantContext } from "../../Context/restaurantContext";
+import { Link } from "react-router-dom";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import { makeStyles } from "@material-ui/styles";
 import CustomMenu from "./CustomMenu";
+import login from "../../Assets/images/login.png";
+import "./NavbarStyles.css";
+import { useLocation } from "react-router-dom";
+import styles from "./styles";
+const useStyles = makeStyles(styles);
 
-function Navbar({ selected }) {
+function Navbar({ showLinks = true }) {
+  const location = useLocation();
+  const classes = useStyles();
   let { token, setToken, restaurant } = useRestaurantContext();
   console.log({ token });
   const logout = () => {
@@ -25,135 +33,124 @@ function Navbar({ selected }) {
   };
 
   const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleCloseMenu = () => {
     setAnchorEl(null);
   };
 
   return (
     <div>
-      <header className="text-gray-700 body-font bg-yellow-400 px-24">
-        <div className="container mx-auto flex flex-wrap p-3 flex-col md:flex-row items-center">
-          {/* <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
-              viewBox="0 0 24 24"
-            >
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-            </svg>
-            <span className="ml-3 text-xl">tailblocks</span>
-          </a> */}
+      {showLinks && (
+        <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center activeLink navbarStyles bgClass">
           <Link to="/">
             <img
-              style={{ height: "50px" }}
               src={`${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`}
-              className="object-cover"
+              style={{ width: "80", height: "50px" }}
             />
           </Link>
-          <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-            <Link
-              to="/"
-              className={`mr-5 text-white text-sm ${
-                selected == "Home" ? "rounded-pill px-2 py-1 bg-black " : ""
-              }`}
+
+          <Link
+            to="/"
+            className="mr-5 font-weight-bolder text-white hover:text-gray-900 "
+          >
+            <p
+              className={
+                location.pathname === "/" ? classes.selected : classes.hover
+              }
             >
-              Home
-            </Link>
-            <Link
-              to="/menu"
-              className={`mr-5 text-white text-sm ${
-                selected == "Menu" ? "rounded-pill px-2 py-1 bg-black " : ""
-              }`}
+              HOME
+            </p>
+          </Link>
+          <Link
+            to="/menu"
+            className="mr-5 font-weight-bolder text-white hover:text-gray-900 "
+          >
+            <p
+              className={
+                location.pathname === "/menu/1"
+                  ? classes.selected
+                  : classes.hover
+              }
             >
-              Menu
-            </Link>
-            <Link
-              to="/delivery"
-              className={`mr-5 text-white text-sm ${
-                selected == "Delivery" ? "rounded-pill px-2 py-1 bg-black " : ""
-              }`}
+              MENU
+            </p>
+          </Link>
+          <Link
+            to="/tableRes"
+            className="mr-5 font-weight-bolder text-white hover:text-gray-900 yes"
+          >
+            <p
+              className={
+                location.pathname === "/tableRes"
+                  ? classes.selected
+                  : classes.hover
+              }
             >
-              Delivery
-            </Link>
-            <Link
-              to="/tableRes"
-              className={`mr-5 text-white text-sm ${
-                selected == "Res" ? "rounded-pill px-2 py-1 bg-black " : ""
-              }`}
+              TABLE RESERVATION
+            </p>
+          </Link>
+          <Link
+            to="/delivery"
+            className="mr-5 font-weight-bolder text-white hover:text-gray-900"
+          >
+            <p
+              className={
+                location.pathname === "/delivery"
+                  ? classes.selected
+                  : classes.hover
+              }
             >
-              Table Reservation
-            </Link>
-            <Link
-              to="/contact"
-              className={`mr-5 text-white text-sm ${
-                selected == "Contact" ? "rounded-pill px-2 py-1 bg-black " : ""
-              }`}
+              DELIVERY
+            </p>
+          </Link>
+          <Link
+            to="/contact"
+            className="mr-5 font-weight-bolder text-white hover:text-gray-900"
+          >
+            <p
+              className={
+                location.pathname === "/contact"
+                  ? classes.selected
+                  : classes.hover
+              }
             >
-              Contact us
-            </Link>
-          </nav>
-          {!token ? (
-            <button className="inline-flex items-center bg-white border-0 py-1 px-3 focus:outline-none  rounded-pill text-xs mt-2 md:mt-0">
-              <Link
-                to="/auth"
-                style={{ textDecoration: "none", color: "black" }}
+              CONTACT
+            </p>
+          </Link>
+          <div className={classes.divStyles}>
+            {!token ? (
+              <button
+                onClick={handleClickOpen}
+                className={classes.buttonStyles}
               >
-                Login/Signup
-              </Link>
-              <svg
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                className="w-4 h-4 ml-1"
-                viewBox="0 0 24 24"
+                <img src={login} alt="" className={classes.imgStyle} />
+                Sign In/Sign Up
+              </button>
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  cursor: "pointer",
+                }}
               >
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
-              </svg>
-            </button>
-          ) : (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                cursor: "pointer",
-              }}
-            >
-              <AccountCircleIcon
-                onClick={handleClick}
-                fontSize="large"
-                style={{ cursor: "pointer" }}
-              />
-            </div>
-          )}
-          <CustomMenu
-            handleClose={handleClose}
-            anchorEl={anchorEl}
-            logout={logout}
-          />
-          {/* <button className="inline-flex items-center bg-white border-0 py-1 px-3 focus:outline-none  rounded-pill text-xs mt-2 md:mt-0">
-            <Link to="/auth" style={{ textDecoration: "none", color: "black" }}>
-              Login/Signup
-            </Link>
-            <svg
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              className="w-4 h-4 ml-1"
-              viewBox="0 0 24 24"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-          </button> */}
-        </div>
-      </header>
+                <AccountCircleIcon
+                  onClick={handleClick}
+                  fontSize="large"
+                  style={{ cursor: "pointer" }}
+                />
+              </div>
+            )}
+            <CustomMenu
+              handleClose={handleCloseMenu}
+              anchorEl={anchorEl}
+              logout={logout}
+            />
+          </div>
+        </nav>
+      )}
     </div>
   );
 }

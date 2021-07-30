@@ -1,14 +1,26 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
-import Hero from "./Hero";
-import food from "../../images/food-rounded.png";
+import HeroCard from "./HeroCard";
 import Footer from "../../Footer";
-import UserPhotos from "../UserPhotos";
-import About from "../About";
-import WeirdPhotos from "../WeirdPhotos";
 import { getGoogleMyBusinessLocations } from "../../api/public";
+import { useStyles } from "./MainStyles";
+import productImg from "../../images/productImg.jpeg";
+import CardMedia from "@material-ui/core/CardMedia";
+import map from "../../images/map.jpg";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
+import ImageAvatars from "../Avatar/Avatar";
+import user from "../../images/user.png";
+import TimingsCard from "../Home/timingsCard";
+import delivery from "../../images/delivery.png";
+import reservationBook from "../../images/reservationBook.png";
+import { useHistory } from "react-router-dom";
+import Menu from "../../images/menu.png";
+import clock from "../../images/clock.png";
 
 function Home() {
+  const classes = useStyles();
   const [openingHours, setOpeningHours] = useState([]);
 
   useEffect(() => {
@@ -22,45 +34,163 @@ function Home() {
     };
     getGMBLocation();
   }, []);
-  
+
+  const history = useHistory();
+
   return (
     <div>
       <Navbar selected={"Home"} />
-      <Hero />
-
-      <WeirdPhotos />
-
-      <section className="h-72 text-gray-700 body-font mt-8 px-36 mb-44 ">
-        <div className="container mx-auto flex px-5 py-18  md:flex-row flex-col items-center">
-          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
-            <img
-              className="object-cover object-center rounded"
-              alt="hero"
-              src="https://dummyimage.com/720x600"
-            />
+      <div className="container">
+        <div className="row row-offset-12">
+          <div className="col-md-6 mt-20">
+            <HeroCard />
           </div>
-          <div className="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
-            <h1 className="font-old sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
-              About us
-            </h1>
-            <p className="mb-8 leading-relaxed text-xs text-left">
-              Copper mug try-hard pitchfork pour-over freegan heirloom neutra
-              air plant cold-pressed tacos poke beard tote bag. Heirloom echo
-              park mlkshk tote bag selvage hot chicken authentic tumeric
-              truffaut hexagon try-hard chambray.
+          <div className="col-md-6 mt-20 mb-10">
+            <h3 className={classes.headingStyles}>SOMETHING ABOUT US</h3>
+            <p className={classes.paraStyles}>
+              Meals are generally served and eaten on the premises, but many
+              restaurants also offer take-out and food delivery services.
+              Restaurants vary greatly in apparance and offerings, including a
+              wide variety of cuisines and services models ranging from
+              inexpensive fast food restaurants and cafeterias, to mid-priced
+              family restaurants, to high-priced luxury establishments.
             </p>
-            <div className="flex justify-center">
-              <button className="ml-4 inline-flex rounded-pill text-gray-900 bg-yellow-400 border-0 py-2 px-6 focus:outline-none  rounded text-sm mb-12">
-                Know more
-              </button>
+          </div>
+          <div className={`col-6 mt-10`}></div>
+          <div className={`col-6 mt-10`}>
+            <img src={productImg} alt="" className={classes.roundedCircle} />
+          </div>
+
+          <div className={classes.flexOne}>
+            <div className={classes.circleButton}>
+              <div className={classes.imageDiv}>
+                <img src={reservationBook} className={classes.img} />
+              </div>
+            </div>
+            <div className={classes.tableReserve2}>
+              <div>
+                <TimingsCard
+                  id="3"
+                  open="true"
+                  textForOpen="Keep in touch with us"
+                  styles={`${classes.root5} ${classes.extraStyleForC7}`}
+                  textStyles={classes.textStyles}
+                />
+              </div>
+              <Card className={`${classes.root5} ${classes.extraStyleForC8}`}>
+                <CardContent></CardContent>
+              </Card>
+            </div>
+            <div className={classes.circleButton}>
+              <div className={classes.imageDiv}>
+                <img src={delivery} className={classes.img} />
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+          <div className="col-12 mt-10">
+            <div className={classes.containerTwo}>
+              <div>
+                <Card
+                  className={`${classes.root5} ${classes.screenStyles} ${classes.bookButtonClss}`}
+                  onClickHandler={() => history.push("/menu")}
+                >
+                  <CardContent className={classes.flexOne}>
+                    <img className={classes.bookImage} src={Menu} />
+                    <Typography className={classes.newTextStyles}>
+                      CHECK ALSO OUR MENU!
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </div>
+          <div className="col-6 mt-10  mb-4">
+            {openingHours.length ? (
+              <div className={classes.flexDisplay}>
+                <div className={classes.mainDiv}>
+                  <Card className={`${classes.timingCardStyles2} `}>
+                    <CardContent className={classes.timingCardContect2}>
+                      <div className={classes.img2}>
+                        <img src={clock} />
+                      </div>
+                      <Typography className={classes.typoStyles4}>
+                        OPENING HOURS
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                  <div className={classes.container2}>
+                    {/* <div>
+              <Card
+                className={`${classes.timingCardStyles} ${classes.addStyles}`}
+              >
+                <CardContent className={classes.timingCardContect}>
+                  <Typography className={classes.typoStyles4}>NAME</Typography>
+                </CardContent>
+              </Card>
+            </div>
 
-      <About />
-      <UserPhotos />
-      <div className="flex mt-0 h-96">
+            <div>
+              <Card
+                className={`${classes.timingCardStyles} ${classes.addStyles}`}
+              >
+                <CardContent className={classes.timingCardContect}>
+                  <Typography className={classes.typoStyles4}>NAME</Typography>
+                </CardContent>
+              </Card>
+            </div> */}
+                    {openingHours.map((item) => (
+                      <>
+                        <div>
+                          <Card className={classes.timingCardStyles}>
+                            <CardContent className={classes.timingCardContect}>
+                              <Typography className={classes.typoStyles4}>
+                                {item?.openDay}
+                              </Typography>
+                            </CardContent>
+                          </Card>
+                        </div>
+                        <div>
+                          <Card className={classes.timingCardStyles}>
+                            <CardContent className={classes.timingCardContect}>
+                              <Typography className={classes.typoStyles4}>
+                                {item?.openTime} - {item?.closeTime}
+                              </Typography>
+                            </CardContent>
+                          </Card>
+                        </div>
+                      </>
+                    ))}
+                  </div>
+                </div>
+                <CardMedia
+                  className={classes.media3}
+                  image={map}
+                  style={{ marginBottom: "30px" }}
+                />
+              </div>
+            ) : null}
+          </div>
+          <div className={`col-6 mt-10  mb-4`}>
+            <Card className={classes.root7}>
+              <CardContent className={classes.cardContentStyles}>
+                <div className={classes.avatarDivStyles}>
+                  <ImageAvatars img={user} />
+                </div>
+
+                <div className={classes.lineStyles}></div>
+
+                <p>
+                  ‘’E’ il mio ristorante preferito a Pisa. Andateci e non ve ne
+                  pentirete!!! I piatti sono buonissimi ed in più il personale è
+                  gentile. Super consigliato, noi appena possiamo (data la
+                  pandemia) ci torniamo con piacere’’
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+      <div className="flex mt-0 h-96 w-50 mb-10 border-10">
         <div className="w-1/2   p-0">
           <iframe
             width="100%"
@@ -75,54 +205,8 @@ function Home() {
             style={{ height: "100%", width: "100%" }}
           ></iframe>
         </div>
-        <div className="w-1/2 bg-yellow-400 p-12">
-          <h1 className="font-old text-4xl">Opening Days</h1>
-          <h1 className=" text-3xl">We'll be available</h1>
-          <div>
-            {openingHours.length > 0 &&
-              openingHours.map((item) => (
-                <div className="flex w-full justify-content-between   ">
-                  <p className="text-left flex-grow text-lg font-weight-bold font-old">
-                    {item?.openDay}
-                  </p>
-                  <p className="text-right text-white">
-                    {item?.openTime} - {item?.closeTime}
-                  </p>
-                </div>
-              ))}
-            {/* <div className="flex w-full justify-content-between   ">
-              <p className="text-left flex-grow text-lg font-weight-bold font-old">
-                Monday
-              </p>
-              <p className="text-right text-white">09:00-20:00</p>
-            </div>
-            <div className="flex w-full justify-content-between  ">
-              <p className="text-left flex-grow text-lg font-weight-bold font-old">
-                Tuesday
-              </p>
-              <p className="text-right text-white">09:00-20:00</p>
-            </div>
-            <div className="flex w-full justify-content-between  ">
-              <p className="text-left flex-grow text-lg font-weight-bold font-old">
-                Wednesday
-              </p>
-              <p className="text-right text-white">09:00-20:00</p>
-            </div>
-            <div className="flex w-full justify-content-between  ">
-              <p className="text-left flex-grow text-lg font-weight-bold font-old">
-                Thursday
-              </p>
-              <p className="text-right text-white text-white">09:00-20:00</p>
-            </div>
-            <div className="flex w-full justify-content-between ">
-              <p className="text-left flex-grow text-lg font-weight-bold font-old">
-                Friday
-              </p>
-              <p className="text-right text-white">09:00-20:00</p>
-            </div> */}
-          </div>
-        </div>
       </div>
+
       <Footer />
     </div>
   );

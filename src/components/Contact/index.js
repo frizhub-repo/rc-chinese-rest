@@ -5,8 +5,15 @@ import { useForm } from "react-hook-form";
 import { addContactUs } from "../../api/customers";
 import { CircularProgress } from "@material-ui/core";
 import { toast } from "react-toastify";
-
+import CardMedia from "@material-ui/core/CardMedia";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import TimingsCard from "../Home/timingsCard";
+import Typography from "@material-ui/core/Typography";
+import map from "../../images/map.jpg";
+import { useStyles } from "../Home/MainStyles";
 function Contact() {
+  const classes = useStyles();
   const { register, handleSubmit, errors, reset } = useForm();
   const [loading, setLoading] = useState(false);
   const addContactUsHandler = async (data) => {
@@ -24,109 +31,183 @@ function Contact() {
   return (
     <div>
       <Navbar selected={"Conatct"} />
-      <form onSubmit={handleSubmit(addContactUsHandler)}>
-        <div
-          className="mt-0 flex pl-36 items-center  h-96 justify-content-start"
-          style={{
-            background:
-              "url(https://images.unsplash.com/photo-1509606674268-3c9117451da1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80) center center",
-          }}
-        >
-          <div className="border-l-4 py-4 px-2 rounded border-yellow-400 ml-24">
-            <h1 className="font-old text-white font-3xl text-left">Contact</h1>
-          </div>
+      <div className={classes.tableReserve2}>
+        <div>
+          <TimingsCard
+            id="3"
+            open="true"
+            textForOpen="Keep in touch with us"
+            styles={`${classes.root5} ${classes.extraStyle7}`}
+            textStyles={classes.textStyles}
+          />
         </div>
-        <section className="w-full px-36">
-          <h1 className="font-old text-3xl mt-8"> Contact us</h1>
-          <p className="text-sm text-gray-500 mt-8 px-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-            nisl eros, pulvinar facilisis justo mollis, auctor consequat urna.
-            Morbi a bibendum metus. Donec scelerisque sollicitudin enim eu
-            venenatis. Duis tincidunt laoreet ex, in pretium orci vestibulum
-            eget.
-          </p>
-          <div className="mt-8 flex  rounded-lg">
-            <div className="mx-4 border border-gray-600 shadow-lg p-8 rounded-lg w-1/2 ">
-              <input
-                name="name"
-                required
-                placeholder="Name"
-                ref={register({
-                  required: "Name is required",
-                })}
-                className="rounded-pill px-3 py-3 text-gray-600 text-sm border border-gray-600 w-full mb-4"
-              />
-              <input
-                type="email"
-                name="email"
-                required
-                placeholder="email"
-                ref={register({
-                  required: "Email is required",
-                })}
-                className="rounded-pill px-3 py-3 text-gray-600 text-sm border border-gray-600 w-full mb-4"
-              />
-              <textarea
-                name="message"
-                ref={register({
-                  required: "Message is required",
-                })}
-                placeholder="Message"
-                className="text-gray-600 rounded-lg p-4 border border-gray-600 text-sm w-full h-52 "
-              ></textarea>
-            </div>
-            <div className="w-1/2 ">
-              <div className="h-1/2  mb-4 ">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  className=" w-full h-full object-cover rounded-xl mb-8 "
-                  frameBorder="0"
-                  title="map"
-                  marginHeight="0"
-                  marginWidth="0"
-                  scrolling="no"
-                  src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
-                  style={{ height: "100%", width: "100%" }}
-                ></iframe>
-                <div className="flex justify-content-start">
-                  <p className="text-gray-600 font-weight-bold mr-2 text-sm text-left">
-                    Address:{" "}
-                  </p>
-                  <p className="text-left">Via mario monti 12</p>
+        <Card className={`${classes.root5} ${classes.extraStyle8}`}>
+          <CardContent>
+            <form
+              className={classes.mapDivStyles}
+              onSubmit={handleSubmit(addContactUsHandler)}
+            >
+              <div className={classes.upperDiv}>
+                <div className={classes.innerDiv}>
+                  <div className={classes.flexStyles}>
+                    <Card
+                      className={`${classes.innnerCard} ${classes.nameStyles}`}
+                    >
+                      <CardContent>
+                        {" "}
+                        <Typography className={classes.typostyles2}>
+                          NAME
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                    <Card
+                      className={`${classes.innnerCard} ${classes.nameDivStyles}`}
+                    >
+                      <input
+                        className="ip"
+                        ref={register}
+                        name="name"
+                        placeholder="John Doe"
+                      />
+                      {/* <CardContent>
+                        <Card
+                          className={`${classes.innnerCard} ${classes.nameDivStyles} ${classes.nameDiv2Styles}`}
+                        >
+                          <CardContent>
+                            <Typography className={classes.typostyles3}>
+                              Dawood Javeed
+                            </Typography>
+                            <input />
+                          </CardContent>
+                        </Card>
+                        
+                      </CardContent> */}
+                    </Card>
+                  </div>
+                  <div className={classes.flexStyles}>
+                    <Card
+                      className={`${classes.innnerCard} ${classes.emailStyles}`}
+                    >
+                      <CardContent>
+                        <Typography className={classes.typostyles2}>
+                          EMAIL
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                    <Card
+                      className={`${classes.innnerCard} ${classes.emailDivStyles} `}
+                    >
+                      <input
+                        className="ip"
+                        ref={register}
+                        name="email"
+                        placeholder="johndoe@gmail.com"
+                      />
+
+                      {/* <CardContent>
+                        <Card
+                          className={`${classes.innnerCard} ${classes.emailDivStyles} ${classes.emailDiv2Styles}`}
+                        >
+                          <CardContent>
+                            <Typography className={classes.typostyles3}>
+                              developmentliesinhearts@gmail.com
+                            </Typography>
+                          </CardContent>
+                        </Card>
+                      </CardContent> */}
+                    </Card>
+                  </div>
                 </div>
-                <div className="flex justify-content-start">
-                  <p className="text-gray-600 font-weight-bold mr-2 text-sm text-left">
-                    email:{" "}
-                  </p>
-                  <p className="text-left">mario.rossi@gmil.com</p>
+                <div className={classes.flexStyles}>
+                  <Card
+                    className={`${classes.innnerCard} ${classes.messageStyles}`}
+                  >
+                    <CardContent>
+                      <Typography className={classes.typostyles2}>
+                        MESSAGE
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                  <Card
+                    className={`${classes.innnerCard} ${classes.messageDivStyles}`}
+                  >
+                    <input
+                      className="ip"
+                      ref={register}
+                      name="message"
+                      placeholder="Hi! This is a message"
+                    />
+
+                    {/* <CardContent>
+                      <Card
+                        className={`${classes.innnerCard} ${classes.messageDivStyles} ${classes.messageDiv2Styles}`}
+                      >
+                        <CardContent>
+                          <Typography className={classes.typostyles3}>
+                            text
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                    </CardContent> */}
+                  </Card>
                 </div>
-                <div className="flex justify-content-start">
-                  <p className="text-gray-600 font-weight-bold mr-2 text-sm text-left">
-                    phone:{" "}
-                  </p>
-                  <p className="text-left">333444-555</p>
-                </div>
+                <button className={`${classes.buttonCard}`} type="submit">
+                  {loading && (
+                    <CircularProgress
+                      color="inherit"
+                      size={20}
+                      style={{ marginRight: "8px" }}
+                    />
+                  )}
+                  <b>
+                    <Typography className={classes.typostyles2}>
+                      SUBMIT
+                    </Typography>
+                  </b>
+                </button>
               </div>
-            </div>
-          </div>
-        </section>
-        <div className="flex justify-content-center mt-8 mb-8">
-          <button
-            type="submit"
-            className="text-white text-lg bg-yellow-400 text-center rounded-pill px-2 py-3  w-1/6"
-          >
-            {loading && (
-              <CircularProgress
-                color="inherit"
-                size={20}
-                style={{ marginRight: "8px" }}
-              />
-            )}
-            Submit
-          </button>
-        </div>
-      </form>
+              <div className={classes.addressStyles}>
+                <div className="flex mt-0 h-96 justify-content-center mb-10 border-10">
+                  <div className="w-1/2   p-0">
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      className=" w-full h-full object-cover "
+                      frameBorder="0"
+                      title="map"
+                      marginHeight="0"
+                      marginWidth="0"
+                      scrolling="no"
+                      src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
+                      style={{ height: "100%", width: "100%" }}
+                    ></iframe>
+                  </div>
+                </div>
+                <Card className={`${classes.addressCard}`}>
+                  <CardContent>
+                    <Typography className={classes.typostyles7}>
+                      <span className={classes.pStyles}>Address:</span> Vis
+                      ciccio gialli Milan Italy
+                    </Typography>
+                    <Typography className={classes.typostyles7}>
+                      <span className={classes.pStyles}>Email:</span>{" "}
+                      starters@cafe.com
+                    </Typography>
+                    <Typography className={classes.typostyles7}>
+                      <span className={classes.pStyles}>Phone:</span>{" "}
+                      33344455566
+                    </Typography>
+                    <Typography className={classes.typostyles7}>
+                      <span className={classes.pStyles}>Email:</span>{" "}
+                      starters@cafe.com
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
       <Footer />
     </div>
   );

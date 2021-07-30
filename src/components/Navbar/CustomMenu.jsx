@@ -10,7 +10,7 @@ const CustomMenu = ({ anchorEl, handleClose, logout }) => {
     <StyledMenu
       id="customized-menu"
       anchorEl={anchorEl}
-      //   keepMounted
+      keepMounted
       open={Boolean(anchorEl)}
       onClose={handleClose}
     >
