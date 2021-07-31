@@ -2,18 +2,17 @@ import React from "react";
 import Navbar from "../Navbar";
 import Footer from "../../Footer";
 import Body from "./Body";
-import Hero from "./Hero";
+import HeroDelivery from "./Hero";
 
 function Menu() {
-    return(
-        <div>
-            <Navbar selected='Menu'/>
-            <Hero/>
-            <Body/>
+  return (
+    <div>
+      <Navbar selected="Menu" />
+      <HeroDelivery />
 
-            <Footer/>
-        </div>
-    )
+      <Footer />
+    </div>
+  );
 }
 
-export default Menu
+export default Menu;

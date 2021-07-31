@@ -97,6 +97,15 @@ export const useStyles = makeStyles((theme) => ({
     borderBottomRightRadius: "15px",
     textAlign: "center",
   },
+  nRoot5: {
+    backgroundColor: "#EA9C0D",
+    width: "400px",
+    height: "60px",
+    color: "white",
+    borderRadius: "0px",
+    borderTopRightRadius: "15px",
+    borderBottomRightRadius: "15px",
+  },
   bookButtonClss: {
     backgroundImage:
       "linear-gradient(left, #280813, #280813 20%, transparent 20%, transparent 100%)",
@@ -155,7 +164,7 @@ export const useStyles = makeStyles((theme) => ({
     borderTopLeftRadius: "15px",
   },
   extraStyle2: {
-    backgroundColor: "white",
+    backgroundColor: "#F49E0B",
     borderRadius: "0px",
     height: "fit-content",
     borderBottomLeftRadius: "15px",
@@ -279,6 +288,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   img: {
     width: "38px",
+    height: "38px",
+  },
+  img5: {
+    width: "63px",
     height: "38px",
   },
   imageDiv: {
@@ -482,6 +495,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   extraStylesForD: {
     width: "900px",
+    backgroundColor: "#280813",
     borderTopLeftRadius: "15px",
     borderTopRightRadius: "15px",
     [theme.breakpoints.down("md")]: {
@@ -490,13 +504,14 @@ export const useStyles = makeStyles((theme) => ({
   },
   extraStyle11: {
     height: "100%",
+    backgroundColor: "#f49e0b",
     [theme.breakpoints.down("md")]: {
       width: "588px",
       position: "relative",
     },
   },
   dCStyles1: {
-    backgroundColor: "#EA9C0D",
+    backgroundColor: "#280813",
     width: "150px",
     height: "120px",
     color: "black",
@@ -506,7 +521,7 @@ export const useStyles = makeStyles((theme) => ({
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   },
   dCStyles2: {
-    backgroundColor: "#EA9C0D",
+    backgroundColor: "#280813",
     width: "300px",
     height: "60px",
     color: "white",
@@ -516,10 +531,10 @@ export const useStyles = makeStyles((theme) => ({
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   },
   dCStyles3: {
-    backgroundColor: "#280813",
+    backgroundColor: "white",
     width: "300px",
     height: "60px",
-    color: "white",
+    color: "#F49E0B",
     borderRadius: "0px",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
@@ -570,9 +585,12 @@ export const useStyles = makeStyles((theme) => ({
     color: "#CB0E0E",
     textDecoration: "underline",
     fontWeight: "bold",
+    position: "relative",
+    bottom: "7px",
+    fontSize: "12px",
   },
   pickCard: {
-    backgroundColor: "#EA9C0D",
+    backgroundColor: "#280813",
     width: "372px",
     height: "65px",
     color: "white",
@@ -928,11 +946,12 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "-6px",
     marginLeft: "5px",
   },
-  headingStyle: {
+  headingStyles: {
     textDecoration: "underline",
     fontSize: "15px",
     fontWeight: "bold",
   },
+
   headingStyles2: {
     textDecoration: "underline",
     fontSize: "12px",
@@ -1085,11 +1104,7 @@ export const useStyles = makeStyles((theme) => ({
     color: "#fff",
     backgroundColor: "#280813",
   },
-  headingStyles: {
-    color: "#EA9C0D",
-    fontSize: "41px",
-    lineHeight: "84px",
-  },
+
   paraStyles: {
     color: "#EA9C0D",
     fontSize: "15px",
@@ -1477,4 +1492,34 @@ export const useStyles = makeStyles((theme) => ({
     width: "1086px",
     height: "297px",
   },
+  tabsContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+  },
+  tabs: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "40%",
+  },
+  activeText: {},
+  ntext: {
+    color: "rgba(219, 214, 213)",
+  },
+
+  whiteCircle: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    border: "2px solid #F49E0B",
+    backgroundColor: "white",
+    backgroundSize: "cover",
+    borderRadius: "50%",
+    color: "#F49E0B",
+    maxWidth: "15em",
+    minHeight: "15em",
+  },
+  wImg: {},
 }));
