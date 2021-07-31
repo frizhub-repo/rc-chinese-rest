@@ -12,6 +12,8 @@ import TimingsCard from "../Home/timingsCard";
 import Typography from "@material-ui/core/Typography";
 import map from "../../images/map.jpg";
 import { useStyles } from "../Home/MainStyles";
+import HeroCard from "../Home/HeroCard";
+
 function Contact() {
   const classes = useStyles();
   const { register, handleSubmit, errors, reset } = useForm();
@@ -31,6 +33,15 @@ function Contact() {
   return (
     <div>
       <Navbar selected={"Conatct"} />
+      <div
+        className="mt-0 flex pl-36 items-center  h-96 justify-content-center"
+        style={{
+          background:
+            "url(https://images.unsplash.com/photo-1452967712862-0cca1839ff27?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80) center center",
+        }}
+      >
+        <HeroCard />
+      </div>
       <div className={classes.tableReserve2}>
         <div>
           <TimingsCard
