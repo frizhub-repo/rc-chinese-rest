@@ -97,12 +97,36 @@ export const useStyles = makeStyles((theme) => ({
     borderBottomRightRadius: "15px",
     textAlign: "center",
   },
+  nRoot5: {
+    backgroundColor: "#EA9C0D",
+    width: "400px",
+    height: "60px",
+    color: "white",
+    borderRadius: "0px",
+    borderTopRightRadius: "15px",
+    borderBottomRightRadius: "15px",
+  },
   bookButtonClss: {
     backgroundImage:
       "linear-gradient(left, #280813, #280813 20%, transparent 20%, transparent 100%)",
     borderRadius: "15px",
   },
+  bookButtonClss2: {
+    backgroundColor: "#280813",
+    backgroundImage:
+      "linear-gradient(left, white, white 20%, transparent 20%, transparent 100%)",
+    borderRadius: "15px",
+    border: "1px solid black",
+  },
   textStyles: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "x-large",
+    marginTop: "10px",
+    color: "white",
+  },
+  ntextStyles: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -117,6 +141,10 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: "x-large",
     marginTop: "10px",
     color: "black",
+  },
+  nTS2: {
+    color: "white",
+    fontSize: "24px",
   },
   containerTwo: {
     display: "flex",
@@ -155,7 +183,7 @@ export const useStyles = makeStyles((theme) => ({
     borderTopLeftRadius: "15px",
   },
   extraStyle2: {
-    backgroundColor: "white",
+    backgroundColor: "#F49E0B",
     borderRadius: "0px",
     height: "fit-content",
     borderBottomLeftRadius: "15px",
@@ -226,6 +254,13 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   },
+  firstone: {
+    backgroundColor: "#280813",
+  },
+  firsttwo: {
+    backgroundColor: "white",
+    color: "#F49E0B",
+  },
   rStyles: {
     [theme.breakpoints.down("md")]: {
       width: "573px",
@@ -242,17 +277,22 @@ export const useStyles = makeStyles((theme) => ({
   },
   extraStylesForRadius: {
     borderTopRightRadius: "15px",
+    backgroundColor: "#280813",
+
     [theme.breakpoints.down("md")]: {
       width: "190px",
     },
   },
   extraStyleForRadius3: {
+    backgroundColor: "#280813",
+
     [theme.breakpoints.down("md")]: {
       width: "190px",
     },
   },
   extraStylesForRadius2: {
     borderTopLeftRadius: "15px",
+    backgroundColor: "#280813",
     [theme.breakpoints.down("md")]: {
       width: "190px",
     },
@@ -281,6 +321,10 @@ export const useStyles = makeStyles((theme) => ({
     width: "38px",
     height: "38px",
   },
+  img5: {
+    width: "63px",
+    height: "38px",
+  },
   imageDiv: {
     backgroundColor: "#EA9C0D",
     width: "75px",
@@ -299,7 +343,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   pStyles: {
     fontStyle: "italic",
-    color: "#EA9C0D",
+    color: "white",
   },
 
   title: {
@@ -456,11 +500,18 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: "-14px",
     borderTopLeftRadius: "15px",
   },
+  bookImgStyles4: {
+    backgroundColor: "white",
+    height: "72px",
+    width: "85px",
+    marginTop: "-25px",
+    marginLeft: "-14px",
+    borderTopLeftRadius: "15px",
+  },
   bookStyles: {
-    height: "60px",
-    width: "60px",
-    marginTop: "10px",
-    marginLeft: "17px",
+    height: "59px",
+    width: "56px",
+    marginTop: "-6px",
   },
   typoStyles: {
     color: "white",
@@ -482,6 +533,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   extraStylesForD: {
     width: "900px",
+    backgroundColor: "#280813",
     borderTopLeftRadius: "15px",
     borderTopRightRadius: "15px",
     [theme.breakpoints.down("md")]: {
@@ -490,13 +542,14 @@ export const useStyles = makeStyles((theme) => ({
   },
   extraStyle11: {
     height: "100%",
+    backgroundColor: "#f49e0b",
     [theme.breakpoints.down("md")]: {
       width: "588px",
       position: "relative",
     },
   },
   dCStyles1: {
-    backgroundColor: "#EA9C0D",
+    backgroundColor: "#280813",
     width: "150px",
     height: "120px",
     color: "black",
@@ -506,7 +559,7 @@ export const useStyles = makeStyles((theme) => ({
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   },
   dCStyles2: {
-    backgroundColor: "#EA9C0D",
+    backgroundColor: "#280813",
     width: "300px",
     height: "60px",
     color: "white",
@@ -516,10 +569,10 @@ export const useStyles = makeStyles((theme) => ({
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   },
   dCStyles3: {
-    backgroundColor: "#280813",
+    backgroundColor: "white",
     width: "300px",
     height: "60px",
-    color: "white",
+    color: "#F49E0B",
     borderRadius: "0px",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
@@ -570,9 +623,12 @@ export const useStyles = makeStyles((theme) => ({
     color: "#CB0E0E",
     textDecoration: "underline",
     fontWeight: "bold",
+    position: "relative",
+    bottom: "7px",
+    fontSize: "12px",
   },
   pickCard: {
-    backgroundColor: "#EA9C0D",
+    backgroundColor: "#280813",
     width: "372px",
     height: "65px",
     color: "white",
@@ -789,7 +845,7 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "30px",
   },
   resSmallCards: {
-    backgroundColor: "rgba(245, 158, 11, 0.4);",
+    backgroundColor: "#FCE2B6",
     height: "50px",
     width: "110px",
     borderRadius: "5px",
@@ -928,11 +984,11 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "-6px",
     marginLeft: "5px",
   },
-  headingStyle: {
-    textDecoration: "underline",
-    fontSize: "15px",
-    fontWeight: "bold",
+  nheadingStyles: {
+    color: "#F49E0B",
+    fontSize: "35px",
   },
+
   headingStyles2: {
     textDecoration: "underline",
     fontSize: "12px",
@@ -1085,11 +1141,7 @@ export const useStyles = makeStyles((theme) => ({
     color: "#fff",
     backgroundColor: "#280813",
   },
-  headingStyles: {
-    color: "#EA9C0D",
-    fontSize: "41px",
-    lineHeight: "84px",
-  },
+
   paraStyles: {
     color: "#EA9C0D",
     fontSize: "15px",
@@ -1142,6 +1194,43 @@ export const useStyles = makeStyles((theme) => ({
       left: "82",
     },
   },
+  extraStyleForC9: {
+    backgroundColor: "#280813",
+    borderRadius: "0px",
+    height: "60px",
+    width: "900px",
+    borderTopRightRadius: "15px",
+    borderTopLeftRadius: "15px",
+    boxShadow:
+      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    [theme.breakpoints.down("md")]: {
+      width: "982px",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "357px",
+      position: "relative",
+      left: "82",
+    },
+  },
+  extraStyleForC10: {
+    backgroundColor: "white",
+
+    borderRadius: "0px",
+    width: "900px",
+    height: "460px",
+    borderBottomRightRadius: "15px",
+    borderBottomLeftRadius: "15px",
+    boxShadow:
+      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    [theme.breakpoints.down("md")]: {
+      width: "982px",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "357px",
+      position: "relative",
+      left: "82",
+    },
+  },
   circleButton: {
     width: "120px",
     height: "120px",
@@ -1151,6 +1240,13 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "space-around",
     alignItems: "center",
+    boxShadow:
+      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+  },
+  stStyles: {
+    backgroundColor: "#280813",
+    backgroundImage:
+      "linear-gradient(left, #f49e0b, #f49e0b 20%, transparent 20%, transparent 100%)",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   },
@@ -1477,4 +1573,34 @@ export const useStyles = makeStyles((theme) => ({
     width: "1086px",
     height: "297px",
   },
+  tabsContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+  },
+  tabs: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "40%",
+  },
+  activeText: {},
+  ntext: {
+    color: "rgba(219, 214, 213)",
+  },
+
+  whiteCircle: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    border: "2px solid #F49E0B",
+    backgroundColor: "white",
+    backgroundSize: "cover",
+    borderRadius: "50%",
+    color: "#F49E0B",
+    maxWidth: "15em",
+    minHeight: "15em",
+  },
+  wImg: {},
 }));

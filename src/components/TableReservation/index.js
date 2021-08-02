@@ -4,7 +4,8 @@ import Footer from "../../Footer";
 import About from "../About";
 import UserPhotos from "../UserPhotos";
 import Carousel from "react-multi-carousel";
-import Card from "./Card";
+import Card from "@material-ui/core/Card";
+
 import moduleName from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { Box, CircularProgress } from "@material-ui/core";
@@ -19,33 +20,35 @@ import { reserveTable } from "../../api/customers";
 import SuccessModal from "./SuccessModal";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import { Link } from "react-router-dom";
-
-const useStyles = makeStyles({
-  tabsContainer: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
-  },
-  tabs: {
-    display: "flex",
-    justifyContent: "space-between",
-    width: "40%",
-  },
-  activeText: {},
-  text: {
-    color: "rgba(219, 214, 213)",
-  },
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    marginTop: "20px",
-    marginBottom: "20px",
-  },
-});
+import HeroCard from "../Home/HeroCard";
+import reservationBook from "../../images/reservationBook.png";
+import CardContent from "@material-ui/core/CardContent";
+import TimingsCard from "../Home/timingsCard";
+import { useStyles } from "../Home/MainStyles";
+import CardMedia from "@material-ui/core/CardMedia";
+import MenuCard from "../Home/MenuCard";
+import Typography from "@material-ui/core/Typography";
+import { useHistory } from "react-router-dom";
+import foodimage from "../../images/foodimage.jpg";
+import likeIcon from "../../images/likeIcon.png";
+import FourFiveIcon from "../../images/FourFiveIcon.png";
+import comment from "../../images/comment.png";
+import FourTwoSeven from "../../images/427.png";
+import Menu from "../../images/menu.png";
+import map from "../../images/map.jpg";
+import euro from "../../images/euro.png";
+import clock from "../../images/clock.png";
+import like from "../../images/like.png";
+import chat from "../../images/chat.png";
+import ImageAvatars from "../Avatar/Avatar";
+import user from "../../images/user.png";
+import Logo from "../../images/CLogo.png";
 
 function TableReservation() {
+  const { restaurant } = useRestaurantContext();
+
   const classes = useStyles();
+  const history = useHistory();
   const [activeTab, setActiveTab] = useState(0);
   const [number, setNumber] = useState(3);
   const [selectedDay, setSelectedDay] = useState(Date.now());
@@ -104,454 +107,250 @@ function TableReservation() {
   };
 
   return (
-    <div>
+    <div className={classes.mainDiv}>
       <Navbar selected="Res" />
       <div
-        className="mt-0 flex pl-36 items-center  h-96 justify-content-start"
+        className="mt-0 flex pl-36 items-center  h-96 justify-content-center"
         style={{
           background:
             "url(https://images.unsplash.com/photo-1452967712862-0cca1839ff27?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80) center center",
         }}
       >
-        <div className="border-l-4 py-4 px-2 rounded border-yellow-400 ml-24">
-          <h1 className="font-old text-white font-3xl text-left">
-            Table Reservation
-          </h1>
-        </div>
+        <HeroCard />
       </div>
-      <h1 className="font-old text-3xl mt-8 mb-8">Table Reservation</h1>
-      <div className={classes.tabsContainer}>
-        <div className={classes.tabs}>
-          <label
-            className={activeTab === 0 ? classes.activeText : classes.text}
-            onClick={() => setActiveTab(0)}
-          >
-            Number of People
-          </label>
-          <label
-            className={activeTab === 1 ? classes.activeText : classes.text}
-            onClick={() => setActiveTab(1)}
-          >
-            Date
-          </label>
-          <label
-            className={activeTab === 2 ? classes.activeText : classes.text}
-            onClick={() => setActiveTab(2)}
-          >
-            Services
-          </label>
-          <label
-            className={activeTab === 3 ? classes.activeText : classes.text}
-            onClick={() => setActiveTab(3)}
-          >
-            Schedule
-          </label>
-          {/* <label
-            className={activeTab === 3 ? classes.activeText : classes.text}
-            onClick={() => setActiveTab(3)}
-          >
-            Promotions
-          </label> */}
-        </div>
-        {activeTab === 0 && (
-          <Box className={classes.container}>
-            <NumberOfPeople number={number} setNumber={setNumber} />
-          </Box>
-        )}
-        {activeTab === 1 && (
-          <DayPicker
-            onDayClick={(day) => {
-              debugger;
-              setSelectedDay(day);
-            }}
-            modifiers={modifiers}
-            modifiersStyles={modifiersStyles}
-            val
-          />
-        )}
-        {activeTab === 2 && (
-          <Box display="flex" flexWrap="wrap" width="35%">
-            <ServiceButton
-              services={services}
-              setServices={setServices}
-              data="breakfast"
-              text="Breakfast"
-            />
-            <ServiceButton
-              services={services}
-              setServices={setServices}
-              data="lunch"
-              text="Lunch"
-            />
-            <ServiceButton
-              services={services}
-              setServices={setServices}
-              data="dinner"
-              text="Dinner"
-            />
-          </Box>
-        )}
-        {activeTab === 3 && (
-          <>
-            <Box mt="18%" display="flex" flexDirection="column">
-              <TimePicker
-                onChange={(time) => {
-                  console.log({ time });
-                  setTime(time);
-                }}
-                value={time}
-                isOpen={true}
+
+      <div className={classes.divClass}>
+        <div className={classes.courseCardDiv}>
+          <div className={classes.tableReserve2}>
+            <div>
+              <TimingsCard
+                id="3"
+                open="true"
+                textForOpen="Keep in touch with us"
+                styles={`${classes.root5} ${classes.extraStyleForC9}`}
+                textStyles={classes.textStyles}
               />
-            </Box>
-            {token ? (
-              <button
-                className="px-12 py-3 text-black text-center text-sm mb-12"
-                style={{
-                  backgroundColor: "#ffc107",
-                  color: "#fff",
-                  width: "40%",
-                  borderRadius: "6px",
-                  marginTop: "20px",
-                }}
-                onClick={tableReserve}
-              >
-                {loading && (
-                  <CircularProgress
-                    color="inherit"
-                    size={20}
-                    style={{ marginRight: "8px" }}
-                  />
-                )}
-                Book Now
-              </button>
-            ) : (
-              <Link to="/auth">
-                <Box mt="20px">Please login to reserve your table</Box>
-              </Link>
-            )}
-          </>
-        )}
-      </div>
-
-      {/* <section className='px-36 mt-8 flex justify-content-center'>
-
-                <div className="text-gray-900   w-75 mb-2 	 px-0 py-0">
-                    <div className="container ml-0 flex   py-0 px-0 md:flex-row flex-col ">
-                        <div className="lg:max-w-lg px-0 rounded-3xl w-75 lg:w-full ml-2 md:w-1/2 w-5/6 md:mb-0">
-                            <Carousel
-                                additionalTransfrom={0}
-                                autoPlaySpeed={3000}
-                                centerMode={false}
-                                className=""
-                                containerClass="carousel-container"
-                                dotListClass=""
-                                draggable
-                                focusOnSelect={false}
-                                infinite
-                                itemClass="carousel-item-padding-30-px"
-                                keyBoardControl
-                                minimumTouchDrag={80}
-                                renderButtonGroupOutside={false}
-                                renderDotsOutside={false}
-                                responsive={{
-                                    desktop: {
-                                        breakpoint: {
-                                            max: 3000,
-                                            min: 1024
-                                        },
-                                        items: 1
-                                    },
-                                    mobile: {
-                                        breakpoint: {
-                                            max: 464,
-                                            min: 0
-                                        },
-                                        items: 1
-                                    },
-                                    tablet: {
-                                        breakpoint: {
-                                            max: 1024,
-                                            min: 464
-                                        },
-                                        items: 1
-                                    }
-                                }}
-                                showDots
-                                sliderClass=""
-                                slidesToSlide={1}
-                                swipeable
-                                arrows={false}
-                            >
-                                <img
-                                    src="https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-                                    style={{
-                                        display: 'block',
-                                        height: '100%',
-                                        margin: 'auto',
-                                        width: '100%'
-                                    }}
-                                    className='rounded-xl'
-                                />
-                                <img
-                                    src="https://images.unsplash.com/photo-1549396535-c11d5c55b9df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-                                    style={{
-                                        display: 'block',
-                                        height: '100%',
-                                        margin: 'auto',
-                                        width: '100%'
-                                    }}
-                                    className='rounded-xl'
-
-                                />
-                                <img
-                                    src="https://images.unsplash.com/photo-1550133730-695473e544be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-                                    style={{
-                                        display: 'block',
-                                        height: '100%',
-                                        margin: 'auto',
-                                        width: '100%'
-                                    }}
-                                    className='rounded-xl'
-
-                                />
-                                <img
-                                    src="https://images.unsplash.com/photo-1550167164-1b67c2be3973?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-                                    style={{
-                                        display: 'block',
-                                        height: '100%',
-                                        margin: 'auto',
-                                        width: '100%'
-                                    }}
-                                    className='rounded-xl'
-
-                                />
-                                <img
-                                    src="https://images.unsplash.com/photo-1550338861-b7cfeaf8ffd8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-                                    style={{
-                                        display: 'block',
-                                        height: '100%',
-                                        margin: 'auto',
-                                        width: '100%'
-                                    }}
-                                    className='rounded-xl'
-
-                                />
-                            </Carousel>
-                        </div>
-                        <div className="lg:flex-grow leading-relaxed rounded-3xl border border-gray-500  md:w-1/2  ml-3  shadow-sm	px-4 py-4 flex flex-col md:items-start md:text-left  ">
-                            <div className=' d-flex justify-content-around w-full px-0 ml-0  '>
-                                <h2 className=" sm:text-3xl  text-xl mb-2 flex-grow-1 font-weight-bold text-yellow-400   ">Arcane</h2>
-                                <h2 className="sm:text-3xl  text-3xl mb-2  ">8.3<span className='text-xs '>/10</span></h2>
-                            </div>
-                            <div className=' d-flex justify-content-around w-full  py-1'>
-
-                                <p className='w-50 text-xs flex-grow-1 leading-relaxed text-gray-500'>Viale san Michele del carso 7 Milan 20144</p>
-
-
-                                <span className=' text-xs text-indigo-500	  '>See on map</span>
-
-
-                            </div>
-                            <div className='w-full'>
-                                <p className=" leading-relaxed text-sm w-full py-1 text-gray-500">Average price 38 accepts returns</p>
-                                <p className=" leading-relaxed text-sm w-full text-red-500 py-1 px-1    font-weight-bold">-50% at checkout</p>
-
-                                <div className="flex justify-center">
-                                    <button
-                                        className="inline-flex text-white bg-yellow-400 mt-4 font-weight-bold hover:text-gray-900 border-0 py-2 px-6 focus:outline-none  rounded-pill text-lg">Book nup to 50%
-                                    </button>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-
-            </section>
-            <div className='w-full flex justify-content-center'>
-                <div className='w-full flex justify-content-center px-24 mb-8 mt-8'>
-                    <button className=' px-4 py-2 text-center rounded-pill  mr-2 border border-yellow-400 hover:text-white hover:font-weight-bold hover:bg-yellow-400' onClick={()=>scrollTo('menu')}>Menu</button>
-                    <button className=' px-4 py-2 text-center rounded-pill  mr-2 border border-yellow-400 hover:text-white hover:font-weight-bold hover:bg-yellow-400' onClick={()=>scrollTo('promotions')}>Promotions</button>
-                    <button className=' px-4 py-2 text-center rounded-pill  mr-2 border border-yellow-400 hover:text-white hover:font-weight-bold hover:bg-yellow-400' onClick={()=>scrollTo('photos')}>User photos</button>
-                    <button className=' px-4 py-2 text-center rounded-pill  mr-2 border border-yellow-400 hover:text-white hover:font-weight-bold hover:bg-yellow-400' onClick={()=>scrollTo('reviews')}>Reviews</button>
-                    <button className=' px-4 py-2 text-center rounded-pill  mr-2 border border-yellow-400 hover:text-white hover:font-weight-bold hover:bg-yellow-400' onClick={()=>scrollTo('info')}>Info</button>
-                </div>
             </div>
-
-            <div className='w-full flex justify-content-center'>
-                <div className='py-2  place-content-start w-75 px-36 '>
-                    <p className='  text-left text-sm font-weight-bold mb-1 w-full text-black' id='menu'>Chef: <span className='text-gray-500'>Mario Rossi</span> </p>
-                    <p className='  text-left font-weight-bold w-full text-sm text-black mb-4'>Average price: <span className='text-gray-500'>38$</span> </p>
-                    <div className=' mr-0  w-full min-w-2/3  '>
-                        <div className='d-flex justify-content-around w-full mb-2'>
-                            <div className='flex-grow-1 py-2 '>
-                                <h6 className='text-left font-weight-bold text-sm text-black'>Pizza margherita pomodoro mozzarella vongole</h6>
-                                <p className='text-xs text-left'>Pomodoro mozzarella</p>
-                            </div>
-                            <div>
-                                <span className='text-lg py-2  font-weight-bold text-black text-right'>15$</span>
-                            </div>
-                        </div>
-                        <div className='d-flex justify-content-around w-full mt-2'>
-                            <div className='flex-grow-1'>
-                                <h6 className='text-left font-weight-bold text-sm text-black'>Pizza margherita</h6>
-                                <p className='text-xs text-left'>Pomodoro mozzarella</p>
-                            </div>
-                            <div>
-                                <span className='text-lg py-2  font-weight-bold text-black text-right'>15$</span>
-                            </div>
-                        </div>
-                        <div className='d-flex justify-content-around w-full mt-2'>
-                            <div className='flex-grow-1'>
-                                <h6 className='text-left font-weight-bold text-sm text-black'>Pizza margherita</h6>
-                                <p className='text-xs text-left'>Pomodoro mozzarella</p>
-                            </div>
-                            <div>
-                                <span className='text-lg py-2  font-weight-bold text-black text-right'>15$</span>
-                            </div>
-                        </div>
-                        <div className=' text-left w-full mt-2'>
-
-                            <h6 className='text-left font-weight-bold text-sm text-black'>Food Options</h6>
-                            <p className='text-xs text-left w-full'>vegan</p>
-
-                            <div className='flex justify-content-end'>
-                                <button
-                                    className="  inline-flex text-white bg-yellow-400 font-weight-bold hover:text-gray-900 border-0 py-2 px-6 focus:outline-none  rounded-pill text-lg">See full menu
-                                </button>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div className=' mr-0  w-full min-w-2/3  mt-8'>
-                        <h1 className='font-old text-left text-xl mb-8' id='promotions'>Our promotions</h1>
-                        <div className='w-full '>
-                            <Carousel
-                                additionalTransfrom={0}
-                                arrows
-                                autoPlaySpeed={3000}
-                                centerMode={false}
-                                className=""
-                                containerClass="carousel-container"
-                                dotListClass=""
-                                draggable
-                                focusOnSelect={false}
-                                infinite
-                                itemClass="carousel-item-padding-30-px"
-                                keyBoardControl
-                                minimumTouchDrag={80}
-                                renderButtonGroupOutside={false}
-                                renderDotsOutside={false}
-                                responsive={{
-                                    desktop: {
-                                        breakpoint: {
-                                            max: 3000,
-                                            min: 1024
-                                        },
-                                        items: 2,
-                                        partialVisibilityGutter: 40
-                                    },
-                                    mobile: {
-                                        breakpoint: {
-                                            max: 464,
-                                            min: 0
-                                        },
-                                        items: 1,
-                                        partialVisibilityGutter: 30
-                                    },
-                                    tablet: {
-                                        breakpoint: {
-                                            max: 1024,
-                                            min: 464
-                                        },
-                                        items: 2,
-                                        partialVisibilityGutter: 30
-                                    }
-                                }}
-                                showDots={false}
-                                sliderClass=""
-                                slidesToSlide={1}
-                                swipeable
-                            >
-
-                                <Card/>
-                                <Card/>
-                                <Card/>
-
-                            </Carousel>
-                        </div>
-                    </div>
-
+            <Card className={`${classes.root5} ${classes.extraStyleForC10}`}>
+              <CardContent></CardContent>
+            </Card>
+          </div>
+          <div className={classes.headerStyles}>
+            <TimingsCard
+              id="3"
+              open="true"
+              textForOpen="DAILY MENU"
+              styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStylesForRadius2}`}
+              textStyles={classes.textStyles}
+            />
+            <TimingsCard
+              id="3"
+              open="true"
+              textForOpen="PROMOTIONS"
+              styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStyleForRadius3}`}
+              textStyles={classes.textStyles}
+            />
+            <TimingsCard
+              id="3"
+              open="true"
+              textForOpen="INFO"
+              styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStylesForRadius}`}
+              textStyles={classes.textStyles}
+            />
+          </div>
+          <Card
+            className={`${classes.root5} ${classes.extraStyle3} ${classes.rStyles}`}
+          >
+            <CardContent>
+              <div className={classes.coursesStyles}>
+                <div className={classes.container}>
+                  <MenuCard text="FIRST COURSE" />
                 </div>
-            </div> */}
-      <h1 className="font-old text-3xl mt-8" id={"photos"}>
-        {" "}
-        User photos
-      </h1>
-      <p className="text-sm text-gray-500 mt-8 px-44 mb-8">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl
-        eros, pulvinar facilisis justo mollis, auctor consequat urna. Morbi a
-        bibendum metus. Donec scelerisque sollicitudin enim eu venenatis. Duis
-        tincidunt laoreet ex, in pretium orci vestibulum eget.
-      </p>
-      <UserPhotos />
-      <div className="w-full flex justify-content-center">
-        <section
-          id="info"
-          className="text-gray-700 body-font w-75 px-44 mt-8 mb-8"
-        >
-          <div className="container  py-4 mx-auto w-full">
-            <div className="flex flex-col text-left w-full mb-4">
-              <h1
-                className="sm:text-3xl text-2xl font-medium font-old text-center  title-font mb-4 text-gray-900"
-                id="info"
-              >
-                Other informations
-              </h1>
-              <div className="w-full p-3 ">
-                <div className="mb-3">
-                  <h6 className="text-gold font-weight-bold text-xs">Info</h6>
-                  <p className="text-gray-500 text-xs font-weight-bold">
-                    info about the restaurant
-                  </p>
+                <div className={classes.container}>
+                  <MenuCard text="SECOND COURSE" />
                 </div>
-                <div className="mb-3">
-                  <h6 className="text-gold font-weight-bold text-xs">Info</h6>
-                  <p className="text-gray-500 text-xs font-weight-bold">
-                    info about the restaurant
-                  </p>
-                </div>
-                <div className="mb-3">
-                  <h6 className="text-gold font-weight-bold text-xs">Info</h6>
-                  <p className="text-gray-500 text-xs font-weight-bold">
-                    info about the restaurant
-                  </p>
-                </div>
-                <div className="mb-3">
-                  <h6 className="text-gold font-weight-bold text-xs">Info</h6>
-                  <p className="text-gray-500 text-xs font-weight-bold">
-                    info about the restaurant
-                  </p>
+                <div>
+                  <Card
+                    className={`${classes.root5} ${classes.screenStyles} ${classes.bookButtonClss2}`}
+                    onClickHandler={() => history.push("/menu")}
+                  >
+                    <CardContent className={classes.flexOne}>
+                      <img className={classes.bookImage} src={Menu} />
+                      <Typography
+                        className={`${classes.newTextStyles2} ${classes.nTS2}`}
+                      >
+                        CHECK ALSO OUR MENU!
+                      </Typography>
+                    </CardContent>
+                  </Card>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-      </div>
+            </CardContent>
+          </Card>
+        </div>
 
-      <div id="reviews">
-        <About />
+        <div className={classes.tableReserve}>
+          <div>
+            <Card
+              className={`${classes.root5} ${classes.extraStyle} ${classes.stStyles}`}
+            >
+              <CardContent>
+                <img src={reservationBook} className={classes.bookStyles} />
+
+                <Typography className={classes.typoStyles}>
+                  RESERVE A TABLE
+                </Typography>
+              </CardContent>
+            </Card>
+          </div>
+          <Card className={`${classes.root5} ${classes.extraStyle2}`}>
+            <CardContent>
+              <div className={classes.iconsDiv}>
+                <Card className={classes.resSmallCards}>
+                  <div className={classes.likeIconDiv}>
+                    <img src={likeIcon} className={classes.likeIcon} />
+                    <img src={FourFiveIcon} className={classes.fourFiveIcon} />
+                  </div>
+                </Card>
+                <Card className={classes.resSmallCards}>
+                  <div className={classes.likeIconDiv}>
+                    <img src={comment} className={classes.likeIcon} />
+                    <img src={FourTwoSeven} className={classes.numberIcon} />
+                  </div>
+                </Card>
+                <Card className={classes.resSmallCards}>
+                  {" "}
+                  <img src={euro} className={classes.euroIcon} />
+                </Card>
+              </div>
+              <div className={`${classes.container4} ${classes.extra}`}>
+                <Card className={`${classes.root2} ${classes.firstone}`}>
+                  <CardContent>
+                    <div className={classes.img}>
+                      <img src={clock} />
+                    </div>
+                  </CardContent>
+                </Card>
+                <div>
+                  <div>
+                    <TimingsCard
+                      id="2"
+                      startTime="9:00am"
+                      endTime="2:00pm"
+                      open="true"
+                      styles={`${classes.root4} ${classes.firstone}`}
+                    />
+                  </div>
+                  <div>
+                    <TimingsCard
+                      id="3"
+                      open="true"
+                      textForOpen="Click for Opening Hours"
+                      styles={`${classes.root6} ${classes.firsttwo}`}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className={classes.textStyles}>
+                <h3>CI CHO SAN</h3>
+                <br />
+                <p className={classes.pStyles}>
+                  Piazza Mentana, 2, 50122 Firenze FI
+                </p>
+              </div>
+              <CardMedia className={classes.media4} image={map} />
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+      <div className={classes.textDivStyles}>
+        <div className={classes.avatarStyles}>
+          <img className={classes.img2} src={Logo} />
+        </div>
+
+        <div className={classes.h1Styles}>
+          <h1>THIS RESTAURANT GAINED A REPUTATION OF</h1>
+          <div className={classes.imgDivContainer}>
+            <img src={like} className={classes.imgStyles} />
+            <p className={classes.getStars}>4</p>
+            <p className={classes.getStarsSlash}>|</p>5
+          </div>
+
+          <div className={classes.imgDivContainer}>
+            WITH
+            <img src={chat} className={classes.imgStyles} />
+            781 REVIEWS
+          </div>
+          <div className={classes.cardContainer}>
+            <Card className={classes.root7}>
+              <CardContent className={classes.cardContentStyles}>
+                <div className={classes.avatarDivStyles}>
+                  <ImageAvatars img={user} />
+                  <div className={classes.forflex}>
+                    <div
+                      className={`${classes.h1Styles} ${classes.divNewStyles}`}
+                    >
+                      <h1>VOTED</h1>
+                    </div>
+                    <div className={`${classes.imgDivContainer} `}>
+                      <img src={like} className={classes.imgStyles} />
+                      <p className={classes.getStars}>4</p>
+                      <p className={classes.getStarsSlash}>|</p>5
+                    </div>
+                  </div>
+                </div>
+
+                <div className={classes.lineStyles}></div>
+
+                <p>
+                  ‘’E’ il mio ristorante preferito a Pisa. Andateci e non ve ne
+                  pentirete!!! I piatti sono buonissimi ed in più il personale è
+                  gentile. Super consigliato, noi appena possiamo (data la
+                  pandemia) ci torniamo con piacere’’
+                </p>
+              </CardContent>
+            </Card>
+            <br />
+            <Card className={classes.root7}>
+              <CardContent className={classes.cardContentStyles}>
+                <div className={classes.avatarDivStyles}>
+                  <ImageAvatars img={user} />
+                  <div className={classes.forflex}>
+                    <div
+                      className={`${classes.h1Styles} ${classes.divNewStyles}`}
+                    >
+                      <h1>VOTED</h1>
+                    </div>
+                    <div className={`${classes.imgDivContainer} `}>
+                      <img src={like} className={classes.imgStyles} />
+                      <p className={classes.getStars}>4</p>
+                      <p className={classes.getStarsSlash}>|</p>5
+                    </div>
+                  </div>
+                </div>
+
+                <div className={classes.lineStyles}></div>
+
+                <p>
+                  ‘’E’ il mio ristorante preferito a Pisa. Andateci e non ve ne
+                  pentirete!!! I piatti sono buonissimi ed in più il personale è
+                  gentile. Super consigliato, noi appena possiamo (data la
+                  pandemia) ci torniamo con piacere’’
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </div>
       <Footer />
-      <SuccessModal
+      {/* <SuccessModal
         show={show}
         handleClose={handleClose}
         date={selectedDay}
         time={time}
         peopleCount={number}
-      />
+      /> */}
     </div>
   );
 }

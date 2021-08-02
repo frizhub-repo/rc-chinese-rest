@@ -36,3 +36,6 @@ export const updateAddressById = (id, payload) => {
     payload
   );
 };
+export const getDeliverableMenus = () => {
+  return axiosIntance.get("/api/v1/menu/deliverables/customers/public");
+};
