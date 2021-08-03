@@ -7,6 +7,7 @@ import reservationBook from "../../images/reservationBook.png";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import TimingsCard from "../Home/timingsCard";
+import CardMenu from "../Home/cardMenu";
 
 function Menu() {
   const classes = useStyles();
@@ -38,7 +39,9 @@ function Menu() {
           />
         </div>
         <Card className={`${classes.root5} ${classes.extraStyleForC8}`}>
-          <CardContent></CardContent>
+          <CardContent>
+            <CardMenu />
+          </CardContent>
         </Card>
       </div>
       <Footer />

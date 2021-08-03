@@ -126,7 +126,7 @@ function TableReservation() {
               <TimingsCard
                 id="3"
                 open="true"
-                textForOpen="Keep in touch with us"
+                textForOpen="DELIVERY COURSE"
                 styles={`${classes.root5} ${classes.extraStyleForC9}`}
                 textStyles={classes.textStyles}
               />

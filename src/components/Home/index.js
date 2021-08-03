@@ -21,10 +21,8 @@ import clock from "../../images/clock.png";
 import rating from "../../images/rating.png";
 import Reservation from "../../images/reservation.png";
 import mapIcon from "../../images/map.png";
-import course1 from "../../images/course1.png";
-import course2 from "../../images/course2.png";
-import course3 from "../../images/course3.png";
-import course4 from "../../images/course4.png";
+import CardMenu from "./cardMenu";
+
 const periods = [
   {
     openDay: "MONDAY",
@@ -173,25 +171,7 @@ function Home() {
               </div>
               <Card className={`${classes.root5} ${classes.extraStyleForC8}`}>
                 <CardContent>
-                  <div className={classes.roundCoursesCards}>
-                    <div className={classes.cardCourseStyles}>
-                      <p>First Course</p>{" "}
-                      <img src={course1} className={classes.chinaDImage} />
-                    </div>
-                    <div className={classes.cardCourseStyles}>
-                      <p>Second Course</p>{" "}
-                      <img src={course2} className={classes.chinaDImage} />
-                    </div>
-                    <div className={classes.cardCourseStyles}>
-                      <p>Desserts</p>{" "}
-                      <img src={course3} className={classes.chinaDImage} />
-                    </div>
-                    <div className={classes.cardCourseStyles}>
-                      <p>Drinks</p>{" "}
-                      <img src={course4} className={classes.chinaDImage} />
-                    </div>
-                  </div>
-                  <div className={classes.blackLine}></div>
+                  <CardMenu />
                 </CardContent>
               </Card>
             </div>

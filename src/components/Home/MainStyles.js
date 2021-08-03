@@ -1039,6 +1039,39 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "30px",
     backgroundColor: "black",
   },
+  extraCard: {
+    width: "170px",
+    height: "170px",
+    borderRadius: "15px",
+    marginTop: "10px",
+    border: "1px solid black",
+    boxShadow:
+      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    backgroundColor: "white",
+    backgroundImage: "url('../../images/foodMain.png')",
+    backgroundPosition: "top",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  },
+  extraCardDiv: {
+    display: "flex",
+    justifyContent: "space-around",
+  },
+  tIconsDiv: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  tIcons: {
+    width: "30px",
+    height: "30px",
+  },
+  homeMenuCardImg: {
+    width: "169px",
+    height: "133px",
+    borderTopRightRadius: "15px",
+    borderTopLeftRadius: "15px",
+  },
   sepText: {
     display: "flex",
     justifyContent: "space-between",
@@ -1225,7 +1258,7 @@ export const useStyles = makeStyles((theme) => ({
 
     borderRadius: "0px",
     width: "1010px",
-    height: "460px",
+    height: "600px",
     borderBottomRightRadius: "15px",
     borderBottomLeftRadius: "15px",
     boxShadow:
