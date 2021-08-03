@@ -300,7 +300,9 @@ function HeroDelivery() {
                   </Card>
                   <CardMedia className={classes.media7} image={shop} />
                   <div className={classes.textsStyles}>
-                    <h1 className={classes.headingStyles}>PickUp your Order</h1>
+                    <h1 className={classes.headingStyles2}>
+                      PickUp your Order
+                    </h1>
                     <p>Come to our local to get your order</p>
                   </div>
                 </CardContent>

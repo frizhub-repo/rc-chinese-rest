@@ -14,9 +14,9 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(3),
   },
   large: {
-    width: "85px",
-    height: "85px",
-    marginTop: "36px",
+    width: "90px",
+    height: "90px",
+    marginTop: "12px",
   },
 }));
 

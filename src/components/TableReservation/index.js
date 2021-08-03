@@ -266,11 +266,11 @@ function TableReservation() {
       </div>
       <div className={classes.textDivStyles}>
         <div className={classes.avatarStyles}>
-          <img className={classes.img2} src={Logo} />
+          <img className={classes.img22} src={Logo} />
         </div>
 
         <div className={classes.h1Styles}>
-          <h1>THIS RESTAURANT GAINED A REPUTATION OF</h1>
+          <h3>THIS RESTAURANT GAINED A REPUTATION OF</h3>
           <div className={classes.imgDivContainer}>
             <img src={like} className={classes.imgStyles} />
             <p className={classes.getStars}>4</p>
@@ -283,7 +283,7 @@ function TableReservation() {
             781 REVIEWS
           </div>
           <div className={classes.cardContainer}>
-            <Card className={classes.root7}>
+            <Card className={` ${classes.extraStyleForRoot}`}>
               <CardContent className={classes.cardContentStyles}>
                 <div className={classes.avatarDivStyles}>
                   <ImageAvatars img={user} />
@@ -291,7 +291,7 @@ function TableReservation() {
                     <div
                       className={`${classes.h1Styles} ${classes.divNewStyles}`}
                     >
-                      <h1>VOTED</h1>
+                      <p>VOTED</p>
                     </div>
                     <div className={`${classes.imgDivContainer} `}>
                       <img src={like} className={classes.imgStyles} />
@@ -301,7 +301,7 @@ function TableReservation() {
                   </div>
                 </div>
 
-                <div className={classes.lineStyles}></div>
+                <div className={classes.lineStyles2}></div>
 
                 <p>
                   ‘’E’ il mio ristorante preferito a Pisa. Andateci e non ve ne
@@ -312,7 +312,7 @@ function TableReservation() {
               </CardContent>
             </Card>
             <br />
-            <Card className={classes.root7}>
+            <Card className={classes.extraStyleForRoot}>
               <CardContent className={classes.cardContentStyles}>
                 <div className={classes.avatarDivStyles}>
                   <ImageAvatars img={user} />
@@ -320,7 +320,7 @@ function TableReservation() {
                     <div
                       className={`${classes.h1Styles} ${classes.divNewStyles}`}
                     >
-                      <h1>VOTED</h1>
+                      <p>VOTED</p>
                     </div>
                     <div className={`${classes.imgDivContainer} `}>
                       <img src={like} className={classes.imgStyles} />
@@ -330,7 +330,7 @@ function TableReservation() {
                   </div>
                 </div>
 
-                <div className={classes.lineStyles}></div>
+                <div className={classes.lineStyles2}></div>
 
                 <p>
                   ‘’E’ il mio ristorante preferito a Pisa. Andateci e non ve ne

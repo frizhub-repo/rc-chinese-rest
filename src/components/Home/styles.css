@@ -1,0 +1,32 @@
+.outer{
+    background-color: #280813;
+    border-radius: 20px;
+    min-width: 131px;
+    min-height: 314px;
+    position: relative;
+}
+div:before, div:after{
+    content:'';
+    position:absolute;
+    height:10%;
+    width:10%;
+}
+.outer:after{
+    right:0;
+    border-right: 10px solid red;
+    border-top: 10px solid red;
+}
+.outer:before{
+    border-left: 3px solid green;
+    border-top: 3px solid green;
+}
+.inner:before{
+    bottom:0;
+    border-left: 3px solid black;
+    border-bottom: 3px solid black;
+}
+.inner:after{
+    bottom:0; right:0;
+    border-right: 3px solid blue;
+    border-bottom: 3px solid blue;
+}

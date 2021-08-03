@@ -18,6 +18,45 @@ import reservationBook from "../../images/reservationBook.png";
 import { useHistory } from "react-router-dom";
 import Menu from "../../images/menu.png";
 import clock from "../../images/clock.png";
+import rating from "../../images/rating.png";
+import Reservation from "../../images/reservation.png";
+import mapIcon from "../../images/map.png";
+import course1 from "../../images/course1.png";
+import course2 from "../../images/course2.png";
+import course3 from "../../images/course3.png";
+import course4 from "../../images/course4.png";
+const periods = [
+  {
+    openDay: "MONDAY",
+    openTime: "10:00",
+    closeDay: "MONDAY",
+    closeTime: "20:00",
+  },
+  {
+    openDay: "TUESDAY",
+    openTime: "10:00",
+    closeDay: "TUESDAY",
+    closeTime: "20:00",
+  },
+  {
+    openDay: "WEDNESDAY",
+    openTime: "10:00",
+    closeDay: "WEDNESDAY",
+    closeTime: "20:00",
+  },
+  {
+    openDay: "THURSDAY",
+    openTime: "10:00",
+    closeDay: "THURSDAY",
+    closeTime: "20:00",
+  },
+  {
+    openDay: "FRIDAY",
+    openTime: "10:00",
+    closeDay: "FRIDAY",
+    closeTime: "20:00",
+  },
+];
 
 function Home() {
   const classes = useStyles();
@@ -46,7 +85,7 @@ function Home() {
             <HeroCard />
           </div>
           <div className="col-md-6 mt-20 mb-10">
-            <h3 className={classes.headingStyles}>SOMETHING ABOUT US</h3>
+            <h3 className={classes.nheadingStyles}>SOMETHING ABOUT US</h3>
             <p className={classes.paraStyles}>
               Meals are generally served and eaten on the premises, but many
               restaurants also offer take-out and food delivery services.
@@ -56,11 +95,66 @@ function Home() {
               family restaurants, to high-priced luxury establishments.
             </p>
           </div>
-          <div className={`col-6 mt-10`}></div>
-          <div className={`col-6 mt-10`}>
-            <img src={productImg} alt="" className={classes.roundedCircle} />
+          <div className={`col-md-6 mt-10`}>
+            <div className={classes.cornerDiv}>
+              <div className={classes.left}>
+                <div className={classes.innerDivStyles1}>
+                  <p className=" text-white text-center text-sm">
+                    Table Reservation
+                  </p>
+                  <img
+                    className="h-16 object-contain  w-full"
+                    src={Reservation}
+                  />
+
+                  <p className=" text-white text-center mt-2 text-sm">
+                    20 Seats Available
+                  </p>
+                </div>
+                <div className={classes.innerDivStyles2}>
+                  <p className=" text-white text-center text-sm">Address</p>
+                  <img
+                    className="object-contain mt-2 w-full h-16 "
+                    src={mapIcon}
+                  />
+
+                  <p className=" text-white text-center mt-2 text-sm">
+                    Via Cristoforo Colombo,44
+                  </p>
+                </div>
+              </div>
+              <div className={classes.imgAndText}>
+                <img className={classes.btImgStyles} src={clock} />
+                <h3 className={classes.btHeader}>Now Opened</h3>
+                <br />
+                <p>From 12:00 - To 15:30</p>
+                <div className={classes.orderPipe}>ORDER NOW</div>
+                <div className={classes.openPipe}>Click for Opening Hours</div>
+              </div>
+              <div className={classes.right}>
+                <div className={classes.innerDivStyles3}>
+                  <p className=" text-white text-center text-sm">Delivery</p>
+                  <img className="h-16 object-contain  w-full" src={delivery} />
+
+                  <p className=" text-white text-center mt-2 text-sm">
+                    Minimum Order 15$
+                  </p>
+                </div>
+                <div className={classes.innerDivStyles4}>
+                  <p className=" text-white text-center text-sm">Reviews</p>
+                  <img className="object-contain  w-full h-16" src={rating} />
+                  <p className=" text-white text-center mt-2 text-sm">
+                    22 Satisfid clients
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
+          <div className={`col-md-6 mt-10`}>
+            <img src={productImg} alt="" className={classes.roundedCircle} />
+          </div>
+          <div className={`col-12 mt-10 ${classes.picCard}`}></div>
           <div className={classes.flexOne}>
             <div className={classes.circleButton}>
               <div className={classes.imageDiv}>
@@ -72,13 +166,33 @@ function Home() {
                 <TimingsCard
                   id="3"
                   open="true"
-                  textForOpen="Keep in touch with us"
+                  textForOpen="OUR MENU SELECTION"
                   styles={`${classes.root5} ${classes.extraStyleForC7}`}
                   textStyles={classes.textStyles}
                 />
               </div>
               <Card className={`${classes.root5} ${classes.extraStyleForC8}`}>
-                <CardContent></CardContent>
+                <CardContent>
+                  <div className={classes.roundCoursesCards}>
+                    <div className={classes.cardCourseStyles}>
+                      <p>First Course</p>{" "}
+                      <img src={course1} className={classes.chinaDImage} />
+                    </div>
+                    <div className={classes.cardCourseStyles}>
+                      <p>Second Course</p>{" "}
+                      <img src={course2} className={classes.chinaDImage} />
+                    </div>
+                    <div className={classes.cardCourseStyles}>
+                      <p>Desserts</p>{" "}
+                      <img src={course3} className={classes.chinaDImage} />
+                    </div>
+                    <div className={classes.cardCourseStyles}>
+                      <p>Drinks</p>{" "}
+                      <img src={course4} className={classes.chinaDImage} />
+                    </div>
+                  </div>
+                  <div className={classes.blackLine}></div>
+                </CardContent>
               </Card>
             </div>
             <div className={classes.circleButton}>
@@ -87,6 +201,7 @@ function Home() {
               </div>
             </div>
           </div>
+
           <div className="col-12 mt-10">
             <div className={classes.containerTwo}>
               <div>
@@ -105,7 +220,7 @@ function Home() {
             </div>
           </div>
           <div className="col-6 mt-10  mb-4">
-            {openingHours.length ? (
+            {periods.length ? (
               <div className={classes.flexDisplay}>
                 <div className={classes.mainDiv}>
                   <Card className={`${classes.timingCardStyles2} `}>
@@ -113,32 +228,33 @@ function Home() {
                       <div className={classes.img2}>
                         <img src={clock} />
                       </div>
-                      <Typography className={classes.typoStyles4}>
-                        OPENING HOURS
-                      </Typography>
                     </CardContent>
                   </Card>
-                  <div className={classes.container2}>
-                    {/* <div>
-              <Card
-                className={`${classes.timingCardStyles} ${classes.addStyles}`}
-              >
-                <CardContent className={classes.timingCardContect}>
-                  <Typography className={classes.typoStyles4}>NAME</Typography>
-                </CardContent>
-              </Card>
-            </div>
+                  <div className={classes.GridContainer}>
+                    <div>
+                      <Card
+                        className={`${classes.timingCardStyles} ${classes.addStyles}`}
+                      >
+                        <CardContent className={classes.timingCardContect}>
+                          <Typography className={classes.typoStyles4}>
+                            SUNDAY
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                    </div>
 
-            <div>
-              <Card
-                className={`${classes.timingCardStyles} ${classes.addStyles}`}
-              >
-                <CardContent className={classes.timingCardContect}>
-                  <Typography className={classes.typoStyles4}>NAME</Typography>
-                </CardContent>
-              </Card>
-            </div> */}
-                    {openingHours.map((item) => (
+                    <div>
+                      <Card
+                        className={`${classes.timingCardStyles} ${classes.addStyles}`}
+                      >
+                        <CardContent className={classes.timingCardContect}>
+                          <Typography className={classes.typoStyles4}>
+                            CLOSED
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                    </div>
+                    {periods.map((item) => (
                       <>
                         <div>
                           <Card className={classes.timingCardStyles}>
@@ -162,11 +278,6 @@ function Home() {
                     ))}
                   </div>
                 </div>
-                <CardMedia
-                  className={classes.media3}
-                  image={map}
-                  style={{ marginBottom: "30px" }}
-                />
               </div>
             ) : null}
           </div>
