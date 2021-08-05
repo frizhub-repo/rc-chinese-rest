@@ -43,6 +43,11 @@ import chat from "../../images/chat.png";
 import ImageAvatars from "../Avatar/Avatar";
 import user from "../../images/user.png";
 import Logo from "../../images/CLogo.png";
+import "react-multi-carousel/lib/styles.css";
+import productImage from "../../images/productImg.jpeg";
+import gluten from "../../images/gluten.png";
+import hot from "../../images/hot.png";
+import vegan from "../../images/vegan.png";
 
 function TableReservation() {
   const { restaurant } = useRestaurantContext();
@@ -126,13 +131,82 @@ function TableReservation() {
               <TimingsCard
                 id="3"
                 open="true"
-                textForOpen="DELIVERY COURSE"
+                textForOpen="Reserver one of our Table"
                 styles={`${classes.root5} ${classes.extraStyleForC9}`}
                 textStyles={classes.textStyles}
               />
             </div>
-            <Card className={`${classes.root5} ${classes.extraStyleForC10}`}>
-              <CardContent></CardContent>
+          <Card className={`${classes.root5} ${classes.extraStyleForC10} ${classes.flatCorners}`}>
+              <CardContent>
+              <Carousel
+            additionalTransfrom={0}
+            arrows
+            autoPlaySpeed={3000}
+            centerMode={false}
+            className=""
+            containerClass="carousel-container"
+            dotListClass=""
+            draggable
+            focusOnSelect={false}
+            infinite
+            itemClass="carousel-item-padding-30-px"
+            keyBoardControl
+            minimumTouchDrag={80}
+            renderButtonGroupOutside={false}
+            renderDotsOutside={false}
+            responsive={{
+              desktop: {
+                breakpoint: {
+                  max: 3000,
+                  min: 1024,
+                },
+                items: 1,
+                partialVisibilityGutter: 0,
+              },
+              mobile: {
+                breakpoint: {
+                  max: 464,
+                  min: 0,
+                },
+                items: 1,
+                partialVisibilityGutter: 0,
+              },
+              tablet: {
+                breakpoint: {
+                  max: 1024,
+                  min: 464,
+                },
+                items: 1,
+                partialVisibilityGutter: 0,
+              },
+            }}
+            showDots={false}
+            sliderClass=""
+            slidesToSlide={1}
+            swipeable
+          >
+            <img
+              className="object-cover object-center rounded w-full"
+              alt="hero"
+              src="https://dummyimage.com/720x600"
+            />
+            <img
+              className="object-cover object-center rounded  w-full"
+              alt="hero"
+              src="https://dummyimage.com/720x600"
+            />
+            <img
+              className="object-cover object-center rounded  w-full"
+              alt="hero"
+              src="https://dummyimage.com/720x600"
+            />
+            <img
+              className="object-cover object-center rounded  w-full"
+              alt="hero"
+              src="https://dummyimage.com/720x600"
+            />
+             </Carousel>
+              </CardContent>
             </Card>
           </div>
           <div className={classes.headerStyles}>
@@ -163,6 +237,29 @@ function TableReservation() {
           >
             <CardContent>
               <div className={classes.coursesStyles}>
+      <div className={classes.blackLine}></div>
+
+              <div className={classes.extraCardDiv}>
+       
+          <div className={classes.extraCard}>
+            <img src={productImage} className={classes.homeMenuCardImg} />
+            <div className={classes.tIconsDiv}>
+              <img src={vegan} className={classes.tIcons} />
+              <img src={gluten} className={classes.tIcons} />
+              <img src={hot} className={classes.tIcons} />
+            </div>
+          </div>
+          <div className={classes.extraCard}>
+            <img src={productImage} className={classes.homeMenuCardImg} />
+            <div className={classes.tIconsDiv}>
+              <img src={vegan} className={classes.tIcons} />
+              <img src={gluten} className={classes.tIcons} />
+              <img src={hot} className={classes.tIcons} />
+            </div>
+          </div>
+          </div>
+      <div className={classes.blackLine}></div>
+
                 <div className={classes.container}>
                   <MenuCard text="FIRST COURSE" />
                 </div>
@@ -189,7 +286,7 @@ function TableReservation() {
           </Card>
         </div>
 
-        <div className={classes.tableReserve}>
+        <div className={classes.tableReserve11}>
           <div>
             <Card
               className={`${classes.root5} ${classes.extraStyle} ${classes.stStyles}`}

@@ -21,6 +21,45 @@ import ProductByCategories from "../CustomComponents/ProductByCategories";
 import DeleteItemIcon from "../../Assets/IconComponent/DeleteItemIcon";
 import { removeItem } from "../../actions/index";
 import delivery from "../../images/delivery.png";
+import './menuStyles.css'
+import CardMenu from '../Home/cardMenu'
+
+
+const product = {
+  foodType: {
+    vegan: false,
+    glutenFree: true,
+    spicy: false,
+  },
+  bundle: {
+    quantity: 1,
+  },
+  title: "Offer Title",
+  description: "helow worl",
+  type: "default",
+  images: ["images/uEW4DQ0AmItiLogo.jpg"],
+  currency: "€",
+  availability: true,
+  isDeleted: false,
+  allergies: ["Magna cupiditate ali", "invent"],
+  _id: "60d1ed21d615ed15b9fcef1a",
+  sizes: [
+    {
+      discountAvailability: false,
+      discountType: "",
+      discountedPrice: 0,
+      discount: -1,
+      title: "",
+      price: 523,
+    },
+  ],
+  multipleSizes: false,
+  restaurant: "605b18408fc02bb4c1377081",
+  addOns: [],
+  createdAt: "2021-06-22T14:01:05.815Z",
+  updatedAt: "2021-06-22T15:59:45.328Z",
+};
+
 
 function HeroDelivery() {
   let { restaurant, customerData } = useRestaurantContext();
@@ -114,7 +153,7 @@ function HeroDelivery() {
       <Section4 />
       <div className={classes.orderStyles2}>
         <div className={classes.itemsStyles} style={{ position: "relative" }}>
-          <div className={`${classes.dealsRoot}`}>
+          {/* <div className={`${classes.dealsRoot}`}>
             <div className="custom-scroll" style={{ height: "300px" }}>
               {menus.length ? (
                 menus?.map((menu, index) => (
@@ -137,7 +176,7 @@ function HeroDelivery() {
                 </div>
               )}
             </div>
-          </div>
+          </div> */}
           <TimingsCard
             id="3"
             open="true"
@@ -150,6 +189,19 @@ function HeroDelivery() {
             className={`${classes.nRoot5} ${classes.extraStyle3} ${classes.extraStyle11}`}
           >
             <CardContent className={classes.carouselCard}>
+              <div className = {classes.bFlatDiv}>
+                <p>Bundle</p>
+                <p>Flat</p>
+                <p className = {classes.percentageClass}>%</p>
+              </div>
+              <div className = {classes.dLineDiv}></div>
+            <form>
+              <div className="inputContainer">
+              <i className="fa fa-search icon"> </i>
+              <input class="Field" type="text" placeholder="Select your courses" />
+              </div>
+            </form>
+            <CardMenu/>
               <Carousel
                 additionalTransfrom={0}
                 arrows

@@ -117,6 +117,7 @@ export const useStyles = makeStyles((theme) => ({
       "linear-gradient(left, white, white 20%, transparent 20%, transparent 100%)",
     borderRadius: "15px",
     border: "1px solid black",
+    display:"inline-block"
   },
   textStyles: {
     display: "flex",
@@ -195,9 +196,51 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
   },
-  tableReserve: {
-    marginTop: "15px",
+  tableReserve11: {
+    marginTop: "28px",
     width: "400px",
+    marginRight:"50px"
+  },
+  tableReserve: {
+    marginTop: "10px",
+    width: "400px",
+    marginRight:"10px"
+  },
+  flexing:{
+    display:"flex",
+    justifyContent:"space-around"
+  },
+  imgCircleCardDiv:{
+    width:"100%",
+    height:"100%",
+   
+  },
+  imgCircleCard:{
+    backgroundColor:"#280813",
+    borderRadius:"50%",
+    minWidth:"30px",
+    maxWidth:"280px",
+    minHeight:"280px",
+    maxHeight:"70px",
+    display:"flex",
+    flexDirection:"column",
+    justifyContent:"space-between",
+    
+   
+  },
+  imgCircle:{
+    minWidth:"30px",
+    maxWidth:"280px",
+    minHeight:"280px",
+    maxHeight:"70px",
+    borderRadius:"50%",
+    backgroundImage:
+    "linear-gradient(bottom, white, white 20%, transparent 20%, transparent 100%)",
+  },
+  line:{
+    height:"2px",
+    width:"210px",
+    backgroundColor:"#F49E0B"
   },
   container4: {
     display: "flex",
@@ -278,6 +321,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   extraStylesForRadius: {
     borderTopRightRadius: "15px",
+  borderTopLeftRadius:"15px",
     backgroundColor: "#280813",
 
     [theme.breakpoints.down("md")]: {
@@ -285,6 +329,8 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   extraStyleForRadius3: {
+    borderTopLeftRadius: "15px",
+    borderTopRightRadius:"15px",
     backgroundColor: "#280813",
 
     [theme.breakpoints.down("md")]: {
@@ -293,6 +339,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   extraStylesForRadius2: {
     borderTopLeftRadius: "15px",
+    borderTopRightRadius:"15px",
     backgroundColor: "#280813",
     [theme.breakpoints.down("md")]: {
       width: "190px",
@@ -543,14 +590,40 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
   },
+  searchBox:{
+    
+    width: "700px",
+    height: "38px",
+    border: "1px solid black",
+    borderRadius: "8px",
+
+  },
   extraStylesForD: {
     width: "900px",
+    height:"84px",
     backgroundColor: "#280813",
     borderTopLeftRadius: "15px",
     borderTopRightRadius: "15px",
     [theme.breakpoints.down("md")]: {
       width: "588px",
     },
+  },
+  bFlatDiv:{
+    display:"flex",
+    justifyContent:"space-around",
+    alignItems:"center",
+    color:"#FACF85",
+    fontSize:"35px"
+  },
+  dLineDiv:{
+    backgroundColor:"#FACF85",
+    width: "651px",
+    height: "6px",
+    marginLeft: "113px",
+    marginBottom:"20px"
+  },
+  percentageClass:{
+    color:"black"
   },
   extraStyle11: {
     height: "100%",
@@ -1308,6 +1381,10 @@ export const useStyles = makeStyles((theme) => ({
       position: "relative",
       left: "82",
     },
+  },
+  flatCorners:{
+    borderBottomRightRadius: "0px",
+    borderBottomLeftRadius: "0px",
   },
   circleButton: {
     width: "120px",
