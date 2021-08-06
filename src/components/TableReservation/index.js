@@ -125,7 +125,7 @@ function TableReservation() {
       </div>
 
       <div className={classes.divClass}>
-        <div className={classes.courseCardDiv}>
+        <div className={`${classes.courseCardDiv} ${classes.marginL}`}>
           <div className={classes.tableReserve2}>
             <div>
               <TimingsCard
@@ -136,76 +136,78 @@ function TableReservation() {
                 textStyles={classes.textStyles}
               />
             </div>
-          <Card className={`${classes.root5} ${classes.extraStyleForC10} ${classes.flatCorners}`}>
+            <Card
+              className={`${classes.root5} ${classes.extraStyleForC10} ${classes.flatCorners}`}
+            >
               <CardContent>
-              <Carousel
-            additionalTransfrom={0}
-            arrows
-            autoPlaySpeed={3000}
-            centerMode={false}
-            className=""
-            containerClass="carousel-container"
-            dotListClass=""
-            draggable
-            focusOnSelect={false}
-            infinite
-            itemClass="carousel-item-padding-30-px"
-            keyBoardControl
-            minimumTouchDrag={80}
-            renderButtonGroupOutside={false}
-            renderDotsOutside={false}
-            responsive={{
-              desktop: {
-                breakpoint: {
-                  max: 3000,
-                  min: 1024,
-                },
-                items: 1,
-                partialVisibilityGutter: 0,
-              },
-              mobile: {
-                breakpoint: {
-                  max: 464,
-                  min: 0,
-                },
-                items: 1,
-                partialVisibilityGutter: 0,
-              },
-              tablet: {
-                breakpoint: {
-                  max: 1024,
-                  min: 464,
-                },
-                items: 1,
-                partialVisibilityGutter: 0,
-              },
-            }}
-            showDots={false}
-            sliderClass=""
-            slidesToSlide={1}
-            swipeable
-          >
-            <img
-              className="object-cover object-center rounded w-full"
-              alt="hero"
-              src="https://dummyimage.com/720x600"
-            />
-            <img
-              className="object-cover object-center rounded  w-full"
-              alt="hero"
-              src="https://dummyimage.com/720x600"
-            />
-            <img
-              className="object-cover object-center rounded  w-full"
-              alt="hero"
-              src="https://dummyimage.com/720x600"
-            />
-            <img
-              className="object-cover object-center rounded  w-full"
-              alt="hero"
-              src="https://dummyimage.com/720x600"
-            />
-             </Carousel>
+                <Carousel
+                  additionalTransfrom={0}
+                  arrows
+                  autoPlaySpeed={3000}
+                  centerMode={false}
+                  className=""
+                  containerClass="carousel-container"
+                  dotListClass=""
+                  draggable
+                  focusOnSelect={false}
+                  infinite
+                  itemClass="carousel-item-padding-30-px"
+                  keyBoardControl
+                  minimumTouchDrag={80}
+                  renderButtonGroupOutside={false}
+                  renderDotsOutside={false}
+                  responsive={{
+                    desktop: {
+                      breakpoint: {
+                        max: 3000,
+                        min: 1024,
+                      },
+                      items: 1,
+                      partialVisibilityGutter: 0,
+                    },
+                    mobile: {
+                      breakpoint: {
+                        max: 464,
+                        min: 0,
+                      },
+                      items: 1,
+                      partialVisibilityGutter: 0,
+                    },
+                    tablet: {
+                      breakpoint: {
+                        max: 1024,
+                        min: 464,
+                      },
+                      items: 1,
+                      partialVisibilityGutter: 0,
+                    },
+                  }}
+                  showDots={false}
+                  sliderClass=""
+                  slidesToSlide={1}
+                  swipeable
+                >
+                  <img
+                    className="object-cover object-center rounded w-full"
+                    alt="hero"
+                    src="https://dummyimage.com/720x600"
+                  />
+                  <img
+                    className="object-cover object-center rounded  w-full"
+                    alt="hero"
+                    src="https://dummyimage.com/720x600"
+                  />
+                  <img
+                    className="object-cover object-center rounded  w-full"
+                    alt="hero"
+                    src="https://dummyimage.com/720x600"
+                  />
+                  <img
+                    className="object-cover object-center rounded  w-full"
+                    alt="hero"
+                    src="https://dummyimage.com/720x600"
+                  />
+                </Carousel>
               </CardContent>
             </Card>
           </div>
@@ -235,38 +237,64 @@ function TableReservation() {
           <Card
             className={`${classes.root5} ${classes.extraStyle3} ${classes.rStyles}`}
           >
-            <CardContent>
-              <div className={classes.coursesStyles}>
-      <div className={classes.blackLine}></div>
-
-              <div className={classes.extraCardDiv}>
-       
-          <div className={classes.extraCard}>
-            <img src={productImage} className={classes.homeMenuCardImg} />
-            <div className={classes.tIconsDiv}>
-              <img src={vegan} className={classes.tIcons} />
-              <img src={gluten} className={classes.tIcons} />
-              <img src={hot} className={classes.tIcons} />
-            </div>
-          </div>
-          <div className={classes.extraCard}>
-            <img src={productImage} className={classes.homeMenuCardImg} />
-            <div className={classes.tIconsDiv}>
-              <img src={vegan} className={classes.tIcons} />
-              <img src={gluten} className={classes.tIcons} />
-              <img src={hot} className={classes.tIcons} />
-            </div>
-          </div>
-          </div>
-      <div className={classes.blackLine}></div>
-
-                <div className={classes.container}>
-                  <MenuCard text="FIRST COURSE" />
+            <CardContent className={classes.alignment}>
+              <div className={classes.blackLine}></div>
+              <p>FIRST COURSE</p>
+              <div className={`${classes.coursesStyles}`}>
+                <div className={`${classes.extraCardDiv} ${classes.cardAlign}`}>
+                  <div className={classes.extraCard}>
+                    <img
+                      src={productImage}
+                      className={classes.homeMenuCardImg}
+                    />
+                    <div className={classes.tIconsDiv}>
+                      <img src={vegan} className={classes.tIcons} />
+                      <img src={gluten} className={classes.tIcons} />
+                      <img src={hot} className={classes.tIcons} />
+                    </div>
+                  </div>
+                  <div className={classes.extraCard}>
+                    <img
+                      src={productImage}
+                      className={classes.homeMenuCardImg}
+                    />
+                    <div className={classes.tIconsDiv}>
+                      <img src={vegan} className={classes.tIcons} />
+                      <img src={gluten} className={classes.tIcons} />
+                      <img src={hot} className={classes.tIcons} />
+                    </div>
+                  </div>
                 </div>
-                <div className={classes.container}>
-                  <MenuCard text="SECOND COURSE" />
-                </div>
+
                 <div>
+                  <div className={classes.blackLine}></div>
+                  <p>SECOND COURSE</p>
+                  <div
+                    className={`${classes.extraCardDiv} ${classes.cardAlign}`}
+                  >
+                    <div className={classes.extraCard}>
+                      <img
+                        src={productImage}
+                        className={classes.homeMenuCardImg}
+                      />
+                      <div className={classes.tIconsDiv}>
+                        <img src={vegan} className={classes.tIcons} />
+                        <img src={gluten} className={classes.tIcons} />
+                        <img src={hot} className={classes.tIcons} />
+                      </div>
+                    </div>
+                    <div className={classes.extraCard}>
+                      <img
+                        src={productImage}
+                        className={classes.homeMenuCardImg}
+                      />
+                      <div className={classes.tIconsDiv}>
+                        <img src={vegan} className={classes.tIcons} />
+                        <img src={gluten} className={classes.tIcons} />
+                        <img src={hot} className={classes.tIcons} />
+                      </div>
+                    </div>
+                  </div>
                   <Card
                     className={`${classes.root5} ${classes.screenStyles} ${classes.bookButtonClss2}`}
                     onClickHandler={() => history.push("/menu")}
@@ -349,10 +377,10 @@ function TableReservation() {
                 </div>
               </div>
 
-              <div className={classes.textStyles}>
+              <div className={classes.textStyles88}>
                 <h3>CI CHO SAN</h3>
                 <br />
-                <p className={classes.pStyles}>
+                <p className={classes.pStyles88}>
                   Piazza Mentana, 2, 50122 Firenze FI
                 </p>
               </div>

@@ -16,14 +16,17 @@ import Carousel from "react-multi-carousel";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
-import { getDeliverableMenus } from "../../api/customers";
 import ProductByCategories from "../CustomComponents/ProductByCategories";
 import DeleteItemIcon from "../../Assets/IconComponent/DeleteItemIcon";
 import { removeItem } from "../../actions/index";
 import delivery from "../../images/delivery.png";
-import './menuStyles.css'
-import CardMenu from '../Home/cardMenu'
-
+import "./menuStyles.css";
+import CardMenu from "../Home/cardMenu";
+import { getDeliverableMenus } from "../../api/customers";
+import course1 from "../../images/course1.png";
+import course2 from "../../images/course2.png";
+import course3 from "../../images/course3.png";
+import course4 from "../../images/course4.png";
 
 const product = {
   foodType: {
@@ -59,7 +62,6 @@ const product = {
   createdAt: "2021-06-22T14:01:05.815Z",
   updatedAt: "2021-06-22T15:59:45.328Z",
 };
-
 
 function HeroDelivery() {
   let { restaurant, customerData } = useRestaurantContext();
@@ -122,21 +124,21 @@ function HeroDelivery() {
     return val;
   };
 
-  useEffect(() => {
-    fetchProductsByCategory();
-  }, []);
-
   const [menus, setMenus] = React.useState([]);
 
   const fetchDeliverableMenus = async () => {
     try {
       const res = await getDeliverableMenus();
+      console.log({ res });
       setMenus(res?.data);
-    } catch (error) {}
+    } catch (error) {
+      console.log({ error });
+    }
   };
 
   useEffect(() => {
     fetchDeliverableMenus();
+    fetchProductsByCategory();
   }, []);
 
   return (
@@ -153,7 +155,7 @@ function HeroDelivery() {
       <Section4 />
       <div className={classes.orderStyles2}>
         <div className={classes.itemsStyles} style={{ position: "relative" }}>
-          {/* <div className={`${classes.dealsRoot}`}>
+          <div className={`${classes.dealsRoot}`}>
             <div className="custom-scroll" style={{ height: "300px" }}>
               {menus.length ? (
                 menus?.map((menu, index) => (
@@ -176,32 +178,30 @@ function HeroDelivery() {
                 </div>
               )}
             </div>
-          </div> */}
+          </div>
           <TimingsCard
             id="3"
             open="true"
             textForOpen="DELIVERY COURSE"
-            styles={`${classes.nRoot5} ${classes.extraStyle4} ${classes.extraStylesForRadius2} ${classes.extraStylesForD}`}
+            styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStylesForRadius2} ${classes.extraStylesForD}`}
             textStyles={classes.textStyles}
           />
 
           <Card
-            className={`${classes.nRoot5} ${classes.extraStyle3} ${classes.extraStyle11}`}
+            className={`${classes.root5} ${classes.extraStyle3} ${classes.extraStyle19}`}
           >
             <CardContent className={classes.carouselCard}>
-              <div className = {classes.bFlatDiv}>
-                <p>Bundle</p>
-                <p>Flat</p>
-                <p className = {classes.percentageClass}>%</p>
-              </div>
-              <div className = {classes.dLineDiv}></div>
-            <form>
-              <div className="inputContainer">
-              <i className="fa fa-search icon"> </i>
-              <input class="Field" type="text" placeholder="Select your courses" />
-              </div>
-            </form>
-            <CardMenu/>
+              <form className="fromClass">
+                <div className="inputContainer">
+                  <i className="fa fa-search icon"> </i>
+                  <input
+                    class="Field"
+                    type="text"
+                    placeholder="Select your courses"
+                  />
+                </div>
+              </form>
+
               <Carousel
                 additionalTransfrom={0}
                 arrows
@@ -251,15 +251,16 @@ function HeroDelivery() {
               >
                 {menus[activeIndex]?.items?.length > 0 &&
                   menus[activeIndex]?.items?.map((item, index) => (
-                    <h1
+                    <div
                       key={index}
-                      className={`${classes.carousel} ${
-                        sectionIndex === index && classes.activeSection
-                      }`}
+                      className={`${classes.cardCourseStyles} ${
+                        classes.backColorCir
+                      } ${sectionIndex === index && classes.activeSection}`}
                       onClick={() => setSectionIndex(index)}
                     >
-                      {item?.category?.name}
-                    </h1>
+                      <p>{item?.category?.name}</p>{" "}
+                      <img src={course1} className={classes.chinaDImage} />
+                    </div>
                   ))}
               </Carousel>
             </CardContent>
@@ -267,7 +268,7 @@ function HeroDelivery() {
               <CardContent
                 className={`${classes.cardSpacing} custom-scroll-product`}
               >
-                <div className={classes.dCStyles}>
+                <div className={classes.dCStyles9}>
                   <ProductByCategories
                     products={menus[activeIndex]?.items[sectionIndex]?.products}
                     isProductAddedToCart={isProductAddedToCart}

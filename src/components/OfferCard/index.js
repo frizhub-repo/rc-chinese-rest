@@ -62,7 +62,12 @@ const OfferCard = ({ product, showBorder = false, marginBottom = "20px" }) => {
   return (
     <div
       className={classes.prdContainer}
-      style={{ marginBottom, color: "#000", position: "relative" }}
+      style={{
+        marginBottom,
+        color: "#000",
+        position: "relative",
+        width: "365px",
+      }}
     >
       {discount.type && (
         <div className={classes.tagContainer}>
@@ -117,19 +122,31 @@ const OfferCard = ({ product, showBorder = false, marginBottom = "20px" }) => {
         <div className={classes.additionalInfoContainer}>
           <FoodType
             src={vegan}
-            title="VEGAN"
+            title="EXTRA SMALL"
+            isSelected={product?.foodType?.vegan}
+            classes={classes}
+          />
+          <FoodType
+            src={vegan}
+            title="SMALL"
+            isSelected={product?.foodType?.vegan}
+            classes={classes}
+          />
+          <FoodType
+            src={vegan}
+            title="MEDIUM"
             isSelected={product?.foodType?.vegan}
             classes={classes}
           />
           <FoodType
             src={glutenFree}
-            title="GLUTEN-FREE"
+            title="LARGE"
             isSelected={product?.foodType?.glutenFree}
             classes={classes}
           />
           <FoodType
             src={spicy}
-            title="SPICY"
+            title="EXTRA LARGE"
             isSelected={product?.foodType?.spicy}
             classes={classes}
           />

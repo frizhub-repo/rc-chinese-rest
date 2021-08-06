@@ -117,11 +117,21 @@ export const useStyles = makeStyles((theme) => ({
       "linear-gradient(left, white, white 20%, transparent 20%, transparent 100%)",
     borderRadius: "15px",
     border: "1px solid black",
-    display:"inline-block"
+    display: "inline-block",
+    marginTop: "10px",
   },
   textStyles: {
     display: "flex",
     alignItems: "center",
+    justifyContent: "center",
+    fontSize: "x-large",
+    marginTop: "10px",
+    color: "white",
+  },
+  textStyles88: {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
     justifyContent: "center",
     fontSize: "x-large",
     marginTop: "10px",
@@ -199,48 +209,73 @@ export const useStyles = makeStyles((theme) => ({
   tableReserve11: {
     marginTop: "28px",
     width: "400px",
-    marginRight:"50px"
+    marginRight: "50px",
   },
   tableReserve: {
     marginTop: "10px",
     width: "400px",
-    marginRight:"10px"
+    marginRight: "10px",
   },
-  flexing:{
-    display:"flex",
-    justifyContent:"space-around"
+  flexing: {
+    display: "flex",
+    justifyContent: "space-around",
+    marginTop: "30px",
   },
-  imgCircleCardDiv:{
-    width:"100%",
-    height:"100%",
-   
+
+  imgCircleCard: {
+    backgroundColor: "#280813",
+    borderRadius: "50%",
+    height: "250px",
+    width: "250px",
+    display: "flex",
+    position: "relative",
+    flexDirection: "column",
+    justifyContent: "space-between",
   },
-  imgCircleCard:{
-    backgroundColor:"#280813",
-    borderRadius:"50%",
-    minWidth:"30px",
-    maxWidth:"280px",
-    minHeight:"280px",
-    maxHeight:"70px",
-    display:"flex",
-    flexDirection:"column",
-    justifyContent:"space-between",
-    
-   
-  },
-  imgCircle:{
-    minWidth:"30px",
-    maxWidth:"280px",
-    minHeight:"280px",
-    maxHeight:"70px",
-    borderRadius:"50%",
+
+  imgCircle: {
+    height: "250px",
+    width: "250px",
+    borderRadius: "50%",
+
     backgroundImage:
-    "linear-gradient(bottom, white, white 20%, transparent 20%, transparent 100%)",
+      "linear-gradient(bottom, white, white 20%, transparent 20%, transparent 100%)",
   },
-  line:{
-    height:"2px",
-    width:"210px",
-    backgroundColor:"#F49E0B"
+  halfCircle: {
+    position: "absolute",
+    width: "250px",
+    height: "121px",
+
+    backgroundColor: "#F49E0B",
+    bottom: "0px",
+    left: "0px",
+    right: "0px",
+    borderRadius: "0px 0px 500px 500px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-around",
+    borderTop: "2px solid white",
+  },
+  flexTwoDiv: {
+    display: "flex",
+  },
+  upperCircle: {
+    right: "155px",
+    zIndex: "2",
+  },
+  upperCol: {
+    backgroundColor: "#280813",
+    borderTop: "2px solid #F49E0B",
+  },
+  upperCircle2: {
+    zIndex: "1",
+    right: "242px",
+  },
+  line: {
+    height: "2px",
+    width: "210px",
+    backgroundColor: "#F49E0B",
   },
   container4: {
     display: "flex",
@@ -306,6 +341,7 @@ export const useStyles = makeStyles((theme) => ({
     color: "#F49E0B",
   },
   rStyles: {
+    height: "1000px",
     [theme.breakpoints.down("md")]: {
       width: "573px",
       position: "relative",
@@ -321,7 +357,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   extraStylesForRadius: {
     borderTopRightRadius: "15px",
-  borderTopLeftRadius:"15px",
+    borderTopLeftRadius: "15px",
     backgroundColor: "#280813",
 
     [theme.breakpoints.down("md")]: {
@@ -330,7 +366,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   extraStyleForRadius3: {
     borderTopLeftRadius: "15px",
-    borderTopRightRadius:"15px",
+    borderTopRightRadius: "15px",
     backgroundColor: "#280813",
 
     [theme.breakpoints.down("md")]: {
@@ -339,7 +375,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   extraStylesForRadius2: {
     borderTopLeftRadius: "15px",
-    borderTopRightRadius:"15px",
+    borderTopRightRadius: "15px",
     backgroundColor: "#280813",
     [theme.breakpoints.down("md")]: {
       width: "190px",
@@ -351,6 +387,13 @@ export const useStyles = makeStyles((theme) => ({
       position: "relative",
       left: "15px",
     },
+  },
+  crsStyles: {
+    marginLeft: "147px",
+  },
+  activeSection2: {
+    color: "red",
+    backgroundColor: "#280813",
   },
   screenStyles: {
     [theme.breakpoints.down("md")]: {
@@ -393,7 +436,10 @@ export const useStyles = makeStyles((theme) => ({
     fontStyle: "italic",
     color: "#F49E0B",
   },
-
+  pStyles88: {
+    fontStyle: "italic",
+    marginTop: "-40px",
+  },
   title: {
     fontSize: 17,
     color: "#EBA73A",
@@ -487,6 +533,9 @@ export const useStyles = makeStyles((theme) => ({
     width: "258px",
     height: "3px",
     marginBottom: "20px",
+  },
+  extraBorder: {
+    borderBottomRightRadius: "16px",
   },
   extraStyle7: {
     backgroundColor: "#280813",
@@ -590,17 +639,15 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
   },
-  searchBox:{
-    
+  searchBox: {
     width: "700px",
     height: "38px",
     border: "1px solid black",
     borderRadius: "8px",
-
   },
   extraStylesForD: {
-    width: "900px",
-    height:"84px",
+    width: "850px",
+    height: "84px",
     backgroundColor: "#280813",
     borderTopLeftRadius: "15px",
     borderTopRightRadius: "15px",
@@ -608,25 +655,34 @@ export const useStyles = makeStyles((theme) => ({
       width: "588px",
     },
   },
-  bFlatDiv:{
-    display:"flex",
-    justifyContent:"space-around",
-    alignItems:"center",
-    color:"#FACF85",
-    fontSize:"35px"
+  bFlatDiv: {
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "center",
+    color: "#FACF85",
+    fontSize: "35px",
   },
-  dLineDiv:{
-    backgroundColor:"#FACF85",
+  dLineDiv: {
+    backgroundColor: "#FACF85",
     width: "651px",
     height: "6px",
     marginLeft: "113px",
-    marginBottom:"20px"
+    marginBottom: "20px",
   },
-  percentageClass:{
-    color:"black"
+  percentageClass: {
+    color: "black",
   },
   extraStyle11: {
     height: "100%",
+    backgroundColor: "#f49e0b",
+    [theme.breakpoints.down("md")]: {
+      width: "588px",
+      position: "relative",
+    },
+  },
+  extraStyle19: {
+    height: "500px",
+    width: "850px",
     backgroundColor: "#f49e0b",
     [theme.breakpoints.down("md")]: {
       width: "588px",
@@ -642,6 +698,12 @@ export const useStyles = makeStyles((theme) => ({
     borderTopLeftRadius: "15px",
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+  },
+  dCStyles9: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   dCStyles2: {
     backgroundColor: "#280813",
@@ -1382,9 +1444,102 @@ export const useStyles = makeStyles((theme) => ({
       left: "82",
     },
   },
-  flatCorners:{
+  flatCorners: {
     borderBottomRightRadius: "0px",
     borderBottomLeftRadius: "0px",
+  },
+  flatCorners2: {
+    width: "1215px",
+    height: "460px",
+    marginLeft: "15px",
+  },
+  picCardImg: {
+    backgroundColor: "black",
+    display: "flex",
+    justifyContent: "center",
+    width: "1249px",
+    height: "300px",
+    borderTopLeftRadius: "40%",
+    borderTopRightRadius: "40%",
+    marginBottom: "10px",
+  },
+  bottomCard: {
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  offCard: {
+    backgroundColor: "#F59E0B",
+    width: "150px",
+    height: "150px",
+    display: "flex",
+    justifyContent: "center",
+    borderRadius: "50%",
+    color: "white",
+    fontSize: "45px",
+  },
+  marginL: {
+    marginLeft: "16px",
+  },
+  alignment: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "center",
+    color: "black",
+    fontSize: "30px",
+  },
+  cardAlign: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    marginLeft: "160px",
+  },
+  dealsRoot: {
+    position: "absolute",
+    top: "236px",
+    left: "-11px",
+    boxShadow: "0px 4px 4px rgb(0 0 0 / 25%)",
+    width: "150px",
+    color: "white",
+    height: "296px",
+    backgroundColor: "#280813",
+    borderTopRightRadius: "30px",
+    borderBottomRightRadius: "30px",
+  },
+  dealsList: {
+    padding: "2px 0",
+    borderBottom: "1px solid white",
+    fontSize: "18px",
+    cursor: "pointer",
+  },
+  notFoundMenus: {
+    color: "#000",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+    fontSize: "14px",
+  },
+  activeMenu: {
+    color: "#F49E0B",
+  },
+  backColorCir: {
+    backgroundColor: "#F8C56D",
+  },
+  mrginCards: {
+    marginLeft: "90px",
+  },
+  specialPriceCard: {
+    backgroundColor: "#F59E0B",
+    width: "150px",
+    height: "150px",
+    display: "flex",
+    justifyContent: "center",
+    borderRadius: "15px",
+    color: "white",
+    fontSize: "36px",
   },
   circleButton: {
     width: "120px",
@@ -1760,8 +1915,9 @@ export const useStyles = makeStyles((theme) => ({
     backgroundSize: "cover",
     borderRadius: "50%",
     color: "#F49E0B",
-    maxWidth: "15em",
-    minHeight: "15em",
+    width: "220px",
+    height: "220px",
+    marginTop: "30px",
   },
   wImg: {},
   section4Styles: {
@@ -1782,7 +1938,8 @@ export const useStyles = makeStyles((theme) => ({
   picCard: {
     backgroundColor: "#280813",
     display: "flex",
-    justifyContent: "space-between",
+    flexDirection: "column",
+
     maxWidth: "1250px",
     minHeight: "500px",
     borderRadius: "15px",

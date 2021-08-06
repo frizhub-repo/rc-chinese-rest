@@ -8,7 +8,8 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import TimingsCard from "../Home/timingsCard";
 import CardMenu from "../Home/cardMenu";
-import foodImg from '../../images/foodimage.jpg';
+import foodImg from "../../images/foodimage.jpg";
+import Carousel from "react-multi-carousel";
 
 function Menu() {
   const classes = useStyles();
@@ -24,21 +25,31 @@ function Menu() {
       >
         <HeroCard />
       </div>
-        <div className = {classes.flexing}>
-        <div className = {classes.imgCircleCardDiv}>
-          <div className = {classes.imgCircleCard}>
-            <img src = {foodImg} className = {classes.imgCircle}/>
-            <div className = {classes.line}></div> 
+      <div className={classes.flexing}>
+        <div className={classes.flexTwoDiv}>
+          <div className={classes.imgCircleCard}>
+            <img src={foodImg} className={classes.imgCircle} />
+            <div className={classes.halfCircle}></div>
+            <div className={classes.line}></div>
           </div>
+          <div className={`${classes.imgCircleCard} ${classes.upperCircle}`}>
+            <img src={foodImg} className={classes.imgCircle} />
+            <div className={`${classes.halfCircle} ${classes.upperCol}`}></div>
+            <div className={classes.line}></div>
           </div>
-          
-        <div className={classes.whiteCircle}>
-        <img className={classes.wImg} src={reservationBook} />
-        <p>RESERVE A TABLE</p>
-      </div>
-         
+          <div className={`${classes.imgCircleCard} ${classes.upperCircle2}`}>
+            <img src={foodImg} className={classes.imgCircle} />
+            <div className={classes.halfCircle}></div>
+            <div className={classes.line}></div>
+          </div>
         </div>
-      
+
+        <div className={classes.whiteCircle}>
+          <img className={classes.wImg} src={reservationBook} />
+          <p>RESERVE A TABLE</p>
+        </div>
+      </div>
+
       <div className={classes.tableReserve2}>
         <div>
           <TimingsCard

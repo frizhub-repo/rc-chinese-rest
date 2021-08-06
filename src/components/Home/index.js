@@ -5,8 +5,7 @@ import Footer from "../../Footer";
 import { getGoogleMyBusinessLocations } from "../../api/public";
 import { useStyles } from "./MainStyles";
 import productImg from "../../images/productImg.jpeg";
-import CardMedia from "@material-ui/core/CardMedia";
-import map from "../../images/map.jpg";
+
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
@@ -152,7 +151,17 @@ function Home() {
           <div className={`col-md-6 mt-10`}>
             <img src={productImg} alt="" className={classes.roundedCircle} />
           </div>
-          <div className={`col-12 mt-10 ${classes.picCard}`}></div>
+          <div className={`col-12 mt-10 ${classes.picCard}`}>
+            <div className={classes.picCardImg}></div>
+            <div className={classes.bottomCard}>
+              <div className={classes.offCard}>
+                <p>30% OFF</p>
+              </div>
+              <div className={classes.specialPriceCard}>
+                <p>SPECIAL PRICE</p>
+              </div>
+            </div>
+          </div>
           <div className={classes.flexOne}>
             <div className={classes.circleButton}>
               <div className={classes.imageDiv}>
