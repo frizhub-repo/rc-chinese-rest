@@ -357,12 +357,90 @@ function TableReservation() {
                 </div>
               </CardContent>
             </Card>
+          ) : option === 2 ? (
+            <div>
+              <Card
+                className={`${classes.root5} ${classes.extraStyle3} ${classes.rStyles}`}
+              >
+                <CardContent className={classes.alignment}>
+                  <Carousel
+                    additionalTransfrom={0}
+                    arrows
+                    autoPlaySpeed={3000}
+                    centerMode={false}
+                    className={classes.carsolClass2}
+                    containerClass="carousel-container"
+                    dotListClass=""
+                    draggable
+                    focusOnSelect={false}
+                    infinite
+                    itemClass="carousel-item-padding-30-px"
+                    keyBoardControl
+                    minimumTouchDrag={80}
+                    renderButtonGroupOutside={false}
+                    renderDotsOutside={true}
+                    responsive={{
+                      desktop: {
+                        breakpoint: {
+                          max: 3000,
+                          min: 1024,
+                        },
+                        items: 1,
+                        partialVisibilityGutter: 0,
+                      },
+                      mobile: {
+                        breakpoint: {
+                          max: 464,
+                          min: 0,
+                        },
+                        items: 1,
+                        partialVisibilityGutter: 0,
+                      },
+                      tablet: {
+                        breakpoint: {
+                          max: 1024,
+                          min: 464,
+                        },
+                        items: 1,
+                        partialVisibilityGutter: 0,
+                      },
+                    }}
+                    showDots={false}
+                    sliderClass=""
+                    slidesToSlide={1}
+                    swipeable
+                  >
+                    <div className={`${classes.picCardDiv2}`}></div>
+                    <div className={`${classes.picCardDiv2}`}></div>
+                    <div className={`${classes.picCardDiv2}`}></div>
+                  </Carousel>
+
+                  <CheckMenu />
+                </CardContent>
+              </Card>
+            </div>
           ) : (
             <Card
               className={`${classes.root5} ${classes.extraStyle3} ${classes.rStyles}`}
             >
               <CardContent className={classes.alignment}>
-                <CheckMenu />
+                <div className={classes.infoText}>
+                  <p className={classes.infoTextColor}>Chef:</p>
+                  <p>Misha Sukays</p>
+                  <br />
+                  <p className={classes.infoTextColor}>Chef:</p>
+
+                  <p>Misha Sukays</p>
+                  <br />
+                  <p className={classes.infoTextColor}>Chef:</p>
+
+                  <p>Misha Sukays</p>
+                  <br />
+                  <p className={classes.infoTextColor}>Chef:</p>
+
+                  <p>Misha Sukays</p>
+                  <br />
+                </div>
               </CardContent>
             </Card>
           )}

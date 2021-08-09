@@ -1991,8 +1991,29 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow:
       "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   },
+  picCardDiv2: {
+    backgroundColor: "#280813",
+    display: "flex",
+    flexDirection: "column",
+    marginTop: "40px",
+    width: "630px",
+    height: "290px",
+    borderRadius: "15px",
+    color: "white",
+  },
   carsolClass: {
     width: "460px",
+  },
+  carsolClass2: {
+    width: "710px",
+    borderRadius: "15px",
+    marginBottom: "60px",
+  },
+  infoText: {
+    textAlign: "center",
+  },
+  infoTextColor: {
+    color: "#F59E0B",
   },
   imgAndText: {
     display: "flex",
