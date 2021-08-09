@@ -2,34 +2,23 @@ import React, { useState } from "react";
 import Navbar from "../Navbar";
 import Footer from "../../Footer";
 import About from "../About";
-import UserPhotos from "../UserPhotos";
 import Carousel from "react-multi-carousel";
 import Card from "@material-ui/core/Card";
 
-import moduleName from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import { Box, CircularProgress } from "@material-ui/core";
-import NumberOfPeople from "./NumberOfPeople";
-import DayPicker from "react-day-picker";
 import "react-day-picker/lib/style.css";
-import TimePicker from "react-time-picker";
-import ServiceButton from "./ServiceButton";
+
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
 import { reserveTable } from "../../api/customers";
-import SuccessModal from "./SuccessModal";
 import { useRestaurantContext } from "../../Context/restaurantContext";
-import { Link } from "react-router-dom";
 import HeroCard from "../Home/HeroCard";
 import reservationBook from "../../images/reservationBook.png";
 import CardContent from "@material-ui/core/CardContent";
 import TimingsCard from "../Home/timingsCard";
 import { useStyles } from "../Home/MainStyles";
 import CardMedia from "@material-ui/core/CardMedia";
-import MenuCard from "../Home/MenuCard";
 import Typography from "@material-ui/core/Typography";
 import { useHistory } from "react-router-dom";
-import foodimage from "../../images/foodimage.jpg";
 import likeIcon from "../../images/likeIcon.png";
 import FourFiveIcon from "../../images/FourFiveIcon.png";
 import comment from "../../images/comment.png";
@@ -48,6 +37,7 @@ import productImage from "../../images/productImg.jpeg";
 import gluten from "../../images/gluten.png";
 import hot from "../../images/hot.png";
 import vegan from "../../images/vegan.png";
+import CheckMenu from "../Home/checkMenu";
 
 function TableReservation() {
   const { restaurant } = useRestaurantContext();
@@ -64,10 +54,14 @@ function TableReservation() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const { token } = useRestaurantContext();
+  const [option, setOption] = useState(0);
 
   var isSameOrBefore = require("dayjs/plugin/isSameOrBefore");
   dayjs.extend(isSameOrBefore);
 
+  const handleClick = () => {
+    setOption(2);
+  };
   const tableReserve = async () => {
     try {
       const formatDate = dayjs(selectedDay).format("YYYY-MM-DD");
@@ -110,7 +104,7 @@ function TableReservation() {
       behavior: "smooth",
     });
   };
-
+  console.log({ option });
   return (
     <div className={classes.mainDiv}>
       <Navbar selected="Res" />
@@ -145,7 +139,7 @@ function TableReservation() {
                   arrows
                   autoPlaySpeed={3000}
                   centerMode={false}
-                  className=""
+                  className={classes.cAlignmentStyels}
                   containerClass="carousel-container"
                   dotListClass=""
                   draggable
@@ -218,6 +212,7 @@ function TableReservation() {
               textForOpen="DAILY MENU"
               styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStylesForRadius2}`}
               textStyles={classes.textStyles}
+              onClick={() => setOption(1)}
             />
             <TimingsCard
               id="3"
@@ -225,6 +220,7 @@ function TableReservation() {
               textForOpen="PROMOTIONS"
               styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStyleForRadius3}`}
               textStyles={classes.textStyles}
+              onClick={handleClick}
             />
             <TimingsCard
               id="3"
@@ -232,86 +228,144 @@ function TableReservation() {
               textForOpen="INFO"
               styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStylesForRadius}`}
               textStyles={classes.textStyles}
+              onClick={() => setOption(3)}
             />
           </div>
-          <Card
-            className={`${classes.root5} ${classes.extraStyle3} ${classes.rStyles}`}
-          >
-            <CardContent className={classes.alignment}>
-              <div className={classes.blackLine}></div>
-              <p>FIRST COURSE</p>
-              <div className={`${classes.coursesStyles}`}>
-                <div className={`${classes.extraCardDiv} ${classes.cardAlign}`}>
-                  <div className={classes.extraCard}>
-                    <img
-                      src={productImage}
-                      className={classes.homeMenuCardImg}
-                    />
-                    <div className={classes.tIconsDiv}>
-                      <img src={vegan} className={classes.tIcons} />
-                      <img src={gluten} className={classes.tIcons} />
-                      <img src={hot} className={classes.tIcons} />
-                    </div>
-                  </div>
-                  <div className={classes.extraCard}>
-                    <img
-                      src={productImage}
-                      className={classes.homeMenuCardImg}
-                    />
-                    <div className={classes.tIconsDiv}>
-                      <img src={vegan} className={classes.tIcons} />
-                      <img src={gluten} className={classes.tIcons} />
-                      <img src={hot} className={classes.tIcons} />
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <div className={classes.blackLine}></div>
-                  <p>SECOND COURSE</p>
+          {option === 1 ? (
+            <Card
+              className={`${classes.root5} ${classes.extraStyle3} ${classes.rStyles}`}
+            >
+              <CardContent className={classes.alignment}>
+                <div className={classes.blackLine}></div>
+                <p>FIRST COURSE</p>
+                <div className={`${classes.coursesStyles}`}>
                   <div
                     className={`${classes.extraCardDiv} ${classes.cardAlign}`}
                   >
-                    <div className={classes.extraCard}>
-                      <img
-                        src={productImage}
-                        className={classes.homeMenuCardImg}
-                      />
-                      <div className={classes.tIconsDiv}>
-                        <img src={vegan} className={classes.tIcons} />
-                        <img src={gluten} className={classes.tIcons} />
-                        <img src={hot} className={classes.tIcons} />
+                    <div className={classes.rowWise}>
+                      <div className={classes.extraCard}>
+                        <img
+                          src={productImage}
+                          className={classes.homeMenuCardImg}
+                        />
+                        <div className={classes.tIconsDiv}>
+                          <img src={vegan} className={classes.tIcons} />
+                          <img src={gluten} className={classes.tIcons} />
+                          <img src={hot} className={classes.tIcons} />
+                        </div>
+                      </div>
+                      <div className={classes.textAlignClass}>
+                        <p>SPAGHETTI ALLA PUTTANESCA.....................5€</p>
+                        <p>
+                          Ingredienti: Pasta di Grano, Sugo di Pomodoro,
+                          Peperoncino
+                        </p>
+                        <p>Allergeni: Farina</p>
                       </div>
                     </div>
-                    <div className={classes.extraCard}>
-                      <img
-                        src={productImage}
-                        className={classes.homeMenuCardImg}
-                      />
-                      <div className={classes.tIconsDiv}>
-                        <img src={vegan} className={classes.tIcons} />
-                        <img src={gluten} className={classes.tIcons} />
-                        <img src={hot} className={classes.tIcons} />
+
+                    <div className={classes.rowWise}>
+                      <div className={classes.extraCard}>
+                        <img
+                          src={productImage}
+                          className={classes.homeMenuCardImg}
+                        />
+                        <div className={classes.tIconsDiv}>
+                          <img src={vegan} className={classes.tIcons} />
+                          <img src={gluten} className={classes.tIcons} />
+                          <img src={hot} className={classes.tIcons} />
+                        </div>
+                      </div>
+                      <div className={classes.textAlignClass}>
+                        <p>SPAGHETTI ALLA PUTTANESCA.....................5€</p>
+                        <p>
+                          Ingredienti: Pasta di Grano, Sugo di Pomodoro,
+                          Peperoncino
+                        </p>
+                        <p>Allergeni: Farina</p>
                       </div>
                     </div>
                   </div>
-                  <Card
-                    className={`${classes.root5} ${classes.screenStyles} ${classes.bookButtonClss2}`}
-                    onClickHandler={() => history.push("/menu")}
-                  >
-                    <CardContent className={classes.flexOne}>
-                      <img className={classes.bookImage} src={Menu} />
-                      <Typography
-                        className={`${classes.newTextStyles2} ${classes.nTS2}`}
-                      >
-                        CHECK ALSO OUR MENU!
-                      </Typography>
-                    </CardContent>
-                  </Card>
+
+                  <div>
+                    <div className={classes.blackLine}></div>
+                    <p>SECOND COURSE</p>
+                    <div
+                      className={`${classes.extraCardDiv} ${classes.cardAlign}`}
+                    >
+                      <div className={classes.rowWise}>
+                        <div className={classes.extraCard}>
+                          <img
+                            src={productImage}
+                            className={classes.homeMenuCardImg}
+                          />
+                          <div className={classes.tIconsDiv}>
+                            <img src={vegan} className={classes.tIcons} />
+                            <img src={gluten} className={classes.tIcons} />
+                            <img src={hot} className={classes.tIcons} />
+                          </div>
+                        </div>
+                        <div className={classes.textAlignClass}>
+                          <p>
+                            SPAGHETTI ALLA PUTTANESCA.....................5€
+                          </p>
+                          <p>
+                            Ingredienti: Pasta di Grano, Sugo di Pomodoro,
+                            Peperoncino
+                          </p>
+                          <p>Allergeni: Farina</p>
+                        </div>
+                      </div>
+                      <div className={classes.rowWise}>
+                        <div className={classes.extraCard}>
+                          <img
+                            src={productImage}
+                            className={classes.homeMenuCardImg}
+                          />
+                          <div className={classes.tIconsDiv}>
+                            <img src={vegan} className={classes.tIcons} />
+                            <img src={gluten} className={classes.tIcons} />
+                            <img src={hot} className={classes.tIcons} />
+                          </div>
+                        </div>
+                        <div className={classes.textAlignClass}>
+                          <p>
+                            SPAGHETTI ALLA PUTTANESCA.....................5€
+                          </p>
+                          <p>
+                            Ingredienti: Pasta di Grano, Sugo di Pomodoro,
+                            Peperoncino
+                          </p>
+                          <p>Allergeni: Farina</p>
+                        </div>
+                      </div>
+                    </div>
+                    <Card
+                      className={`${classes.root5} ${classes.screenStyles} ${classes.bookButtonClss2}`}
+                      onClickHandler={() => history.push("/menu")}
+                    >
+                      <CardContent className={classes.flexOne}>
+                        <img className={classes.bookImage} src={Menu} />
+                        <Typography
+                          className={`${classes.newTextStyles2} ${classes.nTS2}`}
+                        >
+                          CHECK ALSO OUR MENU!
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          ) : (
+            <Card
+              className={`${classes.root5} ${classes.extraStyle3} ${classes.rStyles}`}
+            >
+              <CardContent className={classes.alignment}>
+                <CheckMenu />
+              </CardContent>
+            </Card>
+          )}
         </div>
 
         <div className={classes.tableReserve11}>

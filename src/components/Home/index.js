@@ -21,6 +21,10 @@ import rating from "../../images/rating.png";
 import Reservation from "../../images/reservation.png";
 import mapIcon from "../../images/map.png";
 import CardMenu from "./cardMenu";
+import "react-multi-carousel/lib/styles.css";
+import Carousel from "react-multi-carousel";
+import foodImg from "../../images/foodimage.jpg";
+import CheckMenu from "../Home/checkMenu";
 
 const periods = [
   {
@@ -77,11 +81,11 @@ function Home() {
     <div>
       <Navbar selected={"Home"} />
       <div className="container">
-        <div className="row row-offset-12">
-          <div className="col-md-6 mt-20">
+        <div className={classes.firstDiv}>
+          <div className={classes.hCardDiv}>
             <HeroCard />
           </div>
-          <div className="col-md-6 mt-20 mb-10">
+          <div className={classes.sTDiv}>
             <h3 className={classes.nheadingStyles}>SOMETHING ABOUT US</h3>
             <p className={classes.paraStyles}>
               Meals are generally served and eaten on the premises, but many
@@ -92,205 +96,350 @@ function Home() {
               family restaurants, to high-priced luxury establishments.
             </p>
           </div>
-          <div className={`col-md-6 mt-10`}>
-            <div className={classes.cornerDiv}>
-              <div className={classes.left}>
-                <div className={classes.innerDivStyles1}>
-                  <p className=" text-white text-center text-sm">
-                    Table Reservation
-                  </p>
-                  <img
-                    className="h-16 object-contain  w-full"
-                    src={Reservation}
-                  />
-
-                  <p className=" text-white text-center mt-2 text-sm">
-                    20 Seats Available
-                  </p>
-                </div>
-                <div className={classes.innerDivStyles2}>
-                  <p className=" text-white text-center text-sm">Address</p>
-                  <img
-                    className="object-contain mt-2 w-full h-16 "
-                    src={mapIcon}
-                  />
-
-                  <p className=" text-white text-center mt-2 text-sm">
-                    Via Cristoforo Colombo,44
-                  </p>
-                </div>
-              </div>
-              <div className={classes.imgAndText}>
-                <img className={classes.btImgStyles} src={clock} />
-                <h3 className={classes.btHeader}>Now Opened</h3>
-                <br />
-                <p>From 12:00 - To 15:30</p>
-                <div className={classes.orderPipe}>ORDER NOW</div>
-                <div className={classes.openPipe}>Click for Opening Hours</div>
-              </div>
-              <div className={classes.right}>
-                <div className={classes.innerDivStyles3}>
-                  <p className=" text-white text-center text-sm">Delivery</p>
-                  <img className="h-16 object-contain  w-full" src={delivery} />
-
-                  <p className=" text-white text-center mt-2 text-sm">
-                    Minimum Order 15$
-                  </p>
-                </div>
-                <div className={classes.innerDivStyles4}>
-                  <p className=" text-white text-center text-sm">Reviews</p>
-                  <img className="object-contain  w-full h-16" src={rating} />
-                  <p className=" text-white text-center mt-2 text-sm">
-                    22 Satisfid clients
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className={`col-md-6 mt-10`}>
-            <img src={productImg} alt="" className={classes.roundedCircle} />
-          </div>
-          <div className={`col-12 mt-10 ${classes.picCard}`}>
-            <div className={classes.picCardImg}></div>
-            <div className={classes.bottomCard}>
-              <div className={classes.offCard}>
-                <p>30% OFF</p>
-              </div>
-              <div className={classes.specialPriceCard}>
-                <p>SPECIAL PRICE</p>
-              </div>
-            </div>
-          </div>
-          <div className={classes.flexOne}>
-            <div className={classes.circleButton}>
-              <div className={classes.imageDiv}>
-                <img src={reservationBook} className={classes.img} />
-              </div>
-            </div>
-            <div className={classes.tableReserve2}>
-              <div>
-                <TimingsCard
-                  id="3"
-                  open="true"
-                  textForOpen="OUR MENU SELECTION"
-                  styles={`${classes.root5} ${classes.extraStyleForC7}`}
-                  textStyles={classes.textStyles}
-                />
-              </div>
-              <Card className={`${classes.root5} ${classes.extraStyleForC8}`}>
-                <CardContent>
-                  <CardMenu />
-                </CardContent>
-              </Card>
-            </div>
-            <div className={classes.circleButton}>
-              <div className={classes.imageDiv}>
-                <img src={delivery} className={classes.img} />
-              </div>
-            </div>
-          </div>
-
-          <div className="col-12 mt-10">
-            <div className={classes.containerTwo}>
-              <div>
-                <Card
-                  className={`${classes.root5} ${classes.screenStyles} ${classes.bookButtonClss}`}
-                  onClickHandler={() => history.push("/menu")}
-                >
-                  <CardContent className={classes.flexOne}>
-                    <img className={classes.bookImage} src={Menu} />
-                    <Typography className={classes.newTextStyles}>
-                      CHECK ALSO OUR MENU!
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          </div>
-          <div className="col-6 mt-10  mb-4">
-            {periods.length ? (
-              <div className={classes.flexDisplay}>
-                <div className={classes.mainDiv}>
-                  <Card className={`${classes.timingCardStyles2} `}>
-                    <CardContent className={classes.timingCardContect2}>
-                      <div className={classes.img2}>
-                        <img src={clock} />
-                      </div>
-                    </CardContent>
-                  </Card>
-                  <div className={classes.GridContainer}>
-                    <div>
-                      <Card
-                        className={`${classes.timingCardStyles} ${classes.addStyles}`}
-                      >
-                        <CardContent className={classes.timingCardContect}>
-                          <Typography className={classes.typoStyles4}>
-                            SUNDAY
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                    </div>
-
-                    <div>
-                      <Card
-                        className={`${classes.timingCardStyles} ${classes.addStyles}`}
-                      >
-                        <CardContent className={classes.timingCardContect}>
-                          <Typography className={classes.typoStyles4}>
-                            CLOSED
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                    </div>
-                    {periods.map((item) => (
-                      <>
-                        <div>
-                          <Card className={classes.timingCardStyles}>
-                            <CardContent className={classes.timingCardContect}>
-                              <Typography className={classes.typoStyles4}>
-                                {item?.openDay}
-                              </Typography>
-                            </CardContent>
-                          </Card>
-                        </div>
-                        <div>
-                          <Card className={classes.timingCardStyles}>
-                            <CardContent className={classes.timingCardContect}>
-                              <Typography className={classes.typoStyles4}>
-                                {item?.openTime} - {item?.closeTime}
-                              </Typography>
-                            </CardContent>
-                          </Card>
-                        </div>
-                      </>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ) : null}
-          </div>
-          <div className={`col-6 mt-10  mb-4`}>
-            <Card className={classes.root7}>
-              <CardContent className={classes.cardContentStyles}>
-                <div className={classes.avatarDivStyles}>
-                  <ImageAvatars img={user} />
-                </div>
-
-                <div className={classes.lineStyles}></div>
-
-                <p>
-                  ‘’E’ il mio ristorante preferito a Pisa. Andateci e non ve ne
-                  pentirete!!! I piatti sono buonissimi ed in più il personale è
-                  gentile. Super consigliato, noi appena possiamo (data la
-                  pandemia) ci torniamo con piacere’’
+        </div>
+        <div className={`${classes.secondDiv}`}>
+          <div className={classes.cornerDiv}>
+            <div className={classes.left}>
+              <div className={classes.innerDivStyles1}>
+                <p className=" text-white text-center text-sm">
+                  Table Reservation
                 </p>
+                <img
+                  className="h-16 object-contain  w-full"
+                  src={Reservation}
+                />
+
+                <p className=" text-white text-center mt-2 text-sm">
+                  20 Seats Available
+                </p>
+              </div>
+              <div className={classes.innerDivStyles2}>
+                <p className=" text-white text-center text-sm">Address</p>
+                <img
+                  className="object-contain mt-2 w-full h-16 "
+                  src={mapIcon}
+                />
+
+                <p className=" text-white text-center mt-2 text-sm">
+                  Via Cristoforo Colombo,44
+                </p>
+              </div>
+            </div>
+            <div className={classes.imgAndText}>
+              <img className={classes.btImgStyles} src={clock} />
+              <h3 className={classes.btHeader}>Now Opened</h3>
+              <br />
+              <p>From 12:00 - To 15:30</p>
+              <div className={classes.orderPipe}>ORDER NOW</div>
+              <div className={classes.openPipe}>Click for Opening Hours</div>
+            </div>
+            <div className={classes.right}>
+              <div className={classes.innerDivStyles3}>
+                <p className=" text-white text-center text-sm">Delivery</p>
+                <img className="h-16 object-contain  w-full" src={delivery} />
+
+                <p className=" text-white text-center mt-2 text-sm">
+                  Minimum Order 15$
+                </p>
+              </div>
+              <div className={classes.innerDivStyles4}>
+                <p className=" text-white text-center text-sm">Reviews</p>
+                <img className="object-contain  w-full h-16" src={rating} />
+                <p className=" text-white text-center mt-2 text-sm">
+                  22 Satisfid clients
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <Carousel
+              additionalTransfrom={0}
+              arrows
+              autoPlaySpeed={3000}
+              centerMode={false}
+              className={classes.carsolClass}
+              containerClass="carousel-container"
+              dotListClass=""
+              draggable
+              focusOnSelect={false}
+              infinite
+              itemClass="carousel-item-padding-30-px"
+              keyBoardControl
+              minimumTouchDrag={80}
+              renderButtonGroupOutside={false}
+              renderDotsOutside={false}
+              responsive={{
+                desktop: {
+                  breakpoint: {
+                    max: 3000,
+                    min: 1024,
+                  },
+                  items: 1,
+                  partialVisibilityGutter: 0,
+                },
+                mobile: {
+                  breakpoint: {
+                    max: 464,
+                    min: 0,
+                  },
+                  items: 1,
+                  partialVisibilityGutter: 0,
+                },
+                tablet: {
+                  breakpoint: {
+                    max: 1024,
+                    min: 464,
+                  },
+                  items: 1,
+                  partialVisibilityGutter: 0,
+                },
+              }}
+              showDots={true}
+              sliderClass=""
+              slidesToSlide={1}
+              swipeable
+            >
+              <img src={productImg} alt="" className={classes.roundedCircle} />
+              <img src={productImg} alt="" className={classes.roundedCircle} />
+            </Carousel>
+          </div>
+        </div>
+
+        <div className={`${classes.picCardDiv}`}>
+          <div>
+            <Carousel
+              additionalTransfrom={0}
+              arrows
+              autoPlaySpeed={3000}
+              centerMode={false}
+              className=""
+              containerClass="carousel-container"
+              dotListClass=""
+              draggable
+              focusOnSelect={false}
+              infinite
+              itemClass="carousel-item-padding-30-px"
+              keyBoardControl
+              minimumTouchDrag={80}
+              renderButtonGroupOutside={false}
+              renderDotsOutside={false}
+              responsive={{
+                desktop: {
+                  breakpoint: {
+                    max: 3000,
+                    min: 1024,
+                  },
+                  items: 1,
+                  partialVisibilityGutter: 0,
+                },
+                mobile: {
+                  breakpoint: {
+                    max: 464,
+                    min: 0,
+                  },
+                  items: 1,
+                  partialVisibilityGutter: 0,
+                },
+                tablet: {
+                  breakpoint: {
+                    max: 1024,
+                    min: 464,
+                  },
+                  items: 1,
+                  partialVisibilityGutter: 0,
+                },
+              }}
+              showDots={false}
+              sliderClass=""
+              slidesToSlide={1}
+              swipeable
+            >
+              <div className={classes.picCardImg}>
+                <img src={foodImg} />
+              </div>
+              <div className={classes.picCardImg}>
+                <img src={foodImg} />
+              </div>
+            </Carousel>
+          </div>
+          <div className={classes.bottomCard}>
+            <div className={classes.offCard}>
+              <p>30% OFF</p>
+            </div>
+            <div className={classes.specialPriceCard}>
+              <p>SPECIAL PRICE</p>
+            </div>
+          </div>
+        </div>
+
+        <div className={classes.flexOne}>
+          <div className={classes.circleButton}>
+            <div className={classes.imageDiv}>
+              <img src={reservationBook} className={classes.img} />
+            </div>
+          </div>
+          <div className={classes.tableReserve2}>
+            <div>
+              <TimingsCard
+                id="3"
+                open="true"
+                textForOpen="OUR MENU SELECTION"
+                styles={`${classes.root5} ${classes.extraStyleForC7}`}
+                textStyles={classes.textStyles}
+              />
+            </div>
+            <Card className={`${classes.root5} ${classes.extraStyleForC8}`}>
+              <CardContent>
+                <CardMenu />
               </CardContent>
             </Card>
           </div>
+          <div className={classes.circleButton}>
+            <div className={classes.imageDiv}>
+              <img src={delivery} className={classes.img} />
+            </div>
+          </div>
+        </div>
+
+        <div className={classes.firstDiv}>
+          <div className={classes.containerTwo}>
+            <CheckMenu />
+          </div>
+        </div>
+        <div className={classes.secondDiv}>
+          {periods.length ? (
+            <div className={classes.flexDisplay}>
+              <div className={classes.mainDiv}>
+                <Card className={`${classes.timingCardStyles2} `}>
+                  <CardContent className={classes.timingCardContect2}>
+                    <div className={classes.img2}>
+                      <img src={clock} />
+                    </div>
+                  </CardContent>
+                </Card>
+                <div className={classes.GridContainer}>
+                  <div>
+                    <Card
+                      className={`${classes.timingCardStyles} ${classes.addStyles}`}
+                    >
+                      <CardContent className={classes.timingCardContect}>
+                        <Typography className={classes.typoStyles4}>
+                          SUNDAY
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </div>
+
+                  <div>
+                    <Card
+                      className={`${classes.timingCardStyles} ${classes.addStyles}`}
+                    >
+                      <CardContent className={classes.timingCardContect}>
+                        <Typography className={classes.typoStyles4}>
+                          CLOSED
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </div>
+                  {periods.map((item) => (
+                    <>
+                      <div>
+                        <Card className={classes.timingCardStyles}>
+                          <CardContent className={classes.timingCardContect}>
+                            <Typography className={classes.typoStyles4}>
+                              {item?.openDay}
+                            </Typography>
+                          </CardContent>
+                        </Card>
+                      </div>
+                      <div>
+                        <Card className={classes.timingCardStyles}>
+                          <CardContent className={classes.timingCardContect}>
+                            <Typography className={classes.typoStyles4}>
+                              {item?.openTime} - {item?.closeTime}
+                            </Typography>
+                          </CardContent>
+                        </Card>
+                      </div>
+                    </>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : null}
+
+          <div>
+            <div>
+              <Carousel
+                additionalTransfrom={0}
+                arrows
+                autoPlaySpeed={3000}
+                centerMode={false}
+                className={classes.carsolClass}
+                containerClass="carousel-container"
+                dotListClass=""
+                draggable
+                focusOnSelect={false}
+                infinite
+                itemClass="carousel-item-padding-30-px"
+                keyBoardControl
+                minimumTouchDrag={80}
+                renderButtonGroupOutside={false}
+                renderDotsOutside={false}
+                responsive={{
+                  desktop: {
+                    breakpoint: {
+                      max: 3000,
+                      min: 1024,
+                    },
+                    items: 1,
+                    partialVisibilityGutter: 0,
+                  },
+                  mobile: {
+                    breakpoint: {
+                      max: 464,
+                      min: 0,
+                    },
+                    items: 1,
+                    partialVisibilityGutter: 0,
+                  },
+                  tablet: {
+                    breakpoint: {
+                      max: 1024,
+                      min: 464,
+                    },
+                    items: 1,
+                    partialVisibilityGutter: 0,
+                  },
+                }}
+                showDots={false}
+                sliderClass=""
+                slidesToSlide={1}
+                swipeable
+              >
+                <Card className={classes.root7}>
+                  <CardContent className={classes.cardContentStyles}>
+                    <div className={classes.avatarDivStyles}>
+                      <ImageAvatars img={user} />
+                    </div>
+
+                    <div className={classes.lineStyles}></div>
+
+                    <p>
+                      ‘’E’ il mio ristorante preferito a Pisa. Andateci e non ve
+                      ne pentirete!!! I piatti sono buonissimi ed in più il
+                      personale è gentile. Super consigliato, noi appena
+                      possiamo (data la pandemia) ci torniamo con piacere’’
+                    </p>
+                  </CardContent>
+                </Card>
+              </Carousel>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="flex mt-0 h-96 w-50 mb-10 border-10">
+      <div className="flex mt-0 h-96 w-192 mb-10 border-10">
         <div className="w-1/2   p-0">
           <iframe
             width="100%"

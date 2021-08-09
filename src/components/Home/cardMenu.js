@@ -30,7 +30,7 @@ function CardMenu() {
       </div>
       <div className={classes.blackLine}></div>
       <div className={classes.extraCardDiv}>
-        <div>
+        <div className={classes.extraInnerCardDiv}>
           <div className={classes.extraCard}>
             <img src={productImage} className={classes.homeMenuCardImg} />
             <div className={classes.tIconsDiv}>
@@ -39,6 +39,11 @@ function CardMenu() {
               <img src={hot} className={classes.tIcons} />
             </div>
           </div>
+          <div className={classes.textAlignClass}>
+            <p>SPAGHETTI ALLA PUTTANESCA.....................5€</p>
+            <p>Ingredienti: Pasta di Grano, Sugo di Pomodoro, Peperoncino</p>
+            <p>Allergeni: Farina</p>
+          </div>
           <div className={classes.extraCard}>
             <img src={productImage} className={classes.homeMenuCardImg} />
             <div className={classes.tIconsDiv}>
@@ -46,9 +51,15 @@ function CardMenu() {
               <img src={gluten} className={classes.tIcons} />
               <img src={hot} className={classes.tIcons} />
             </div>
+          </div>
+          <div className={classes.textAlignClass}>
+            <p>SPAGHETTI ALLA PUTTANESCA.....................5€</p>
+            <p>Ingredienti: Pasta di Grano, Sugo di Pomodoro, Peperoncino</p>
+            <p>Allergeni: Farina</p>
           </div>
         </div>
-        <div>
+
+        <div className={classes.extraInnerCardDiv}>
           <div className={classes.extraCard}>
             <img src={productImage} className={classes.homeMenuCardImg} />
             <div className={classes.tIconsDiv}>
@@ -57,6 +68,11 @@ function CardMenu() {
               <img src={hot} className={classes.tIcons} />
             </div>
           </div>
+          <div className={classes.textAlignClass}>
+            <p>SPAGHETTI ALLA PUTTANESCA.....................5€</p>
+            <p>Ingredienti: Pasta di Grano, Sugo di Pomodoro, Peperoncino</p>
+            <p>Allergeni: Farina</p>
+          </div>
           <div className={classes.extraCard}>
             <img src={productImage} className={classes.homeMenuCardImg} />
             <div className={classes.tIconsDiv}>
@@ -64,6 +80,11 @@ function CardMenu() {
               <img src={gluten} className={classes.tIcons} />
               <img src={hot} className={classes.tIcons} />
             </div>
+          </div>
+          <div className={classes.textAlignClass}>
+            <p>SPAGHETTI ALLA PUTTANESCA.....................5€</p>
+            <p>Ingredienti: Pasta di Grano, Sugo di Pomodoro, Peperoncino</p>
+            <p>Allergeni: Farina</p>
           </div>
         </div>
       </div>

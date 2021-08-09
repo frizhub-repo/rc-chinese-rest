@@ -47,7 +47,7 @@ function Navbar({ showLinks = true }) {
           <Link to="/">
             <img
               src={`${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`}
-              style={{ width: "80", height: "50px" }}
+              className="imgClass"
             />
           </Link>
 
