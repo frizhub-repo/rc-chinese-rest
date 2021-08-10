@@ -2,34 +2,23 @@ import React, { useState } from "react";
 import Navbar from "../Navbar";
 import Footer from "../../Footer";
 import About from "../About";
-import UserPhotos from "../UserPhotos";
 import Carousel from "react-multi-carousel";
 import Card from "@material-ui/core/Card";
 
-import moduleName from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import { Box, CircularProgress } from "@material-ui/core";
-import NumberOfPeople from "./NumberOfPeople";
-import DayPicker from "react-day-picker";
 import "react-day-picker/lib/style.css";
-import TimePicker from "react-time-picker";
-import ServiceButton from "./ServiceButton";
+
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
 import { reserveTable } from "../../api/customers";
-import SuccessModal from "./SuccessModal";
 import { useRestaurantContext } from "../../Context/restaurantContext";
-import { Link } from "react-router-dom";
 import HeroCard from "../Home/HeroCard";
 import reservationBook from "../../images/reservationBook.png";
 import CardContent from "@material-ui/core/CardContent";
 import TimingsCard from "../Home/timingsCard";
 import { useStyles } from "../Home/MainStyles";
 import CardMedia from "@material-ui/core/CardMedia";
-import MenuCard from "../Home/MenuCard";
 import Typography from "@material-ui/core/Typography";
 import { useHistory } from "react-router-dom";
-import foodimage from "../../images/foodimage.jpg";
 import likeIcon from "../../images/likeIcon.png";
 import FourFiveIcon from "../../images/FourFiveIcon.png";
 import comment from "../../images/comment.png";
@@ -43,6 +32,12 @@ import chat from "../../images/chat.png";
 import ImageAvatars from "../Avatar/Avatar";
 import user from "../../images/user.png";
 import Logo from "../../images/CLogo.png";
+import "react-multi-carousel/lib/styles.css";
+import productImage from "../../images/productImg.jpeg";
+import gluten from "../../images/gluten.png";
+import hot from "../../images/hot.png";
+import vegan from "../../images/vegan.png";
+import CheckMenu from "../Home/checkMenu";
 
 function TableReservation() {
   const { restaurant } = useRestaurantContext();
@@ -59,10 +54,14 @@ function TableReservation() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const { token } = useRestaurantContext();
+  const [option, setOption] = useState(0);
 
   var isSameOrBefore = require("dayjs/plugin/isSameOrBefore");
   dayjs.extend(isSameOrBefore);
 
+  const handleClick = () => {
+    setOption(2);
+  };
   const tableReserve = async () => {
     try {
       const formatDate = dayjs(selectedDay).format("YYYY-MM-DD");
@@ -105,7 +104,7 @@ function TableReservation() {
       behavior: "smooth",
     });
   };
-
+  console.log({ option });
   return (
     <div className={classes.mainDiv}>
       <Navbar selected="Res" />
@@ -120,19 +119,90 @@ function TableReservation() {
       </div>
 
       <div className={classes.divClass}>
-        <div className={classes.courseCardDiv}>
+        <div className={`${classes.courseCardDiv} ${classes.marginL}`}>
           <div className={classes.tableReserve2}>
             <div>
               <TimingsCard
                 id="3"
                 open="true"
-                textForOpen="Keep in touch with us"
+                textForOpen="Reserver one of our Table"
                 styles={`${classes.root5} ${classes.extraStyleForC9}`}
                 textStyles={classes.textStyles}
               />
             </div>
-            <Card className={`${classes.root5} ${classes.extraStyleForC10}`}>
-              <CardContent></CardContent>
+            <Card
+              className={`${classes.root5} ${classes.extraStyleForC10} ${classes.flatCorners}`}
+            >
+              <CardContent>
+                <Carousel
+                  additionalTransfrom={0}
+                  arrows
+                  autoPlaySpeed={3000}
+                  centerMode={false}
+                  className={classes.cAlignmentStyels}
+                  containerClass="carousel-container"
+                  dotListClass=""
+                  draggable
+                  focusOnSelect={false}
+                  infinite
+                  itemClass="carousel-item-padding-30-px"
+                  keyBoardControl
+                  minimumTouchDrag={80}
+                  renderButtonGroupOutside={false}
+                  renderDotsOutside={false}
+                  responsive={{
+                    desktop: {
+                      breakpoint: {
+                        max: 3000,
+                        min: 1024,
+                      },
+                      items: 1,
+                      partialVisibilityGutter: 0,
+                    },
+                    mobile: {
+                      breakpoint: {
+                        max: 464,
+                        min: 0,
+                      },
+                      items: 1,
+                      partialVisibilityGutter: 0,
+                    },
+                    tablet: {
+                      breakpoint: {
+                        max: 1024,
+                        min: 464,
+                      },
+                      items: 1,
+                      partialVisibilityGutter: 0,
+                    },
+                  }}
+                  showDots={false}
+                  sliderClass=""
+                  slidesToSlide={1}
+                  swipeable
+                >
+                  <img
+                    className="object-cover object-center rounded w-full"
+                    alt="hero"
+                    src="https://dummyimage.com/720x600"
+                  />
+                  <img
+                    className="object-cover object-center rounded  w-full"
+                    alt="hero"
+                    src="https://dummyimage.com/720x600"
+                  />
+                  <img
+                    className="object-cover object-center rounded  w-full"
+                    alt="hero"
+                    src="https://dummyimage.com/720x600"
+                  />
+                  <img
+                    className="object-cover object-center rounded  w-full"
+                    alt="hero"
+                    src="https://dummyimage.com/720x600"
+                  />
+                </Carousel>
+              </CardContent>
             </Card>
           </div>
           <div className={classes.headerStyles}>
@@ -142,6 +212,7 @@ function TableReservation() {
               textForOpen="DAILY MENU"
               styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStylesForRadius2}`}
               textStyles={classes.textStyles}
+              onClick={() => setOption(1)}
             />
             <TimingsCard
               id="3"
@@ -149,6 +220,7 @@ function TableReservation() {
               textForOpen="PROMOTIONS"
               styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStyleForRadius3}`}
               textStyles={classes.textStyles}
+              onClick={handleClick}
             />
             <TimingsCard
               id="3"
@@ -156,40 +228,225 @@ function TableReservation() {
               textForOpen="INFO"
               styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStylesForRadius}`}
               textStyles={classes.textStyles}
+              onClick={() => setOption(3)}
             />
           </div>
-          <Card
-            className={`${classes.root5} ${classes.extraStyle3} ${classes.rStyles}`}
-          >
-            <CardContent>
-              <div className={classes.coursesStyles}>
-                <div className={classes.container}>
-                  <MenuCard text="FIRST COURSE" />
-                </div>
-                <div className={classes.container}>
-                  <MenuCard text="SECOND COURSE" />
-                </div>
-                <div>
-                  <Card
-                    className={`${classes.root5} ${classes.screenStyles} ${classes.bookButtonClss2}`}
-                    onClickHandler={() => history.push("/menu")}
+          {option === 1 ? (
+            <Card
+              className={`${classes.root5} ${classes.extraStyle3} ${classes.rStyles}`}
+            >
+              <CardContent className={classes.alignment}>
+                <div className={classes.blackLine}></div>
+                <p>FIRST COURSE</p>
+                <div className={`${classes.coursesStyles}`}>
+                  <div
+                    className={`${classes.extraCardDiv} ${classes.cardAlign}`}
                   >
-                    <CardContent className={classes.flexOne}>
-                      <img className={classes.bookImage} src={Menu} />
-                      <Typography
-                        className={`${classes.newTextStyles2} ${classes.nTS2}`}
-                      >
-                        CHECK ALSO OUR MENU!
-                      </Typography>
-                    </CardContent>
-                  </Card>
+                    <div className={classes.rowWise}>
+                      <div className={classes.extraCard}>
+                        <img
+                          src={productImage}
+                          className={classes.homeMenuCardImg}
+                        />
+                        <div className={classes.tIconsDiv}>
+                          <img src={vegan} className={classes.tIcons} />
+                          <img src={gluten} className={classes.tIcons} />
+                          <img src={hot} className={classes.tIcons} />
+                        </div>
+                      </div>
+                      <div className={classes.textAlignClass}>
+                        <p>SPAGHETTI ALLA PUTTANESCA.....................5€</p>
+                        <p>
+                          Ingredienti: Pasta di Grano, Sugo di Pomodoro,
+                          Peperoncino
+                        </p>
+                        <p>Allergeni: Farina</p>
+                      </div>
+                    </div>
+
+                    <div className={classes.rowWise}>
+                      <div className={classes.extraCard}>
+                        <img
+                          src={productImage}
+                          className={classes.homeMenuCardImg}
+                        />
+                        <div className={classes.tIconsDiv}>
+                          <img src={vegan} className={classes.tIcons} />
+                          <img src={gluten} className={classes.tIcons} />
+                          <img src={hot} className={classes.tIcons} />
+                        </div>
+                      </div>
+                      <div className={classes.textAlignClass}>
+                        <p>SPAGHETTI ALLA PUTTANESCA.....................5€</p>
+                        <p>
+                          Ingredienti: Pasta di Grano, Sugo di Pomodoro,
+                          Peperoncino
+                        </p>
+                        <p>Allergeni: Farina</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className={classes.blackLine}></div>
+                    <p>SECOND COURSE</p>
+                    <div
+                      className={`${classes.extraCardDiv} ${classes.cardAlign}`}
+                    >
+                      <div className={classes.rowWise}>
+                        <div className={classes.extraCard}>
+                          <img
+                            src={productImage}
+                            className={classes.homeMenuCardImg}
+                          />
+                          <div className={classes.tIconsDiv}>
+                            <img src={vegan} className={classes.tIcons} />
+                            <img src={gluten} className={classes.tIcons} />
+                            <img src={hot} className={classes.tIcons} />
+                          </div>
+                        </div>
+                        <div className={classes.textAlignClass}>
+                          <p>
+                            SPAGHETTI ALLA PUTTANESCA.....................5€
+                          </p>
+                          <p>
+                            Ingredienti: Pasta di Grano, Sugo di Pomodoro,
+                            Peperoncino
+                          </p>
+                          <p>Allergeni: Farina</p>
+                        </div>
+                      </div>
+                      <div className={classes.rowWise}>
+                        <div className={classes.extraCard}>
+                          <img
+                            src={productImage}
+                            className={classes.homeMenuCardImg}
+                          />
+                          <div className={classes.tIconsDiv}>
+                            <img src={vegan} className={classes.tIcons} />
+                            <img src={gluten} className={classes.tIcons} />
+                            <img src={hot} className={classes.tIcons} />
+                          </div>
+                        </div>
+                        <div className={classes.textAlignClass}>
+                          <p>
+                            SPAGHETTI ALLA PUTTANESCA.....................5€
+                          </p>
+                          <p>
+                            Ingredienti: Pasta di Grano, Sugo di Pomodoro,
+                            Peperoncino
+                          </p>
+                          <p>Allergeni: Farina</p>
+                        </div>
+                      </div>
+                    </div>
+                    <Card
+                      className={`${classes.root5} ${classes.screenStyles} ${classes.bookButtonClss2}`}
+                      onClickHandler={() => history.push("/menu")}
+                    >
+                      <CardContent className={classes.flexOne}>
+                        <img className={classes.bookImage} src={Menu} />
+                        <Typography
+                          className={`${classes.newTextStyles2} ${classes.nTS2}`}
+                        >
+                          CHECK ALSO OUR MENU!
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          ) : option === 2 ? (
+            <div>
+              <Card
+                className={`${classes.root5} ${classes.extraStyle3} ${classes.rStyles}`}
+              >
+                <CardContent className={classes.alignment}>
+                  <Carousel
+                    additionalTransfrom={0}
+                    arrows
+                    autoPlaySpeed={3000}
+                    centerMode={false}
+                    className={classes.carsolClass2}
+                    containerClass="carousel-container"
+                    dotListClass=""
+                    draggable
+                    focusOnSelect={false}
+                    infinite
+                    itemClass="carousel-item-padding-30-px"
+                    keyBoardControl
+                    minimumTouchDrag={80}
+                    renderButtonGroupOutside={false}
+                    renderDotsOutside={true}
+                    responsive={{
+                      desktop: {
+                        breakpoint: {
+                          max: 3000,
+                          min: 1024,
+                        },
+                        items: 1,
+                        partialVisibilityGutter: 0,
+                      },
+                      mobile: {
+                        breakpoint: {
+                          max: 464,
+                          min: 0,
+                        },
+                        items: 1,
+                        partialVisibilityGutter: 0,
+                      },
+                      tablet: {
+                        breakpoint: {
+                          max: 1024,
+                          min: 464,
+                        },
+                        items: 1,
+                        partialVisibilityGutter: 0,
+                      },
+                    }}
+                    showDots={false}
+                    sliderClass=""
+                    slidesToSlide={1}
+                    swipeable
+                  >
+                    <div className={`${classes.picCardDiv2}`}></div>
+                    <div className={`${classes.picCardDiv2}`}></div>
+                    <div className={`${classes.picCardDiv2}`}></div>
+                  </Carousel>
+
+                  <CheckMenu />
+                </CardContent>
+              </Card>
+            </div>
+          ) : (
+            <Card
+              className={`${classes.root5} ${classes.extraStyle3} ${classes.rStyles}`}
+            >
+              <CardContent className={classes.alignment}>
+                <div className={classes.infoText}>
+                  <p className={classes.infoTextColor}>Chef:</p>
+                  <p>Misha Sukays</p>
+                  <br />
+                  <p className={classes.infoTextColor}>Chef:</p>
+
+                  <p>Misha Sukays</p>
+                  <br />
+                  <p className={classes.infoTextColor}>Chef:</p>
+
+                  <p>Misha Sukays</p>
+                  <br />
+                  <p className={classes.infoTextColor}>Chef:</p>
+
+                  <p>Misha Sukays</p>
+                  <br />
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </div>
 
-        <div className={classes.tableReserve}>
+        <div className={classes.tableReserve11}>
           <div>
             <Card
               className={`${classes.root5} ${classes.extraStyle} ${classes.stStyles}`}
@@ -252,10 +509,10 @@ function TableReservation() {
                 </div>
               </div>
 
-              <div className={classes.textStyles}>
+              <div className={classes.textStyles88}>
                 <h3>CI CHO SAN</h3>
                 <br />
-                <p className={classes.pStyles}>
+                <p className={classes.pStyles88}>
                   Piazza Mentana, 2, 50122 Firenze FI
                 </p>
               </div>
@@ -266,11 +523,11 @@ function TableReservation() {
       </div>
       <div className={classes.textDivStyles}>
         <div className={classes.avatarStyles}>
-          <img className={classes.img2} src={Logo} />
+          <img className={classes.img22} src={Logo} />
         </div>
 
         <div className={classes.h1Styles}>
-          <h1>THIS RESTAURANT GAINED A REPUTATION OF</h1>
+          <h3>THIS RESTAURANT GAINED A REPUTATION OF</h3>
           <div className={classes.imgDivContainer}>
             <img src={like} className={classes.imgStyles} />
             <p className={classes.getStars}>4</p>
@@ -283,7 +540,7 @@ function TableReservation() {
             781 REVIEWS
           </div>
           <div className={classes.cardContainer}>
-            <Card className={classes.root7}>
+            <Card className={` ${classes.extraStyleForRoot}`}>
               <CardContent className={classes.cardContentStyles}>
                 <div className={classes.avatarDivStyles}>
                   <ImageAvatars img={user} />
@@ -291,7 +548,7 @@ function TableReservation() {
                     <div
                       className={`${classes.h1Styles} ${classes.divNewStyles}`}
                     >
-                      <h1>VOTED</h1>
+                      <p>VOTED</p>
                     </div>
                     <div className={`${classes.imgDivContainer} `}>
                       <img src={like} className={classes.imgStyles} />
@@ -301,7 +558,7 @@ function TableReservation() {
                   </div>
                 </div>
 
-                <div className={classes.lineStyles}></div>
+                <div className={classes.lineStyles2}></div>
 
                 <p>
                   ‘’E’ il mio ristorante preferito a Pisa. Andateci e non ve ne
@@ -312,7 +569,7 @@ function TableReservation() {
               </CardContent>
             </Card>
             <br />
-            <Card className={classes.root7}>
+            <Card className={classes.extraStyleForRoot}>
               <CardContent className={classes.cardContentStyles}>
                 <div className={classes.avatarDivStyles}>
                   <ImageAvatars img={user} />
@@ -320,7 +577,7 @@ function TableReservation() {
                     <div
                       className={`${classes.h1Styles} ${classes.divNewStyles}`}
                     >
-                      <h1>VOTED</h1>
+                      <p>VOTED</p>
                     </div>
                     <div className={`${classes.imgDivContainer} `}>
                       <img src={like} className={classes.imgStyles} />
@@ -330,7 +587,7 @@ function TableReservation() {
                   </div>
                 </div>
 
-                <div className={classes.lineStyles}></div>
+                <div className={classes.lineStyles2}></div>
 
                 <p>
                   ‘’E’ il mio ristorante preferito a Pisa. Andateci e non ve ne

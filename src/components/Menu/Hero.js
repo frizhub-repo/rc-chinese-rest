@@ -16,11 +16,52 @@ import Carousel from "react-multi-carousel";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
-import { getDeliverableMenus } from "../../api/customers";
 import ProductByCategories from "../CustomComponents/ProductByCategories";
 import DeleteItemIcon from "../../Assets/IconComponent/DeleteItemIcon";
 import { removeItem } from "../../actions/index";
 import delivery from "../../images/delivery.png";
+import "./menuStyles.css";
+import CardMenu from "../Home/cardMenu";
+import { getDeliverableMenus } from "../../api/customers";
+import course1 from "../../images/course1.png";
+import course2 from "../../images/course2.png";
+import course3 from "../../images/course3.png";
+import course4 from "../../images/course4.png";
+
+const product = {
+  foodType: {
+    vegan: false,
+    glutenFree: true,
+    spicy: false,
+  },
+  bundle: {
+    quantity: 1,
+  },
+  title: "Offer Title",
+  description: "helow worl",
+  type: "default",
+  images: ["images/uEW4DQ0AmItiLogo.jpg"],
+  currency: "€",
+  availability: true,
+  isDeleted: false,
+  allergies: ["Magna cupiditate ali", "invent"],
+  _id: "60d1ed21d615ed15b9fcef1a",
+  sizes: [
+    {
+      discountAvailability: false,
+      discountType: "",
+      discountedPrice: 0,
+      discount: -1,
+      title: "",
+      price: 523,
+    },
+  ],
+  multipleSizes: false,
+  restaurant: "605b18408fc02bb4c1377081",
+  addOns: [],
+  createdAt: "2021-06-22T14:01:05.815Z",
+  updatedAt: "2021-06-22T15:59:45.328Z",
+};
 
 function HeroDelivery() {
   let { restaurant, customerData } = useRestaurantContext();
@@ -83,21 +124,21 @@ function HeroDelivery() {
     return val;
   };
 
-  useEffect(() => {
-    fetchProductsByCategory();
-  }, []);
-
   const [menus, setMenus] = React.useState([]);
 
   const fetchDeliverableMenus = async () => {
     try {
       const res = await getDeliverableMenus();
+      console.log({ res });
       setMenus(res?.data);
-    } catch (error) {}
+    } catch (error) {
+      console.log({ error });
+    }
   };
 
   useEffect(() => {
     fetchDeliverableMenus();
+    fetchProductsByCategory();
   }, []);
 
   return (
@@ -142,14 +183,25 @@ function HeroDelivery() {
             id="3"
             open="true"
             textForOpen="DELIVERY COURSE"
-            styles={`${classes.nRoot5} ${classes.extraStyle4} ${classes.extraStylesForRadius2} ${classes.extraStylesForD}`}
+            styles={`${classes.root5} ${classes.extraStyle4} ${classes.extraStylesForRadius2} ${classes.extraStylesForD}`}
             textStyles={classes.textStyles}
           />
 
           <Card
-            className={`${classes.nRoot5} ${classes.extraStyle3} ${classes.extraStyle11}`}
+            className={`${classes.root5} ${classes.extraStyle3} ${classes.extraStyle19}`}
           >
             <CardContent className={classes.carouselCard}>
+              <form className="fromClass">
+                <div className="inputContainer">
+                  <i className="fa fa-search icon"> </i>
+                  <input
+                    class="Field"
+                    type="text"
+                    placeholder="Select your courses"
+                  />
+                </div>
+              </form>
+
               <Carousel
                 additionalTransfrom={0}
                 arrows
@@ -199,15 +251,16 @@ function HeroDelivery() {
               >
                 {menus[activeIndex]?.items?.length > 0 &&
                   menus[activeIndex]?.items?.map((item, index) => (
-                    <h1
+                    <div
                       key={index}
-                      className={`${classes.carousel} ${
-                        sectionIndex === index && classes.activeSection
-                      }`}
+                      className={`${classes.cardCourseStyles} ${
+                        classes.backColorCir
+                      } ${sectionIndex === index && classes.activeSection}`}
                       onClick={() => setSectionIndex(index)}
                     >
-                      {item?.category?.name}
-                    </h1>
+                      <p>{item?.category?.name}</p>{" "}
+                      <img src={course1} className={classes.chinaDImage} />
+                    </div>
                   ))}
               </Carousel>
             </CardContent>
@@ -215,7 +268,7 @@ function HeroDelivery() {
               <CardContent
                 className={`${classes.cardSpacing} custom-scroll-product`}
               >
-                <div className={classes.dCStyles}>
+                <div className={classes.dCStyles9}>
                   <ProductByCategories
                     products={menus[activeIndex]?.items[sectionIndex]?.products}
                     isProductAddedToCart={isProductAddedToCart}
@@ -300,7 +353,9 @@ function HeroDelivery() {
                   </Card>
                   <CardMedia className={classes.media7} image={shop} />
                   <div className={classes.textsStyles}>
-                    <h1 className={classes.headingStyles}>PickUp your Order</h1>
+                    <h1 className={classes.headingStyles2}>
+                      PickUp your Order
+                    </h1>
                     <p>Come to our local to get your order</p>
                   </div>
                 </CardContent>

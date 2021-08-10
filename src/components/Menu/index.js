@@ -7,6 +7,9 @@ import reservationBook from "../../images/reservationBook.png";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import TimingsCard from "../Home/timingsCard";
+import CardMenu from "../Home/cardMenu";
+import foodImg from "../../images/foodimage.jpg";
+import Carousel from "react-multi-carousel";
 
 function Menu() {
   const classes = useStyles();
@@ -22,11 +25,87 @@ function Menu() {
       >
         <HeroCard />
       </div>
+      <div className={classes.flexing}>
+        <div className={classes.flexTwoDiv}>
+          <div>
+            <Carousel
+              additionalTransfrom={0}
+              arrows
+              autoPlaySpeed={3000}
+              centerMode={false}
+              className={classes.carsolClass}
+              containerClass="carousel-container"
+              dotListClass=""
+              draggable
+              focusOnSelect={false}
+              infinite
+              itemClass="carousel-item-padding-30-px"
+              keyBoardControl
+              minimumTouchDrag={80}
+              renderButtonGroupOutside={false}
+              renderDotsOutside={false}
+              responsive={{
+                desktop: {
+                  breakpoint: {
+                    max: 3000,
+                    min: 1024,
+                  },
+                  items: 1,
+                  partialVisibilityGutter: 0,
+                },
+                mobile: {
+                  breakpoint: {
+                    max: 464,
+                    min: 0,
+                  },
+                  items: 1,
+                  partialVisibilityGutter: 0,
+                },
+                tablet: {
+                  breakpoint: {
+                    max: 1024,
+                    min: 464,
+                  },
+                  items: 1,
+                  partialVisibilityGutter: 0,
+                },
+              }}
+              showDots={false}
+              sliderClass=""
+              slidesToSlide={1}
+              swipeable
+            >
+              <div className={classes.imgCircleCard}>
+                <img src={foodImg} className={classes.imgCircle} />
+                <div className={classes.halfCircle}></div>
+                <div className={classes.line}></div>
+              </div>
+              <div
+                className={`${classes.imgCircleCard} ${classes.upperCircle}`}
+              >
+                <img src={foodImg} className={classes.imgCircle} />
+                <div
+                  className={`${classes.halfCircle} ${classes.upperCol}`}
+                ></div>
+                <div className={classes.line}></div>
+              </div>
+              <div
+                className={`${classes.imgCircleCard} ${classes.upperCircle2}`}
+              >
+                <img src={foodImg} className={classes.imgCircle} />
+                <div className={classes.halfCircle}></div>
+                <div className={classes.line}></div>
+              </div>
+            </Carousel>
+          </div>
+        </div>
 
-      <div className={classes.whiteCircle}>
-        <img className={classes.wImg} src={reservationBook} />
-        <p>RESERVE A TABLE</p>
+        <div className={classes.whiteCircle}>
+          <img className={classes.wImg} src={reservationBook} />
+          <p>RESERVE A TABLE</p>
+        </div>
       </div>
+
       <div className={classes.tableReserve2}>
         <div>
           <TimingsCard
@@ -38,7 +117,9 @@ function Menu() {
           />
         </div>
         <Card className={`${classes.root5} ${classes.extraStyleForC8}`}>
-          <CardContent></CardContent>
+          <CardContent>
+            <CardMenu />
+          </CardContent>
         </Card>
       </div>
       <Footer />
