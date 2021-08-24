@@ -12,8 +12,8 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import CardContent from "@material-ui/core/CardContent";
 import TimingsCard from "../Home/timingsCard";
 import { useStyles } from "../Home/MainStyles";
-import HeroCard from "../Home/HeroCard";
-import HeroDelivery from "../Menu/Hero";
+// import Hero from "../Home/Hero";
+// import HeroDelivery from "../Menu/Hero";
 
 function Media() {
   return (
@@ -41,7 +41,7 @@ function Delivery() {
     <div>
       <Navbar selected={"Delivery"} />
 
-      <HeroDelivery />
+      {/* <HeroDelivery /> */}
 
       <Footer />
     </div>

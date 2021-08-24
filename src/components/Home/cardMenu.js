@@ -3,7 +3,6 @@ import course1 from "../../images/course1.png";
 import course2 from "../../images/course2.png";
 import course3 from "../../images/course3.png";
 import course4 from "../../images/course4.png";
-import productImage from "../../images/productImg.jpeg";
 import gluten from "../../images/gluten.png";
 import hot from "../../images/hot.png";
 import vegan from "../../images/vegan.png";
@@ -32,7 +31,10 @@ function CardMenu() {
       <div className={classes.extraCardDiv}>
         <div className={classes.extraInnerCardDiv}>
           <div className={classes.extraCard}>
-            <img src={productImage} className={classes.homeMenuCardImg} />
+            <img
+              src="assets/productImg.jpeg"
+              className={classes.homeMenuCardImg}
+            />
             <div className={classes.tIconsDiv}>
               <img src={vegan} className={classes.tIcons} />
               <img src={gluten} className={classes.tIcons} />
@@ -45,7 +47,10 @@ function CardMenu() {
             <p>Allergeni: Farina</p>
           </div>
           <div className={classes.extraCard}>
-            <img src={productImage} className={classes.homeMenuCardImg} />
+            <img
+              src="assets/productImg.jpeg"
+              className={classes.homeMenuCardImg}
+            />
             <div className={classes.tIconsDiv}>
               <img src={vegan} className={classes.tIcons} />
               <img src={gluten} className={classes.tIcons} />
@@ -61,7 +66,10 @@ function CardMenu() {
 
         <div className={classes.extraInnerCardDiv}>
           <div className={classes.extraCard}>
-            <img src={productImage} className={classes.homeMenuCardImg} />
+            <img
+              src="assets/productImg.jpeg"
+              className={classes.homeMenuCardImg}
+            />
             <div className={classes.tIconsDiv}>
               <img src={vegan} className={classes.tIcons} />
               <img src={gluten} className={classes.tIcons} />
@@ -74,7 +82,10 @@ function CardMenu() {
             <p>Allergeni: Farina</p>
           </div>
           <div className={classes.extraCard}>
-            <img src={productImage} className={classes.homeMenuCardImg} />
+            <img
+              src="assets/productImg.jpeg"
+              className={classes.homeMenuCardImg}
+            />
             <div className={classes.tIconsDiv}>
               <img src={vegan} className={classes.tIcons} />
               <img src={gluten} className={classes.tIcons} />

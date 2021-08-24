@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import { useDispatch } from "react-redux";
 import { addItem, setTotal } from "../../actions";
-import productImg from "../../images/productImg.jpeg";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import RemoveIcon from "@material-ui/icons/IndeterminateCheckBox";
 import { Box } from "@material-ui/core";
@@ -38,7 +37,7 @@ function Product({ product }) {
         onMouseEnter={() => setVisible(true)}
         onMouseLeave={() => setVisible(false)}
         style={{
-          background: `url(${productImg})`,
+          background: `url("assets/productImg.jpeg")`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
         }}
