@@ -15,6 +15,7 @@ const styles = {
     borderRadius: "0px 10px 0px 0px",
   },
   buttonContainer: {
+    cursor: "pointer",
     color: "#F49E0B",
     background: "white",
     borderRadius: "0px 0px 10px 0px",
