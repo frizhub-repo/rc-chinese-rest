@@ -12,14 +12,16 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case "ADD_ITEM":
-      const index = state.products
-        .map(function (e) {
-          return e.product;
-        })
-        .indexOf(action.payload.product);
+      const index = state.products.findIndex(
+        (e) =>
+          e.product === action.payload.product &&
+          e.size._id === action.payload.size._id &&
+          e.isDiscount === action.payload.isDiscount
+      );
       if (index !== -1) {
         const products = state.products;
-        products[index].quantity = products[index].quantity + 1;
+        products[index].quantity =
+          products[index].quantity + action.payload.quantity;
         return { ...state, products };
       } else
         return {
@@ -64,16 +66,19 @@ export default function (state = initialState, action) {
         total: state.total + addProducts[addQuantityIndex].price,
       };
     case "REMOVE_QUANTITY":
-      const removeQuantityProducts = state.products;
-      const removeQuantityIndex = removeQuantityProducts.findIndex(
-        (product) => product.product === action.payload.key
+      const updatedProduct = state.products.filter(
+        (value) => value.product !== action.payload.key.product
       );
-      removeQuantityProducts[removeQuantityIndex].quantity =
-        removeQuantityProducts[removeQuantityIndex].quantity - 1;
+      const removeQuantityIndex = state.products.findIndex(
+        (product) => product.product === action.payload.key.product
+      );
       return {
         ...state,
-        products: removeQuantityProducts,
-        total: state.total - removeQuantityProducts[removeQuantityIndex].price,
+        products: updatedProduct,
+        total:
+          state.total -
+          state.products[removeQuantityIndex].price *
+            state.products[removeQuantityIndex].quantity,
       };
     case "TOTAL":
       return {

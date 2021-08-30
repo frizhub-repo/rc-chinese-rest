@@ -1,4 +1,6 @@
+import { addItem, setTotal } from "actions";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { isEmpty } from "utils/common";
 import classes from "./CourseItem.module.css";
 
@@ -46,6 +48,7 @@ export default function CourseItem({ item, size, offer }) {
   const [price, setPrice] = React.useState(null);
   const [productSize, setProdctSize] = React.useState(null);
   const [quantity, setQuantity] = React.useState(1);
+  const dispatch = useDispatch();
 
   const calculateDiscountedPrice = () => {
     if (isEmpty(offer)) {
@@ -76,13 +79,16 @@ export default function CourseItem({ item, size, offer }) {
   }, [size]);
 
   const addToCart = () => {
-    console.log({
+    const payload = {
       product: item._id,
       name: item.title,
       price,
+      size: productSize,
       originalPrice: price,
       quantity,
-    });
+    };
+    dispatch(addItem(payload));
+    dispatch(setTotal(price * quantity));
   };
 
   const handleChangeDecrementQuantity = () => {
