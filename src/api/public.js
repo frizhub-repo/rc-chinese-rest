@@ -7,3 +7,9 @@ export const getGoogleMyBusinessLocations = () => {
 export const productsByCategory = () => {
   return axiosIntance.get("/api/v1/products/category/public");
 };
+
+export const customerMenu = () =>
+  axiosIntance.get("/api/v1/menu/customers/public");
+
+export const getSpecialMenus = () =>
+  axiosIntance.get("/api/v1/menu/special/customers/public");
