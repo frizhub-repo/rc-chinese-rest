@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { Carousel } from "react-bootstrap";
 
 const useStyle = () => ({
+  carouselItem: {
+    background: "#F49E0B",
+    borderRadius: "50%",
+  },
   carouselContent: {
     display: "flex",
     flexDirection: "column",
@@ -32,10 +36,10 @@ export default function Testimonial() {
   ]);
 
   return (
-    <Carousel interval={1000}>
+    <Carousel interval={1000} indicators={false}>
       {testimonials.map((testimonial) => {
         return (
-          <Carousel.Item>
+          <Carousel.Item style={styles.carouselItem}>
             <div style={styles.carouselContent}>
               <img src={testimonial.img} className="mb-3" width={100} />
               <p style={styles.carouselMessage}>‘’{testimonial.content}’’</p>

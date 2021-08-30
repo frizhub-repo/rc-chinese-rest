@@ -1,51 +1,26 @@
-import React, { useEffect, useState } from "react";
-import Navbar from "../Navbar";
-import Footer from "../../Footer";
-import Card from "./Card";
-import Carousel from "react-multi-carousel";
-import Control from "./Control";
-import Product from "./Product";
-import { getProductByCategory } from "../../actions/productAction";
-import { useDispatch, useSelector } from "react-redux";
-import Box from "@material-ui/core/Box";
-import Skeleton from "@material-ui/lab/Skeleton";
-import CardContent from "@material-ui/core/CardContent";
-import TimingsCard from "../Home/timingsCard";
-import { useStyles } from "../Home/MainStyles";
-// import Hero from "../Home/Hero";
-// import HeroDelivery from "../Menu/Hero";
+import React from "react";
+import Hero from "../Common/Hero";
+import ActionBox from "./ActionBox";
+import Course from "./Course";
+import Info from "./Info";
 
-function Media() {
-  return (
-    <Box width={210} marginRight="20px" my={5}>
-      <Skeleton variant="rect" width={210} height={150} />
-      <Box pt={0.5}>
-        <Skeleton />
-        <Skeleton width="60%" />
-      </Box>
-    </Box>
-  );
-}
-
-function Delivery() {
-  const classes = useStyles();
-  const [categoryIndex, setCategoryIndex] = useState(0);
-  const disp = useDispatch();
-  const { productByCategory } = useSelector((state) => state.productReducer);
-
-  useEffect(() => {
-    disp(getProductByCategory());
-  }, []);
-
+export default function Delivery() {
   return (
     <div>
-      <Navbar selected={"Delivery"} />
-
-      {/* <HeroDelivery /> */}
-
-      <Footer />
+      <section>
+        <Hero />
+      </section>
+      <section>
+        <Info />
+      </section>
+      <section className="row px-3 d-flex flex-column-reverse flex-lg-row pb-5">
+        <div className="col-12 col-lg-8 mt-4 mt-lg-0">
+          <Course />
+        </div>
+        <div className="col-12 col-lg-4">
+          <ActionBox />
+        </div>
+      </section>
     </div>
   );
 }
-
-export default Delivery;

@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import CurvedText from "./CurvedText";
+import CurvedText from "../Common/CurvedText";
 
 const styles = {
   container: {
     background: "white",
   },
   optionContainer: {
-    borderRadius: "50%",
-    border: "1px solid #280813",
-    padding: "0px -20px",
+    // background: "white",
+    // border: "1px solid #280813",
+    // borderRadius: "50%",
+    // height: "100%",
+    padding: "0px 5px",
   },
 };
 
@@ -24,13 +26,14 @@ export default function MenuSelector() {
   return (
     <div style={styles.container}>
       <div className="">
-        <div className="d-flex justify-content-between">
+        <div className="d-flex justify-content-around py-2">
           {options.map((option, index) => (
             <div style={styles.optionContainer}>
               <CurvedText
-                style={{ margin: "-20px" }}
                 text={option.name}
-                textColor={"#280813"}
+                icon={option.icon}
+                objectSize={60}
+                spacing={0}
               />
             </div>
           ))}

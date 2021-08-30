@@ -8,6 +8,7 @@ const useStyle = () => ({
     alignItems: "center",
     justifyContent: "space-between",
     color: "white",
+    marginBottom: "50px",
   },
   statusStyle: {
     color: "#B29051",

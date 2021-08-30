@@ -44,13 +44,15 @@ function Home() {
           <GalleryCarousel />
         </div>
       </div>
-
+      {/* <div>
+        <Menu />
+      </div> */}
       <div>
         <div className="d-flex row justfiy-content-center align-items-center justify-content-lg-between my-5">
           <div className="d-flex justify-content-center col-12 col-lg-6">
             <Table />
           </div>
-          <div className="col-12 col-lg-6">
+          <div className="col-12 col-lg-6 mt-5 mt-lg-0">
             <Testimonial />
           </div>
         </div>
