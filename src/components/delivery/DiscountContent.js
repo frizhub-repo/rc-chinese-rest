@@ -1,3 +1,5 @@
+import { Backdrop, CircularProgress } from "@material-ui/core";
+import { getHotDeals } from "api/public";
 import React, { useState } from "react";
 import CourseItem from "./CourseItem";
 import CourseSelector from "./CourseSelector";
@@ -13,46 +15,91 @@ const styles = {
     maxHeight: "55vh",
     overflowY: "scroll",
   },
+  backdrop: {
+    zIndex: 1,
+    color: "#fff",
+  },
 };
 
-export default function DiscountContent({ showGenre, menuSelected }) {
-  const [genreSelected, setGenreSelected] = useState(0);
-  const [items, setItems] = useState(
-    Array(8).fill({
-      image: "assets/item-pic.png",
-      name: "RAVIOLI AL VAPORE",
-      price: "25€",
-      ingredients: ["Pasta di Grano", "Sugo di Pomodoro", "Peperoncino"],
-      allergeni: ["Farina"],
-      properties: { vegan: true, hot: true },
-    })
-  );
+export default function DiscountContent() {
+  const [activeStep, setActiveStep] = React.useState(0);
+  const [discountList, setDiscountList] = React.useState({});
+  const [loading, setLoading] = React.useState(false);
 
-  function handleClickGenre(id) {
-    setGenreSelected(id);
-  }
+  const getHotDealsFn = async () => {
+    setLoading(true);
+    try {
+      const res = await getHotDeals();
+      setDiscountList(res?.data);
+      setLoading(false);
+    } catch (error) {
+      console.log({ error });
+      setLoading(false);
+    }
+  };
 
+  React.useEffect(() => {
+    getHotDealsFn();
+  }, []);
+
+  const handleChangeActiveStep = (value) => setActiveStep(value);
   return (
     <div style={styles.container}>
       <div>
-        {showGenre === 0 && (
-          <DiscountGenre
-            selected={genreSelected}
-            handleClick={handleClickGenre}
-          />
-        )}
+        <DiscountGenre
+          selected={activeStep}
+          handleClick={handleChangeActiveStep}
+        />
+
         <input placeholder="Search..." className="form-control" type="text" />
         <div>
           <CourseSelector />
         </div>
         <div style={styles.items} className="row my-4">
-          {items.map((item) => (
-            <div className="col-12 col-md-6 mb-3">
-              <CourseItem {...item} />
-            </div>
-          ))}
+          {activeStep === 0 &&
+            discountList?.bundled?.length > 0 &&
+            discountList?.bundled?.map(({ product, offer, size }) => (
+              <div className="col-12 col-md-6 mb-3">
+                <CourseItem
+                  item={product}
+                  offer={offer}
+                  size={size}
+                  discountList={discountList}
+                  setDiscountList={setDiscountList}
+                />
+              </div>
+            ))}
+          {activeStep === 1 &&
+            discountList?.flat?.length > 0 &&
+            discountList?.flat?.map(({ product, offer, size }) => (
+              <div className="col-12 col-md-6 mb-3">
+                <CourseItem
+                  item={product}
+                  offer={offer}
+                  size={size}
+                  discountList={discountList}
+                  setDiscountList={setDiscountList}
+                />
+              </div>
+            ))}
+          {activeStep === 2 &&
+            discountList?.percentage?.length > 0 &&
+            discountList?.percentage?.map(({ product, offer, size }) => (
+              <div className="col-12 col-md-6 mb-3">
+                <CourseItem
+                  item={product}
+                  offer={offer}
+                  size={size}
+                  discountList={discountList}
+                  setDiscountList={setDiscountList}
+                />
+              </div>
+            ))}
         </div>
       </div>
+      <Backdrop style={styles.backdrop} open={loading}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 }

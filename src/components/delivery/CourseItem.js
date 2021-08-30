@@ -1,7 +1,10 @@
 import { addItem, setTotal } from "actions";
+import { useRestaurantContext } from "Context/restaurantContext";
 import React from "react";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import { isEmpty } from "utils/common";
+import messages from "utils/messages";
 import classes from "./CourseItem.module.css";
 
 const styles = {
@@ -44,11 +47,20 @@ const styles = {
   },
 };
 
-export default function CourseItem({ item, size, offer }) {
+export default function CourseItem({
+  item,
+  size,
+  offer,
+  discountList,
+  setDiscountList,
+}) {
   const [price, setPrice] = React.useState(null);
   const [productSize, setProdctSize] = React.useState(null);
   const [quantity, setQuantity] = React.useState(1);
   const dispatch = useDispatch();
+  const {
+    customerData: { _id: customerId },
+  } = useRestaurantContext();
 
   const calculateDiscountedPrice = () => {
     if (isEmpty(offer)) {
@@ -66,6 +78,7 @@ export default function CourseItem({ item, size, offer }) {
 
   const handleChangeProductSize = (sizeObj) => {
     if (isEmpty(offer)) {
+      setPrice(0);
       setProdctSize(sizeObj);
       setPrice(sizeObj?.price);
     }
@@ -78,18 +91,91 @@ export default function CourseItem({ item, size, offer }) {
     }
   }, [size]);
 
+  const discountedPrice = price > 0 ? price : 0;
+
   const addToCart = () => {
-    const payload = {
-      product: item._id,
-      name: item.title,
-      price,
-      size: productSize,
-      originalPrice: price,
-      quantity,
-    };
-    dispatch(addItem(payload));
-    dispatch(setTotal(price * quantity));
+    console.log({ offer, item });
+    try {
+      const isDiscount = isEmpty(offer) ? false : offer.discountType;
+      isDiscount && validateOffer(offer);
+      debugger;
+      const payload = {
+        product: item._id,
+        name: item.title,
+        price: discountedPrice,
+        originalPrice: productSize?.price,
+        size: productSize,
+        isDiscount,
+        quantity,
+        offer,
+        bundledProduct: offer?.bundledProduct ?? [],
+      };
+      dispatch(addItem(payload));
+      dispatch(setTotal(discountedPrice * quantity));
+      setQuantity(1);
+    } catch (error) {
+      if (error.message) {
+        toast.error(error.message);
+        return;
+      }
+      toast.error("Error while adding product");
+    }
   };
+
+  function validateOffer(offer) {
+    if (!offer?.isActivated || offer.isDeleted) {
+      throw Error(messages.notFound("Offer"));
+    }
+    if (offer.totalDiscount === 0) {
+      throw Error(messages.total_Disocunt);
+    }
+    if (Date.now() > new Date(offer.endDate)) {
+      throw Error(messages.offerExpire);
+    }
+
+    const value =
+      offer?.discountType === "bundle" ? "bundled" : offer?.discountType;
+    let updatedDiscountList = [];
+    for (const discount of discountList[value]) {
+      if (discount.offer._id === offer?._id) {
+        let customerExist = false;
+        const updateCustomerUsage = offer?.customerUsage?.map(
+          ({ customer, usage }) => {
+            if (customer === customerId) {
+              if (
+                offer?.maxNoOfUsage === usage ||
+                offer?.maxNoOfUsage < usage + quantity
+              ) {
+                throw Error(messages.maximumNoOfUsage);
+              }
+              customerExist = true;
+              return { usage: usage + quantity, customer };
+            } else {
+              return { customer, usage };
+            }
+          }
+        );
+        if (!customerExist) {
+          updateCustomerUsage.push({ customer: customerId, usage: 1 });
+        }
+
+        updatedDiscountList.push({
+          ...discount,
+          offer: {
+            ...discount.offer,
+            customerUsage: updateCustomerUsage,
+            totalDiscount: discount.offer.totalDiscount - 1,
+          },
+        });
+      } else {
+        updatedDiscountList.push(discount);
+      }
+    }
+    setDiscountList({
+      ...discountList,
+      [value]: updatedDiscountList,
+    });
+  }
 
   const handleChangeDecrementQuantity = () => {
     if (quantity > 1) {
@@ -101,9 +187,23 @@ export default function CourseItem({ item, size, offer }) {
     <div style={styles.container}>
       <div className="d-flex">
         <div style={styles.iconContainer}>
-          <img style={styles.icon} src={item?.images?.[0]} />
+          <img
+            style={styles.icon}
+            src={process.env.REACT_APP_API_BASE_URL + "/" + item?.images?.[0]}
+          />
           <h5 className="shadow-md" style={styles.price}>
-            {price}€
+            {isEmpty(offer) ? (
+              <span>€{discountedPrice}</span>
+            ) : offer?.discountType === "bundle" ? (
+              <span>€{size?.price}</span>
+            ) : (
+              <div>
+                <span className={classes.priceTextDecoration}>
+                  €{size?.price}
+                </span>
+                <span>€{discountedPrice}</span>
+              </div>
+            )}
           </h5>
         </div>
         <div>

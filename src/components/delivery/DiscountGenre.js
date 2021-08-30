@@ -7,10 +7,9 @@ const useStyle = () => ({
   },
 });
 
+const options = ["Bundle", "Flat", "%"];
 export default function DicountGenre({ selected, handleClick }) {
   const styles = useStyle();
-
-  const [options, setOptions] = useState(["Bundle", "Flat", "%"]);
 
   return (
     <div style={styles.container}>

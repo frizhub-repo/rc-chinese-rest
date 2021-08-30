@@ -13,3 +13,6 @@ export const customerMenu = () =>
 
 export const getSpecialMenus = () =>
   axiosIntance.get("/api/v1/menu/special/customers/public");
+
+export const getHotDeals = () =>
+  axiosIntance.get("/api/v1/delivery/discount/hotdeals/public");

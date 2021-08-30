@@ -11,16 +11,34 @@ const styles = {
   total: {
     textDecoration: "underline",
   },
+  bundlePrdSpacing: {
+    paddingLeft: "30px",
+  },
+  sizes: {
+    textAlign: "left",
+    paddingLeft: "5px",
+    fontSize: "14px",
+  },
+  productName: {
+    fontSize: "16px",
+  },
+  priceTagContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  originalPriceTag: {
+    fontSize: "15px",
+    lineHeight: "19px",
+    color: "rgba(0, 0, 0, 0.5)",
+    textDecorationLine: "line-through",
+    marginRight: "10px",
+  },
 };
 
 export default function Billing() {
   const { products, total } = useSelector((state) => state.orders);
   const dispatch = useDispatch();
-
-  const [items, setItems] = useState([
-    { name: "Spaghetti alla Puttanesca", qty: 1, price: 10 },
-    { name: "Spaghetti alla Puttanesca", qty: 1, price: 10 },
-  ]);
 
   const removeItem = (product) => {
     console.log(product);
@@ -30,19 +48,52 @@ export default function Billing() {
   return (
     <div className="my-3 text-white">
       {products.map((item) => (
-        <div className="d-flex justify-content-between mb-1">
-          <div className="d-flex align-items-center">
-            <img
-              onClick={() => removeItem(item)}
-              src="assets/delete.png"
-              width={30}
-            />
-            <small className="ml-1">
-              <span>{item.quantity}x</span> {item.name}
-            </small>
+        <>
+          <div className="d-flex justify-content-between mb-1">
+            <div className="d-flex align-items-center">
+              <img
+                onClick={() => removeItem(item)}
+                src="assets/delete.png"
+                width={30}
+                className="cursor-pointer"
+              />
+              <div className="d-flex flex-column">
+                <small className="ml-1" style={styles.productName}>
+                  <span>{item.quantity}x</span> {item.name}
+                </small>
+                <small style={styles.sizes}>Size</small>
+              </div>
+            </div>
+            {console.log(item)}
+            {item.price ? (
+              <div style={styles.priceTagContainer}>
+                {(item?.isDiscount === "flat" ||
+                  item?.isDiscount === "percentage") && (
+                  <span style={styles.originalPriceTag}>
+                    {item?.originalPrice}€
+                  </span>
+                )}
+                <p>{item.price > 0 ? item.price : 0}€</p>
+              </div>
+            ) : (
+              <p className={styles.free}>Free</p>
+            )}
           </div>
-          <p>{item.price}€</p>
-        </div>
+          {item?.bundledProduct?.length > 0 &&
+            item?.bundledProduct?.map((productObj) => (
+              <div
+                style={styles.bundlePrdSpacing}
+                className="d-flex justify-content-between mb-1"
+              >
+                <div className="d-flex align-items-center">
+                  <small className="ml-1">
+                    <span>{item?.quantity}x</span> {productObj?.product?.title}
+                  </small>
+                </div>
+                <p>Free</p>
+              </div>
+            ))}
+        </>
       ))}
       <hr style={styles.divider} />
       <div className="d-flex justify-content-between align-items-center">

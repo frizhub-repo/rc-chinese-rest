@@ -66,7 +66,7 @@ export default function Course() {
         <h2>DEVLIVERY COURSE</h2>
       </div>
       {menuSelected === 0 ? (
-        <DiscountContent showGenre={menuSelected} />
+        <DiscountContent />
       ) : (
         <CourseContent selectedMenu={menus[menuSelected - 1]?.items} />
       )}
