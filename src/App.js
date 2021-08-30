@@ -1,7 +1,7 @@
-import logo from "./logo.svg";
 import "./App.css";
 import "rsuite/dist/styles/rsuite-default.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Menu from "./components/Menu";
 import Contact from "./components/Contact";
@@ -20,6 +20,7 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <Navbar />
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/menu" exact component={Menu} />

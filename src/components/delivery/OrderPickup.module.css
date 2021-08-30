@@ -1,0 +1,9 @@
+.option {
+  cursor: pointer;
+}
+
+.active {
+  background-color: white;
+  color: #280813;
+  border-radius: 20px;
+}

@@ -1,0 +1,17 @@
+.category {
+  border-radius: 20px 20px 0px 0px;
+  font-size: 24px;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 10px 0px;
+}
+
+.category_active {
+  background-color: white;
+  text-decoration: underline;
+}
+
+.category_unactive {
+  color: white;
+  background-color: #280813;
+}
