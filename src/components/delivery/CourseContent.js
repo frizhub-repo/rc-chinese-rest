@@ -23,7 +23,6 @@ export default function CourseContent({ selectedMenu }) {
 
   const handleChangeSectionIndex = (index) => setActiveSection(index);
 
-  console.log({ courrae: selectedMenu });
   return (
     <div style={styles.container}>
       <div style={styles.menuSelectorPadding}>

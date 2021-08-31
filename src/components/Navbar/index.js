@@ -7,7 +7,7 @@ import classes from "./navbar.module.css";
 function Navbar({ showLinks = true }) {
   const location = useLocation();
   let { token, setToken, restaurant } = useRestaurantContext();
-  console.log({ token });
+
   const logout = () => {
     window.localStorage.removeItem("token");
     window.location.reload();
