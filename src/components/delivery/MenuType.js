@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import classes from "./MenuType.module.css";
 
 const styles = {
@@ -24,13 +24,7 @@ const styles = {
   },
 };
 
-export default function MenuType({ selected, handleClick }) {
-  const [items, setItems] = useState([
-    "Newest Deals",
-    "Menu 1",
-    "Menu 2",
-    "Menu 3",
-  ]);
+export default function MenuType({ menus, selected, handleClick }) {
   return (
     <ul style={styles.container} className="shadow-lg">
       <li
@@ -43,15 +37,16 @@ export default function MenuType({ selected, handleClick }) {
         Hot Deals
         <img style={styles.hotDealIcon} src="assets/flames.png" width={37} />
       </li>
-      {items.map((item, index) => (
-        <li
-          onClick={(e) => handleClick(index + 1)}
-          style={styles.item}
-          className={`p-3 ${selected === index + 1 && classes.active}`}
-        >
-          {item}
-        </li>
-      ))}
+      {menus.length > 0 &&
+        menus.map((menu, index) => (
+          <li
+            onClick={(e) => handleClick(index + 1)}
+            style={styles.item}
+            className={`p-3 ${selected === index + 1 && classes.active}`}
+          >
+            {menu?.title}
+          </li>
+        ))}
     </ul>
   );
 }

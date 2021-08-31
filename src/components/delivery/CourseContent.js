@@ -1,7 +1,7 @@
+import MenuSelector from "components/Common/ItemsMenu/MenuSelector";
 import React, { useState } from "react";
 import CourseItem from "./CourseItem";
 import CourseSelector from "./CourseSelector";
-import DiscountGenre from "./DiscountGenre";
 
 const styles = {
   container: {
@@ -13,45 +13,43 @@ const styles = {
     maxHeight: "55vh",
     overflowY: "scroll",
   },
+  menuSelectorPadding: {
+    padding: "0 10px 10px",
+  },
 };
 
-export default function CourseContent({ showGenre }) {
-  const [genreSelected, setGenreSelected] = useState(0);
-  const [items, setItems] = useState(
-    Array(8).fill({
-      image: "assets/item-pic.png",
-      name: "RAVIOLI AL VAPORE",
-      price: "25€",
-      ingredients: ["Pasta di Grano", "Sugo di Pomodoro", "Peperoncino"],
-      allergeni: ["Farina"],
-      properties: { vegan: true, hot: true },
-    })
-  );
+export default function CourseContent({ selectedMenu }) {
+  const [activeSection, setActiveSection] = useState(0);
 
-  function handleClickGenre(id) {
-    setGenreSelected(id);
-  }
+  const handleChangeSectionIndex = (index) => setActiveSection(index);
 
   return (
     <div style={styles.container}>
-      <div>
-        {showGenre && (
-          <DiscountGenre
-            selected={genreSelected}
-            handleClick={handleClickGenre}
+      <div style={styles.menuSelectorPadding}>
+        {selectedMenu?.length > 0 && (
+          <MenuSelector
+            selectedMenu={selectedMenu}
+            activeSection={activeSection}
+            handleChangeSectionIndex={handleChangeSectionIndex}
           />
         )}
+      </div>
+      <div>
         <input placeholder="Search..." className="form-control" type="text" />
         <div>
           <CourseSelector />
         </div>
-        <div style={styles.items} className="row my-4">
-          {items.map((item) => (
-            <div className="col-12 col-md-6 mb-3">
-              <CourseItem {...item} />
-            </div>
-          ))}
-        </div>
+        {selectedMenu?.length > 0 ? (
+          <div style={styles.items} className="row my-4">
+            {selectedMenu?.[activeSection]?.products?.map((item) => (
+              <div className="col-12 col-md-6 mb-3">
+                <CourseItem item={item} size={item?.sizes[0]} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <span>THis section has not product</span>
+        )}
       </div>
     </div>
   );
