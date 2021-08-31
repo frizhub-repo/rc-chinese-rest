@@ -28,7 +28,7 @@ const styles = {
 };
 
 export default function ActionBox() {
-  let { customerData } = useRestaurantContext();
+  let { customerData, restaurant } = useRestaurantContext();
   const { products: ordersProducts, total } = useSelector(
     (state) => state.orders
   );
@@ -56,7 +56,7 @@ export default function ActionBox() {
       style={styles.container}
       className="ml-lg-5 ml-xs-0 d-flex flex-column justify-content-between align-items-center"
     >
-      <OpenStatus />
+      <OpenStatus openNow={restaurant?.placeData?.opening_hours?.open_now} />
       <div className="px-2 px-md-3 my-3">
         <AllergyAlert />
         <OrderPickup />
