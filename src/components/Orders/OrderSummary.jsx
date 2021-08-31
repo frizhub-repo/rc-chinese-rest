@@ -64,7 +64,7 @@ const OrderSummary = () => {
               {
                 description: "Restaurant Club",
                 amount: {
-                  value: total,
+                  value: total.toFixed(2),
                 },
               },
             ],
@@ -81,7 +81,7 @@ const OrderSummary = () => {
               address,
             });
             toast.success("Order has been created successfully");
-            history.push(`/ordersreceived`);
+            history.push(`/ordersreceived/${res?.data?._id}`);
             setLoading(false);
           } else {
             toast.error("Something went wrong");

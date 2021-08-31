@@ -26,3 +26,11 @@
 .last_option {
   border-radius: 0px 0px 20px 0px;
 }
+
+.priceTextDecoration {
+  font-size: 15px;
+  line-height: 19px;
+  color: rgba(0, 0, 0, 0.5);
+  text-decoration-line: line-through;
+  margin-right: 10px;
+}

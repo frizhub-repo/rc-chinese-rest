@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 });
 
 function ccyFormat(num) {
-  return `${num.toFixed(2)}`;
+  return `${num?.toFixed(2)}`;
 }
 
 function priceRow(qty, unit) {
@@ -30,7 +30,7 @@ function createRow(desc, qty, unit) {
 }
 
 function subtotal(items) {
-  return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
+  return items?.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
 }
 
 const rows = [
@@ -50,12 +50,6 @@ export default function Tables({ products, total }) {
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="spanning table">
         <TableHead>
-          {/* <TableRow>
-            <TableCell align="center" colSpan={3}>
-              Details
-            </TableCell>
-            <TableCell align="right">Price</TableCell>
-          </TableRow> */}
           <TableRow>
             <TableCell>Name</TableCell>
             <TableCell align="right">Price</TableCell>
@@ -64,31 +58,38 @@ export default function Tables({ products, total }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {products.map((product) => (
-            <TableRow key={product.product}>
-              <TableCell>{product.name}</TableCell>
-              <TableCell align="right">{product.price}</TableCell>
-              <TableCell align="right">{product.quantity}</TableCell>
-              <TableCell align="right">
-                {ccyFormat(product.price * product.quantity)}
-              </TableCell>
-            </TableRow>
+          {products?.map((product) => (
+            <>
+              <TableRow key={product?.product?._id || product.product}>
+                <TableCell>{product?.product?.title || product.name}</TableCell>
+                <TableCell align="right">
+                  {(product?.isDiscount === "flat" ||
+                    product?.isDiscount === "percentage") && (
+                    <span className={classes.originalPriceTag}>
+                      {product?.originalPrice}
+                    </span>
+                  )}
+                  {product.price}
+                </TableCell>
+                <TableCell align="right">{product.quantity}</TableCell>
+                <TableCell align="right">
+                  {ccyFormat(product?.price * product?.quantity)}
+                </TableCell>
+              </TableRow>
+              {product?.bundledProduct?.length > 0 &&
+                product?.bundledProduct?.map((prodObj) => (
+                  <TableRow>
+                    <TableCell>{prodObj?.product?.title}</TableCell>
+                    <TableCell className={classes.free} align="right">
+                      Free
+                    </TableCell>
+                    <TableCell align="right">{product.quantity}</TableCell>
+                    <TableCell align="right">0</TableCell>
+                  </TableRow>
+                ))}
+            </>
           ))}
 
-          {/* <TableRow>
-            <TableCell rowSpan={3} />
-            <TableCell colSpan={2}>Subtotal</TableCell>
-            <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Tax</TableCell>
-            <TableCell align="right">{`${(TAX_RATE * 100).toFixed(0)} %`}</TableCell>
-            <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell colSpan={2}>Total</TableCell>
-            <TableCell align="right">{ccyFormat(total)} €</TableCell>
-          </TableRow> */}
           <TableRow>
             <TableCell rowSpan={3} />
             <TableCell colSpan={2} style={{ fontWeight: "500" }}>
