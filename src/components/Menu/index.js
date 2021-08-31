@@ -1,3 +1,4 @@
+import { customerMenu } from "api/public";
 import React from "react";
 import Hero from "../Common/Hero";
 import ItemsMenu from "../Common/ItemsMenu/ItemsMenu";
@@ -22,6 +23,20 @@ const styles = {
 };
 
 export default function Menu() {
+  const [specialMenu, setSpecialMenus] = React.useState([]);
+  const [activeIndex, setActiveIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    async function getSpecialMenuHandler() {
+      try {
+        const res = await customerMenu();
+        setSpecialMenus(res?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getSpecialMenuHandler();
+  }, []);
   return (
     <div>
       <section>
@@ -29,7 +44,11 @@ export default function Menu() {
       </section>
       <section className="row mt-5">
         <div className="col-12 col-md-6 mb-5 mb-md-0">
-          <ItemCarousel />
+          <ItemCarousel
+            specialMenu={specialMenu}
+            activeIndex={activeIndex}
+            setActiveIndex={setActiveIndex}
+          />
         </div>
         <div className="col-12 col-md-6 d-flex justify-content-center align-items-center">
           <div style={styles.reserve}>
@@ -39,7 +58,7 @@ export default function Menu() {
         </div>
       </section>
       <section className="p-5">
-        <ItemsMenu />
+        <ItemsMenu selectedMenu={specialMenu[activeIndex]} />
       </section>
     </div>
   );
