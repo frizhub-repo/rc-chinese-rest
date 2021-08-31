@@ -23,17 +23,7 @@ const styles = {
   },
 };
 
-export default function Table() {
-  const [timings, setTimings] = useState([
-    ["Sunday", "Closed"],
-    ["Monday", "13:00 - 15:30 / 21:00 - 01:00"],
-    ["Tuesday", "13:00 - 15:30"],
-    ["Wednesday", "13:00 - 15:30"],
-    ["Thursday", "13:00 - 15:30"],
-    ["Friday", "13:00 - 15:30 / 21:00 - 01:00"],
-    ["Saturday", "13:00 - 15:30 / 21:00 - 01:00"],
-  ]);
-
+export default function Table({ openingHours }) {
   return (
     <table style={styles.table}>
       <thead>
@@ -42,20 +32,18 @@ export default function Table() {
         </th>
       </thead>
       <tbody>
-        {timings.map((timing) => (
+        {openingHours.map((timing) => (
           <tr
-            className={
-              timing[1].toLowerCase() === "closed"
-                ? classes.closed
-                : classes.opened
-            }
+            className={timing?.openTime ? classes.opened : classes.closed}
             style={styles.row}
           >
             <td colSpan={1} style={styles.column}>
-              {timing[0]}
+              {timing?.openDay}
             </td>
             <td colSpan={1} style={styles.column}>
-              {timing[1]}
+              {timing?.openTime || timing?.closeTime
+                ? timing?.openTime + " - " + timing?.closeTime
+                : "Closed"}
             </td>
           </tr>
         ))}

@@ -18,34 +18,24 @@ const useStyle = () => ({
   },
 });
 
-export default function Testimonial() {
+export default function Testimonial({ reviews }) {
   const styles = useStyle();
-  const [testimonials, setTestimonials] = useState([
-    {
-      img: "assets/testimonial-client.png",
-      content:
-        "Birre ottime e panini buoni nel pane e nella farcitura, carne scelta. Locale informale e caldo. Ragazzi preparati e gentili. Patatine buone servite con più salse. Buoni i gelati e i sorbettie buono il soufflé al cioccolato. Da provare indubbiamente",
-      author: "Giulia",
-    },
-    {
-      img: "assets/testimonial-client.png",
-      content:
-        "Birre ottime e panini buoni nel pane e nella farcitura, carne scelta. Locale informale e caldo. Ragazzi preparati e gentili. Patatine buone servite con più salse. Buoni i gelati e i sorbettie buono il soufflé al cioccolato. Da provare indubbiamente",
-      author: "Giulia",
-    },
-  ]);
 
   return (
     <Carousel interval={1000} indicators={false}>
-      {testimonials.map((testimonial) => {
+      {reviews.map((review) => {
         return (
           <Carousel.Item style={styles.carouselItem}>
             <div style={styles.carouselContent}>
-              <img src={testimonial.img} className="mb-3" width={100} />
-              <p style={styles.carouselMessage}>‘’{testimonial.content}’’</p>
+              <img
+                src={review.profile_photo_url}
+                className="mb-3"
+                width={100}
+              />
+              <p style={styles.carouselMessage}>‘’{review.text}’’</p>
             </div>
             <Carousel.Caption>
-              <p>-{testimonial.author}-</p>
+              <p>-{review.author_name}-</p>
             </Carousel.Caption>
           </Carousel.Item>
         );

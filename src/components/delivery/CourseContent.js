@@ -48,7 +48,7 @@ export default function CourseContent({ selectedMenu }) {
             ))}
           </div>
         ) : (
-          <span>THis section has not product</span>
+          <span>These sections don't have any products!</span>
         )}
       </div>
     </div>

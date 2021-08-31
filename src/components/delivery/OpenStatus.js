@@ -22,7 +22,7 @@ const useStyle = () => ({
   },
 });
 
-export default function OpenStatus() {
+export default function OpenStatus({ openNow }) {
   const styles = useStyle();
 
   return (
@@ -38,7 +38,7 @@ export default function OpenStatus() {
           style={styles.info}
           className="row d-flex flex-column justify-content-center"
         >
-          <h5>Now Opened</h5>
+          <h5>{openNow ? "Now Opened" : "Now Closed"}</h5>
           <h5>From 12:00 - To 15:30</h5>
         </div>
         <div
