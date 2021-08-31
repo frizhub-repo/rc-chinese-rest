@@ -1,18 +1,11 @@
 import React from "react";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import { Link } from "react-router-dom";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import { makeStyles } from "@material-ui/styles";
-import CustomMenu from "./CustomMenu";
-import login from "../../Assets/images/login.png";
-import "./NavbarStyles.css";
 import { useLocation } from "react-router-dom";
-import styles from "./styles";
-const useStyles = makeStyles(styles);
+import classes from "./navbar.module.css";
 
 function Navbar({ showLinks = true }) {
   const location = useLocation();
-  const classes = useStyles();
   let { token, setToken, restaurant } = useRestaurantContext();
   console.log({ token });
   const logout = () => {
@@ -43,111 +36,63 @@ function Navbar({ showLinks = true }) {
   return (
     <div>
       {showLinks && (
-        <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center activeLink navbarStyles bgClass">
-          <Link to="/">
-            <img
-              src={`${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`}
-              className="imgClass"
-            />
+        <nav
+          className={`navbar fixed-top navbar-expand-lg navbar-dark ${classes.navbar}`}
+        >
+          <Link className="btn btn-outline-light navbar-brand" to="/">
+            Logo
           </Link>
-
-          <Link
-            to="/"
-            className="mr-5 font-weight-bolder text-white hover:text-gray-900 "
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
           >
-            <p
-              className={
-                location.pathname === "/" ? classes.selected : classes.hover
-              }
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collpase navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item">
+                <Link className="nav-link" to="/">
+                  HOME
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/menu">
+                  MENU
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/tableRes">
+                  TABLE RESERVATION
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/delivery">
+                  DELIVERY
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/contact">
+                  CONTACT
+                </Link>
+              </li>
+            </ul>
+            <button
+              className="d-flex btn btn-lg btn-outline-light btn-rounded"
+              style={{ borderRadius: "20px" }}
+              onClick={handleClickOpen}
             >
-              HOME
-            </p>
-          </Link>
-          <Link
-            to="/menu"
-            className="mr-5 font-weight-bolder text-white hover:text-gray-900 "
-          >
-            <p
-              className={
-                location.pathname === "/menu/1"
-                  ? classes.selected
-                  : classes.hover
-              }
-            >
-              MENU
-            </p>
-          </Link>
-          <Link
-            to="/tableRes"
-            className="mr-5 font-weight-bolder text-white hover:text-gray-900 yes"
-          >
-            <p
-              className={
-                location.pathname === "/tableRes"
-                  ? classes.selected
-                  : classes.hover
-              }
-            >
-              TABLE RESERVATION
-            </p>
-          </Link>
-          <Link
-            to="/delivery"
-            className="mr-5 font-weight-bolder text-white hover:text-gray-900"
-          >
-            <p
-              className={
-                location.pathname === "/delivery"
-                  ? classes.selected
-                  : classes.hover
-              }
-            >
-              DELIVERY
-            </p>
-          </Link>
-          <Link
-            to="/contact"
-            className="mr-5 font-weight-bolder text-white hover:text-gray-900"
-          >
-            <p
-              className={
-                location.pathname === "/contact"
-                  ? classes.selected
-                  : classes.hover
-              }
-            >
-              CONTACT
-            </p>
-          </Link>
-          <div className={classes.divStyles}>
-            {!token ? (
-              <button
-                onClick={handleClickOpen}
-                className={classes.buttonStyles}
-              >
-                <img src={login} alt="" className={classes.imgStyle} />
-                Sign In/Sign Up
-              </button>
-            ) : (
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  cursor: "pointer",
-                }}
-              >
-                <AccountCircleIcon
-                  onClick={handleClick}
-                  fontSize="large"
-                  style={{ cursor: "pointer" }}
-                />
-              </div>
-            )}
-            <CustomMenu
-              handleClose={handleCloseMenu}
-              anchorEl={anchorEl}
-              logout={logout}
-            />
+              <img
+                src="assets/login.png"
+                width="20"
+                style={{ marginRight: "5px" }}
+              />
+              Sign In/Sign Up
+            </button>
           </div>
         </nav>
       )}

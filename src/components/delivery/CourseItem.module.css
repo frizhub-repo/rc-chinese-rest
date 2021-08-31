@@ -1,0 +1,28 @@
+.vegan {
+  border-radius: 0px 10px 0px 0px;
+  padding: 2px;
+}
+
+.glutten_free {
+  padding: 2px;
+}
+
+.hot {
+  border-radius: 0px 0px 10px 0px;
+  padding: 2px;
+}
+
+.size_option {
+  background-color: white;
+  padding: 6px 0px;
+  margin: 0px;
+  text-transform: uppercase;
+}
+
+.first_option {
+  border-radius: 0px 0px 0px 20px;
+}
+
+.last_option {
+  border-radius: 0px 0px 20px 0px;
+}

@@ -1,0 +1,10 @@
+.active {
+  color: white;
+  background: #280813;
+}
+
+.un_active {
+  color: #280813;
+  background: white;
+  opacity: 0.7;
+}
