@@ -94,7 +94,6 @@ export default function CourseItem({
   const discountedPrice = price > 0 ? price : 0;
 
   const addToCart = () => {
-    console.log({ offer, item });
     try {
       const isDiscount = isEmpty(offer) ? false : offer.discountType;
       isDiscount && validateOffer(offer);

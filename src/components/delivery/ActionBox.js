@@ -1,4 +1,8 @@
+import { useRestaurantContext } from "Context/restaurantContext";
 import React from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
+import { toast } from "react-toastify";
 import AllergyAlert from "./AllergyAlert";
 import Billing from "./Billing";
 import OpenStatus from "./OpenStatus";
@@ -24,6 +28,29 @@ const styles = {
 };
 
 export default function ActionBox() {
+  let { customerData } = useRestaurantContext();
+  const { products: ordersProducts, total } = useSelector(
+    (state) => state.orders
+  );
+  const history = useHistory();
+  const orderNow = () => {
+    try {
+      if (ordersProducts?.length <= 0) {
+        throw new Error("Please provide some products to proceed");
+      }
+      if (customerData?.addresses?.length) {
+        history.push("/chooseAddress");
+      } else {
+        history.push("/deliveryAddress");
+      }
+    } catch (error) {
+      if (error.message) {
+        toast.error(error.message);
+        return;
+      }
+      toast.error("Error occured");
+    }
+  };
   return (
     <div
       style={styles.container}
@@ -38,7 +65,10 @@ export default function ActionBox() {
           <button style={{ ...styles.proceedButton, ...styles.button }}>
             Add more 5€ to your order to proceed
           </button>
-          <button style={{ ...styles.paymentButton, ...styles.button }}>
+          <button
+            style={{ ...styles.paymentButton, ...styles.button }}
+            onClick={orderNow}
+          >
             Choose a Payment method
           </button>
         </div>
