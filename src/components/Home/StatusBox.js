@@ -53,7 +53,7 @@ const styles = {
   },
 };
 
-export default function StatusBox() {
+export default function StatusBox({ placeData }) {
   return (
     <div
       style={styles.container}
@@ -76,13 +76,15 @@ export default function StatusBox() {
         <div style={{ ...styles.corner, ...styles.axisCorner }}>
           <p>Address</p>
           <img src="assets/map.png" width={50} />
-          <p>Via Cristoforo Colombo, 44</p>
+          <p>{placeData?.formatted_address}</p>
         </div>
       </div>
       <div style={styles.center}>
         <img className="my-2" src="assets/clock.png" width={80} />
         <div>
-          <h6>Now Closed - Opening:</h6>
+          <h6>
+            {placeData?.opening_hours?.open_now ? "Now Open" : "Now Closed"}:
+          </h6>
           <h6>From 19:00 - To 23:30</h6>
         </div>
         <button style={styles.orderButton} disabled>
@@ -111,7 +113,7 @@ export default function StatusBox() {
           <p>Reviews</p>
           <img src="assets/stars.png" width={50} />
           <p>
-            <span>44</span> Satisfied Clients
+            <span>{placeData?.user_ratings_total}</span> Satisfied Clients
           </p>
         </div>
       </div>
