@@ -28,10 +28,10 @@ export default function Menu() {
         <Hero />
       </section>
       <section className="row mt-5">
-        <div className="col-12 col-md-6 mb-5 mb-md-0">
+        <div className="col-12 col-md-7 mb-5 mb-md-0 px-2 px-md-5">
           <ItemCarousel />
         </div>
-        <div className="col-12 col-md-6 d-flex justify-content-center align-items-center">
+        <div className="col-12 col-md-5 d-flex justify-content-center align-items-center">
           <div style={styles.reserve}>
             <img src="assets/reserve-table.png" />
             <a style={styles.buttonText}>RESERVE A TABLE</a>

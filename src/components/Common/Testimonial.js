@@ -23,7 +23,7 @@ export default function Testimonial({ reviews }) {
 
   return (
     <Carousel interval={1000} indicators={false}>
-      {reviews.map((review) => {
+      {reviews?.map((review) => {
         return (
           <Carousel.Item style={styles.carouselItem}>
             <div style={styles.carouselContent}>
