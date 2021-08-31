@@ -20,20 +20,6 @@ const useStyle = () => ({
 
 export default function Testimonial({ reviews }) {
   const styles = useStyle();
-  const [testimonials, setTestimonials] = useState([
-    {
-      img: "assets/testimonial-client.png",
-      content:
-        "Birre ottime e panini buoni nel pane e nella farcitura, carne scelta. Locale informale e caldo. Ragazzi preparati e gentili. Patatine buone servite con più salse. Buoni i gelati e i sorbettie buono il soufflé al cioccolato. Da provare indubbiamente",
-      author: "Giulia",
-    },
-    {
-      img: "assets/testimonial-client.png",
-      content:
-        "Birre ottime e panini buoni nel pane e nella farcitura, carne scelta. Locale informale e caldo. Ragazzi preparati e gentili. Patatine buone servite con più salse. Buoni i gelati e i sorbettie buono il soufflé al cioccolato. Da provare indubbiamente",
-      author: "Giulia",
-    },
-  ]);
 
   return (
     <Carousel interval={1000} indicators={false}>
