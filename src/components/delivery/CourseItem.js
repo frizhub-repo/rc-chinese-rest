@@ -98,7 +98,7 @@ export default function CourseItem({
     try {
       const isDiscount = isEmpty(offer) ? false : offer.discountType;
       isDiscount && validateOffer(offer);
-      debugger;
+
       const payload = {
         product: item._id,
         name: item.title,

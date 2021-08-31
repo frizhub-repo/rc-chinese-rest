@@ -1,5 +1,5 @@
-import { removeQuantity } from "actions";
-import React, { useState } from "react";
+import { removeItem } from "actions";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const styles = {
@@ -34,15 +34,19 @@ const styles = {
     textDecorationLine: "line-through",
     marginRight: "10px",
   },
+  sizeTitleContainer: {
+    display: "flex",
+    paddingLeft: "36px",
+    textAlign: "left",
+  },
 };
 
 export default function Billing() {
   const { products, total } = useSelector((state) => state.orders);
   const dispatch = useDispatch();
 
-  const removeItem = (product) => {
-    console.log(product);
-    dispatch(removeQuantity(product));
+  const removeItemFromCart = (product) => {
+    dispatch(removeItem(product));
   };
 
   return (
@@ -52,7 +56,7 @@ export default function Billing() {
           <div className="d-flex justify-content-between mb-1">
             <div className="d-flex align-items-center">
               <img
-                onClick={() => removeItem(item)}
+                onClick={() => removeItemFromCart(item)}
                 src="assets/delete.png"
                 width={30}
                 className="cursor-pointer"
@@ -61,10 +65,9 @@ export default function Billing() {
                 <small className="ml-1" style={styles.productName}>
                   <span>{item.quantity}x</span> {item.name}
                 </small>
-                <small style={styles.sizes}>Size</small>
+                <small style={styles.sizes}>{item?.size?.title}</small>
               </div>
             </div>
-            {console.log(item)}
             {item.price ? (
               <div style={styles.priceTagContainer}>
                 {(item?.isDiscount === "flat" ||
@@ -81,16 +84,22 @@ export default function Billing() {
           </div>
           {item?.bundledProduct?.length > 0 &&
             item?.bundledProduct?.map((productObj) => (
-              <div
-                style={styles.bundlePrdSpacing}
-                className="d-flex justify-content-between mb-1"
-              >
-                <div className="d-flex align-items-center">
-                  <small className="ml-1">
-                    <span>{item?.quantity}x</span> {productObj?.product?.title}
-                  </small>
+              <div>
+                <div
+                  style={styles.bundlePrdSpacing}
+                  className="d-flex justify-content-between mb-1"
+                >
+                  <div className="d-flex align-items-center">
+                    <small className="ml-1" style={styles.productName}>
+                      <span>{item?.quantity}x</span>{" "}
+                      {productObj?.product?.title}
+                    </small>
+                  </div>
+                  <p>Free</p>
                 </div>
-                <p>Free</p>
+                <span style={styles.sizeTitleContainer}>
+                  {productObj?.size?.title}
+                </span>
               </div>
             ))}
         </>

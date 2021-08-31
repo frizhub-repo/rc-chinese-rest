@@ -42,7 +42,10 @@ export default function (state = initialState, action) {
     case "REMOVE_ITEM":
       const removeProducts = state.products;
       const removeIndex = removeProducts.findIndex(
-        (product) => product.product === action.payload.key
+        (product) =>
+          product.product === action.payload.key.product &&
+          product.size._id === action.payload.key.size._id &&
+          product.isDiscount === action.payload.key.isDiscount
       );
       const price =
         removeProducts[removeIndex].quantity *
