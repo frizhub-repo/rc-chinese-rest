@@ -1,3 +1,4 @@
+import { useRestaurantContext } from "Context/restaurantContext";
 import React, { useState } from "react";
 import Hero from "../Common/Hero";
 import Review from "../Common/Review";
@@ -7,6 +8,10 @@ import Status from "./Status";
 import TableCarousel from "./TableCarousel";
 
 export default function TableReservation() {
+  const {
+    restaurant: { placeData },
+  } = useRestaurantContext();
+
   const [reviews, setReviews] = useState([
     {
       name: "Filippo",
@@ -38,10 +43,13 @@ export default function TableReservation() {
             <MenuBox />
           </div>
           <div className="row">
-            <Status />
+            <Status
+              userTotalRating={placeData?.user_ratings_total}
+              rating={placeData?.rating}
+            />
           </div>
           <div className="d-none d-sm-flex flex-column align-items-center my-5">
-            {reviews.map((review) => (
+            {placeData?.reviews.map((review) => (
               <Review {...review} />
             ))}
           </div>

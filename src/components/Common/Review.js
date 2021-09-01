@@ -37,7 +37,12 @@ const styles = {
   },
 };
 
-export default function Review({ name, image, review, vote }) {
+export default function Review({
+  author_name,
+  profile_photo_url,
+  text,
+  rating,
+}) {
   return (
     <div style={styles.container}>
       <div style={styles.review} className="d-flex flex-column align-items-end">
@@ -47,16 +52,16 @@ export default function Review({ name, image, review, vote }) {
         <div className="d-flex">
           <img className="mr-2" src="assets/like.png" />
           <h5>
-            <span style={styles.highlight}>{vote}</span>|5
+            <span style={styles.highlight}>{rating}</span>|5
           </h5>
         </div>
       </div>
       <div style={styles.imageContainer}>
-        <img style={styles.image} src={image} />
+        <img style={styles.image} src={profile_photo_url} />
       </div>
       <hr style={styles.divider} />
-      <p>‘’{review}’’</p>
-      <p className="italic">-{name}-</p>
+      <p>‘’{text}’’</p>
+      <p className="italic">-{author_name}-</p>
     </div>
   );
 }
