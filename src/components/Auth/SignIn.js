@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({ setActiveStep }) {
+export default function SignIn({ setActiveStep, handleClickOpen }) {
   const classes = useStyles();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
@@ -83,6 +83,7 @@ export default function SignIn({ setActiveStep }) {
             ? history.push("/deliveryAddress")
             : history.push("/deliveryAddress");
         } else {
+          handleClickOpen();
           history.push("/");
         }
       }

@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Auth() {
+function Auth({ open = true, handleClickOpen }) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
 
@@ -34,13 +34,23 @@ function Auth() {
         // maxWidth="xs"
         scroll="body"
         aria-labelledby="customized-dialog-title"
-        open={true}
+        open={open}
         className={`${classes.bgImg} customDesign`}
       >
         <DialogContent dividers>
           <Box className={classes.root}>
-            {activeStep === 0 && <SignIn setActiveStep={setActiveStep} />}
-            {activeStep === 1 && <SignUp setActiveStep={setActiveStep} />}
+            {activeStep === 0 && (
+              <SignIn
+                setActiveStep={setActiveStep}
+                handleClickOpen={handleClickOpen}
+              />
+            )}
+            {activeStep === 1 && (
+              <SignUp
+                setActiveStep={setActiveStep}
+                handleClickOpen={handleClickOpen}
+              />
+            )}
           </Box>
         </DialogContent>
       </Dialog>

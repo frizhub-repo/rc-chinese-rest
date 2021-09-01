@@ -3,10 +3,11 @@ import { useRestaurantContext } from "../../Context/restaurantContext";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import classes from "./navbar.module.css";
+import Auth from "components/Auth";
 
 function Navbar({ showLinks = true }) {
   const location = useLocation();
-  let { token, setToken, restaurant } = useRestaurantContext();
+  let { token, setToken, restaurant, customerData } = useRestaurantContext();
 
   const logout = () => {
     window.localStorage.removeItem("token");
@@ -22,7 +23,7 @@ function Navbar({ showLinks = true }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpen((prev) => !prev);
   };
 
   const handleClose = () => {
@@ -81,21 +82,36 @@ function Navbar({ showLinks = true }) {
                 </Link>
               </li>
             </ul>
-            <button
-              className="d-flex btn btn-lg btn-outline-light btn-rounded"
-              style={{ borderRadius: "20px" }}
-              onClick={handleClickOpen}
-            >
-              <img
-                src="assets/login.png"
-                width="20"
-                style={{ marginRight: "5px" }}
-              />
-              Sign In/Sign Up
-            </button>
+            {token ? (
+              <button
+                className="d-flex btn btn-lg btn-outline-light btn-rounded"
+                style={{ borderRadius: "20px" }}
+              >
+                <img
+                  src="assets/login.png"
+                  width="20"
+                  style={{ marginRight: "5px" }}
+                />
+                {customerData?.firstName} {customerData?.lastName}
+              </button>
+            ) : (
+              <button
+                className="d-flex btn btn-lg btn-outline-light btn-rounded"
+                style={{ borderRadius: "20px" }}
+                onClick={handleClickOpen}
+              >
+                <img
+                  src="assets/login.png"
+                  width="20"
+                  style={{ marginRight: "5px" }}
+                />
+                Sign In/Sign Up
+              </button>
+            )}
           </div>
         </nav>
       )}
+      {open && <Auth open={open} handleClickOpen={handleClickOpen} />}
     </div>
   );
 }
