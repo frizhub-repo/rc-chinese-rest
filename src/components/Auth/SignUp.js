@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp({ setActiveStep }) {
+export default function SignUp({ setActiveStep, handleClickOpen }) {
   const classes = useStyles();
   const history = useHistory();
   const { register, handleSubmit, errors } = useForm();
@@ -78,6 +78,7 @@ export default function SignUp({ setActiveStep }) {
             ? history.push("/deliveryAddress")
             : history.push("/deliveryAddress");
         } else {
+          handleClickOpen();
           history.push("/");
         }
       }

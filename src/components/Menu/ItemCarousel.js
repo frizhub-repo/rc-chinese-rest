@@ -39,16 +39,20 @@ const useStyles = () => ({
   },
 });
 
-export default function ItemCarousel() {
+export default function ItemCarousel({
+  specialMenu,
+  activeIndex,
+  setActiveIndex,
+}) {
   const styles = useStyles();
-  const [selected, setSelected] = useState(0);
-  const [items, setItems] = useState([
-    { img: "assets/dessert-placeholder.jpg", type: "lunch", price: 20 },
-    { img: "assets/dessert-placeholder.jpg", type: "lunch", price: 20 },
-    { img: "assets/dessert-placeholder.jpg", type: "lunch", price: 20 },
-    { img: "assets/dessert-placeholder.jpg", type: "lunch", price: 20 },
-    { img: "assets/dessert-placeholder.jpg", type: "lunch", price: 20 },
-  ]);
+
+  const getCount = (items) => {
+    let count = 0;
+    items.forEach((item) => {
+      count = count + item?.products?.length;
+    });
+    return count;
+  };
 
   return (
     <Carousel
@@ -74,18 +78,27 @@ export default function ItemCarousel() {
       swipeable={false}
       showDots={false}
     >
-      {items.map((item, index) => (
-        <div onClick={(e) => setSelected(index)} style={styles.itemContainer}>
-          <img src={item.img} width={300} />
+      {specialMenu?.length > 0 &&
+        specialMenu.map((menu, index) => (
           <div
-            style={index === selected ? styles.selectedContent : styles.content}
+            onClick={(e) => setActiveIndex(index)}
+            style={styles.itemContainer}
           >
-            <h4>{item.type.toUpperCase()}</h4>
-            <img src="assets/restaurant.png" />
-            <h4>{item.price}</h4>
+            <img
+              src={`${process.env.REACT_APP_API_BASE_URL}/${menu.imageUrl}`}
+              width={300}
+            />
+            <div
+              style={
+                index === activeIndex ? styles.selectedContent : styles.content
+              }
+            >
+              <h4>{menu.title.toUpperCase()}</h4>
+              <img src="assets/restaurant.png" />
+              <h4>{getCount(menu?.items)}</h4>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
     </Carousel>
   );
 }
