@@ -16,6 +16,12 @@ const styles = {
     maxHeight: "60vh",
     overflowY: "scroll",
   },
+  noProduct: {
+    textAlign: "center",
+    width: "100%",
+    fontSize: "20px",
+    padding: "10px 0",
+  },
 };
 
 export default function MenuContent({ items }) {
@@ -29,11 +35,17 @@ export default function MenuContent({ items }) {
         <div className="row">
           {items?.length > 0 &&
             items.map((item) =>
-              item?.products?.map((product) => (
-                <div className="col-md-6 col-12">
-                  <MenuItem product={product} />
-                </div>
-              ))
+              item?.products?.length > 0 ? (
+                item?.products?.map((product) => (
+                  <div className="col-md-6 col-12">
+                    <MenuItem product={product} />
+                  </div>
+                ))
+              ) : (
+                <span style={styles.noProduct}>
+                  This menu don't have any product
+                </span>
+              )
             )}
         </div>
       </div>

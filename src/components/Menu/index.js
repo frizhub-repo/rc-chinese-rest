@@ -1,3 +1,4 @@
+import { Backdrop, CircularProgress } from "@material-ui/core";
 import { customerMenu } from "api/public";
 import React from "react";
 import Hero from "../Common/Hero";
@@ -20,22 +21,30 @@ const styles = {
     color: "#F49E0B",
     fontSize: "20px",
   },
+  backdrop: {
+    zIndex: 1,
+    color: "#fff",
+  },
 };
 
 export default function Menu() {
   const [specialMenu, setSpecialMenus] = React.useState([]);
   const [activeIndex, setActiveIndex] = React.useState(0);
+  const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
-    async function getSpecialMenuHandler() {
+    async function getRestaurantMenu() {
+      setLoading(true);
       try {
         const res = await customerMenu();
         setSpecialMenus(res?.data);
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.log(error);
       }
     }
-    getSpecialMenuHandler();
+    getRestaurantMenu();
   }, []);
   return (
     <div>
@@ -60,6 +69,9 @@ export default function Menu() {
       <section className="p-5">
         <ItemsMenu selectedMenu={specialMenu[activeIndex]} />
       </section>
+      <Backdrop style={styles.backdrop} open={loading}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 }
