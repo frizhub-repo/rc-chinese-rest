@@ -1,7 +1,6 @@
 import React from "react";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import { Link, useHistory } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import classes from "./navbar.module.css";
 import Auth from "components/Auth";
 import { useOrderContext } from "Context/OrderContext";
@@ -9,7 +8,6 @@ import { Badge, Menu, MenuItem } from "@material-ui/core";
 import shopingBag from "Assets/images/shopingBag.png";
 
 function Navbar({ showLinks = true }) {
-  const location = useLocation();
   const history = useHistory();
   let { token, setToken, restaurant, customerData } = useRestaurantContext();
   const { pendingOrders } = useOrderContext();
