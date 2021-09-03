@@ -15,12 +15,15 @@ import store from "./store";
 
 import { RestaurantProvider } from "./Context/restaurantContext";
 import { Provider } from "react-redux";
+import { OrderProvider } from "Context/OrderContext";
 
 ReactDOM.render(
   [
     <Provider store={store}>
       <RestaurantProvider>
-        <App />
+        <OrderProvider>
+          <App />
+        </OrderProvider>
       </RestaurantProvider>
     </Provider>,
     <ToastContainer />,
