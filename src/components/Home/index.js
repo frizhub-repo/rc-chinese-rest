@@ -73,16 +73,19 @@ function Home() {
       </div> */}
       <div>
         <div className="d-flex row justfiy-content-center align-items-center justify-content-lg-between my-5">
-          <div className="d-flex justify-content-center col-12 col-lg-6">
-            <Table openingHours={openingHours} />
-          </div>
+          <div className="d-flex justify-content-center col-12 col-lg-6"></div>
           <div className="col-12 col-lg-6 mt-5 mt-lg-0">
             <Testimonial reviews={placeData?.reviews} />
           </div>
         </div>
       </div>
-      <div>
-        <Map />
+      <div className="row mb-5">
+        <div className="col-12 col-lg-6">
+          <Map />
+        </div>
+        <div className="col-12 offset-lg-1 col-lg-5 my-3 my-lg-0">
+          <Table openingHours={openingHours} />
+        </div>
       </div>
     </div>
   );

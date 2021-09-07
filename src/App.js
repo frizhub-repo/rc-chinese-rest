@@ -15,6 +15,7 @@ import Profile from "./components/Profile";
 import OrdersReceived from "./components/Orders/OrdersReceived";
 import ExistingAddress from "./components/ExistingAddress";
 import OrderSummary from "./components/Orders/OrderSummary";
+import Footer from "components/Common/Footer";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/chooseAddress" exact component={ExistingAddress} />
           <Route path="/order/summary" exact component={OrderSummary} />
         </Switch>
+        <Footer />
       </Router>
     </div>
   );

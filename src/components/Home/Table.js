@@ -4,6 +4,7 @@ import classes from "./Table.module.css";
 const styles = {
   table: {
     tableLayout: "fixed",
+    width: "100%",
   },
   header: {
     background: "#280813",
