@@ -90,7 +90,7 @@ export default function Billing() {
                   className="d-flex justify-content-between mb-1"
                 >
                   <div className="d-flex align-items-center">
-                    <small className="ml-1" style={styles.productName}>
+                    <small className="ml-5" style={styles.productName}>
                       <span>{item?.quantity}x</span>{" "}
                       {productObj?.product?.title}
                     </small>

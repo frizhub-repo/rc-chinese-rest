@@ -1,3 +1,5 @@
+import { Skeleton } from "@material-ui/lab";
+import { getReservationOffers } from "api/public";
 import React, { useState, useEffect } from "react";
 import { Carousel } from "react-bootstrap";
 
@@ -15,6 +17,19 @@ const styles = {
     background: "#F49E0B",
     padding: "20px",
     borderRadius: "20px",
+    fontSize: "30px",
+  },
+  skeletongSpaing: {
+    margin: "0 20px",
+    borderRadius: "30px",
+  },
+  itemHeight: {
+    height: "120px",
+  },
+  discountImg: {
+    width: "200px",
+    height: "180px",
+    borderRadius: "30px",
   },
 };
 
@@ -22,30 +37,23 @@ export default function PromotionContent() {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(null);
   const [carouselItemCount, setCarouselItemCount] = useState(3);
-  const [items, setItems] = useState([
-    {
-      name: "Lunch Offer",
-      dishes: ["Plate #1", "Plate #2", "Plate #3"],
-      price: "12€",
-      original: "20€",
-    },
-    {
-      name: "Lunch Offer",
-      dishes: ["Plate #1", "Plate #2", "Plate #3"],
-      price: "12€",
-      original: "20€",
-    },
-    {
-      name: "Lunch Offer",
-      dishes: ["Plate #1", "Plate #2", "Plate #3"],
-      price: "12€",
-      original: "20€",
-    },
-  ]);
+  const [discounts, setDiscounts] = useState([]);
+  const fetchDiscounts = async () => {
+    try {
+      const res = await getReservationOffers();
+      setDiscounts(res?.data);
+    } catch (error) {
+      console.log({ error });
+    }
+  };
 
   useEffect(() => {
-    setCarouselItemCount(items.length);
+    fetchDiscounts();
   }, []);
+
+  useEffect(() => {
+    setCarouselItemCount(discounts?.length);
+  }, [discounts]);
 
   function toggleCarousel(direction) {
     const [min, max] = [0, carouselItemCount - 1];
@@ -68,43 +76,59 @@ export default function PromotionContent() {
       activeIndex={index}
       direction={direction}
     >
-      {items.map((item) => (
-        <Carousel.Item>
-          <div style={styles.carouselItem}>
-            <div className="d-flex justify-content-between">
-              <a
-                class="left carousel-control"
-                onClick={() => toggleCarousel("prev")}
-              >
-                <img src="assets/arrow-left.png" />
-              </a>
-              <h1>IMAGE</h1>
-              <a
-                class="right carousel-control"
-                onClick={() => toggleCarousel("next")}
-              >
-                <img src="assets/arrow-right.png" />
-              </a>
-            </div>
-            <div>
-              <div className="row">
-                <div className="col-xs-12 col-sm-9">
-                  <h3>{item.name}</h3>
-                  <hr style={styles.divider} />
-                  <div className="d-flex flex-column align-items-start">
-                    {item.dishes.map((dish) => (
-                      <p>{dish}</p>
-                    ))}
+      {discounts?.length ? (
+        discounts?.map((item) => (
+          <Carousel.Item>
+            <div style={styles.carouselItem}>
+              <div className="d-flex justify-content-between">
+                <a
+                  class="left carousel-control"
+                  onClick={() => toggleCarousel("prev")}
+                >
+                  <img src="assets/arrow-left.png" />
+                </a>
+                <img
+                  src={`${process.env.REACT_APP_API_BASE_URL}/${item?.imageUrl}`}
+                  style={styles.discountImg}
+                />
+                <a
+                  class="right carousel-control"
+                  onClick={() => toggleCarousel("next")}
+                >
+                  <img src="assets/arrow-right.png" />
+                </a>
+              </div>
+              <div>
+                <div className="row">
+                  <div className="col-xs-12 col-sm-9">
+                    <h3>{item?.title}</h3>
+                    <hr style={styles.divider} />
+                    <div
+                      className="d-flex flex-column align-items-start custom-scroll"
+                      style={styles.itemHeight}
+                    >
+                      {item.items.map((dish) => (
+                        <p>{dish}</p>
+                      ))}
+                    </div>
                   </div>
-                </div>
-                <div className="col-xs-12 col-sm-3" style={styles.offer}>
-                  SPECIAL OFFER
+                  {item?.discountPrice && (
+                    <div
+                      className="col-xs-12 col-sm-3 d-flex flex-column"
+                      style={styles.offer}
+                    >
+                      <span>SPECIAL OFFER</span>
+                      <span>{item?.discountPrice}</span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
-          </div>
-        </Carousel.Item>
-      ))}
+          </Carousel.Item>
+        ))
+      ) : (
+        <Skeleton variant="rect" height={350} style={styles.skeletongSpaing} />
+      )}
     </Carousel>
   );
 }

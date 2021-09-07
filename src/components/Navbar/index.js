@@ -1,12 +1,16 @@
 import React from "react";
 import { useRestaurantContext } from "../../Context/restaurantContext";
-import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import classes from "./navbar.module.css";
+import Auth from "components/Auth";
+import { useOrderContext } from "Context/OrderContext";
+import { Badge, Menu, MenuItem } from "@material-ui/core";
+import shopingBag from "Assets/images/shopingBag.png";
 
 function Navbar({ showLinks = true }) {
-  const location = useLocation();
-  let { token, setToken, restaurant } = useRestaurantContext();
+  const history = useHistory();
+  let { token, setToken, restaurant, customerData } = useRestaurantContext();
+  const { pendingOrders } = useOrderContext();
 
   const logout = () => {
     window.localStorage.removeItem("token");
@@ -22,7 +26,7 @@ function Navbar({ showLinks = true }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpen((prev) => !prev);
   };
 
   const handleClose = () => {
@@ -31,6 +35,20 @@ function Navbar({ showLinks = true }) {
 
   const handleCloseMenu = () => {
     setAnchorEl(null);
+  };
+
+  const [anchorEl1, setAnchorEl1] = React.useState(null);
+  const handleClose1 = () => {
+    setAnchorEl1(null);
+  };
+
+  const handleClickListItem = (event) => {
+    setAnchorEl1(event.currentTarget);
+  };
+
+  const handleMenuItemClick = (orderId) => {
+    setAnchorEl1(null);
+    history.push(`/ordersreceived/${orderId}`);
   };
 
   return (
@@ -81,21 +99,93 @@ function Navbar({ showLinks = true }) {
                 </Link>
               </li>
             </ul>
-            <button
-              className="d-flex btn btn-lg btn-outline-light btn-rounded"
-              style={{ borderRadius: "20px" }}
-              onClick={handleClickOpen}
-            >
-              <img
-                src="assets/login.png"
-                width="20"
-                style={{ marginRight: "5px" }}
-              />
-              Sign In/Sign Up
-            </button>
+            {token ? (
+              <button
+                className="d-flex btn btn-lg btn-outline-light btn-rounded"
+                style={{ borderRadius: "20px" }}
+              >
+                <img
+                  src="assets/login.png"
+                  width="20"
+                  style={{ marginRight: "5px" }}
+                />
+                {customerData?.firstName} {customerData?.lastName}
+              </button>
+            ) : (
+              <button
+                className="d-flex btn btn-lg btn-outline-light btn-rounded"
+                style={{ borderRadius: "20px" }}
+                onClick={handleClickOpen}
+              >
+                <img
+                  src="assets/login.png"
+                  width="20"
+                  style={{ marginRight: "5px" }}
+                />
+                Sign In/Sign Up
+              </button>
+            )}
           </div>
         </nav>
       )}
+      {pendingOrders?.length > 0 && (
+        <>
+          <Badge
+            className={classes.trackOrderRoot}
+            badgeContent={pendingOrders?.length}
+            color="secondary"
+            onClick={handleClickListItem}
+          >
+            <img src={shopingBag} className={classes.shopingBag} />
+            <span>My Orders</span>
+          </Badge>
+          <Menu
+            style={{ border: "1px solid #d3d4d5" }}
+            getContentAnchorEl={null}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "center",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+            id="lock-menu"
+            anchorEl={anchorEl1}
+            keepMounted
+            open={Boolean(anchorEl1)}
+            onClose={handleClose1}
+          >
+            {pendingOrders.map((order, index) => (
+              <MenuItem
+                key={order?._id}
+                onClick={() => handleMenuItemClick(order?._id)}
+                className={classes.menuItemRoot}
+              >
+                <div>
+                  <span className={classes.orderId}>{order?.orderId}</span>{" "}
+                  &nbsp;{" "}
+                  <span
+                    className={`${classes.statusRoot} ${
+                      order?.status === "pending"
+                        ? classes.pending
+                        : order?.status === "accepted"
+                        ? classes.accepted
+                        : order?.status === "assigned" ||
+                          order?.status === "pickedUp"
+                        ? classes.assigned
+                        : classes.requested
+                    }`}
+                  >
+                    {order?.status}
+                  </span>
+                </div>
+              </MenuItem>
+            ))}
+          </Menu>
+        </>
+      )}
+      {open && <Auth open={open} handleClickOpen={handleClickOpen} />}
     </div>
   );
 }

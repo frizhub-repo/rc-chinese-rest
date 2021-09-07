@@ -10,14 +10,14 @@ const styles = {
   },
 };
 
-export default function ItemsMenu() {
+export default function ItemsMenu({ selectedMenu }) {
   return (
     <div>
       <div style={styles.header}>
-        <h2>LUNCH MENU</h2>
+        <h2>{selectedMenu?.title}</h2>
       </div>
       <div>
-        <MenuContent />
+        <MenuContent items={selectedMenu?.items} />
       </div>
     </div>
   );

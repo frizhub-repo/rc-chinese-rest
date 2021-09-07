@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: #1A1B20;
+  background-color: #1a1b20;
 }
 
 .App-logo {
@@ -46,4 +46,28 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.custom-scroll {
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.custom-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: #f8efef !important;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #f59e0b;
+  border-radius: 5px;
+}
+
+.custom-scroll p:last-child {
+  border: none;
 }
