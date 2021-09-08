@@ -5,6 +5,8 @@ const styles = {
   container: {
     background: "#280813",
     borderRadius: "0px 20px 20px 0px",
+    maxHeight: "150px",
+    overflowY: "scroll",
   },
   item: {
     borderTop: "1px solid white",
@@ -26,27 +28,31 @@ const styles = {
 
 export default function MenuType({ menus, selected, handleClick }) {
   return (
-    <ul style={styles.container} className="shadow-lg">
-      <li
-        onClick={(e) => handleClick(0)}
-        style={styles.hotDeal}
-        className={`${
-          selected === 0 && classes.active
-        } p-2 d-flex justify-content-between`}
-      >
-        Hot Deals
-        <img style={styles.hotDealIcon} src="assets/flames.png" width={37} />
-      </li>
-      {menus.length > 0 &&
-        menus.map((menu, index) => (
-          <li
-            onClick={(e) => handleClick(index + 1)}
-            style={styles.item}
-            className={`p-3 ${selected === index + 1 && classes.active}`}
-          >
-            {menu?.title}
-          </li>
-        ))}
-    </ul>
+    <div style={styles.container} className="custom-scroll">
+      <ul className="shadow-lg">
+        <li
+          onClick={(e) => handleClick(0)}
+          style={styles.hotDeal}
+          className={`${
+            selected === 0 && classes.active
+          } p-2 d-flex justify-content-between`}
+        >
+          Hot Deals
+          <img style={styles.hotDealIcon} src="assets/flames.png" width={37} />
+        </li>
+        {menus.length > 0 &&
+          menus.map((menu, index) => (
+            <li
+              onClick={(e) => handleClick(index + 1)}
+              style={styles.item}
+              className={`p-3 d-flex ${
+                selected === index + 1 && classes.active
+              }`}
+            >
+              {menu?.title}
+            </li>
+          ))}
+      </ul>
+    </div>
   );
 }

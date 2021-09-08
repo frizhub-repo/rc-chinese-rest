@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MenuItem from "./MenuItem";
 import MenuSelector from "./MenuSelector";
 
@@ -22,31 +22,39 @@ const styles = {
     fontSize: "20px",
     padding: "10px 0",
   },
+  selectorContainer: {
+    padding: "20px 40px",
+  },
 };
 
 export default function MenuContent({ items }) {
+  const [activeSection, setActiveSection] = useState(0);
+
+  const handleChangeSectionIndex = (index) => setActiveSection(index);
+
   return (
     <div style={styles.container}>
-      <div>
-        <MenuSelector />
+      <div style={styles.selectorContainer}>
+        <MenuSelector
+          selectedMenu={items}
+          activeSection={activeSection}
+          handleChangeSectionIndex={handleChangeSectionIndex}
+        />
       </div>
       <hr style={styles.divider} />
-      <div style={styles.items}>
-        <div className="row">
-          {items?.length > 0 &&
-            items.map((item) =>
-              item?.products?.length > 0 ? (
-                item?.products?.map((product) => (
-                  <div className="col-md-6 col-12">
-                    <MenuItem product={product} />
-                  </div>
-                ))
-              ) : (
-                <span style={styles.noProduct}>
-                  This menu don't have any product
-                </span>
-              )
-            )}
+      <div style={styles.items} className="custom-scroll">
+        <div className="row px-5">
+          {items?.length > 0 && items?.[activeSection]?.products?.length > 0 ? (
+            items?.[activeSection]?.products?.map((product) => (
+              <div className="col-md-6 col-12 d-flex justfiy-content-start mb-3">
+                <MenuItem product={product} />
+              </div>
+            ))
+          ) : (
+            <span style={styles.noProduct}>
+              This menu don't have any product
+            </span>
+          )}
         </div>
       </div>
     </div>

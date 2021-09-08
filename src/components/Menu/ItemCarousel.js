@@ -43,6 +43,7 @@ export default function ItemCarousel({
   specialMenu,
   activeIndex,
   setActiveIndex,
+  showItems = null,
 }) {
   const styles = useStyles();
 
@@ -54,24 +55,24 @@ export default function ItemCarousel({
     return count;
   };
 
-  return (
+  return specialMenu?.length > 0 ? (
     <Carousel
       responsive={{
         superLargeDesktop: {
           breakpoint: { max: 4000, min: 3000 },
-          items: 3,
+          items: showItems?.xl ?? 3,
         },
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
-          items: 2,
+          items: showItems?.lg ?? 2,
         },
         tablet: {
           breakpoint: { max: 1024, min: 464 },
-          items: 2,
+          items: showItems?.md ?? 2,
         },
         mobile: {
           breakpoint: { max: 464, min: 0 },
-          items: 1,
+          items: showItems?.sm ?? 1,
         },
       }}
       autoplay={false}
@@ -79,7 +80,7 @@ export default function ItemCarousel({
       showDots={false}
     >
       {specialMenu?.length > 0 &&
-        specialMenu.map((menu, index) => (
+        specialMenu?.map((menu, index) => (
           <div
             onClick={(e) => setActiveIndex(index)}
             style={styles.itemContainer}
@@ -100,5 +101,5 @@ export default function ItemCarousel({
           </div>
         ))}
     </Carousel>
-  );
+  ) : null;
 }

@@ -14,9 +14,9 @@ const styles = {
 
 export default function Info({ restaurant, placeData }) {
   return (
-    <div className="row p-5 d-flex flex-column flex-sm-row justify-content-between align-items-center">
+    <div className="p-5 d-flex flex-column flex-sm-row justify-content-between align-items-center">
       <div
-        className="d-flex flex-column justify-content-center align-items-center"
+        className="d-flex flex-column justify-content-center align-items-center shadow-lg"
         style={styles.itemContainer}
       >
         <h4>Access123</h4>
@@ -24,7 +24,7 @@ export default function Info({ restaurant, placeData }) {
         <h4>{placeData?.formatted_address || restaurant?.address}</h4>
       </div>
       <div
-        className="d-flex flex-column justify-content-center align-items-center mt-2 mt-sm-0"
+        className="d-flex flex-column justify-content-center align-items-center mt-2 mt-sm-0 shadow-lg"
         style={styles.itemContainer}
       >
         <h4>Delivery</h4>
@@ -32,7 +32,7 @@ export default function Info({ restaurant, placeData }) {
         <h4>Minimum Order 15€</h4>
       </div>
       <div
-        className="d-flex flex-column justify-content-center align-items-center mt-2 mt-md-0"
+        className="d-flex flex-column justify-content-center align-items-center mt-2 mt-md-0 shadow-lg"
         style={styles.itemContainer}
       >
         <h4>Delivery fees</h4>
@@ -40,7 +40,7 @@ export default function Info({ restaurant, placeData }) {
         <h4>Minimum Order 15€</h4>
       </div>
       <div
-        className="d-flex flex-column justify-content-center align-items-center mt-2 mt-lg-0"
+        className="d-flex flex-column justify-content-center align-items-center mt-2 mt-lg-0 shadow-lg"
         style={styles.itemContainer}
       >
         <h4>Reviews</h4>

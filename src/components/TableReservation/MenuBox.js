@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classes from "./MenuBox.module.css";
 import DailyMenuContent from "./DailyMenuContent";
-import PromotionContent from "./PromotionContent";
+import PromotionContent from "../Common/PromotionContent";
 import InfoContent from "./InfoContent";
 import { useHistory } from "react-router";
 

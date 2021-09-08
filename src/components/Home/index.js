@@ -1,18 +1,18 @@
+import { customerMenu } from "api/public";
+import PromotionContent from "components/Common/PromotionContent";
+import ItemCarousel from "components/Menu/ItemCarousel";
+import { useRestaurantContext } from "Context/restaurantContext";
 import React, { useEffect, useState } from "react";
-import Hero from "./Hero";
-import { getGoogleMyBusinessLocations } from "../../api/public";
-import { useStyles } from "./MainStyles";
 import "react-multi-carousel/lib/styles.css";
-import Carousel from "react-multi-carousel";
-import foodImg from "../../images/foodimage.jpg";
-import StatusBox from "./StatusBox";
-import Menu from "./Menu";
-import Map from "./Map";
-import Table from "./Table";
+import { isEmpty } from "utils/common";
 import Testimonial from "../Common/Testimonial";
 import GalleryCarousel from "./GalleryCarousel";
-import { useRestaurantContext } from "Context/restaurantContext";
-import { isEmpty } from "utils/common";
+import Hero from "./Hero";
+import { useStyles } from "./MainStyles";
+import Map from "./Map";
+import StatusBox from "./StatusBox";
+import Table from "./Table";
+import ItemsMenu from "components/Common/ItemsMenu/ItemsMenu";
 
 function Home() {
   const classes = useStyles();
@@ -55,12 +55,31 @@ function Home() {
     }
   }
 
+  const [specialMenu, setSpecialMenus] = React.useState([]);
+  const [activeIndex, setActiveIndex] = React.useState(0);
+  const [loading, setLoading] = React.useState(false);
+
+  React.useEffect(() => {
+    async function getRestaurantMenu() {
+      setLoading(true);
+      try {
+        const res = await customerMenu();
+        setSpecialMenus(res?.data);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        console.log(error);
+      }
+    }
+    getRestaurantMenu();
+  }, []);
+
   return (
     <div className="mx-5">
       <div>
         <Hero />
       </div>
-      <div className="row mt-5 d-flex justify-content-between align-items-center">
+      <div className="row my-5 d-flex justify-content-between align-items-center">
         <div className="col col-lg-6">
           <StatusBox placeData={placeData} />
         </div>
@@ -68,12 +87,26 @@ function Home() {
           <GalleryCarousel />
         </div>
       </div>
-      {/* <div>
-        <Menu />
-      </div> */}
+      <section className="my-5">
+        <div className="mb-4">
+          <ItemCarousel
+            specialMenu={specialMenu}
+            activeIndex={activeIndex}
+            setActiveIndex={setActiveIndex}
+            showItems={{ xl: 6, lg: 5 }}
+          />
+        </div>
+        <div>
+          {specialMenu?.length > 0 && (
+            <ItemsMenu selectedMenu={specialMenu?.[activeIndex]} />
+          )}
+        </div>
+      </section>
       <div>
         <div className="d-flex row justfiy-content-center align-items-center justify-content-lg-between my-5">
-          <div className="d-flex justify-content-center col-12 col-lg-6"></div>
+          <div className="d-flex justify-content-center col-12 col-lg-6">
+            <PromotionContent />
+          </div>
           <div className="col-12 col-lg-6 mt-5 mt-lg-0">
             <Testimonial reviews={placeData?.reviews} />
           </div>

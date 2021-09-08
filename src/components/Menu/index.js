@@ -54,8 +54,8 @@ export default function Menu() {
       <section>
         <Hero />
       </section>
-      <section className="row mt-5">
-        <div className="col-12 col-md-6 mb-5 mb-md-0">
+      <section className="row mt-5 mr-0">
+        <div className="col-12 col-md-6 mb-5 mb-md-0 pl-0 pl-md-5">
           <ItemCarousel
             specialMenu={specialMenu}
             activeIndex={activeIndex}
@@ -75,7 +75,9 @@ export default function Menu() {
         </div>
       </section>
       <section className="p-5">
-        <ItemsMenu selectedMenu={specialMenu[activeIndex]} />
+        {specialMenu?.length > 0 && (
+          <ItemsMenu selectedMenu={specialMenu?.[activeIndex]} />
+        )}
       </section>
       <Backdrop style={styles.backdrop} open={loading}>
         <CircularProgress color="inherit" />

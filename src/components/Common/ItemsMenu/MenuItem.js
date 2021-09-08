@@ -5,17 +5,25 @@ const styles = {
   itemImage: {
     borderRadius: "10px",
     width: "130px",
-    height: "auto",
+    height: "130px",
+  },
+  imageContainer: {
+    borderRadius: "10px",
   },
 };
 
 export default function MenuItem({ product }) {
+  console.log(product);
   return (
     <div className="d-flex justify-content-center mb-3">
-      <div className="shadow-sm d-sm-flex d-md-none d-lg-flex flex-column align-items-center d-none">
+      <div
+        className="shadow-md d-sm-flex d-md-none d-lg-flex flex-column align-items-center d-none"
+        style={styles.imageContainer}
+      >
         <img
           style={styles.itemImage}
           src={`${process.env.REACT_APP_API_BASE_URL}/${product?.images[0]}`}
+          alt="Item Image"
         />
         <div
           className={`d-flex justify-content-between ${classes.properties_container}`}
