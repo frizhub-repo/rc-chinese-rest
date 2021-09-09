@@ -14,7 +14,7 @@ const styles = {
   itemImage: {
     borderRadius: "10px",
     width: "130px",
-    height: "auto",
+    height: "130px",
   },
 };
 

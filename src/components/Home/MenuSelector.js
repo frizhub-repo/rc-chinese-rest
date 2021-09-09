@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import CurvedText from "../Common/CurvedText";
 
 const styles = {
   container: {
@@ -28,14 +27,7 @@ export default function MenuSelector() {
       <div className="">
         <div className="d-flex justify-content-around py-2">
           {options.map((option, index) => (
-            <div style={styles.optionContainer}>
-              <CurvedText
-                text={option.name}
-                icon={option.icon}
-                objectSize={60}
-                spacing={0}
-              />
-            </div>
+            <div style={styles.optionContainer}></div>
           ))}
         </div>
       </div>

@@ -12,12 +12,18 @@ const styles = {
     padding: "10px 20px",
   },
   items: {
-    maxHeight: "55vh",
+    maxHeight: "90vh",
     overflowY: "scroll",
+    paddingLeft: "160px",
+    paddingRight: "10px",
   },
   backdrop: {
     zIndex: 1,
     color: "#fff",
+  },
+  itemRoot: {
+    width: "100%",
+    marginTop: "10px",
   },
 };
 
@@ -55,11 +61,11 @@ export default function DiscountContent() {
         <div>
           <CourseSelector />
         </div>
-        <div style={styles.items} className="row my-4">
+        <div style={styles.items} className="row my-4 custom-scroll-secondary">
           {activeStep === 0 &&
             discountList?.bundled?.length > 0 &&
             discountList?.bundled?.map(({ product, offer, size }) => (
-              <div className="col-12 col-md-6 mb-3">
+              <div style={styles.itemRoot}>
                 <CourseItem
                   item={product}
                   offer={offer}
@@ -72,7 +78,7 @@ export default function DiscountContent() {
           {activeStep === 1 &&
             discountList?.flat?.length > 0 &&
             discountList?.flat?.map(({ product, offer, size }) => (
-              <div className="col-12 col-md-6 mb-3">
+              <div style={styles.itemRoot}>
                 <CourseItem
                   item={product}
                   offer={offer}
@@ -85,7 +91,7 @@ export default function DiscountContent() {
           {activeStep === 2 &&
             discountList?.percentage?.length > 0 &&
             discountList?.percentage?.map(({ product, offer, size }) => (
-              <div className="col-12 col-md-6 mb-3">
+              <div style={styles.itemRoot}>
                 <CourseItem
                   item={product}
                   offer={offer}

@@ -18,7 +18,7 @@ export default function Delivery() {
       <section>
         <Info restaurant={restaurant} placeData={placeData} />
       </section>
-      <section className="row px-3 d-flex flex-column-reverse flex-lg-row pb-5">
+      <section className="px-3 d-flex flex-column-reverse flex-lg-row pb-5">
         <div className="col-12 col-lg-8 mt-4 mt-lg-0">
           <Course />
         </div>

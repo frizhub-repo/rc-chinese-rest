@@ -20,7 +20,7 @@ const styles = {
     top: "50%",
     translate: "transformX(-50%)",
     zIndex: "10",
-    left: -15,
+    left: -30,
   },
   backdrop: {
     zIndex: 1,

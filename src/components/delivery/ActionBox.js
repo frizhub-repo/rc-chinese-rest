@@ -1,8 +1,10 @@
+import Auth from "components/Auth";
 import { useRestaurantContext } from "Context/restaurantContext";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
+import { isEmpty } from "utils/common";
 import AllergyAlert from "./AllergyAlert";
 import Billing from "./Billing";
 import OpenStatus from "./OpenStatus";
@@ -28,6 +30,11 @@ const styles = {
 };
 
 export default function ActionBox() {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen((prev) => !prev);
+  };
   let { customerData, restaurant } = useRestaurantContext();
   const { products: ordersProducts, total } = useSelector(
     (state) => state.orders
@@ -37,8 +44,9 @@ export default function ActionBox() {
     try {
       if (ordersProducts?.length <= 0) {
         throw new Error("Please provide some products to proceed");
-      }
-      if (customerData?.addresses?.length) {
+      } else if (isEmpty(customerData)) {
+        handleClickOpen();
+      } else if (customerData?.addresses?.length) {
         history.push("/chooseAddress");
       } else {
         history.push("/deliveryAddress");
@@ -73,6 +81,7 @@ export default function ActionBox() {
           </button>
         </div>
       </div>
+      {open && <Auth open={open} handleClickOpen={handleClickOpen} />}
     </div>
   );
 }

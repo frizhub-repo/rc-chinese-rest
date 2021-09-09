@@ -13,6 +13,7 @@ const styles = {
     borderRadius: "20px",
     display: "flex",
     flexDirection: "column",
+    alignItems: "space-between",
   },
   iconContainer: {
     display: "inline-block",
@@ -20,6 +21,8 @@ const styles = {
   },
   icon: {
     borderRadius: "20px 0px 0px 0px",
+    width: "100px",
+    height: "100px",
   },
   price: {
     position: "absolute",
@@ -31,7 +34,7 @@ const styles = {
   },
   details: {
     color: "#280813",
-    margin: "0px 2px",
+    margin: "4px 2px",
   },
   counter: {
     color: "#280813",
@@ -58,9 +61,7 @@ export default function CourseItem({
   const [productSize, setProdctSize] = React.useState(null);
   const [quantity, setQuantity] = React.useState(1);
   const dispatch = useDispatch();
-  const {
-    customerData: { _id: customerId },
-  } = useRestaurantContext();
+  const { customerData: { _id = "" } = {} } = useRestaurantContext();
 
   const calculateDiscountedPrice = () => {
     if (isEmpty(offer)) {
@@ -140,7 +141,7 @@ export default function CourseItem({
         let customerExist = false;
         const updateCustomerUsage = offer?.customerUsage?.map(
           ({ customer, usage }) => {
-            if (customer === customerId) {
+            if (customer === _id) {
               if (
                 offer?.maxNoOfUsage === usage ||
                 offer?.maxNoOfUsage < usage + quantity
@@ -155,7 +156,7 @@ export default function CourseItem({
           }
         );
         if (!customerExist) {
-          updateCustomerUsage.push({ customer: customerId, usage: 1 });
+          updateCustomerUsage.push({ customer: _id, usage: 1 });
         }
 
         updatedDiscountList.push({
@@ -184,38 +185,42 @@ export default function CourseItem({
   const handleChangeIncrementQuantity = () => setQuantity((prev) => prev + 1);
   return (
     <div style={styles.container}>
-      <div className="d-flex">
-        <div style={styles.iconContainer}>
-          <img
-            style={styles.icon}
-            src={process.env.REACT_APP_API_BASE_URL + "/" + item?.images?.[0]}
-          />
-          <h5 className="shadow-md" style={styles.price}>
-            {isEmpty(offer) ? (
-              <span>€{discountedPrice}</span>
-            ) : offer?.discountType === "bundle" ? (
-              <span>€{size?.price}</span>
-            ) : (
-              <div>
-                <span className={classes.priceTextDecoration}>
-                  €{size?.price}
-                </span>
+      <div className="d-flex justify-content-between">
+        <div className="d-flex">
+          <div style={styles.iconContainer}>
+            <img
+              style={styles.icon}
+              src={process.env.REACT_APP_API_BASE_URL + "/" + item?.images?.[0]}
+              alt="Item Image"
+            />
+            <h5 className="shadow-md" style={styles.price}>
+              {isEmpty(offer) ? (
                 <span>€{discountedPrice}</span>
-              </div>
-            )}
-          </h5>
+              ) : offer?.discountType === "bundle" ? (
+                <span>€{size?.price}</span>
+              ) : (
+                <div>
+                  <span className={classes.priceTextDecoration}>
+                    €{size?.price}
+                  </span>
+                  <span>€{discountedPrice}</span>
+                </div>
+              )}
+            </h5>
+          </div>
+          <div>
+            <img
+              className={`shadow-md ${classes.vegan}`}
+              src="assets/vegan.png"
+            />
+            <img
+              className={`shadow-md ${classes.glutten_free}`}
+              src="assets/glutten-free.png"
+            />
+            <img className={`shadow-md ${classes.hot}`} src="assets/hot.png" />
+          </div>
         </div>
-        <div>
-          <img
-            className={`shadow-md ${classes.vegan}`}
-            src="assets/vegan.png"
-          />
-          <img
-            className={`shadow-md ${classes.glutten_free}`}
-            src="assets/glutten-free.png"
-          />
-          <img className={`shadow-md ${classes.hot}`} src="assets/hot.png" />
-        </div>
+
         <div style={styles.details}>
           <h5>{item?.title}</h5>
           <p>{item?.description}</p>
@@ -226,34 +231,39 @@ export default function CourseItem({
             ))}
           </p>
         </div>
-        <div className="d-flex flex-column">
-          <h4
-            onClick={handleChangeDecrementQuantity}
-            className="shadow-md flex-1"
-            style={{ ...styles.counter, cursor: "pointer" }}
-          >
-            -
-          </h4>
-          <h4 className="shadow-md flex-1" style={styles.counter}>
-            {quantity}
-          </h4>
-          <h4
-            onClick={handleChangeIncrementQuantity}
-            className="shadow-md flex-1"
-            style={{ ...styles.counter, cursor: "pointer" }}
-          >
-            +
-          </h4>
-        </div>
-        <div onClick={addToCart} style={styles.basketContainer}>
-          <img src="assets/shopping-basket.png" width={40} />
+        <div className="d-flex">
+          <div className="d-flex flex-column">
+            <h4
+              onClick={handleChangeDecrementQuantity}
+              className="shadow-md flex-1"
+              style={{ ...styles.counter, cursor: "pointer" }}
+            >
+              -
+            </h4>
+            <h4 className="shadow-md flex-1" style={styles.counter}>
+              {quantity}
+            </h4>
+            <h4
+              onClick={handleChangeIncrementQuantity}
+              className="shadow-md flex-1"
+              style={{ ...styles.counter, cursor: "pointer" }}
+            >
+              +
+            </h4>
+          </div>
+          <div onClick={addToCart} style={styles.basketContainer}>
+            <img src="assets/shopping-basket.png" style={{ width: "50px" }} />
+          </div>
         </div>
       </div>
+
       <div className="d-flex align-items-stretch">
         {item?.sizes?.map((size) => (
           <p
             onClick={() => handleChangeProductSize(size)}
-            className={`flex-1 shadow-lg ${classes.size_option} ${classes.first_option}`}
+            className={`flex-1 shadow-lg ${classes.size_option} ${
+              classes.first_option
+            } ${productSize?._id === size?._id && classes.activeSize}`}
           >
             {size?.title}
           </p>

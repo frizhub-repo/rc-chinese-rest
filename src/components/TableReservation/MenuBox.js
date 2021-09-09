@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import classes from "./MenuBox.module.css";
 import DailyMenuContent from "./DailyMenuContent";
-import PromotionContent from "./PromotionContent";
+import PromotionContent from "../Common/PromotionContent";
 import InfoContent from "./InfoContent";
+import { useHistory } from "react-router";
 
 const styles = {
   container: {
@@ -35,6 +36,8 @@ const styles = {
 };
 
 export default function MenuBox() {
+  const history = useHistory();
+
   const [categorySelected, setCategorySelected] = useState(0);
   const [categories, setCategories] = useState([
     "daily menu",
@@ -78,7 +81,11 @@ export default function MenuBox() {
           >
             <img src="assets/menu.png" width={50} />
           </div>
-          <button className="shadow-md" style={styles.groupButton}>
+          <button
+            className="shadow-md"
+            style={styles.groupButton}
+            onClick={() => history.push("/menu")}
+          >
             CHECK ALSO OUR MENU!
           </button>
         </div>

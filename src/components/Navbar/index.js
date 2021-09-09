@@ -104,11 +104,6 @@ function Navbar({ showLinks = true }) {
                 className="d-flex btn btn-lg btn-outline-light btn-rounded"
                 style={{ borderRadius: "20px" }}
               >
-                <img
-                  src="assets/login.png"
-                  width="20"
-                  style={{ marginRight: "5px" }}
-                />
                 {customerData?.firstName} {customerData?.lastName}
               </button>
             ) : (

@@ -9,19 +9,37 @@ const styles = {
     width: "200px",
     height: "200px",
     padding: "5px",
+    boxShadow: "inset 0px 0px 10px 5px rgba(0, 0, 0, 0.75)",
+  },
+  wraptxtWidth: {
+    width: "140px",
+  },
+  infoRoot: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "90px",
+    padding: "40px 0",
+    fontStyle: "italic",
   },
 };
 
 export default function Info({ restaurant, placeData }) {
   return (
-    <div className="row p-5 d-flex flex-column flex-sm-row justify-content-between align-items-center">
+    <div style={styles.infoRoot}>
       <div
         className="d-flex flex-column justify-content-center align-items-center"
         style={styles.itemContainer}
       >
-        <h4>Access123</h4>
+        <h4>Access</h4>
         <img src="assets/map.png" width={50} />
-        <h4>{placeData?.formatted_address || restaurant?.address}</h4>
+        <h4
+          style={styles.wraptxtWidth}
+          title={placeData?.formatted_address || restaurant?.address}
+          className="wrapTextIntoTwoLine"
+        >
+          {placeData?.formatted_address || restaurant?.address}
+        </h4>
       </div>
       <div
         className="d-flex flex-column justify-content-center align-items-center mt-2 mt-sm-0"

@@ -6,6 +6,7 @@ import InfoBox from "./InfoBox";
 import MenuBox from "./MenuBox";
 import Status from "./Status";
 import TableCarousel from "./TableCarousel";
+import { Carousel } from "react-bootstrap";
 
 export default function TableReservation() {
   const {
@@ -42,21 +43,27 @@ export default function TableReservation() {
           <div className="row">
             <MenuBox />
           </div>
-          <div className="row">
-            <Status
-              userTotalRating={placeData?.user_ratings_total}
-              rating={placeData?.rating}
-            />
-          </div>
-          <div className="d-none d-sm-flex flex-column align-items-center my-5">
-            {placeData?.reviews.map((review) => (
-              <Review {...review} />
-            ))}
-          </div>
+          <div className="d-none d-sm-flex flex-column align-items-center my-5"></div>
         </div>
         <div className="d-none d-lg-block col-1"></div>
         <div className="col-12 col-md-6 col-lg-4">
           <InfoBox />
+          <Status
+            userTotalRating={placeData?.user_ratings_total}
+            rating={placeData?.rating}
+          />
+
+          {placeData?.reviews && (
+            <div className="d-none d-md-block">
+              <Carousel indicators={false}>
+                {placeData?.reviews.map((review) => (
+                  <Carousel.Item>
+                    <Review {...review} />
+                  </Carousel.Item>
+                ))}
+              </Carousel>
+            </div>
+          )}
         </div>
       </section>
     </div>

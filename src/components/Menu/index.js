@@ -4,6 +4,7 @@ import React from "react";
 import Hero from "../Common/Hero";
 import ItemsMenu from "../Common/ItemsMenu/ItemsMenu";
 import ItemCarousel from "./ItemCarousel";
+import { useHistory } from "react-router";
 
 const styles = {
   reserve: {
@@ -28,6 +29,8 @@ const styles = {
 };
 
 export default function Menu() {
+  const history = useHistory();
+
   const [specialMenu, setSpecialMenus] = React.useState([]);
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
@@ -51,23 +54,30 @@ export default function Menu() {
       <section>
         <Hero />
       </section>
-      <section className="row mt-5">
-        <div className="col-12 col-md-6 mb-5 mb-md-0">
+      <section className="row mt-5 mr-0">
+        <div className="col-12 col-md-6 mb-5 mb-md-0 pl-0 pl-md-5">
           <ItemCarousel
             specialMenu={specialMenu}
             activeIndex={activeIndex}
             setActiveIndex={setActiveIndex}
           />
         </div>
-        <div className="col-12 col-md-6 d-flex justify-content-center align-items-center">
+        <div className="col-12 col-md-5 d-flex justify-content-center align-items-center">
           <div style={styles.reserve}>
             <img src="assets/reserve-table.png" />
-            <a style={styles.buttonText}>RESERVE A TABLE</a>
+            <a
+              style={styles.buttonText}
+              onClick={() => history.push("tableRes")}
+            >
+              RESERVE A TABLE
+            </a>
           </div>
         </div>
       </section>
       <section className="p-5">
-        <ItemsMenu selectedMenu={specialMenu[activeIndex]} />
+        {specialMenu?.length > 0 && (
+          <ItemsMenu selectedMenu={specialMenu?.[activeIndex]} />
+        )}
       </section>
       <Backdrop style={styles.backdrop} open={loading}>
         <CircularProgress color="inherit" />

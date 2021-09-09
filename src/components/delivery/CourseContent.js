@@ -10,11 +10,17 @@ const styles = {
     padding: "10px 20px",
   },
   items: {
-    maxHeight: "55vh",
+    maxHeight: "90vh",
     overflowY: "scroll",
+    paddingLeft: "160px",
+    paddingRight: "10px",
   },
   menuSelectorPadding: {
-    padding: "0 10px 10px",
+    padding: "20px 10px",
+  },
+  itemRoot: {
+    width: "100%",
+    marginTop: "10px",
   },
 };
 
@@ -25,24 +31,28 @@ export default function CourseContent({ selectedMenu }) {
 
   return (
     <div style={styles.container}>
-      <div style={styles.menuSelectorPadding}>
-        {selectedMenu?.length > 0 && (
-          <MenuSelector
-            selectedMenu={selectedMenu}
-            activeSection={activeSection}
-            handleChangeSectionIndex={handleChangeSectionIndex}
-          />
-        )}
-      </div>
       <div>
-        <input placeholder="Search..." className="form-control" type="text" />
-        <div>
-          <CourseSelector />
+        <input
+          placeholder="Search..."
+          className="form-control mt-2"
+          type="text"
+        />
+        <div style={styles.menuSelectorPadding}>
+          {selectedMenu?.length > 0 && (
+            <MenuSelector
+              selectedMenu={selectedMenu}
+              activeSection={activeSection}
+              handleChangeSectionIndex={handleChangeSectionIndex}
+            />
+          )}
         </div>
         {selectedMenu?.length > 0 ? (
-          <div style={styles.items} className="row my-4">
+          <div
+            style={styles.items}
+            className="row my-4 custom-scroll-secondary"
+          >
             {selectedMenu?.[activeSection]?.products?.map((item) => (
-              <div className="col-12 col-md-6 mb-3">
+              <div style={styles.itemRoot}>
                 <CourseItem item={item} size={item?.sizes[0]} />
               </div>
             ))}

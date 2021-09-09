@@ -36,7 +36,7 @@ const styles = {
 
 export default function InfoBox() {
   return (
-    <div className="mb-5 mb-lg-0" style={styles.container}>
+    <div className="mb-5" style={styles.container}>
       <div className="d-flex shadow-sm">
         <div style={styles.reserveIconContainer}>
           <img src="assets/reserve-table.png" width={80} />
