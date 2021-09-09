@@ -261,7 +261,9 @@ export default function CourseItem({
         {item?.sizes?.map((size) => (
           <p
             onClick={() => handleChangeProductSize(size)}
-            className={`flex-1 shadow-lg ${classes.size_option} ${classes.first_option}`}
+            className={`flex-1 shadow-lg ${classes.size_option} ${
+              classes.first_option
+            } ${productSize?._id === size?._id && classes.activeSize}`}
           >
             {size?.title}
           </p>

@@ -35,3 +35,8 @@
   text-decoration-line: line-through;
   margin-right: 10px;
 }
+
+.activeSize {
+  color: #f49e0b;
+  font-weight: bold;
+}
