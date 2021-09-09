@@ -8,9 +8,13 @@ const useStyles = () => ({
   },
   headingContainer: {
     background: "#F49E0B",
-    borderRadius: "100% 100% 0px 0px",
+    borderRadius: "70% / 100% 100% 0 0",
     fontSize: "24px",
     padding: "10px 0px 30px 0px",
+    height: "90px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   contentContainer: {
     background: "#280813",
