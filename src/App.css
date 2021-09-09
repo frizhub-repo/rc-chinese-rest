@@ -95,3 +95,12 @@
 .custom-scroll-secondary p:last-child {
   border: none;
 }
+
+.wrapTextIntoTwoLine {
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+}

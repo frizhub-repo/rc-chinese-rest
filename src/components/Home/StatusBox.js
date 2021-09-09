@@ -76,7 +76,12 @@ export default function StatusBox({ placeData }) {
         <div style={{ ...styles.corner, ...styles.axisCorner }}>
           <p>Address</p>
           <img src="assets/map.png" width={50} />
-          <p>{placeData?.formatted_address}</p>
+          <p
+            className="wrapTextIntoTwoLine"
+            title={placeData?.formatted_address}
+          >
+            {placeData?.formatted_address}
+          </p>
         </div>
       </div>
       <div style={styles.center}>
