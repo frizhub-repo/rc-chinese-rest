@@ -10,11 +10,17 @@ const styles = {
     padding: "10px 20px",
   },
   items: {
-    maxHeight: "55vh",
+    maxHeight: "90vh",
     overflowY: "scroll",
+    paddingLeft: "160px",
+    paddingRight: "10px",
   },
   menuSelectorPadding: {
     padding: "20px 10px",
+  },
+  itemRoot: {
+    width: "100%",
+    marginTop: "10px",
   },
 };
 
@@ -46,7 +52,7 @@ export default function CourseContent({ selectedMenu }) {
             className="row my-4 custom-scroll-secondary"
           >
             {selectedMenu?.[activeSection]?.products?.map((item) => (
-              <div className="col-12 col-md-6 mb-3">
+              <div style={styles.itemRoot}>
                 <CourseItem item={item} size={item?.sizes[0]} />
               </div>
             ))}
