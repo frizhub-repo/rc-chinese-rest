@@ -140,6 +140,7 @@
   background-color: #280813;
   color: #f59e0b;
   border-radius: 10px;
+}
 .wrapTextIntoTwoLine {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
