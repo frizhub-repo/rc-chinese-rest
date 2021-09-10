@@ -21,7 +21,7 @@
 }
 
 .first_option {
-  border-radius: 0px 0px 0px 20px;
+  border-radius: 0px 0px 20px 20px;
 }
 
 .last_option {
@@ -34,4 +34,9 @@
   color: rgba(0, 0, 0, 0.5);
   text-decoration-line: line-through;
   margin-right: 10px;
+}
+
+.activeSize {
+  color: #f49e0b;
+  font-weight: bold;
 }

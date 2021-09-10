@@ -28,7 +28,7 @@ export default function Testimonial({ reviews }) {
       <Carousel interval={1000} indicators={false}>
         {reviews?.map((review) => {
           return (
-            <Carousel.Item style={styles.carouselItem}>
+            <Carousel.Item interval={500} style={styles.carouselItem}>
               <div style={styles.carouselContent}>
                 <img
                   src={review.profile_photo_url}

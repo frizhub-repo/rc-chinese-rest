@@ -5,7 +5,7 @@ const styles = {
   container: {
     background: "#280813",
     borderRadius: "0px 20px 20px 0px",
-    maxHeight: "150px",
+    maxHeight: "300px",
     overflowY: "scroll",
   },
   item: {
