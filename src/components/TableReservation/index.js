@@ -9,9 +9,7 @@ import TableCarousel from "./TableCarousel";
 import { Carousel } from "react-bootstrap";
 
 export default function TableReservation() {
-  const {
-    restaurant: { placeData },
-  } = useRestaurantContext();
+  const { restaurant: { placeData } = {} } = useRestaurantContext();
 
   const [reviews, setReviews] = useState([
     {

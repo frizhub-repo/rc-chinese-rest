@@ -1,0 +1,120 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.contentContainer {
+  height: 500px;
+}
+
+.header {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.item {
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #280813;
+  color: #280813;
+  border-radius: 20px;
+  cursor: pointer;
+  position: relative;
+}
+
+.discountContainer {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -15px;
+  background-color: #280813;
+  padding: 8px;
+  color: #f49e0b;
+  border-radius: 30px;
+}
+
+.active_discount {
+  background-color: #f49e0b;
+  color: #280813;
+}
+
+.active_item {
+  color: #f49e0b;
+  background-color: #280813;
+}
+
+.secondaryHeader {
+  color: #280813;
+  display: flex;
+  margin-top: 10px;
+  margin-left: 25px;
+  text-decoration: underline;
+}
+
+.detailsCardContainer {
+  display: flex;
+  justify-content: space-between;
+  color: #280813;
+  border: 2px solid #280813;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.detailsCardContainer:hover {
+  color: white;
+}
+
+.detailsCardContentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.detailsCardHeaderContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.detailsCardNameContainer {
+  background-color: #280813;
+  color: #f49e0b;
+  padding: 5px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+.detailsCardSelector {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #280813;
+}
+
+.detailsCardSelector_active {
+  background-color: #280813;
+}
+
+.dateDiscount {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #280813;
+  color: #f49e0b;
+  border-radius: 5px;
+  padding: 0px 5px;
+  display: flex;
+  font-size: 10px;
+}
+
+.dateDiscount_active {
+  color: #280813;
+  background: #f49e0b;
+}
