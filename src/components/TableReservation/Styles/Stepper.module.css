@@ -1,0 +1,42 @@
+.step {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 0px;
+  background-color: #280813;
+  border: 1px solid #f49e0b;
+  cursor: pointer;
+  position: relative;
+}
+
+.active {
+  background-color: #f49e0b;
+  border: 1px solid #280813;
+}
+
+.arrow_container {
+  position: absolute;
+  border-radius: 50%;
+  background: white;
+  color: #f49e0b;
+  border: 2px solid #f49e0b;
+  width: 25px;
+  height: 25px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 11px;
+  right: -13px;
+  z-index: 10;
+}
+
+.arrow_text {
+  padding: 0px;
+  margin: 0px;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: -3px;
+  margin-left: 2px;
+}

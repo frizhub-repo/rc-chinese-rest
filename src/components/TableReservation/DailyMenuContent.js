@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import classes from "./DailyMenuContent.module.css";
+import classes from "./Styles/DailyMenuContent.module.css";
 
 const styles = {
   divider: {

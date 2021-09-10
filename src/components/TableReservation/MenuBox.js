@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import classes from "./MenuBox.module.css";
+import classes from "./Styles/MenuBox.module.css";
 import DailyMenuContent from "./DailyMenuContent";
 import PromotionContent from "../Common/PromotionContent";
 import InfoContent from "./InfoContent";
