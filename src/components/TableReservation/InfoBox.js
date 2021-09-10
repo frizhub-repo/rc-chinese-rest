@@ -22,7 +22,7 @@ export default function InfoBox() {
       setIsNextBtnDisabled(false);
     else if (reservationDetail?.discount !== undefined && active === 3)
       setIsNextBtnDisabled(false);
-  }, [reservationDetail, isNextBtnDisabled]);
+  }, [reservationDetail, isNextBtnDisabled, active]);
 
   function incrementActive() {
     if (active < 3) setActive(active + 1);

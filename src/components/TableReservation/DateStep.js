@@ -21,7 +21,7 @@ export default function DateStep({ detail, setDetail }) {
   }
 
   function discountDisplay({ activeStartDate, date, view }) {
-    if (Math.random() > 0.7)
+    if (true)
       return <Discount isActive={date.getTime() === detail?.date?.getTime()} />;
     return null;
   }
