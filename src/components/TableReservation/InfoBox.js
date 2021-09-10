@@ -6,23 +6,75 @@ import TimeStep from "./TimeStep";
 import classes from "./Styles/InfoBox.module.css";
 import DiscountStep from "./DiscountStep";
 import DateStep from "./DateStep";
+import { getReservationOffers } from "api/public";
 
 export default function InfoBox() {
   const [reserving, setReserving] = React.useState(false);
   const [isNextBtnDisabled, setIsNextBtnDisabled] = React.useState(true);
   const [active, setActive] = React.useState(0);
-  const [reservationDetail, setReservationDetail] = React.useState({});
+  const [parameters, setParameters] = React.useState({});
+  const [reservationDetail, setReservationDetail] = React.useState({
+    choosePeople: {
+      1: [],
+      2: [],
+      3: [],
+      4: [],
+      5: [],
+      6: [],
+      7: [],
+      8: [],
+      9: [],
+      10: [],
+      11: [],
+      12: [],
+      13: [],
+      14: [],
+      15: [],
+      16: [],
+    },
+  });
 
   React.useEffect(() => {
-    if (reservationDetail?.people !== undefined && active === 0)
+    try {
+      (async function () {
+        const res = await getReservationOffers();
+        const offers = res?.data;
+        console.log(offers);
+        const peopleOffer = { ...reservationDetail?.choosePeople };
+        for (const offer of offers) {
+          if (offer?.peopleGreaterThanSix) {
+            for (
+              let index = 6;
+              index < Object.entries(reservationDetail?.choosePeople)?.length;
+              index++
+            ) {
+              peopleOffer[index] = [...peopleOffer[index], offer];
+            }
+          }
+          offer?.numberOfPeople.forEach((count) => {
+            peopleOffer[count] = [...peopleOffer[count], offer];
+          });
+        }
+        setReservationDetail({
+          ...reservationDetail,
+          choosePeople: peopleOffer,
+        });
+      })();
+    } catch (error) {
+      console.log({ error });
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (parameters?.people !== undefined && active === 0)
       setIsNextBtnDisabled(false);
-    else if (reservationDetail?.date !== undefined && active === 1)
+    else if (parameters?.date !== undefined && active === 1)
       setIsNextBtnDisabled(false);
-    else if (reservationDetail?.time !== undefined && active === 2)
+    else if (parameters?.time !== undefined && active === 2)
       setIsNextBtnDisabled(false);
-    else if (reservationDetail?.discount !== undefined && active === 3)
+    else if (parameters?.discount !== undefined && active === 3)
       setIsNextBtnDisabled(false);
-  }, [reservationDetail, isNextBtnDisabled, active]);
+  }, [parameters, isNextBtnDisabled, active]);
 
   function incrementActive() {
     if (active < 3) setActive(active + 1);
@@ -36,30 +88,22 @@ export default function InfoBox() {
       case 0:
         return (
           <PeopleStep
-            detail={reservationDetail}
-            setDetail={setReservationDetail}
+            reservationDetail={reservationDetail}
+            parameters={parameters}
+            setParameters={setParameters}
           />
         );
       case 1:
         return (
-          <DateStep
-            detail={reservationDetail}
-            setDetail={setReservationDetail}
-          />
+          <DateStep parameters={parameters} setParameters={setParameters} />
         );
       case 2:
         return (
-          <TimeStep
-            detail={reservationDetail}
-            setDetail={setReservationDetail}
-          />
+          <TimeStep parameters={parameters} setParameters={setParameters} />
         );
       case 3:
         return (
-          <DiscountStep
-            detail={reservationDetail}
-            setDetail={setReservationDetail}
-          />
+          <DiscountStep parameters={parameters} setParameters={setParameters} />
         );
     }
   }
