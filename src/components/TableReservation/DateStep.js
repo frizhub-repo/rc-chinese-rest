@@ -27,6 +27,15 @@ export default function DateStep({ parameters, setParameters }) {
       );
     return null;
   }
+  const today = new Date();
+  function tileClassName({ date }) {
+    const yesterday = new Date();
+    yesterday.setDate(new Date().getDate() - 1);
+
+    if (date.getTime() < yesterday.getTime()) {
+      return classes.disableTitle;
+    }
+  }
 
   return (
     <div>
@@ -35,9 +44,10 @@ export default function DateStep({ parameters, setParameters }) {
           onChange={updateDate}
           value={parameters?.date}
           showNeighboringMonth={false}
-          prevLabel={"<"}
-          nextLabel={">"}
-          minDate={new Date()}
+          prevLabel={<span className={classes.calenderArrow}>{"<"}</span>}
+          nextLabel={<span className={classes.calenderArrow}>{">"}</span>}
+          minDate={today}
+          tileClassName={tileClassName}
           tileContent={discountDisplay}
         />
       </div>
