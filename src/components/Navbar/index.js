@@ -110,7 +110,7 @@ function Navbar({ showLinks = true }) {
               <button
                 className="d-flex btn btn-lg btn-outline-light btn-rounded"
                 style={{ borderRadius: "20px" }}
-                onClick={handleClickOpen}
+                onClick={() => history.push('signIn')}
               >
                 <img
                   src="assets/login.png"
@@ -161,16 +161,15 @@ function Navbar({ showLinks = true }) {
                   <span className={classes.orderId}>{order?.orderId}</span>{" "}
                   &nbsp;{" "}
                   <span
-                    className={`${classes.statusRoot} ${
-                      order?.status === "pending"
-                        ? classes.pending
-                        : order?.status === "accepted"
+                    className={`${classes.statusRoot} ${order?.status === "pending"
+                      ? classes.pending
+                      : order?.status === "accepted"
                         ? classes.accepted
                         : order?.status === "assigned" ||
                           order?.status === "pickedUp"
-                        ? classes.assigned
-                        : classes.requested
-                    }`}
+                          ? classes.assigned
+                          : classes.requested
+                      }`}
                   >
                     {order?.status}
                   </span>
