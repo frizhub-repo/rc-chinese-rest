@@ -3,19 +3,50 @@ import classes from "./Styles/Step.module.css";
 
 function Discount({ total, isActive }) {
   return (
-    <div
-      className={`${classes.discountContainer} ${
-        isActive && classes.active_discount
-      } shadow-md`}
-    >
-      <p>-{total}%</p>
-    </div>
+    <>
+      {total > 0 && (
+        <div
+          className={`${classes.discountContainer} ${
+            isActive && classes.active_discount
+          } shadow-md`}
+        >
+          <p>-{total}%</p>
+        </div>
+      )}
+    </>
   );
 }
 
-export default function PeopleStep({ discounts, detail, setDetail }) {
+export default function PeopleStep({
+  reservationDetail,
+  parameters,
+  setParameters,
+  offers,
+  setReservationDetail,
+}) {
+  React.useEffect(() => {
+    const peopleOffer = { ...reservationDetail?.choosePeople };
+    for (const offer of offers) {
+      if (offer?.peopleGreaterThanSix) {
+        for (
+          let index = 6;
+          index <= Object.entries(reservationDetail?.choosePeople)?.length;
+          index++
+        ) {
+          peopleOffer[index] = [...peopleOffer[index], offer];
+        }
+      }
+      offer?.numberOfPeople.forEach((count) => {
+        peopleOffer[count] = [...peopleOffer[count], offer];
+      });
+    }
+    setReservationDetail({
+      ...reservationDetail,
+      choosePeople: peopleOffer,
+    });
+  }, []);
   function updatePeople(id) {
-    setDetail({ ...detail, people: id });
+    setParameters({ ...parameters, people: id });
   }
 
   return (
@@ -23,24 +54,27 @@ export default function PeopleStep({ discounts, detail, setDetail }) {
       <h3 className={classes.header}>Choose number of People</h3>
       <div className={`${classes.contentContainer} custom-scroll-secondary`}>
         <div className="row mx-2">
-          {Array(25)
-            .fill()
-            .map((_, index) => (
+          {Object.entries(reservationDetail?.choosePeople)?.map(
+            ([count, value], index) => (
               <div key={index} className="col-4 my-2">
                 <div
                   className={`${classes.item} ${
-                    detail?.people === index + 1 && classes.active_item
+                    parameters?.people === count && classes.active_item
                   } shadow-md`}
-                  onClick={() => updatePeople(index + 1)}
+                  onClick={() => updatePeople(count)}
                 >
-                  <h4>{index + 1}</h4>
+                  <h4>{count}</h4>
                   <Discount
-                    isActive={detail?.people === index + 1}
-                    total={"20"}
+                    isActive={parameters?.people === count}
+                    total={Math.max.apply(
+                      null,
+                      value.map((item) => item.discountPrice)
+                    )}
                   />
                 </div>
               </div>
-            ))}
+            )
+          )}
         </div>
       </div>
     </div>
