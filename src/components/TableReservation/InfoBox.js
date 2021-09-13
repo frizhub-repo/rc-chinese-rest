@@ -13,6 +13,7 @@ export default function InfoBox() {
   const [isNextBtnDisabled, setIsNextBtnDisabled] = React.useState(true);
   const [active, setActive] = React.useState(0);
   const [parameters, setParameters] = React.useState({});
+  const [offers, setOffers] = React.useState([]);
   const [reservationDetail, setReservationDetail] = React.useState({
     choosePeople: {
       1: [],
@@ -38,27 +39,7 @@ export default function InfoBox() {
     try {
       (async function () {
         const res = await getReservationOffers();
-        const offers = res?.data;
-        console.log(offers);
-        const peopleOffer = { ...reservationDetail?.choosePeople };
-        for (const offer of offers) {
-          if (offer?.peopleGreaterThanSix) {
-            for (
-              let index = 6;
-              index < Object.entries(reservationDetail?.choosePeople)?.length;
-              index++
-            ) {
-              peopleOffer[index] = [...peopleOffer[index], offer];
-            }
-          }
-          offer?.numberOfPeople.forEach((count) => {
-            peopleOffer[count] = [...peopleOffer[count], offer];
-          });
-        }
-        setReservationDetail({
-          ...reservationDetail,
-          choosePeople: peopleOffer,
-        });
+        setOffers(res?.data);
       })();
     } catch (error) {
       console.log({ error });
@@ -88,7 +69,9 @@ export default function InfoBox() {
       case 0:
         return (
           <PeopleStep
+            offers={offers}
             reservationDetail={reservationDetail}
+            setReservationDetail={setReservationDetail}
             parameters={parameters}
             setParameters={setParameters}
           />

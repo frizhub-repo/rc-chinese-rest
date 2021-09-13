@@ -21,7 +21,30 @@ export default function PeopleStep({
   reservationDetail,
   parameters,
   setParameters,
+  offers,
+  setReservationDetail,
 }) {
+  React.useEffect(() => {
+    const peopleOffer = { ...reservationDetail?.choosePeople };
+    for (const offer of offers) {
+      if (offer?.peopleGreaterThanSix) {
+        for (
+          let index = 6;
+          index <= Object.entries(reservationDetail?.choosePeople)?.length;
+          index++
+        ) {
+          peopleOffer[index] = [...peopleOffer[index], offer];
+        }
+      }
+      offer?.numberOfPeople.forEach((count) => {
+        peopleOffer[count] = [...peopleOffer[count], offer];
+      });
+    }
+    setReservationDetail({
+      ...reservationDetail,
+      choosePeople: peopleOffer,
+    });
+  }, []);
   function updatePeople(id) {
     setParameters({ ...parameters, people: id });
   }
