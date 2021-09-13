@@ -1,6 +1,6 @@
 import "./App.css";
 import "rsuite/dist/styles/rsuite-default.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, withRouter } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Menu from "./components/Menu";
@@ -16,8 +16,18 @@ import OrdersReceived from "./components/Orders/OrdersReceived";
 import ExistingAddress from "./components/ExistingAddress";
 import OrderSummary from "./components/Orders/OrderSummary";
 import Footer from "components/Common/Footer";
+import SignIn from "components/Auth/SignIn";
+import SignUp from "components/Auth/SignUp";
+import ForgotPassword from "components/Auth/ForgotPassword";
+
+function FooterWrapper({ location }) {
+  if (location.pathname.match('/signIn') || location.pathname.match('signUp') || location.pathname.match('forgotPassword'))
+    return null;
+  return <Footer />
+}
 
 function App() {
+
   return (
     <div className="App">
       <Router>
@@ -36,11 +46,16 @@ function App() {
           <Route path="/ordersreceived/:id" component={OrdersReceived} />
           <Route path="/chooseAddress" exact component={ExistingAddress} />
           <Route path="/order/summary" exact component={OrderSummary} />
+          <Route path="/signIn" exact component={SignIn} />
+          <Route path="/signUp" exact component={SignUp} />
+          <Route path="/forgotPassword" exact component={ForgotPassword} />
         </Switch>
-        <Footer />
+        <WrappedFooter />
       </Router>
     </div>
   );
 }
+
+const WrappedFooter = withRouter(FooterWrapper);
 
 export default App;
