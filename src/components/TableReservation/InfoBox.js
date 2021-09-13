@@ -78,7 +78,13 @@ export default function InfoBox() {
         );
       case 1:
         return (
-          <DateStep parameters={parameters} setParameters={setParameters} />
+          <DateStep
+            offers={offers}
+            parameters={parameters}
+            setParameters={setParameters}
+            reservationDetail={reservationDetail}
+            setReservationDetail={setReservationDetail}
+          />
         );
       case 2:
         return (
