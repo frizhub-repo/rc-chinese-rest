@@ -1,70 +1,24 @@
-import {
-  makeStyles,
-  Box,
-  Button,
-  TextField,
-  FormControlLabel,
-  Checkbox,
-  FormHelperText,
-  CircularProgress,
-} from "@material-ui/core";
-import SignaturesLogo from "../../images/SignaturesLogo.jpg";
-import { useForm } from "react-hook-form";
-import { customerSignIn } from "../../api/Auth";
-import axiosIntance from "../../utils/axios-configure";
-import { toast } from "react-toastify";
+import { useState } from "react";
 import { useHistory } from "react-router";
-import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { customerSignIn } from "../../api/Auth";
 import { useRestaurantContext } from "../../Context/restaurantContext";
+import { useForm } from "react-hook-form";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import axiosIntance from "../../utils/axios-configure";
+import SocialAuth from "./SocialAuth";
 
-const useStyles = makeStyles((theme) => ({
-  logo: {
-    display: "flex",
-    justifyContent: "center",
-    marginTop: "60px",
-    marginBottom: "30px",
-  },
-  txtFieldSpacing: {
-    marginTop: "35px",
-  },
-  keepMeSignedIn: {
-    color: "#7DA7F4",
-  },
-  signInButton: {
-    borderRadius: "35px",
-    width: "100%",
-    padding: "15px 20px",
-    backgroundColor: "#FDBD00",
-    color: "white",
-    marginTop: "30px",
-    fontSize: "22px",
-    "&:hover": {
-      backgroundColor: "#FDBD00",
-      color: "white",
-    },
-  },
-  forgotPassword: {
-    display: "flex",
-    justifyContent: "space-between",
-    marginTop: "20px",
-    fontSize: "12px",
-    color: "#7DA7F4",
-  },
-  changeCursor: {
-    cursor: "pointer",
-  },
-  helperText: {
-    marginLeft: "15px",
-    color: "red",
-  },
-}));
+import classes from "./Auth.module.css";
+import { IconButton } from "rsuite";
+import FieldError from "components/Common/FieldError";
 
 export default function SignIn({ setActiveStep, handleClickOpen }) {
-  const classes = useStyles();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
-  const { register, handleSubmit, errors } = useForm();
+  const [isPassVisible, setIsPassVisible] = useState(false);
   const { setToken, customerData } = useRestaurantContext();
+  const { register, errors, handleSubmit } = useForm();
   const signinwithpayload = async (data) => {
     try {
       setLoading(true);
@@ -94,76 +48,64 @@ export default function SignIn({ setActiveStep, handleClickOpen }) {
   };
 
   return (
-    <Box>
-      <Box className={classes.logo}>
-        <img src={SignaturesLogo} width="50%" height="50%" />
-      </Box>
-      <form onSubmit={handleSubmit(signinwithpayload)}>
-        <Box className={classes.txtFieldSpacing}>
-          <TextField
-            placeholder="Email"
-            fullWidth
-            variant="outlined"
-            className={`my_custom_text_field`}
+    <div className={classes.root}>
+      <div>
+        <h1 className={classes.header}>Sign In</h1>
+      </div>
+      <div className={classes.inputContainer}>
+        <form onSubmit={handleSubmit(e => e.preventDefault())}>
+          <input
             name="email"
-            inputRef={register({
-              required: "Email Address required",
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Invalid email address",
-              },
-            })}
-            error={errors?.email ? true : false}
+            className={classes.authInput}
+            type="text"
+            placeholder="Email"
+            ref={register({ required: "Email is required" })}
           />
-          <FormHelperText className={classes.helperText}>
-            {errors?.email?.message}
-          </FormHelperText>
-        </Box>
-        <Box className={classes.txtFieldSpacing}>
-          <TextField
-            placeholder="Password"
-            fullWidth
-            variant="outlined"
-            className={`my_custom_text_field`}
-            type="password"
-            name="password"
-            inputRef={register({
-              required: "Password required",
-              minLength: {
-                value: 8,
-                message: "Password must be 8 character",
-              },
-            })}
-            error={errors?.password ? true : false}
-          />
-          <FormHelperText className={classes.helperText}>
-            {errors?.password?.message}
-          </FormHelperText>
-        </Box>
-        <FormControlLabel
-          className={classes.keepMeSignedIn}
-          control={
-            <Checkbox className={classes.keepMeSignedIn} name="checkedB" />
-          }
-          label="Keep me Signed in"
-        />
-        <Button disableElevation className={classes.signInButton} type="submit">
-          {loading && (
-            <CircularProgress
-              color="inherit"
-              size={20}
-              style={{ marginRight: "8px" }}
+          {errors?.email?.message && <FieldError message={errors?.email?.message} />}
+          <div className={classes.passwordContainer}>
+            <input
+              name="password"
+              className={classes.authInput}
+              type={isPassVisible ? "text" : "password"}
+              placeholder="Password"
+              ref={register({ required: "Password is required" })}
             />
-          )}
-          Log in
-        </Button>
-      </form>
-      <Box className={classes.forgotPassword}>
-        <Box className={classes.changeCursor}>Forgot Password?</Box>
-        <Box className={classes.changeCursor} onClick={() => setActiveStep(1)}>
-          Not a member? Sign Up
-        </Box>
-      </Box>
-    </Box>
+            <IconButton
+              className={classes.iconContainer}
+              onClick={() => setIsPassVisible((prev) => !prev)}
+            >
+              {isPassVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
+            </IconButton>
+          </div>
+          {errors?.password?.message && <FieldError message={errors?.password?.message} />}
+          <div className={classes.forgotPassContainer}>
+            <button
+              className={classes.forgotPass}
+              onClick={() => history.push("forgotPassword")}
+            >
+              Forgot your password?
+            </button>
+          </div>
+          <button type="submit" className={classes.submitBtn}>
+            Login
+          </button>
+        </form>
+        <div className={classes.secondaryText}>
+          <h4>or</h4>
+        </div>
+        <section>
+          <SocialAuth />
+        </section>
+      </div>
+      <div>
+        <h5>You didn't Sign Up?</h5>
+        <button
+          className={classes.redirectBtn}
+          onClick={() => history.push("signUp")}
+        >
+          Register Here
+        </button>
+      </div>
+    </div>
   );
 }

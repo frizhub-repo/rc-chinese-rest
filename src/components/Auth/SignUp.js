@@ -1,63 +1,24 @@
-import {
-  makeStyles,
-  Box,
-  Button,
-  TextField,
-  FormHelperText,
-  CircularProgress,
-} from "@material-ui/core";
-import SignaturesLogo from "../../images/SignaturesLogo.jpg";
-import { useForm } from "react-hook-form";
-import { customerSignUp } from "../../api/Auth";
-import axiosIntance from "../../utils/axios-configure";
-import { toast } from "react-toastify";
-import { useHistory } from "react-router";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router";
+import { toast } from "react-toastify";
+import { customerSignUp } from "../../api/Auth";
 import { useRestaurantContext } from "../../Context/restaurantContext";
-
-const useStyles = makeStyles((theme) => ({
-  logo: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  txtFieldSpacing: {
-    marginTop: "30px",
-  },
-  signUpButton: {
-    borderRadius: "35px",
-    width: "100%",
-    padding: "15px 20px",
-    backgroundColor: "#FDBD00",
-    color: "white",
-    marginTop: "15px",
-    fontSize: "22px",
-    "&:hover": {
-      backgroundColor: "#FDBD00",
-      color: "white",
-    },
-  },
-  forgotPassword: {
-    display: "flex",
-    justifyContent: "space-between",
-    marginTop: "20px",
-    fontSize: "12px",
-    color: "#7DA7F4",
-  },
-  changeCursor: {
-    cursor: "pointer",
-  },
-  helperText: {
-    marginLeft: "15px",
-    color: "red",
-  },
-}));
+import { IconButton } from "rsuite";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import axiosIntance from "../../utils/axios-configure";
+import classes from "./Auth.module.css";
+import SocialAuth from "./SocialAuth";
+import FieldError from "components/Common/FieldError";
 
 export default function SignUp({ setActiveStep, handleClickOpen }) {
-  const classes = useStyles();
   const history = useHistory();
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, watch } = useForm();
   const [loading, setLoading] = useState(false);
   const { setToken, customerData } = useRestaurantContext();
+  const [isPassVisible, setIsPassVisible] = React.useState(false);
+  const [isRePassVisible, setIsRePassVisible] = React.useState(false);
 
   const signUpwithpayload = async (data) => {
     try {
@@ -89,133 +50,100 @@ export default function SignUp({ setActiveStep, handleClickOpen }) {
   };
 
   return (
-    <Box>
-      <Box className={classes.logo}>
-        <img src={SignaturesLogo} width="50%" height="50%" />
-      </Box>
-      <form onSubmit={handleSubmit(signUpwithpayload)}>
-        <Box className={classes.txtFieldSpacing}>
-          <TextField
-            name="email"
-            placeholder="Email"
-            fullWidth
-            variant="outlined"
-            className={`my_custom_text_field`}
-            inputRef={register({
-              required: "Email Address required",
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Invalid email address",
-              },
-            })}
-            error={errors?.email ? true : false}
-          />
-          <FormHelperText className={classes.helperText}>
-            {errors?.email?.message}
-          </FormHelperText>
-        </Box>
-        <Box className={classes.txtFieldSpacing}>
-          <TextField
-            name="phoneNumber"
-            placeholder="Phone Number"
-            fullWidth
-            variant="outlined"
-            className={`my_custom_text_field`}
-            inputRef={register({
-              required: "Phone Number required",
-            })}
-            error={errors?.phoneNumber ? true : false}
-          />
-          <FormHelperText className={classes.helperText}>
-            {errors?.phoneNumber?.message}
-          </FormHelperText>
-        </Box>
-        <Box className={classes.txtFieldSpacing}>
-          <TextField
+    <div className={classes.root}>
+      <div>
+        <h1 className={classes.header}>Sign Up</h1>
+      </div>
+      <div className={classes.inputContainer}>
+        <form onSubmit={handleSubmit(e => e.preventDefault())}>
+          <input
             name="firstName"
+            className={classes.authInput}
+            type="text"
             placeholder="First Name"
-            fullWidth
-            variant="outlined"
-            className={`my_custom_text_field`}
-            inputRef={register({
-              required: "First Name required",
-            })}
-            error={errors?.firstName ? true : false}
+            ref={register({ required: "First Name is required" })}
           />
-          <FormHelperText className={classes.helperText}>
-            {errors?.firstName?.message}
-          </FormHelperText>
-        </Box>
-        <Box className={classes.txtFieldSpacing}>
-          <TextField
+          {errors?.firstName?.message && <FieldError message={errors?.firstName?.message} />}
+          <input
             name="lastName"
+            className={classes.authInput}
+            type="text"
             placeholder="Last Name"
-            fullWidth
-            variant="outlined"
-            className={`my_custom_text_field`}
-            inputRef={register({
-              required: "Last Name required",
-            })}
-            error={errors?.lastName ? true : false}
+            ref={register({ required: "Last Name is required" })}
           />
-          <FormHelperText className={classes.helperText}>
-            {errors?.lastName?.message}
-          </FormHelperText>
-        </Box>
-        <Box className={classes.txtFieldSpacing}>
-          <TextField
-            name="address"
-            placeholder="Address"
-            fullWidth
-            variant="outlined"
-            className={`my_custom_text_field`}
-            inputRef={register({
-              required: "Address required",
-            })}
-            error={errors?.address ? true : false}
+          {errors?.lastName?.message && <FieldError message={errors?.lastName?.message} />}
+          <input
+            name="phone"
+            className={classes.authInput}
+            type="text"
+            placeholder="Phone Number"
+            ref={register({ required: "Phone number is required" })}
           />
-          <FormHelperText className={classes.helperText}>
-            {errors?.address?.message}
-          </FormHelperText>
-        </Box>
-        <Box className={classes.txtFieldSpacing}>
-          <TextField
-            name="password"
-            placeholder="Password"
-            fullWidth
-            type="password"
-            variant="outlined"
-            className={`my_custom_text_field`}
-            inputRef={register({
-              required: "Password required",
-              minLength: {
-                value: 8,
-                message: "Password must be 8 character",
-              },
-            })}
-            error={errors?.password ? true : false}
+          {errors?.phone?.message && <FieldError message={errors?.phone?.message} />}
+          <input
+            name="email"
+            className={classes.authInput}
+            type="text"
+            placeholder="Email"
+            ref={register({ required: "Email is required" })}
           />
-          <FormHelperText className={classes.helperText}>
-            {errors?.password?.message}
-          </FormHelperText>
-        </Box>
-        <Button disableElevation className={classes.signUpButton} type="submit">
-          {loading && (
-            <CircularProgress
-              color="inherit"
-              size={20}
-              style={{ marginRight: "8px" }}
+          {errors?.email?.message && <FieldError message={errors?.email?.message} />}
+          <div className={classes.passwordContainer}>
+            <input
+              name="password"
+              className={classes.authInput}
+              type={isPassVisible ? "text" : "password"}
+              placeholder="Password"
+              ref={register({ required: "Password is required" })}
             />
-          )}
-          Sign Up
-        </Button>
-      </form>
-      <Box className={classes.forgotPassword}>
-        <Box className={classes.changeCursor}></Box>
-        <Box className={classes.changeCursor} onClick={() => setActiveStep(0)}>
-          Already Member Login
-        </Box>
-      </Box>
-    </Box>
+            <IconButton
+              className={classes.iconContainer}
+              onClick={() => setIsPassVisible((prev) => !prev)}
+            >
+              {isPassVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
+            </IconButton>
+          </div>
+          {errors?.password?.message && <FieldError message={errors?.password?.message} />}
+          <div className={classes.passwordContainer}>
+            <input
+              name="rePassword"
+              className={classes.authInput}
+              type={isRePassVisible ? "text" : "password"}
+              placeholder="Confirm Password"
+              ref={register({
+                required: "Please re-type your password", validate: (value) =>
+                  value === watch("password") || "Password does not match"
+              })}
+            />
+            <IconButton
+              className={classes.iconContainer}
+              onClick={() => setIsPassVisible((prev) => !prev)}
+            >
+              {isRePassVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
+            </IconButton>
+          </div>
+          {errors?.rePassword?.message && <FieldError message={errors?.rePassword?.message} />}
+          <div style={{ marginBottom: "20px" }}></div>
+          <button type="submit" className={classes.submitBtn}>
+            Sign Up
+          </button>
+        </form>
+        <div className={classes.secondaryText}>
+          <h4>or</h4>
+        </div>
+        <section>
+          <SocialAuth />
+        </section>
+      </div>
+      <div style={{ marginBottom: "10px" }}>
+        <h5>If you're already Signed Up</h5>
+        <button
+          className={classes.redirectBtn}
+          onClick={() => history.push("signIn")}
+        >
+          Click Here
+        </button>
+      </div>
+    </div>
   );
 }
