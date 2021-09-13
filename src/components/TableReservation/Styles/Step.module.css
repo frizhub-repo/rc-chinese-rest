@@ -114,6 +114,19 @@
   font-size: 10px;
 }
 
+.disableTitle {
+  background-color: #636363;
+  margin: 5px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #636363;
+}
+
+.calenderArrow {
+  border: 2px solid #280813;
+  border-radius: 30px;
+  padding: 0 6px;
+}
+
 .dateDiscount_active {
   color: #280813;
   background: #f49e0b;

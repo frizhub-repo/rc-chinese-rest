@@ -15,15 +15,26 @@ function Discount({ total, isActive }) {
   );
 }
 
-export default function DateStep({ detail, setDetail }) {
+export default function DateStep({ parameters, setParameters }) {
   function updateDate(e) {
-    setDetail({ ...detail, date: e });
+    setParameters({ ...parameters, date: e });
   }
 
   function discountDisplay({ activeStartDate, date, view }) {
     if (true)
-      return <Discount isActive={date.getTime() === detail?.date?.getTime()} />;
+      return (
+        <Discount isActive={date.getTime() === parameters?.date?.getTime()} />
+      );
     return null;
+  }
+  const today = new Date();
+  function tileClassName({ date }) {
+    const yesterday = new Date();
+    yesterday.setDate(new Date().getDate() - 1);
+
+    if (date.getTime() < yesterday.getTime()) {
+      return classes.disableTitle;
+    }
   }
 
   return (
@@ -31,11 +42,12 @@ export default function DateStep({ detail, setDetail }) {
       <div className={classes.container}>
         <Calendar
           onChange={updateDate}
-          value={detail?.date}
+          value={parameters?.date}
           showNeighboringMonth={false}
-          prevLabel={"<"}
-          nextLabel={">"}
-          minDate={new Date()}
+          prevLabel={<span className={classes.calenderArrow}>{"<"}</span>}
+          nextLabel={<span className={classes.calenderArrow}>{">"}</span>}
+          minDate={today}
+          tileClassName={tileClassName}
           tileContent={discountDisplay}
         />
       </div>

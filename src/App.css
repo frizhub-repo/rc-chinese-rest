@@ -134,6 +134,9 @@
   padding: 10px 0px;
   position: relative;
   overflow: visible !important;
+  margin: 5px;
+  border: 2px solid #280813;
+  border-radius: 10px;
 }
 
 .react-calendar__tile--active {
