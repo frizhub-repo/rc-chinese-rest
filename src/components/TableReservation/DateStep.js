@@ -4,6 +4,7 @@ import classes from "./Styles/Step.module.css";
 import { NavigateNext, NavigateBefore } from "@material-ui/icons";
 
 function Discount({ total, isActive, offers }) {
+  console.log("Get max value");
   return (
     <div
       className={`${classes.dateDiscount} ${
