@@ -42,7 +42,6 @@ export default function TimeStep({ offers, parameters, setParameters }) {
   ]);
 
   React.useEffect(() => {
-    console.log("offers :>> ", offers);
     let timeSlotOffer = [...timeSlots];
     for (const offer of offers) {
       timeSlotOffer?.map((timeObj, index) => {
@@ -65,7 +64,7 @@ export default function TimeStep({ offers, parameters, setParameters }) {
         });
       });
     }
-    console.log("timeSlotOffer :>> ", timeSlotOffer);
+    setTimeSlots(timeSlotOffer);
   }, []);
 
   function updateTime(name, slot) {
@@ -80,7 +79,7 @@ export default function TimeStep({ offers, parameters, setParameters }) {
           <div>
             <h5 className={classes.secondaryHeader}>{name}:</h5>
             <div className="row mx-2">
-              {Object.entries(slots).map(([slot, offer], index) => (
+              {Object.entries(slots).map(([slot, value], index) => (
                 <div key={index} className="col-4 my-2">
                   <div
                     className={`${classes.item} ${
