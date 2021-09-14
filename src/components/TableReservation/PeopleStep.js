@@ -1,16 +1,18 @@
 import * as React from "react";
+import { getMaxValue } from "utils/common";
 import classes from "./Styles/Step.module.css";
 
-function Discount({ total, isActive }) {
+function Discount({ offers, isActive }) {
+  const maxOffer = getMaxValue(offers, "discountPrice");
   return (
     <>
-      {total > 0 && (
+      {maxOffer?.count > 0 && (
         <div
           className={`${classes.discountContainer} ${
             isActive && classes.active_discount
           } shadow-md`}
         >
-          <p>-{total}%</p>
+          <p>-{maxOffer?.count}%</p>
         </div>
       )}
     </>
@@ -44,9 +46,13 @@ export default function PeopleStep({
       ...reservationDetail,
       choosePeople: peopleOffer,
     });
-  }, []);
-  function updatePeople(id) {
-    setParameters({ ...parameters, people: id });
+  }, [offers]);
+  function updatePeople({ count, value }) {
+    const maxOffer = getMaxValue(value, "discountPrice");
+    setParameters({
+      ...parameters,
+      people: { count, offer: maxOffer?.obj },
+    });
   }
 
   return (
@@ -59,17 +65,14 @@ export default function PeopleStep({
               <div key={index} className="col-4 my-2">
                 <div
                   className={`${classes.item} ${
-                    parameters?.people === count && classes.active_item
+                    parameters?.people?.count === count && classes.active_item
                   } shadow-md`}
-                  onClick={() => updatePeople(count)}
+                  onClick={() => updatePeople({ count, value })}
                 >
                   <h4>{count}</h4>
                   <Discount
-                    isActive={parameters?.people === count}
-                    total={Math.max.apply(
-                      null,
-                      value.map((item) => item.discountPrice)
-                    )}
+                    isActive={parameters?.people?.count === count}
+                    offers={value}
                   />
                 </div>
               </div>
