@@ -88,7 +88,11 @@ export default function InfoBox() {
         );
       case 2:
         return (
-          <TimeStep parameters={parameters} setParameters={setParameters} />
+          <TimeStep
+            offers={offers}
+            parameters={parameters}
+            setParameters={setParameters}
+          />
         );
       case 3:
         return (
