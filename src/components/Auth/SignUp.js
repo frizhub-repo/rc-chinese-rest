@@ -117,7 +117,7 @@ export default function SignUp({ setActiveStep, handleClickOpen }) {
             />
             <IconButton
               className={classes.iconContainer}
-              onClick={() => setIsPassVisible((prev) => !prev)}
+              onClick={() => setIsRePassVisible((prev) => !prev)}
             >
               {isRePassVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
             </IconButton>
