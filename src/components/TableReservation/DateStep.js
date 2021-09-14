@@ -2,16 +2,18 @@ import * as React from "react";
 import Calendar from "react-calendar";
 import classes from "./Styles/Step.module.css";
 import { NavigateNext, NavigateBefore } from "@material-ui/icons";
+import { getMaxValue } from "utils/common";
 
-function Discount({ total, isActive, offers }) {
-  console.log("Get max value");
+function Discount({ isActive, offers }) {
+  const maxOffer = getMaxValue(offers, "discountPrice");
+
   return (
     <div
       className={`${classes.dateDiscount} ${
         isActive && classes.dateDiscount_active
       } shadow-md`}
     >
-      {total > 0 && <p>-{total}%</p>}
+      {maxOffer?.count > 0 && <p>-{maxOffer?.count}%</p>}
     </div>
   );
 }
@@ -47,7 +49,24 @@ export default function DateStep({
   }, [offers]);
 
   function updateDate(e) {
-    setParameters({ ...parameters, date: e });
+    if (reservationDetail?.days?.length > 0) {
+      const reserDetail = reservationDetail?.days?.sort(
+        (a, b) => a.day - b.day
+      );
+      const dateIndex = reserDetail?.findIndex(
+        (value) =>
+          new Date(value?.day).toLocaleDateString() ===
+          new Date(e).toLocaleDateString()
+      );
+      const maxOffer = getMaxValue(
+        reserDetail?.[dateIndex]?.offers,
+        "discountPrice"
+      );
+      setParameters({
+        ...parameters,
+        date: { value: e, offer: maxOffer?.obj },
+      });
+    }
   }
 
   function discountDisplay({ activeStartDate, date, view }) {
@@ -64,13 +83,7 @@ export default function DateStep({
       if (dateIndex > -1)
         return (
           <Discount
-            total={Math.max.apply(
-              null,
-              reserDetail?.[dateIndex]?.offers?.map(
-                (item) => item?.discountPrice
-              )
-            )}
-            isActive={date.getTime() === parameters?.date?.getTime()}
+            isActive={date.getTime() === parameters?.date?.value?.getTime()}
             offers={reserDetail?.[dateIndex]?.offers}
           />
         );
@@ -91,7 +104,7 @@ export default function DateStep({
       <div className={classes.container}>
         <Calendar
           onChange={updateDate}
-          value={parameters?.date}
+          value={parameters?.date?.value}
           showNeighboringMonth={false}
           prevLabel={<span className={classes.calenderArrow}>{"<"}</span>}
           nextLabel={<span className={classes.calenderArrow}>{">"}</span>}
