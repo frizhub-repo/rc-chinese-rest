@@ -22,7 +22,7 @@ function Discount({ isActive, offers }) {
 export default function TimeStep({ offers, parameters, setParameters }) {
   const [timeSlots, setTimeSlots] = React.useState([
     {
-      name: "Breakfast",
+      name: "breakfast",
       slots: {
         "11:30": [],
         "12:00": [],
@@ -33,7 +33,7 @@ export default function TimeStep({ offers, parameters, setParameters }) {
       },
     },
     {
-      name: "Dinner",
+      name: "dinner",
       slots: {
         "19:30": [],
         "20:00": [],
