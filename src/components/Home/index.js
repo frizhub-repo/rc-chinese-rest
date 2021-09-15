@@ -17,7 +17,7 @@ import ItemsMenu from "components/Common/ItemsMenu/ItemsMenu";
 function Home() {
   const classes = useStyles();
   const {
-    restaurant: { placeData },
+    restaurant: { placeData = {} },
   } = useRestaurantContext();
   const [openingHours, setOpeningHours] = useState([
     { id: 1, openDay: "Monday" },
@@ -44,10 +44,10 @@ function Home() {
           prevOpeningHours.map((openingHour) =>
             openingHour?.id === open?.day
               ? {
-                  ...openingHour,
-                  openTime: splitTime(open?.time),
-                  closeTime: splitTime(close?.time),
-                }
+                ...openingHour,
+                openTime: splitTime(open?.time),
+                closeTime: splitTime(close?.time),
+              }
               : openingHour
           )
         );

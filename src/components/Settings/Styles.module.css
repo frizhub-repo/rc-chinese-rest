@@ -1,0 +1,39 @@
+.root {
+  background-color: #1a1b20;
+  width: 100%;
+  min-height: 100vh;
+  padding: 10px;
+  padding-top: 74px;
+}
+
+.contentContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.secondaryColumn {
+  position: fixed;
+  right: 0;
+  height: 100%;
+  padding: 20px;
+}
+
+.message {
+  color: #280813;
+  background-color: white;
+  padding: 10px;
+  border-radius: 20px;
+  font-size: 24px;
+}
+
+@media screen and (max-width: 1200px) {
+  .secondaryColumn {
+    position: relative;
+  }
+  .contentContainer {
+  }
+  .message {
+    display: none;
+  }
+}

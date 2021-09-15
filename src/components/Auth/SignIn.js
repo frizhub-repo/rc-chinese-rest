@@ -53,7 +53,7 @@ export default function SignIn({ setActiveStep, handleClickOpen }) {
         <h1 className={classes.header}>Sign In</h1>
       </div>
       <div className={classes.inputContainer}>
-        <form onSubmit={handleSubmit(e => e.preventDefault())}>
+        <form onSubmit={handleSubmit(signinwithpayload)}>
           <input
             name="email"
             className={classes.authInput}
