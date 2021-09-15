@@ -1,15 +1,21 @@
 import * as React from "react";
+import { getMaxValue } from "utils/common";
 import classes from "./Styles/Step.module.css";
 
-function Discount({ total, isActive }) {
+function Discount({ isActive, offers }) {
+  const maxValue = getMaxValue(offers, "discountPrice");
   return (
-    <div
-      className={`${classes.discountContainer} ${
-        isActive && classes.active_discount
-      } shadow-md`}
-    >
-      <p>-{total}%</p>
-    </div>
+    <>
+      {maxValue?.count > 0 && (
+        <div
+          className={`${classes.discountContainer} ${
+            isActive && classes.active_discount
+          } shadow-md`}
+        >
+          <p>-{maxValue?.count}%</p>
+        </div>
+      )}
+    </>
   );
 }
 
@@ -67,8 +73,12 @@ export default function TimeStep({ offers, parameters, setParameters }) {
     setTimeSlots(timeSlotOffer);
   }, []);
 
-  function updateTime(name, slot) {
-    setParameters({ ...parameters, time: { name, slot } });
+  function updateTime(name, slot, value) {
+    const maxValue = getMaxValue(value, "discountPrice");
+    setParameters({
+      ...parameters,
+      time: { name, slot, offer: maxValue?.obj },
+    });
   }
 
   return (
@@ -87,15 +97,15 @@ export default function TimeStep({ offers, parameters, setParameters }) {
                       slot === parameters?.time?.slot &&
                       classes.active_item
                     } shadow-md`}
-                    onClick={() => updateTime(name, slot)}
+                    onClick={() => updateTime(name, slot, value)}
                   >
                     <h4>{slot}</h4>
                     <Discount
+                      offers={value}
                       isActive={
                         name === parameters?.time?.name &&
                         slot === parameters?.time?.slot
                       }
-                      total={"20"}
                     />
                   </div>
                 </div>
