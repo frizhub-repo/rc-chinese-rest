@@ -31,13 +31,8 @@ function DiscountCard({ content, isActive, handleClick }) {
   );
 }
 
-export default function DiscountStep({
-  offers,
-  parameters,
-  setParameters,
-  chooseOffer,
-  setChooseOffer,
-}) {
+export default function DiscountStep({ offers, parameters, setParameters }) {
+  const [chooseOffer, setChooseOffer] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const { token } = useRestaurantContext();
   const history = useHistory();
