@@ -31,15 +31,7 @@ export default function SignIn({ setActiveStep, handleClickOpen }) {
         localStorage.setItem("token", res?.data?.token);
         setToken(res?.data?.token);
         toast.success("You have been sign in successfully");
-        if (window.localStorage.getItem("redirectToOrder")) {
-          window.localStorage.removeItem("redirectToOrder");
-          customerData?.addresses?.length
-            ? history.push("/deliveryAddress")
-            : history.push("/deliveryAddress");
-        } else {
-          handleClickOpen();
-          history.push("/");
-        }
+        history.push("/");
       }
     } catch (error) {
       setLoading(false);
@@ -61,7 +53,9 @@ export default function SignIn({ setActiveStep, handleClickOpen }) {
             placeholder="Email"
             ref={register({ required: "Email is required" })}
           />
-          {errors?.email?.message && <FieldError message={errors?.email?.message} />}
+          {errors?.email?.message && (
+            <FieldError message={errors?.email?.message} />
+          )}
           <div className={classes.passwordContainer}>
             <input
               name="password"
@@ -77,7 +71,9 @@ export default function SignIn({ setActiveStep, handleClickOpen }) {
               {isPassVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
             </IconButton>
           </div>
-          {errors?.password?.message && <FieldError message={errors?.password?.message} />}
+          {errors?.password?.message && (
+            <FieldError message={errors?.password?.message} />
+          )}
           <div className={classes.forgotPassContainer}>
             <button
               className={classes.forgotPass}
