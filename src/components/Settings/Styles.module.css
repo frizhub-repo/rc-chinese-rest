@@ -27,6 +27,46 @@
   font-size: 24px;
 }
 
+.modalStyle {
+  padding: 20px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #1a1b20;
+  border-radius: 5px;
+  width: 300px;
+}
+
+.modalText {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.cancelBtn {
+  background-color: #b91010;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  width: 90px;
+}
+
+.yesBtn {
+  margin-left: 10px;
+  background-color: #f49e0b;
+  padding: 10px;
+  border-radius: 5px;
+  width: 90px;
+}
+
+.btnsContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
 @media screen and (max-width: 1200px) {
   .secondaryColumn {
     position: relative;
