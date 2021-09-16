@@ -32,16 +32,7 @@ export default function SignUp({ setActiveStep, handleClickOpen }) {
         localStorage.setItem("token", res?.data?.token);
         setToken(res?.data?.token);
         toast.success("Registration successful!");
-        // history.push("/deliveryAddress");
-        if (window.localStorage.getItem("redirectToOrder")) {
-          window.localStorage.removeItem("redirectToOrder");
-          customerData?.addresses?.length
-            ? history.push("/deliveryAddress")
-            : history.push("/deliveryAddress");
-        } else {
-          handleClickOpen();
-          history.push("/");
-        }
+        history.push("/");
       }
     } catch (error) {
       setLoading(false);
@@ -55,7 +46,7 @@ export default function SignUp({ setActiveStep, handleClickOpen }) {
         <h1 className={classes.header}>Sign Up</h1>
       </div>
       <div className={classes.inputContainer}>
-        <form onSubmit={handleSubmit(e => e.preventDefault())}>
+        <form onSubmit={handleSubmit(signUpwithpayload)}>
           <input
             name="firstName"
             className={classes.authInput}
@@ -63,7 +54,9 @@ export default function SignUp({ setActiveStep, handleClickOpen }) {
             placeholder="First Name"
             ref={register({ required: "First Name is required" })}
           />
-          {errors?.firstName?.message && <FieldError message={errors?.firstName?.message} />}
+          {errors?.firstName?.message && (
+            <FieldError message={errors?.firstName?.message} />
+          )}
           <input
             name="lastName"
             className={classes.authInput}
@@ -71,30 +64,42 @@ export default function SignUp({ setActiveStep, handleClickOpen }) {
             placeholder="Last Name"
             ref={register({ required: "Last Name is required" })}
           />
-          {errors?.lastName?.message && <FieldError message={errors?.lastName?.message} />}
+          {errors?.lastName?.message && (
+            <FieldError message={errors?.lastName?.message} />
+          )}
           <input
-            name="phone"
+            name="phoneNumber"
             className={classes.authInput}
             type="text"
             placeholder="Phone Number"
             ref={register({ required: "Phone number is required" })}
           />
-          {errors?.phone?.message && <FieldError message={errors?.phone?.message} />}
+          {errors?.phone?.message && (
+            <FieldError message={errors?.phone?.message} />
+          )}
           <input
             name="email"
             className={classes.authInput}
             type="text"
             placeholder="Email"
-            ref={register({ required: "Email is required" })}
+            ref={register({
+              required: "Email is required",
+              pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+            })}
           />
-          {errors?.email?.message && <FieldError message={errors?.email?.message} />}
+          {errors.email?.type === "pattern" && (
+            <FieldError message={"Email is not valid"} />
+          )}
+          {errors?.email?.message && (
+            <FieldError message={errors?.email?.message} />
+          )}
           <div className={classes.passwordContainer}>
             <input
               name="password"
               className={classes.authInput}
               type={isPassVisible ? "text" : "password"}
               placeholder="Password"
-              ref={register({ required: "Password is required" })}
+              ref={register({ required: "Password is required", minLength: 8 })}
             />
             <IconButton
               className={classes.iconContainer}
@@ -103,7 +108,12 @@ export default function SignUp({ setActiveStep, handleClickOpen }) {
               {isPassVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
             </IconButton>
           </div>
-          {errors?.password?.message && <FieldError message={errors?.password?.message} />}
+          {errors?.password?.type === "minLength" && (
+            <FieldError message={"Password must be 8 characters long"} />
+          )}
+          {errors?.password?.message && (
+            <FieldError message={errors?.password?.message} />
+          )}
           <div className={classes.passwordContainer}>
             <input
               name="rePassword"
@@ -111,18 +121,21 @@ export default function SignUp({ setActiveStep, handleClickOpen }) {
               type={isRePassVisible ? "text" : "password"}
               placeholder="Confirm Password"
               ref={register({
-                required: "Please re-type your password", validate: (value) =>
-                  value === watch("password") || "Password does not match"
+                required: "Please re-type your password",
+                validate: (value) =>
+                  value === watch("password") || "Password does not match",
               })}
             />
             <IconButton
               className={classes.iconContainer}
-              onClick={() => setIsPassVisible((prev) => !prev)}
+              onClick={() => setIsRePassVisible((prev) => !prev)}
             >
               {isRePassVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
             </IconButton>
           </div>
-          {errors?.rePassword?.message && <FieldError message={errors?.rePassword?.message} />}
+          {errors?.rePassword?.message && (
+            <FieldError message={errors?.rePassword?.message} />
+          )}
           <div style={{ marginBottom: "20px" }}></div>
           <button type="submit" className={classes.submitBtn}>
             Sign Up
