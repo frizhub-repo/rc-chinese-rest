@@ -7,8 +7,10 @@ import classes from "./Styles/InfoBox.module.css";
 import DiscountStep from "./DiscountStep";
 import DateStep from "./DateStep";
 import { getReservationOffers } from "api/public";
+import { Skeleton } from "@material-ui/lab";
 
 export default function InfoBox() {
+  const [loading, setLoading] = React.useState(false);
   const [reserving, setReserving] = React.useState(false);
   const [isNextBtnDisabled, setIsNextBtnDisabled] = React.useState(true);
   const [active, setActive] = React.useState(0);
@@ -37,13 +39,16 @@ export default function InfoBox() {
   });
 
   React.useEffect(() => {
+    setLoading(true);
     try {
       (async function () {
         const res = await getReservationOffers();
         setOffers(res?.data);
+        setLoading(false);
       })();
     } catch (error) {
       console.log({ error });
+      setLoading(false);
     }
   }, []);
 
@@ -134,19 +139,27 @@ export default function InfoBox() {
         )}
       </div>
       {reserving ? (
-        <div className={classes.reservingContainer}>
-          <button
-            className={`${classes.reservingNextBtn} shadow-md`}
-            onClick={() => {
-              incrementActive();
-              setIsNextBtnDisabled(true);
-            }}
-            disabled={isNextBtnDisabled}
-          >
-            Next
-          </button>
-          {getStep(active)}
-        </div>
+        loading ? (
+          <Skeleton
+            variant="rect"
+            height={350}
+            className={classes.skeletonSpacing}
+          />
+        ) : (
+          <div className={classes.reservingContainer}>
+            <button
+              className={`${classes.reservingNextBtn} shadow-md`}
+              onClick={() => {
+                incrementActive();
+                setIsNextBtnDisabled(true);
+              }}
+              disabled={isNextBtnDisabled}
+            >
+              Next
+            </button>
+            {getStep(active)}
+          </div>
+        )
       ) : (
         <div className="d-flex flex-column justify-content-between h-100">
           <div className="mx-1 mt-2">

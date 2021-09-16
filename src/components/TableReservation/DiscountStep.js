@@ -4,6 +4,7 @@ import { useRestaurantContext } from "Context/restaurantContext";
 import * as React from "react";
 import { toast } from "react-toastify";
 import classes from "./Styles/Step.module.css";
+import { useHistory } from "react-router";
 
 function DiscountCard({ content, isActive, handleClick }) {
   return (
@@ -39,6 +40,7 @@ export default function DiscountStep({
 }) {
   const [loading, setLoading] = React.useState(false);
   const { token } = useRestaurantContext();
+  const history = useHistory();
 
   React.useEffect(() => {
     for (const offer of offers) {
@@ -87,6 +89,7 @@ export default function DiscountStep({
     try {
       if (!token) {
         toast.info("Please login first");
+        history.push("/signIn");
         return;
       }
       if (!parameters?.discount) {
