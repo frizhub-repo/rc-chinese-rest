@@ -53,6 +53,7 @@
   margin-top: 10px;
   margin-left: 25px;
   text-decoration: underline;
+  text-transform: capitalize;
 }
 
 .detailsCardContainer {
@@ -129,4 +130,16 @@
 .dateDiscount_active {
   color: #280813;
   background: #f49e0b;
+}
+
+.createReservationBtnRoot {
+  border-radius: 30px;
+  background-color: #280813;
+  color: white;
+}
+
+.createReservationBtn {
+  padding: 10px 0;
+  font-size: 20px;
+  text-transform: uppercase;
 }

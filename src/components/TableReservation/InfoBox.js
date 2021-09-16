@@ -14,6 +14,7 @@ export default function InfoBox() {
   const [active, setActive] = React.useState(0);
   const [parameters, setParameters] = React.useState({});
   const [offers, setOffers] = React.useState([]);
+  const [chooseOffer, setChooseOffer] = React.useState([]);
   const [reservationDetail, setReservationDetail] = React.useState({
     choosePeople: {
       1: [],
@@ -88,11 +89,21 @@ export default function InfoBox() {
         );
       case 2:
         return (
-          <TimeStep parameters={parameters} setParameters={setParameters} />
+          <TimeStep
+            offers={offers}
+            parameters={parameters}
+            setParameters={setParameters}
+          />
         );
       case 3:
         return (
-          <DiscountStep parameters={parameters} setParameters={setParameters} />
+          <DiscountStep
+            offers={offers}
+            parameters={parameters}
+            setParameters={setParameters}
+            chooseOffer={chooseOffer}
+            setChooseOffer={setChooseOffer}
+          />
         );
     }
   }
