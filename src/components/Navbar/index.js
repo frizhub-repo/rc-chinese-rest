@@ -103,6 +103,7 @@ function Navbar({ showLinks = true }) {
               <button
                 className="d-flex btn btn-lg btn-outline-light btn-rounded"
                 style={{ borderRadius: "20px" }}
+                onClick={() => history.push('profile')}
               >
                 {customerData?.firstName} {customerData?.lastName}
               </button>
