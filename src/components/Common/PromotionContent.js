@@ -1,3 +1,6 @@
+import { Checkbox, FormControlLabel } from "@material-ui/core";
+import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
+import AddCircleOutlineSharpIcon from "@material-ui/icons/AddCircleOutlineSharp";
 import { Skeleton } from "@material-ui/lab";
 import { getReservationOffers } from "api/public";
 import React, { useState, useEffect } from "react";
@@ -31,9 +34,18 @@ const styles = {
     height: "180px",
     borderRadius: "30px",
   },
+  iconStyle: {
+    color: "green",
+    width: "50px",
+    height: "50px",
+  },
+  iconRoot: {
+    display: "flex",
+    justifyContent: "flex-end",
+  },
 };
 
-export default function PromotionContent() {
+export default function PromotionContent({ setReservationOffer }) {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(null);
   const [carouselItemCount, setCarouselItemCount] = useState(3);
@@ -68,6 +80,14 @@ export default function PromotionContent() {
 
     setDirection(direction);
   }
+
+  const handleChangeReservationOffer = (event, offer) => {
+    if (event?.target?.checked) {
+      setReservationOffer(offer);
+    } else {
+      setReservationOffer({});
+    }
+  };
 
   return (
     <div style={{ width: "100%" }}>
@@ -120,6 +140,27 @@ export default function PromotionContent() {
                       >
                         <span>SPECIAL OFFER</span>
                         <span>{item?.discountPrice}</span>
+                        <FormControlLabel
+                          style={styles.iconRoot}
+                          onClick={(event) =>
+                            handleChangeReservationOffer(event, item)
+                          }
+                          control={
+                            <Checkbox
+                              label="Add to cart"
+                              icon={
+                                <AddCircleOutlineSharpIcon
+                                  style={styles.iconStyle}
+                                />
+                              }
+                              checkedIcon={
+                                <CheckCircleOutlineIcon
+                                  style={styles.iconStyle}
+                                />
+                              }
+                            />
+                          }
+                        ></FormControlLabel>
                       </div>
                     )}
                   </div>

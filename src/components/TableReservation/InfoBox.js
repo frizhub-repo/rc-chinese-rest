@@ -9,7 +9,7 @@ import DateStep from "./DateStep";
 import { getReservationOffers } from "api/public";
 import { Skeleton } from "@material-ui/lab";
 
-export default function InfoBox() {
+export default function InfoBox({ selectedReservationOffer, specialMenu }) {
   const [loading, setLoading] = React.useState(false);
   const [reserving, setReserving] = React.useState(false);
   const [isNextBtnDisabled, setIsNextBtnDisabled] = React.useState(true);
@@ -79,6 +79,7 @@ export default function InfoBox() {
             setReservationDetail={setReservationDetail}
             parameters={parameters}
             setParameters={setParameters}
+            selectedReservationOffer={selectedReservationOffer}
           />
         );
       case 1:
@@ -89,6 +90,7 @@ export default function InfoBox() {
             setParameters={setParameters}
             reservationDetail={reservationDetail}
             setReservationDetail={setReservationDetail}
+            selectedReservationOffer={selectedReservationOffer}
           />
         );
       case 2:
@@ -97,6 +99,7 @@ export default function InfoBox() {
             offers={offers}
             parameters={parameters}
             setParameters={setParameters}
+            selectedReservationOffer={selectedReservationOffer}
           />
         );
       case 3:
@@ -105,8 +108,12 @@ export default function InfoBox() {
             offers={offers}
             parameters={parameters}
             setParameters={setParameters}
+            selectedReservationOffer={selectedReservationOffer}
+            specialMenu={specialMenu}
           />
         );
+      default:
+        return 0;
     }
   }
 
@@ -114,7 +121,12 @@ export default function InfoBox() {
     <div className={`mb-5 ${classes.container}`}>
       <div className="d-flex shadow-sm">
         <div className={`${classes.reserveIconContainer} shadow-md`}>
-          <img src="assets/reserve-table.png" width={60} height={60} />
+          <img
+            alt="reserve table"
+            src="assets/reserve-table.png"
+            width={60}
+            height={60}
+          />
         </div>
         {reserving ? (
           <div className="d-flex flex-column justify-content-between align-items-stretch flex-fill">

@@ -25,28 +25,47 @@ export default function PeopleStep({
   setParameters,
   offers,
   setReservationDetail,
+  selectedReservationOffer,
 }) {
   React.useEffect(() => {
-    const peopleOffer = { ...reservationDetail?.choosePeople };
-    for (const offer of offers) {
-      if (offer?.peopleGreaterThanSix) {
-        for (
-          let index = 6;
-          index <= Object.entries(reservationDetail?.choosePeople)?.length;
-          index++
-        ) {
-          peopleOffer[index] = [...peopleOffer[index], offer];
+    if (Object.entries(selectedReservationOffer).length > 0) {
+      const peopleOffer = { ...reservationDetail?.choosePeople };
+      for (const [count, offer] of Object.entries(peopleOffer)) {
+        if (selectedReservationOffer?.peopleGreaterThanSix && count >= 6) {
+          peopleOffer[count] = [selectedReservationOffer];
+        } else {
+          peopleOffer[count] = [];
         }
       }
-      offer?.numberOfPeople.forEach((count) => {
-        peopleOffer[count] = [...peopleOffer[count], offer];
+      selectedReservationOffer?.numberOfPeople.forEach((count) => {
+        peopleOffer[count] = [selectedReservationOffer];
+      });
+      setReservationDetail({
+        ...reservationDetail,
+        choosePeople: peopleOffer,
+      });
+    } else {
+      const peopleOffer = { ...reservationDetail?.choosePeople };
+      for (const offer of offers) {
+        if (offer?.peopleGreaterThanSix) {
+          for (
+            let index = 6;
+            index <= Object.entries(reservationDetail?.choosePeople)?.length;
+            index++
+          ) {
+            peopleOffer[index] = [...peopleOffer[index], offer];
+          }
+        }
+        offer?.numberOfPeople.forEach((count) => {
+          peopleOffer[count] = [...peopleOffer[count], offer];
+        });
+      }
+      setReservationDetail({
+        ...reservationDetail,
+        choosePeople: peopleOffer,
       });
     }
-    setReservationDetail({
-      ...reservationDetail,
-      choosePeople: peopleOffer,
-    });
-  }, [offers]);
+  }, [selectedReservationOffer]);
   function updatePeople({ count, value }) {
     const maxOffer = getMaxValue(value, "discountPrice");
     setParameters({
