@@ -51,6 +51,8 @@ export default function InfoBox({ selectedReservationOffer, specialMenu }) {
     }
   }, []);
 
+  console.log("parameters :>> ", parameters);
+
   React.useEffect(() => {
     if (parameters?.people !== undefined && active === 0)
       setIsNextBtnDisabled(false);

@@ -101,6 +101,10 @@ export default function DiscountStep({
     setParameters({ ...parameters, discount });
   }
 
+  function updateSpecialMenu(menu) {
+    setParameters({ ...parameters, menu });
+  }
+
   const createReservation = async () => {
     setLoading(true);
     try {
@@ -115,7 +119,8 @@ export default function DiscountStep({
           numberOfPeople: parseInt(parameters?.people?.count),
           timeSlot: parameters?.time?.slot,
           services: parameters?.time?.name,
-          offer: parameters?.discount === -1 ? null : parameters?.discount,
+          offer: parameters?.discount === -1 ? null : parameters?._id,
+          menu: parameters?.menu,
         };
         await reserveTable(payload);
         toast.success("Reservation created successfully");
@@ -137,8 +142,8 @@ export default function DiscountStep({
             chooseOffer.map((discount, index) => (
               <DiscountCard
                 content={discount}
-                isActive={discount?._id === parameters?.discount?._id}
-                handleClick={() => updateDiscount(discount)}
+                isActive={discount?._id === parameters?.discount}
+                handleClick={() => updateDiscount(discount?._id)}
               />
             ))}
           {chooseOffer?.length > 0 && (
@@ -151,6 +156,22 @@ export default function DiscountStep({
             handleClick={() => updateDiscount(-1)}
           />
         </div>
+        {specialMenu?.length > 0 && (
+          <>
+            <h3 className={classes.header}>Choose a Special Menu</h3>
+            <div className={`custom-scroll-secondary`}>
+              <div className="mx-2">
+                {specialMenu?.map((menu) => (
+                  <DiscountCard
+                    content={menu}
+                    isActive={parameters?.menu === menu?._id}
+                    handleClick={() => updateSpecialMenu(menu?._id)}
+                  />
+                ))}
+              </div>
+            </div>
+          </>
+        )}
       </div>
       <div className={classes.createReservationBtnRoot}>
         <button

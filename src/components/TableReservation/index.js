@@ -46,7 +46,10 @@ export default function TableReservation() {
         </div>
         <div className="d-none d-lg-block col-1"></div>
         <div className="col-12 col-md-6 col-lg-4">
-          <InfoBox selectedReservationOffer={selectedReservationOffer} />
+          <InfoBox
+            selectedReservationOffer={selectedReservationOffer}
+            specialMenu={specialMenu}
+          />
           <Status
             userTotalRating={placeData?.user_ratings_total}
             rating={placeData?.rating}
