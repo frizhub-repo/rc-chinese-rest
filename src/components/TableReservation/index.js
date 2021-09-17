@@ -7,10 +7,24 @@ import MenuBox from "./MenuBox";
 import Status from "./Status";
 import TableCarousel from "./TableCarousel";
 import { Carousel } from "react-bootstrap";
+import { getSpecialMenus } from "api/public";
 
 export default function TableReservation() {
   const { restaurant: { placeData } = {} } = useRestaurantContext();
   const [selectedReservationOffer, setReservationOffer] = React.useState({});
+  const [specialMenu, setSpecialMenu] = React.useState([]);
+
+  React.useEffect(() => {
+    try {
+      async function getSpecialMenusFn() {
+        const res = await getSpecialMenus();
+        setSpecialMenu(res?.data);
+      }
+      getSpecialMenusFn();
+    } catch (error) {
+      console.log({ error });
+    }
+  }, []);
 
   return (
     <div>
@@ -23,7 +37,10 @@ export default function TableReservation() {
             <TableCarousel />
           </div>
           <div className="row">
-            <MenuBox setReservationOffer={setReservationOffer} />
+            <MenuBox
+              setReservationOffer={setReservationOffer}
+              specialMenu={specialMenu}
+            />
           </div>
           <div className="d-none d-sm-flex flex-column align-items-center my-5"></div>
         </div>
