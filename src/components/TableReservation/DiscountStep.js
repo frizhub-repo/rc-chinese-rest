@@ -64,7 +64,19 @@ export default function DiscountStep({ offers, parameters, setParameters }) {
       ) {
         isSlotExist = true;
       }
-      if (isPeopleExist && isDateExist && isSlotExist) {
+      // Set offers based on offers
+      if (offer?.discountType === "bundle" && isDateExist) {
+        setChooseOffer((prevOffer) => [...prevOffer, offer]);
+      }
+      if (
+        offer?.discountType === "group" &&
+        isPeopleExist &&
+        isDateExist &&
+        isSlotExist
+      ) {
+        setChooseOffer((prevOffer) => [...prevOffer, offer]);
+      }
+      if (offer?.discountType === "hourly" && isDateExist && isSlotExist) {
         setChooseOffer((prevOffer) => [...prevOffer, offer]);
       }
     }
@@ -85,21 +97,19 @@ export default function DiscountStep({ offers, parameters, setParameters }) {
       if (!token) {
         toast.info("Please login first");
         history.push("/signIn");
-        return;
-      }
-      if (!parameters?.discount) {
+      } else if (!parameters?.discount) {
         toast.error("Please choose discount");
-        return;
+      } else {
+        const payload = {
+          startTime: parameters?.date?.value,
+          numberOfPeople: parseInt(parameters?.people?.count),
+          timeSlot: parameters?.time?.slot,
+          services: parameters?.time?.name,
+          offer: parameters?.discount === -1 ? null : parameters?.discount,
+        };
+        const res = await reserveTable(payload);
+        toast.success("Reservation created successfully");
       }
-      const payload = {
-        startTime: parameters?.date?.value,
-        numberOfPeople: parseInt(parameters?.people?.count),
-        timeSlot: parameters?.time?.slot,
-        services: parameters?.time?.name,
-        offer: parameters?.discount === -1 ? null : parameters?.discount,
-      };
-      const res = await reserveTable(payload);
-      toast.success("Reservation created successfully");
       setLoading(false);
     } catch (error) {
       toast.error("Error while creating offer");
@@ -132,11 +142,12 @@ export default function DiscountStep({ offers, parameters, setParameters }) {
           />
         </div>
       </div>
-      <div
-        className={classes.createReservationBtnRoot}
-        onClick={createReservation}
-      >
-        <button className={classes.createReservationBtn}>
+      <div className={classes.createReservationBtnRoot}>
+        <button
+          className={classes.createReservationBtn}
+          onClick={createReservation}
+          disabled={loading}
+        >
           {loading && (
             <CircularProgress
               color="inherit"

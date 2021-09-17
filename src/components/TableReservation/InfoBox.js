@@ -144,16 +144,18 @@ export default function InfoBox() {
           />
         ) : (
           <div className={classes.reservingContainer}>
-            <button
-              className={`${classes.reservingNextBtn} shadow-md`}
-              onClick={() => {
-                incrementActive();
-                setIsNextBtnDisabled(true);
-              }}
-              disabled={isNextBtnDisabled}
-            >
-              Next
-            </button>
+            {active !== 3 && (
+              <button
+                className={`${classes.reservingNextBtn} shadow-md`}
+                onClick={() => {
+                  incrementActive();
+                  setIsNextBtnDisabled(true);
+                }}
+                disabled={isNextBtnDisabled}
+              >
+                Next
+              </button>
+            )}
             {getStep(active)}
           </div>
         )
