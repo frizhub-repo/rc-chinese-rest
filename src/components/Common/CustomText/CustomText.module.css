@@ -1,6 +1,6 @@
 .authInput {
   border: 2px solid #f59e0b;
-  background-color: transparent;
+  background-color: #1a1b20;
   border-radius: 10px;
   padding: 10px;
   font-size: 18px;
@@ -15,7 +15,6 @@
 }
 
 .authInput:focus {
-  background-color: transparent;
   outline: none;
 }
 
