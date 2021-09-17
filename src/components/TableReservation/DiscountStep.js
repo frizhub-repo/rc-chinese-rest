@@ -31,56 +31,66 @@ function DiscountCard({ content, isActive, handleClick }) {
   );
 }
 
-export default function DiscountStep({ offers, parameters, setParameters }) {
+export default function DiscountStep({
+  offers,
+  parameters,
+  setParameters,
+  selectedReservationOffer,
+  specialMenu,
+}) {
   const [chooseOffer, setChooseOffer] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const { token } = useRestaurantContext();
   const history = useHistory();
 
   React.useEffect(() => {
-    for (const offer of offers) {
-      let numPeople = parseInt(parameters?.people?.count);
-      const isPeopleExist =
-        offer?.numberOfPeople?.includes(numPeople) ||
-        (offer?.peopleGreaterThanSix && numPeople >= 6);
-      let isDateExist = false;
-      for (
-        let date = new Date(offer?.startDate);
-        date <= new Date(offer?.endDate);
-        date.setDate(date.getDate() + 1)
-      ) {
-        if (
-          new Date(date).toLocaleDateString() ===
-          new Date(parameters?.date?.value).toLocaleDateString()
+    if (Object.entries(selectedReservationOffer).length > 0) {
+      setChooseOffer([selectedReservationOffer]);
+    } else {
+      for (const offer of offers) {
+        let numPeople = parseInt(parameters?.people?.count);
+        const isPeopleExist =
+          offer?.numberOfPeople?.includes(numPeople) ||
+          (offer?.peopleGreaterThanSix && numPeople >= 6);
+        let isDateExist = false;
+        for (
+          let date = new Date(offer?.startDate);
+          date <= new Date(offer?.endDate);
+          date.setDate(date.getDate() + 1)
         ) {
-          isDateExist = true;
+          if (
+            new Date(date).toLocaleDateString() ===
+            new Date(parameters?.date?.value).toLocaleDateString()
+          ) {
+            isDateExist = true;
+          }
+        }
+        let isSlotExist = false;
+        if (
+          offer?.hourlyTimeSlots?.includes(parameters?.time?.slot) ||
+          (parameters?.time?.slot >= offer?.groupTimeSlot?.startHour &&
+            parameters?.time?.slot <= offer?.groupTimeSlot?.endHour)
+        ) {
+          isSlotExist = true;
+        }
+        // Set offers based on offers
+        if (offer?.discountType === "bundle" && isDateExist) {
+          setChooseOffer((prevOffer) => [...prevOffer, offer]);
+        }
+        if (
+          offer?.discountType === "group" &&
+          isPeopleExist &&
+          isDateExist &&
+          isSlotExist
+        ) {
+          setChooseOffer((prevOffer) => [...prevOffer, offer]);
+        }
+        if (offer?.discountType === "hourly" && isDateExist && isSlotExist) {
+          setChooseOffer((prevOffer) => [...prevOffer, offer]);
         }
       }
-      let isSlotExist = false;
-      if (
-        offer?.hourlyTimeSlots?.includes(parameters?.time?.slot) ||
-        (parameters?.time?.slot >= offer?.groupTimeSlot?.startHour &&
-          parameters?.time?.slot <= offer?.groupTimeSlot?.endHour)
-      ) {
-        isSlotExist = true;
-      }
-      // Set offers based on offers
-      if (offer?.discountType === "bundle" && isDateExist) {
-        setChooseOffer((prevOffer) => [...prevOffer, offer]);
-      }
-      if (
-        offer?.discountType === "group" &&
-        isPeopleExist &&
-        isDateExist &&
-        isSlotExist
-      ) {
-        setChooseOffer((prevOffer) => [...prevOffer, offer]);
-      }
-      if (offer?.discountType === "hourly" && isDateExist && isSlotExist) {
-        setChooseOffer((prevOffer) => [...prevOffer, offer]);
-      }
     }
-  }, []);
+  }, [selectedReservationOffer, offers]);
 
   const noDiscount = {
     title: "Don’t use any discounts",
@@ -89,6 +99,10 @@ export default function DiscountStep({ offers, parameters, setParameters }) {
 
   function updateDiscount(discount) {
     setParameters({ ...parameters, discount });
+  }
+
+  function updateSpecialMenu(menu) {
+    setParameters({ ...parameters, menu });
   }
 
   const createReservation = async () => {
@@ -105,9 +119,10 @@ export default function DiscountStep({ offers, parameters, setParameters }) {
           numberOfPeople: parseInt(parameters?.people?.count),
           timeSlot: parameters?.time?.slot,
           services: parameters?.time?.name,
-          offer: parameters?.discount === -1 ? null : parameters?.discount,
+          offer: parameters?.discount === -1 ? null : parameters?._id,
+          menu: parameters?.menu,
         };
-        const res = await reserveTable(payload);
+        await reserveTable(payload);
         toast.success("Reservation created successfully");
       }
       setLoading(false);
@@ -127,8 +142,8 @@ export default function DiscountStep({ offers, parameters, setParameters }) {
             chooseOffer.map((discount, index) => (
               <DiscountCard
                 content={discount}
-                isActive={discount?._id === parameters?.discount?._id}
-                handleClick={() => updateDiscount(discount)}
+                isActive={discount?._id === parameters?.discount}
+                handleClick={() => updateDiscount(discount?._id)}
               />
             ))}
           {chooseOffer?.length > 0 && (
@@ -141,6 +156,22 @@ export default function DiscountStep({ offers, parameters, setParameters }) {
             handleClick={() => updateDiscount(-1)}
           />
         </div>
+        {specialMenu?.length > 0 && (
+          <>
+            <h3 className={classes.header}>Choose a Special Menu</h3>
+            <div className={`custom-scroll-secondary`}>
+              <div className="mx-2">
+                {specialMenu?.map((menu) => (
+                  <DiscountCard
+                    content={menu}
+                    isActive={parameters?.menu === menu?._id}
+                    handleClick={() => updateSpecialMenu(menu?._id)}
+                  />
+                ))}
+              </div>
+            </div>
+          </>
+        )}
       </div>
       <div className={classes.createReservationBtnRoot}>
         <button

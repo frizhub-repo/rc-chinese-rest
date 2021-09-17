@@ -16,117 +16,91 @@ const styles = {
     width: "130px",
     height: "130px",
   },
+  courseHeight: {
+    height: "fit-content",
+    maxHeight: "1000px",
+  },
 };
 
 function DailyMenuItem({
-  name,
-  image,
-  properties,
-  price,
+  title,
+  images,
+  foodType,
+  sizes,
   ingredients,
-  allergeni,
+  allergies,
 }) {
   return (
     <div className="d-flex justify-content-center mb-3">
       <div className="shadow-sm d-lg-flex flex-column align-items-center d-none">
-        <img style={styles.itemImage} src={image} />
+        <img
+          style={styles.itemImage}
+          src={`${process.env.REACT_APP_API_BASE_URL}/${images[0]}`}
+          alt="product"
+        />
         <div
           className={`d-flex justify-content-between ${classes.properties_container}`}
         >
           <img
             className={`flex-1 ${classes.property} ${
-              !properties.vegan && classes.not_property
+              !foodType.vegan && classes.not_property
             }`}
             src="assets/vegan.png"
+            alt="vegan"
           />
           <img
             className={`flex-1 ${classes.property} ${
-              !properties.glutten_free && classes.not_property
+              !foodType.glutenFree && classes.not_property
             }`}
+            alt="Gluten free"
             src="assets/glutten-free.png"
           />{" "}
           <img
             className={`flex-1 ${classes.property} ${
-              !properties.hot && classes.not_property
+              !foodType.spicy && classes.not_property
             }`}
             src="assets/hot.png"
+            alt="Spicy"
           />
         </div>
       </div>
       <div className={`mr-2 my-2 my-lg-0 ${classes.details}`}>
         <div className="d-flex justify-content-between">
-          <h4>{name}</h4>
-          <h4>{price}</h4>
+          <h4>{title}</h4>
+          <h4>{sizes?.[0]?.price}</h4>
         </div>
         <div className="d-flex">
           <p>Ingredients: {ingredients.map((i) => `${i}, `)}</p>
         </div>
         <div className="d-flex">
-          <p>Allergeni: {allergeni.map((i) => `${i}, `)}</p>
+          <p>Allergeni: {allergies.map((i) => `${i}, `)}</p>
         </div>
       </div>
     </div>
   );
 }
 
-export default function DailyMenuContent() {
-  const [courses, setCourses] = useState([
-    {
-      name: "first course",
-      items: [
-        {
-          image: "assets/item-pic.png",
-          name: "SPAGHETTI ALLA PUTTANESCA",
-          price: "5€",
-          ingredients: ["Pasta di Grano", "Sugo di Pomodoro", "Peperoncino"],
-          allergeni: ["Farina"],
-          properties: { vegan: true, hot: true },
-        },
-        {
-          image: "assets/item-pic.png",
-          name: "SPAGHETTI ALLA PUTTANESCA",
-          price: "5€",
-          ingredients: ["Pasta di Grano", "Sugo di Pomodoro", "Peperoncino"],
-          allergeni: ["Farina"],
-          properties: { vegan: true, hot: true },
-        },
-      ],
-    },
-    {
-      name: "second course",
-      items: [
-        {
-          image: "assets/item-pic.png",
-          name: "SPAGHETTI ALLA PUTTANESCA",
-          price: "5€",
-          ingredients: ["Pasta di Grano", "Sugo di Pomodoro", "Peperoncino"],
-          allergeni: ["Farina"],
-          properties: { vegan: true, hot: true },
-        },
-        {
-          image: "assets/item-pic.png",
-          name: "SPAGHETTI ALLA PUTTANESCA",
-          price: "5€",
-          ingredients: ["Pasta di Grano", "Sugo di Pomodoro", "Peperoncino"],
-          allergeni: ["Farina"],
-          properties: { vegan: true, hot: true },
-        },
-      ],
-    },
-  ]);
-
+export default function DailyMenuContent({ specialMenu }) {
   return (
-    <div>
+    <div className="custom-scroll" style={styles.courseHeight}>
       <hr style={styles.divider} />
-      {courses.map((course) => (
-        <div>
-          <h2 style={styles.courseName}>{course.name}</h2>
-          {course.items.map((item) => (
-            <DailyMenuItem {...item} />
-          ))}
-          <hr style={styles.divider} />
-        </div>
-      ))}
+      {specialMenu?.length > 0 ? (
+        specialMenu?.map((menu) =>
+          menu?.items.map(({ category, products }) => (
+            <div>
+              <h2 style={styles.courseName}>{category?.name}</h2>
+              {products?.length > 0 ? (
+                products?.map((item) => <DailyMenuItem {...item} />)
+              ) : (
+                <span>This section don't have any products</span>
+              )}
+              <hr style={styles.divider} />
+            </div>
+          ))
+        )
+      ) : (
+        <span>No special menu found</span>
+      )}
     </div>
   );
 }

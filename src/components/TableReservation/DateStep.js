@@ -1,8 +1,8 @@
+import useDateStep from "Hooks/useDateStep";
 import * as React from "react";
 import Calendar from "react-calendar";
-import classes from "./Styles/Step.module.css";
-import { NavigateNext, NavigateBefore } from "@material-ui/icons";
 import { getMaxValue } from "utils/common";
+import classes from "./Styles/Step.module.css";
 
 function Discount({ isActive, offers }) {
   const maxOffer = getMaxValue(offers, "discountPrice");
@@ -26,26 +26,13 @@ export default function DateStep({
   setParameters,
   reservationDetail,
   setReservationDetail,
+  selectedReservationOffer,
 }) {
-  React.useEffect(() => {
-    let days = [];
-    for (const offer of offers) {
-      for (
-        let d = new Date(offer?.startDate);
-        d <= new Date(offer?.endDate);
-        d.setDate(d.getDate() + 1)
-      ) {
-        const index = days.findIndex((value) => value.day === d);
-        index === -1
-          ? days.push({ day: d.toLocaleDateString(), offers: [offer] })
-          : (days[index] = {
-              day: d.toLocaleDateString(),
-              offers: [...days[index].offers, offer],
-            });
-      }
-    }
-    setReservationDetail({ ...reservationDetail, days });
-  }, []);
+  useDateStep({
+    offers,
+    selectedReservationOffer,
+    setReservationDetail,
+  });
 
   function updateDate(e) {
     if (reservationDetail?.days?.length > 0) {
