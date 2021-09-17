@@ -1,6 +1,6 @@
 import { Checkbox, FormControlLabel } from "@material-ui/core";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
+import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
+import AddCircleOutlineSharpIcon from "@material-ui/icons/AddCircleOutlineSharp";
 import { Skeleton } from "@material-ui/lab";
 import { getReservationOffers } from "api/public";
 import React, { useState, useEffect } from "react";
@@ -33,6 +33,15 @@ const styles = {
     width: "200px",
     height: "180px",
     borderRadius: "30px",
+  },
+  iconStyle: {
+    color: "green",
+    width: "50px",
+    height: "50px",
+  },
+  iconRoot: {
+    display: "flex",
+    justifyContent: "flex-end",
   },
 };
 
@@ -132,19 +141,23 @@ export default function PromotionContent({ setReservationOffer }) {
                         <span>SPECIAL OFFER</span>
                         <span>{item?.discountPrice}</span>
                         <FormControlLabel
+                          style={styles.iconRoot}
                           onClick={(event) =>
                             handleChangeReservationOffer(event, item)
                           }
-                          label="Add to cart"
                           control={
                             <Checkbox
                               label="Add to cart"
                               icon={
-                                <RadioButtonUncheckedIcon
-                                  style={{ color: "red", width: "35px" }}
+                                <AddCircleOutlineSharpIcon
+                                  style={styles.iconStyle}
                                 />
                               }
-                              checkedIcon={<CheckCircleIcon />}
+                              checkedIcon={
+                                <CheckCircleOutlineIcon
+                                  style={styles.iconStyle}
+                                />
+                              }
                             />
                           }
                         ></FormControlLabel>

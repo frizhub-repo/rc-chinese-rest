@@ -19,7 +19,12 @@ function Discount({ isActive, offers }) {
   );
 }
 
-export default function TimeStep({ offers, parameters, setParameters }) {
+export default function TimeStep({
+  offers,
+  parameters,
+  setParameters,
+  selectedReservationOffer,
+}) {
   const [timeSlots, setTimeSlots] = React.useState([
     {
       name: "breakfast",
@@ -48,30 +53,48 @@ export default function TimeStep({ offers, parameters, setParameters }) {
   ]);
 
   React.useEffect(() => {
-    let timeSlotOffer = [...timeSlots];
-    for (const offer of offers) {
+    if (Object.entries(selectedReservationOffer).length > 0) {
+      let timeSlotOffer = [...timeSlots];
       timeSlotOffer?.map((timeObj, index) => {
         Object.entries(timeObj.slots).map(([slot, offerObj]) => {
           if (
-            slot >= offer?.groupTimeSlot?.startHour &&
-            slot <= offer?.groupTimeSlot?.endHour
+            slot >= selectedReservationOffer?.groupTimeSlot?.startHour &&
+            slot <= selectedReservationOffer?.groupTimeSlot?.endHour
           ) {
-            timeSlotOffer[index].slots[slot] = [
-              ...timeSlotOffer[index].slots[slot],
-              offer,
-            ];
+            timeSlotOffer[index].slots[slot] = [selectedReservationOffer];
           }
-          if (offer?.hourlyTimeSlots?.includes(slot)) {
-            timeSlotOffer[index].slots[slot] = [
-              ...timeSlotOffer[index].slots[slot],
-              offer,
-            ];
+          if (selectedReservationOffer?.hourlyTimeSlots?.includes(slot)) {
+            timeSlotOffer[index].slots[slot] = [selectedReservationOffer];
           }
         });
       });
+      setTimeSlots(timeSlotOffer);
+    } else {
+      let timeSlotOffer = [...timeSlots];
+      for (const offer of offers) {
+        timeSlotOffer?.map((timeObj, index) => {
+          Object.entries(timeObj.slots).map(([slot, offerObj]) => {
+            if (
+              slot >= offer?.groupTimeSlot?.startHour &&
+              slot <= offer?.groupTimeSlot?.endHour
+            ) {
+              timeSlotOffer[index].slots[slot] = [
+                ...timeSlotOffer[index].slots[slot],
+                offer,
+              ];
+            }
+            if (offer?.hourlyTimeSlots?.includes(slot)) {
+              timeSlotOffer[index].slots[slot] = [
+                ...timeSlotOffer[index].slots[slot],
+                offer,
+              ];
+            }
+          });
+        });
+      }
+      setTimeSlots(timeSlotOffer);
     }
-    setTimeSlots(timeSlotOffer);
-  }, []);
+  }, [selectedReservationOffer, offers]);
 
   function updateTime(name, slot, value) {
     const maxValue = getMaxValue(value, "discountPrice");
