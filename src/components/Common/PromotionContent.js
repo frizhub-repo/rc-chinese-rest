@@ -1,3 +1,6 @@
+import { Checkbox, FormControlLabel } from "@material-ui/core";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 import { Skeleton } from "@material-ui/lab";
 import { getReservationOffers } from "api/public";
 import React, { useState, useEffect } from "react";
@@ -33,7 +36,7 @@ const styles = {
   },
 };
 
-export default function PromotionContent() {
+export default function PromotionContent({ setReservationOffer }) {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(null);
   const [carouselItemCount, setCarouselItemCount] = useState(3);
@@ -68,6 +71,14 @@ export default function PromotionContent() {
 
     setDirection(direction);
   }
+
+  const handleChangeReservationOffer = (event, offer) => {
+    if (event?.target?.checked) {
+      setReservationOffer(offer);
+    } else {
+      setReservationOffer({});
+    }
+  };
 
   return (
     <div style={{ width: "100%" }}>
@@ -120,6 +131,23 @@ export default function PromotionContent() {
                       >
                         <span>SPECIAL OFFER</span>
                         <span>{item?.discountPrice}</span>
+                        <FormControlLabel
+                          onClick={(event) =>
+                            handleChangeReservationOffer(event, item)
+                          }
+                          label="Add to cart"
+                          control={
+                            <Checkbox
+                              label="Add to cart"
+                              icon={
+                                <RadioButtonUncheckedIcon
+                                  style={{ color: "red", width: "35px" }}
+                                />
+                              }
+                              checkedIcon={<CheckCircleIcon />}
+                            />
+                          }
+                        ></FormControlLabel>
                       </div>
                     )}
                   </div>

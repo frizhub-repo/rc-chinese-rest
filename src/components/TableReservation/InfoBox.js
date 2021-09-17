@@ -9,7 +9,7 @@ import DateStep from "./DateStep";
 import { getReservationOffers } from "api/public";
 import { Skeleton } from "@material-ui/lab";
 
-export default function InfoBox() {
+export default function InfoBox({ selectedReservationOffer }) {
   const [loading, setLoading] = React.useState(false);
   const [reserving, setReserving] = React.useState(false);
   const [isNextBtnDisabled, setIsNextBtnDisabled] = React.useState(true);
@@ -79,6 +79,7 @@ export default function InfoBox() {
             setReservationDetail={setReservationDetail}
             parameters={parameters}
             setParameters={setParameters}
+            selectedReservationOffer={selectedReservationOffer}
           />
         );
       case 1:
