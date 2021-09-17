@@ -31,7 +31,7 @@ export function RestaurantProvider({ children }) {
         window.location.reload();
       }
     }
-  }, [token]);
+  }, [token, refetchCustomer]);
 
   useEffect(async () => {
     const data = await fetchRestaurantInfo();
