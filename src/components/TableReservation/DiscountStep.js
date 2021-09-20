@@ -55,7 +55,8 @@ export default function DiscountStep({
         let isDateExist = false;
         for (
           let date = new Date(offer?.startDate);
-          date <= new Date(offer?.endDate);
+          new Date(date.toLocaleDateString()) <=
+          new Date(new Date(offer?.endDate).toLocaleDateString());
           date.setDate(date.getDate() + 1)
         ) {
           if (
