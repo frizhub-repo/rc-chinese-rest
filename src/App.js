@@ -27,13 +27,17 @@ import SignUp from "components/Auth/SignUp";
 import ForgotPassword from "components/Auth/ForgotPassword";
 import Settings from "components/Settings";
 import { useRestaurantContext } from "Context/restaurantContext";
+import ResetPassword from "components/Auth/ResetPassword";
+import NewPassword from "components/Auth/NewPassword";
 
 function FooterWrapper({ location }) {
   if (
     location.pathname.match("/signIn") ||
     location.pathname.match("signUp") ||
     location.pathname.match("forgotPassword") ||
-    location.pathname.match("profile")
+    location.pathname.match("profile") ||
+    location.pathname.match("resetPassword.*") ||
+    location.pathname.match("newPassword.*")
   )
     return null;
   return <Footer />;
@@ -55,6 +59,8 @@ function App() {
           <Route path="/signIn" exact component={SignIn} />
           <Route path="/signUp" exact component={SignUp} />
           <Route path="/forgotPassword" exact component={ForgotPassword} />
+          <Route path="/resetPassword/:id" exact component={ResetPassword} />
+          <Route path="/newPassword/:id/:code" exact component={NewPassword} />
 
           {token ? (
             <>
