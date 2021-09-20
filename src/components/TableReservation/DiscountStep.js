@@ -55,7 +55,8 @@ export default function DiscountStep({
         let isDateExist = false;
         for (
           let date = new Date(offer?.startDate);
-          date <= new Date(offer?.endDate);
+          new Date(date.toLocaleDateString()) <=
+          new Date(new Date(offer?.endDate).toLocaleDateString());
           date.setDate(date.getDate() + 1)
         ) {
           if (
@@ -113,14 +114,16 @@ export default function DiscountStep({
         history.push("/signIn");
       } else if (!parameters?.discount) {
         toast.error("Please choose discount");
+      } else if (!parameters?.menu) {
+        toast.error("Please choose special menu");
       } else {
         const payload = {
           startTime: parameters?.date?.value,
           numberOfPeople: parseInt(parameters?.people?.count),
           timeSlot: parameters?.time?.slot,
           services: parameters?.time?.name,
-          offer: parameters?.discount === -1 ? null : parameters?._id,
-          menu: parameters?.menu,
+          offer: parameters?.discount === -1 ? null : parameters?.discount,
+          specialMenu: parameters?.menu,
         };
         await reserveTable(payload);
         toast.success("Reservation created successfully");
