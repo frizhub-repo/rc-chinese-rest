@@ -34,18 +34,26 @@ const styles = {
     height: "180px",
     borderRadius: "30px",
   },
-  iconStyle: {
-    color: "green",
-    width: "50px",
-    height: "50px",
+  reserveBtn: {
+    border: "1px solid #fff",
+    borderRadius: "15px",
+    padding: "0 10px",
+    marginTop: "5px",
+    fontSize: "20px",
+    outline: "none",
   },
-  iconRoot: {
+  actionBtnRoot: {
     display: "flex",
-    justifyContent: "flex-end",
+  },
+  discountPriceTxt: {
+    flex: 1,
   },
 };
 
-export default function PromotionContent({ setReservationOffer }) {
+export default function PromotionContent({
+  setReservationOffer,
+  selectedReservationOffer,
+}) {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(null);
   const [carouselItemCount, setCarouselItemCount] = useState(3);
@@ -81,11 +89,11 @@ export default function PromotionContent({ setReservationOffer }) {
     setDirection(direction);
   }
 
-  const handleChangeReservationOffer = (event, offer) => {
-    if (event?.target?.checked) {
-      setReservationOffer(offer);
-    } else {
+  const handleChangeReservationOffer = (offer) => {
+    if (selectedReservationOffer?._id === offer?._id) {
       setReservationOffer({});
+    } else {
+      setReservationOffer(offer);
     }
   };
 
@@ -133,36 +141,22 @@ export default function PromotionContent({ setReservationOffer }) {
                         ))}
                       </div>
                     </div>
-                    {item?.discountPrice && (
-                      <div
-                        className="col-xs-12 col-sm-3 d-flex flex-column"
-                        style={styles.offer}
+
+                    <div
+                      className="col-xs-12 col-sm-3 d-flex flex-column"
+                      style={styles.offer}
+                    >
+                      <span>SPECIAL OFFER</span>
+                      <span>{item?.discountPrice}</span>
+                      <button
+                        style={styles.reserveBtn}
+                        onClick={() => handleChangeReservationOffer(item)}
                       >
-                        <span>SPECIAL OFFER</span>
-                        <span>{item?.discountPrice}</span>
-                        <FormControlLabel
-                          style={styles.iconRoot}
-                          onClick={(event) =>
-                            handleChangeReservationOffer(event, item)
-                          }
-                          control={
-                            <Checkbox
-                              label="Add to cart"
-                              icon={
-                                <AddCircleOutlineSharpIcon
-                                  style={styles.iconStyle}
-                                />
-                              }
-                              checkedIcon={
-                                <CheckCircleOutlineIcon
-                                  style={styles.iconStyle}
-                                />
-                              }
-                            />
-                          }
-                        ></FormControlLabel>
-                      </div>
-                    )}
+                        {selectedReservationOffer?._id === item?._id
+                          ? "Remove Offer"
+                          : "Add offer"}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

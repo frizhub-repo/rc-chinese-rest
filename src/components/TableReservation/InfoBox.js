@@ -158,6 +158,7 @@ export default function InfoBox({ selectedReservationOffer, specialMenu }) {
           <div className={classes.reservingContainer}>
             {active !== 3 && (
               <button
+                style={{ border: 0, outline: "none" }}
                 className={`${classes.reservingNextBtn} shadow-md`}
                 onClick={() => {
                   incrementActive();
