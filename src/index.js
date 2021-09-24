@@ -16,6 +16,7 @@ import store from "./store";
 import { RestaurantProvider } from "./Context/restaurantContext";
 import { Provider } from "react-redux";
 import { OrderProvider } from "Context/OrderContext";
+import FacebookChatPlugin from "components/ChatPlugin/FacebookChatPlugin";
 
 ReactDOM.render(
   [
@@ -27,6 +28,7 @@ ReactDOM.render(
       </RestaurantProvider>
     </Provider>,
     <ToastContainer />,
+    <FacebookChatPlugin />,
   ],
   document.getElementById("root")
 );
