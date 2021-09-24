@@ -176,6 +176,7 @@ export default function DiscountStep({
       </div>
       <div className={classes.createReservationBtnRoot}>
         <button
+          style={{ outline: "none" }}
           className={classes.createReservationBtn}
           onClick={createReservation}
           disabled={loading}

@@ -39,6 +39,7 @@ export default function TableReservation() {
           <div className="row">
             <MenuBox
               setReservationOffer={setReservationOffer}
+              selectedReservationOffer={selectedReservationOffer}
               specialMenu={specialMenu}
             />
           </div>

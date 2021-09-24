@@ -35,7 +35,11 @@ const styles = {
   },
 };
 
-export default function MenuBox({ setReservationOffer, specialMenu }) {
+export default function MenuBox({
+  setReservationOffer,
+  specialMenu,
+  selectedReservationOffer,
+}) {
   const history = useHistory();
 
   const [categorySelected, setCategorySelected] = useState(0);
@@ -50,7 +54,12 @@ export default function MenuBox({ setReservationOffer, specialMenu }) {
       case 0:
         return <DailyMenuContent specialMenu={specialMenu} />;
       case 1:
-        return <PromotionContent setReservationOffer={setReservationOffer} />;
+        return (
+          <PromotionContent
+            setReservationOffer={setReservationOffer}
+            selectedReservationOffer={selectedReservationOffer}
+          />
+        );
       case 2:
         return <InfoContent />;
       default:
