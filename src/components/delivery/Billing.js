@@ -12,7 +12,7 @@ const styles = {
     textDecoration: "underline",
   },
   bundlePrdSpacing: {
-    paddingLeft: "30px",
+    paddingLeft: "35px",
   },
   sizes: {
     textAlign: "left",
@@ -51,8 +51,8 @@ export default function Billing() {
 
   return (
     <div className="my-3 text-white">
-      {products.map((item) => (
-        <>
+      {products.map((item, index) => (
+        <div key={index}>
           <div className="d-flex justify-content-between mb-1">
             <div className="d-flex align-items-center">
               <img
@@ -60,6 +60,7 @@ export default function Billing() {
                 src="assets/delete.png"
                 width={30}
                 className="cursor-pointer"
+                alt="Delete img"
               />
               <div className="d-flex flex-column">
                 <small className="ml-1" style={styles.productName}>
@@ -68,19 +69,16 @@ export default function Billing() {
                 <small style={styles.sizes}>{item?.size?.title}</small>
               </div>
             </div>
-            {item.price ? (
-              <div style={styles.priceTagContainer}>
-                {(item?.isDiscount === "flat" ||
-                  item?.isDiscount === "percentage") && (
-                  <span style={styles.originalPriceTag}>
-                    {item?.originalPrice}€
-                  </span>
-                )}
-                <p>{item.price > 0 ? item.price : 0}€</p>
-              </div>
-            ) : (
-              <p className={styles.free}>Free</p>
-            )}
+
+            <div style={styles.priceTagContainer}>
+              {(item?.isDiscount === "flat" ||
+                item?.isDiscount === "percentage") && (
+                <span style={styles.originalPriceTag}>
+                  {item?.originalPrice}€
+                </span>
+              )}
+              <p>{item.price > 0 ? item.price : 0}€</p>
+            </div>
           </div>
           {item?.bundledProduct?.length > 0 &&
             item?.bundledProduct?.map((productObj) => (
@@ -90,7 +88,7 @@ export default function Billing() {
                   className="d-flex justify-content-between mb-1"
                 >
                   <div className="d-flex align-items-center">
-                    <small className="ml-5" style={styles.productName}>
+                    <small style={styles.productName}>
                       <span>{item?.quantity}x</span>{" "}
                       {productObj?.product?.title}
                     </small>
@@ -102,12 +100,14 @@ export default function Billing() {
                 </span>
               </div>
             ))}
-        </>
+        </div>
       ))}
       <hr style={styles.divider} />
       <div className="d-flex justify-content-between align-items-center">
         <p>Subtotal</p>
-        <p style={styles.total}>{total}€</p>
+        <p style={styles.total}>
+          {products?.length > 0 ? total.toFixed(2) : 0}€
+        </p>
       </div>
     </div>
   );

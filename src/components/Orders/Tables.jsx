@@ -14,6 +14,16 @@ const useStyles = makeStyles({
   table: {
     // minWidth: 700,
   },
+  originalPriceTag: {
+    fontSize: "15px",
+    lineHeight: "19px",
+    color: "rgba(0, 0, 0, 0.5)",
+    textDecorationLine: "line-through",
+    marginRight: "10px",
+  },
+  free: {
+    color: "#10B981",
+  },
 });
 
 function ccyFormat(num) {
@@ -58,9 +68,9 @@ export default function Tables({ products, total }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {products?.map((product) => (
+          {products?.map((product, index) => (
             <>
-              <TableRow key={product?.product?._id || product.product}>
+              <TableRow key={index}>
                 <TableCell>{product?.product?.title || product.name}</TableCell>
                 <TableCell align="right">
                   {(product?.isDiscount === "flat" ||
