@@ -1,7 +1,8 @@
 import { Backdrop, Box, CircularProgress, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import { removeOrderItems } from "actions";
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import axiosIntance from "../../utils/axios-configure";
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 const OrderSummary = () => {
   const paypal = useRef();
   const classes = useStyles();
-  const [status, setStatus] = useState(null);
+  const dispatch = useDispatch();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const products = useSelector((state) => state.orders).products;
@@ -73,13 +74,13 @@ const OrderSummary = () => {
         onApprove: async (data, actions) => {
           const order = await actions.order.capture();
           if (order?.status === "COMPLETED") {
-            debugger;
             const res = await axiosIntance.post("/api/v1/orders/customers", {
               products: products,
               time,
               note,
               address,
             });
+            dispatch(removeOrderItems());
             toast.success("Order has been created successfully");
             history.push(`/ordersreceived/${res?.data?._id}`);
             setLoading(false);
@@ -124,7 +125,7 @@ const OrderSummary = () => {
         <Grid item>
           <Box className={classes.detail}>
             <label className={classes.detailText}>Order Detail</label>
-            <label className={classes.total}>Total: {total} €</label>
+            <label className={classes.total}>Total: {total.toFixed(2)} €</label>
           </Box>
         </Grid>
         <Grid item>
