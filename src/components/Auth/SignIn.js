@@ -8,10 +8,12 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import axiosIntance from "../../utils/axios-configure";
 import SocialAuth from "./SocialAuth";
+import { CircularProgress } from "@material-ui/core";
 
 import classes from "./Auth.module.css";
 import { IconButton } from "rsuite";
 import FieldError from "components/Common/FieldError";
+import { EMAIL_REGEX } from "utils/types";
 
 export default function SignIn({ setActiveStep, handleClickOpen }) {
   const history = useHistory();
@@ -30,7 +32,6 @@ export default function SignIn({ setActiveStep, handleClickOpen }) {
           res?.data?.token;
         localStorage.setItem("token", res?.data?.token);
         setToken(res?.data?.token);
-        toast.success("You have been sign in successfully");
         history.push("/");
       }
     } catch (error) {
@@ -51,8 +52,14 @@ export default function SignIn({ setActiveStep, handleClickOpen }) {
             className={classes.authInput}
             type="text"
             placeholder="Email"
-            ref={register({ required: "Email is required" })}
+            ref={register({
+              required: "Email is required",
+              pattern: EMAIL_REGEX,
+            })}
           />
+          {errors.email?.type === "pattern" && (
+            <FieldError message={"Email is not valid"} />
+          )}
           {errors?.email?.message && (
             <FieldError message={errors?.email?.message} />
           )}
@@ -76,6 +83,7 @@ export default function SignIn({ setActiveStep, handleClickOpen }) {
           )}
           <div className={classes.forgotPassContainer}>
             <button
+              type="button"
               className={classes.forgotPass}
               onClick={() => history.push("forgotPassword")}
             >
@@ -83,6 +91,13 @@ export default function SignIn({ setActiveStep, handleClickOpen }) {
             </button>
           </div>
           <button type="submit" className={classes.submitBtn}>
+            {loading && (
+              <CircularProgress
+                color="inherit"
+                size={20}
+                style={{ marginRight: "8px" }}
+              />
+            )}
             Login
           </button>
         </form>
