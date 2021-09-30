@@ -11,6 +11,8 @@ import axiosIntance from "../../utils/axios-configure";
 import classes from "./Auth.module.css";
 import SocialAuth from "./SocialAuth";
 import FieldError from "components/Common/FieldError";
+import { CircularProgress } from "@material-ui/core";
+import { EMAIL_REGEX } from "utils/types";
 
 export default function SignUp({ setActiveStep, handleClickOpen }) {
   const history = useHistory();
@@ -31,7 +33,6 @@ export default function SignUp({ setActiveStep, handleClickOpen }) {
           res?.data?.token;
         localStorage.setItem("token", res?.data?.token);
         setToken(res?.data?.token);
-        toast.success("Registration successful!");
         history.push("/");
       }
     } catch (error) {
@@ -84,7 +85,7 @@ export default function SignUp({ setActiveStep, handleClickOpen }) {
             placeholder="Email"
             ref={register({
               required: "Email is required",
-              pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+              pattern: EMAIL_REGEX,
             })}
           />
           {errors.email?.type === "pattern" && (
@@ -122,6 +123,7 @@ export default function SignUp({ setActiveStep, handleClickOpen }) {
               placeholder="Confirm Password"
               ref={register({
                 required: "Please re-type your password",
+                minLength: 8,
                 validate: (value) =>
                   value === watch("password") || "Password does not match",
               })}
@@ -136,8 +138,18 @@ export default function SignUp({ setActiveStep, handleClickOpen }) {
           {errors?.rePassword?.message && (
             <FieldError message={errors?.rePassword?.message} />
           )}
+          {errors?.rePassword?.type === "minLength" && (
+            <FieldError message={"Password must be 8 characters long"} />
+          )}
           <div style={{ marginBottom: "20px" }}></div>
           <button type="submit" className={classes.submitBtn}>
+            {loading && (
+              <CircularProgress
+                color="inherit"
+                size={20}
+                style={{ marginRight: "8px" }}
+              />
+            )}
             Sign Up
           </button>
         </form>
