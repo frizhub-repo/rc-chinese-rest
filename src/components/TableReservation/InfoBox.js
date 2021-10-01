@@ -108,6 +108,7 @@ export default function InfoBox({ selectedReservationOffer, specialMenu }) {
             offers={offers}
             parameters={parameters}
             setParameters={setParameters}
+            setActive={setActive}
             selectedReservationOffer={selectedReservationOffer}
             specialMenu={specialMenu}
           />
@@ -177,16 +178,31 @@ export default function InfoBox({ selectedReservationOffer, specialMenu }) {
           <div className="mx-1 mt-2">
             <div className="d-flex justify-content-between my-3">
               <button className={`${classes.statusButton} flex-fill`}>
-                <img className="mx-2" src="assets/like.png" width={40} />
+                <img
+                  className="mx-2"
+                  src="assets/like.png"
+                  width={40}
+                  alt="Like"
+                />
                 <h5 className="m-0">4|5</h5>
               </button>
               <button className={`${classes.statusButton} flex-fill`}>
-                <img className="mx-2" src="assets/chat.png" width={40} />
+                <img
+                  className="mx-2"
+                  src="assets/chat.png"
+                  width={40}
+                  alt="chat"
+                />
                 <h5 className="m-0">427</h5>
               </button>
               <button className={`${classes.statusButton} flex-fill`}>
-                <img className="mx-2" src="assets/active-euro.png" width={40} />
-                <img src="assets/passive-euro.png" width={40} />
+                <img
+                  className="mx-2"
+                  src="assets/active-euro.png"
+                  width={40}
+                  alt="Euro"
+                />
+                <img src="assets/passive-euro.png" width={40} alt="Euro" />
               </button>
             </div>
           </div>
