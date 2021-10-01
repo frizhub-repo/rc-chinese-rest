@@ -17,6 +17,7 @@ const styles = {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    cursor: "pointer",
   },
   buttonText: {
     color: "#F49E0B",
@@ -55,22 +56,17 @@ export default function Menu() {
         <Hero />
       </section>
       <section className="row mt-5 mr-0">
-        <div className="col-12 col-md-6 mb-5 mb-md-0 pl-0 pl-md-5">
+        <div className="col-12 col-md-8 mb-5 mb-md-0 pl-0 pl-md-5">
           <ItemCarousel
             specialMenu={specialMenu}
             activeIndex={activeIndex}
             setActiveIndex={setActiveIndex}
           />
         </div>
-        <div className="col-12 col-md-5 d-flex justify-content-center align-items-center">
-          <div style={styles.reserve}>
-            <img src="assets/reserve-table.png" />
-            <a
-              style={styles.buttonText}
-              onClick={() => history.push("tableRes")}
-            >
-              RESERVE A TABLE
-            </a>
+        <div className="col-12 col-md-4 d-flex justify-content-center align-items-center">
+          <div style={styles.reserve} onClick={() => history.push("tableRes")}>
+            <img src="assets/reserve-table.png" alt="reserve-table" />
+            <span style={styles.buttonText}>RESERVE A TABLE</span>
           </div>
         </div>
       </section>
