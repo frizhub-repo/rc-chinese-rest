@@ -1,5 +1,5 @@
 .property {
-  padding: 3px;
+  padding: 5px;
 }
 
 .not_property {
@@ -8,7 +8,7 @@
 
 .properties_container {
   background-color: white;
-  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-top: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: 0px 0px 10px 10px;
   width: 100%;
   margin-top: -45px;
@@ -17,4 +17,8 @@
 .details {
   color: #280813;
   margin-left: 10px;
+}
+
+.alignLeft {
+  text-align: left;
 }

@@ -9,7 +9,12 @@ import DateStep from "./DateStep";
 import { getReservationOffers } from "api/public";
 import { Skeleton } from "@material-ui/lab";
 
-export default function InfoBox({ selectedReservationOffer, specialMenu }) {
+export default function InfoBox({
+  selectedReservationOffer,
+  specialMenu,
+  userTotalRating,
+  rating,
+}) {
   const [loading, setLoading] = React.useState(false);
   const [reserving, setReserving] = React.useState(false);
   const [isNextBtnDisabled, setIsNextBtnDisabled] = React.useState(true);
@@ -108,6 +113,7 @@ export default function InfoBox({ selectedReservationOffer, specialMenu }) {
             offers={offers}
             parameters={parameters}
             setParameters={setParameters}
+            setActive={setActive}
             selectedReservationOffer={selectedReservationOffer}
             specialMenu={specialMenu}
           />
@@ -175,18 +181,40 @@ export default function InfoBox({ selectedReservationOffer, specialMenu }) {
       ) : (
         <div className="d-flex flex-column justify-content-between h-100">
           <div className="mx-1 mt-2">
-            <div className="d-flex justify-content-between my-3">
+            <div
+              className={`d-flex justify-content-between ${classes.imgRoot}`}
+            >
               <button className={`${classes.statusButton} flex-fill`}>
-                <img className="mx-2" src="assets/like.png" width={40} />
-                <h5 className="m-0">4|5</h5>
+                <img
+                  className={`mx-2 ${classes.reserImg}`}
+                  src="assets/like.png"
+                  width={40}
+                  alt="Like"
+                />
+                <h5 className="m-0">{rating}|5</h5>
               </button>
               <button className={`${classes.statusButton} flex-fill`}>
-                <img className="mx-2" src="assets/chat.png" width={40} />
-                <h5 className="m-0">427</h5>
+                <img
+                  className={`mx-2 ${classes.reserImg}`}
+                  src="assets/chat.png"
+                  width={40}
+                  alt="chat"
+                />
+                <h5 className="m-0">{userTotalRating}</h5>
               </button>
               <button className={`${classes.statusButton} flex-fill`}>
-                <img className="mx-2" src="assets/active-euro.png" width={40} />
-                <img src="assets/passive-euro.png" width={40} />
+                <img
+                  className={`${classes.reserImg}`}
+                  src="assets/active-euro.png"
+                  width={40}
+                  alt="Euro"
+                />
+                <img
+                  className={classes.reserImg}
+                  src="assets/passive-euro.png"
+                  width={40}
+                  alt="Euro"
+                />
               </button>
             </div>
           </div>

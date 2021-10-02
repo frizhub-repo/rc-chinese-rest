@@ -19,7 +19,7 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     gap: "90px",
-    padding: "40px 0",
+    marginBlock: "60px",
     fontStyle: "italic",
   },
 };

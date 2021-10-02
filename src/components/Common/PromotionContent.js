@@ -53,6 +53,7 @@ const styles = {
 export default function PromotionContent({
   setReservationOffer,
   selectedReservationOffer,
+  isTableReservation = true,
 }) {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(null);
@@ -148,14 +149,16 @@ export default function PromotionContent({
                     >
                       <span>SPECIAL OFFER</span>
                       <span>{item?.discountPrice}</span>
-                      <button
-                        style={styles.reserveBtn}
-                        onClick={() => handleChangeReservationOffer(item)}
-                      >
-                        {selectedReservationOffer?._id === item?._id
-                          ? "Remove Offer"
-                          : "Add offer"}
-                      </button>
+                      {isTableReservation && (
+                        <button
+                          style={styles.reserveBtn}
+                          onClick={() => handleChangeReservationOffer(item)}
+                        >
+                          {selectedReservationOffer?._id === item?._id
+                            ? "Remove Offer"
+                            : "Add offer"}
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>

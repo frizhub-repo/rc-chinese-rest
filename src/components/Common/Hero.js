@@ -10,6 +10,7 @@ const styles = {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    marginTop: "82px",
   },
   logoContainer: {
     background: "#280813",

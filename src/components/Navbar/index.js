@@ -1,6 +1,7 @@
 import React from "react";
 import { useRestaurantContext } from "../../Context/restaurantContext";
 import { Link, useHistory } from "react-router-dom";
+import { useLocation } from "react-router";
 import classes from "./navbar.module.css";
 import Auth from "components/Auth";
 import { useOrderContext } from "Context/OrderContext";
@@ -9,6 +10,7 @@ import shopingBag from "Assets/images/shopingBag.png";
 
 function Navbar({ showLinks = true }) {
   const history = useHistory();
+  const { pathname } = useLocation();
   let { token, setToken, restaurant, customerData } = useRestaurantContext();
   const { pendingOrders } = useOrderContext();
 
@@ -73,27 +75,47 @@ function Navbar({ showLinks = true }) {
           </button>
           <div className="collpase navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
+              <li
+                className={`nav-item ${
+                  pathname === "/" ? classes.selected : classes.unselect
+                }`}
+              >
                 <Link className="nav-link" to="/">
                   HOME
                 </Link>
               </li>
-              <li className="nav-item">
+              <li
+                className={`nav-item ${
+                  pathname === "/menu" ? classes.selected : classes.unselect
+                }`}
+              >
                 <Link className="nav-link" to="/menu">
                   MENU
                 </Link>
               </li>
-              <li className="nav-item">
+              <li
+                className={`nav-item ${
+                  pathname === "/tableRes" ? classes.selected : classes.unselect
+                }`}
+              >
                 <Link className="nav-link" to="/tableRes">
                   TABLE RESERVATION
                 </Link>
               </li>
-              <li className="nav-item">
+              <li
+                className={`nav-item ${
+                  pathname === "/delivery" ? classes.selected : classes.unselect
+                }`}
+              >
                 <Link className="nav-link" to="/delivery">
                   DELIVERY
                 </Link>
               </li>
-              <li className="nav-item">
+              <li
+                className={`nav-item ${
+                  pathname === "/contact" ? classes.selected : classes.unselect
+                }`}
+              >
                 <Link className="nav-link" to="/contact">
                   CONTACT
                 </Link>
@@ -101,17 +123,15 @@ function Navbar({ showLinks = true }) {
             </ul>
             {token ? (
               <button
-                className="d-flex btn btn-lg btn-outline-light btn-rounded"
-                style={{ borderRadius: "20px" }}
-                onClick={() => history.push('profile')}
+                className={`d-flex btn btn-lg btn-rounded ${classes.authBtn}`}
+                onClick={() => history.push("profile")}
               >
                 {customerData?.firstName} {customerData?.lastName}
               </button>
             ) : (
               <button
-                className="d-flex btn btn-lg btn-outline-light btn-rounded"
-                style={{ borderRadius: "20px" }}
-                onClick={() => history.push('signIn')}
+                className={`d-flex btn btn-lg btn-rounded ${classes.authBtn}`}
+                onClick={() => history.push("signIn")}
               >
                 <img
                   src="assets/login.png"
@@ -162,15 +182,16 @@ function Navbar({ showLinks = true }) {
                   <span className={classes.orderId}>{order?.orderId}</span>{" "}
                   &nbsp;{" "}
                   <span
-                    className={`${classes.statusRoot} ${order?.status === "pending"
-                      ? classes.pending
-                      : order?.status === "accepted"
+                    className={`${classes.statusRoot} ${
+                      order?.status === "pending"
+                        ? classes.pending
+                        : order?.status === "accepted"
                         ? classes.accepted
                         : order?.status === "assigned" ||
                           order?.status === "pickedUp"
-                          ? classes.assigned
-                          : classes.requested
-                      }`}
+                        ? classes.assigned
+                        : classes.requested
+                    }`}
                   >
                     {order?.status}
                   </span>

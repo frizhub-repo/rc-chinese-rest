@@ -13,12 +13,12 @@ import Map from "./Map";
 import StatusBox from "./StatusBox";
 import Table from "./Table";
 import ItemsMenu from "components/Common/ItemsMenu/ItemsMenu";
+import { useLocation } from "react-router";
 
 function Home() {
+  const { state } = useLocation();
   const classes = useStyles();
-  const {
-    restaurant: { placeData = {} },
-  } = useRestaurantContext();
+  const { restaurant: { placeData = {} } = {} } = useRestaurantContext();
   const [openingHours, setOpeningHours] = useState([
     { id: 1, openDay: "Monday" },
     { id: 2, openDay: "Tuesday" },
@@ -44,10 +44,10 @@ function Home() {
           prevOpeningHours.map((openingHour) =>
             openingHour?.id === open?.day
               ? {
-                ...openingHour,
-                openTime: splitTime(open?.time),
-                closeTime: splitTime(close?.time),
-              }
+                  ...openingHour,
+                  openTime: splitTime(open?.time),
+                  closeTime: splitTime(close?.time),
+                }
               : openingHour
           )
         );
@@ -60,6 +60,13 @@ function Home() {
   const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
+    if (state?.showOpeningHours) {
+      document
+        .getElementById("opening_hour")
+        .scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.scrollTo(0, 0);
+    }
     async function getRestaurantMenu() {
       setLoading(true);
       try {
@@ -105,14 +112,14 @@ function Home() {
       <div>
         <div className="d-flex row justfiy-content-center align-items-center justify-content-lg-between my-5">
           <div className="d-flex justify-content-center col-12 col-lg-6">
-            <PromotionContent />
+            <PromotionContent isTableReservation={false} />
           </div>
           <div className="col-12 col-lg-6 mt-5 mt-lg-0">
             <Testimonial reviews={placeData?.reviews} />
           </div>
         </div>
       </div>
-      <div className="row mb-5">
+      <div id="opening_hour" className="row mb-5">
         <div className="col-12 col-lg-6">
           <Map />
         </div>

@@ -15,6 +15,7 @@ export default function TableReservation() {
   const [specialMenu, setSpecialMenu] = React.useState([]);
 
   React.useEffect(() => {
+    window.scrollTo(0, 0);
     try {
       async function getSpecialMenusFn() {
         const res = await getSpecialMenus();
@@ -50,6 +51,8 @@ export default function TableReservation() {
           <InfoBox
             selectedReservationOffer={selectedReservationOffer}
             specialMenu={specialMenu}
+            userTotalRating={placeData?.user_ratings_total}
+            rating={placeData?.rating}
           />
           <Status
             userTotalRating={placeData?.user_ratings_total}

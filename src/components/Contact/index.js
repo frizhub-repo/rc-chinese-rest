@@ -2,7 +2,11 @@ import React from "react";
 import Hero from "../Common/Hero";
 import Touch from "./Touch";
 
-export default function index() {
+export default function Index() {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       <section>
