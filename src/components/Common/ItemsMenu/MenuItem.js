@@ -9,15 +9,15 @@ const styles = {
   },
   imageContainer: {
     borderRadius: "10px",
+    border: "1px solid rgba(0, 0, 0, 0.4)",
   },
 };
 
 export default function MenuItem({ product }) {
-  console.log(product);
   return (
     <div className="d-flex justify-content-center mb-3">
       <div
-        className="shadow-md d-sm-flex d-md-none d-lg-flex flex-column align-items-center d-none"
+        className="d-sm-flex d-md-none d-lg-flex flex-column align-items-center d-none"
         style={styles.imageContainer}
       >
         <img

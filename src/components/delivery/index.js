@@ -10,6 +10,10 @@ export default function Delivery() {
     restaurant: { restaurant, placeData },
   } = useRestaurantContext();
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       <section>

@@ -37,6 +37,7 @@ export default function Menu() {
   const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
+    window.scrollTo(0, 0);
     async function getRestaurantMenu() {
       setLoading(true);
       try {

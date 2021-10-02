@@ -55,7 +55,7 @@ export default function MenuSelector({
         >
           <h4>{item?.category?.name}</h4>
           <img
-            className="p-1 shadow-md"
+            className="p-1 shadow-md selector"
             style={styles.image}
             src="assets/first-course.png"
             width={40}

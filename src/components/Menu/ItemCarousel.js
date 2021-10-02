@@ -88,6 +88,7 @@ export default function ItemCarousel({
             <img
               src={`${process.env.REACT_APP_API_BASE_URL}/${menu.imageUrl}`}
               width={300}
+              className="selector"
             />
             <div
               style={
@@ -95,7 +96,11 @@ export default function ItemCarousel({
               }
             >
               <h4>{menu.title.toUpperCase()}</h4>
-              <img src="assets/restaurant.png" />
+              <img
+                src="assets/restaurant.png"
+                alt="Restaurant"
+                className="selector"
+              />
               <h4>{getCount(menu?.items)}</h4>
             </div>
           </div>

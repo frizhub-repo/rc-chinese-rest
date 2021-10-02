@@ -52,3 +52,21 @@
   color: #e25985;
   border: 1px solid #e25985;
 }
+
+.authBtn {
+  border-radius: 20px;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+.selected {
+  text-decoration: underline;
+}
+
+.unselect {
+  text-decoration: none;
+}
+
+.unselect:hover {
+  text-decoration: underline;
+}

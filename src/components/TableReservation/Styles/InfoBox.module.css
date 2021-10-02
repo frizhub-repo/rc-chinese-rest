@@ -19,16 +19,26 @@
 }
 .statusButton {
   background: rgba(255, 255, 255, 0.7);
-  padding: 3px 8px;
+  padding: 2px 8px;
   margin: 0px 5px;
   border-radius: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  outline: none !important;
 }
+.reserImg {
+  width: 30px;
+}
+
+.imgRoot {
+  margin: 4px 0 25px 0;
+  color: #280813;
+}
+
 .map {
   border-radius: 10px;
-  height: 30vh;
+  height: 40vh;
   width: 100%;
 }
 .reservingTextContainer {

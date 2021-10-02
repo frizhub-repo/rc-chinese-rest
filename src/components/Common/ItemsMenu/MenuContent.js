@@ -13,7 +13,7 @@ const styles = {
   },
   items: {
     padding: "0px 20px",
-    maxHeight: "60vh",
+    maxHeight: "80vh",
     overflowY: "scroll",
   },
   noProduct: {
