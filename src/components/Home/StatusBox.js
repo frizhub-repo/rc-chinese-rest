@@ -17,7 +17,7 @@ const styles = {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-between",
-    width: "150px",
+    width: "160px",
     height: "150px",
   },
   mainCorner: {
@@ -31,7 +31,7 @@ const styles = {
     color: "#F49E0B",
     borderRadius: "20px",
     background: "#fff",
-    padding: "5px",
+    padding: "5px 70px",
     fontSize: "16px",
     width: "100%",
     outline: "none",
@@ -39,7 +39,6 @@ const styles = {
   openHoursButton: {
     width: "100%",
     color: "#F49E0B",
-    border: "2px solid #F49E0B",
     background: "white",
     borderRadius: "0px 0px 25px 25px",
     padding: "10px",
@@ -49,6 +48,9 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     outline: "none",
+  },
+  nowOpenTxt: {
+    fontSize: "20px",
   },
 };
 
@@ -100,13 +102,13 @@ export default function StatusBox({ placeData }) {
       <div style={styles.center}>
         <img className="my-2" src="assets/clock.png" width={80} alt="Clock" />
         <div>
-          <h6>
+          <h6 style={styles.nowOpenTxt}>
             {placeData?.opening_hours?.open_now ? "Now Open" : "Now Closed"}:
           </h6>
           <h6>From 19:00 - To 23:30</h6>
         </div>
         <button style={styles.orderButton} onClick={showDeliveryPage}>
-          ORDER NOW
+          <span>ORDER NOW</span>
         </button>
         <button style={styles.openHoursButton} onClick={showOpeningHours}>
           <p>Click for Opening Hours</p>
