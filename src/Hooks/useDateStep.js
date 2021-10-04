@@ -16,7 +16,9 @@ const useDateStep = ({
         );
         d.setDate(d.getDate() + 1)
       ) {
-        const index = days.findIndex((value) => value.day === d);
+        const index = days.findIndex(
+          (value) => value.day === d.toLocaleDateString()
+        );
         index === -1
           ? days.push({
               day: d.toLocaleDateString(),
@@ -31,19 +33,23 @@ const useDateStep = ({
     } else {
       let days = [];
       for (const offer of offers) {
-        for (
-          let d = new Date(offer?.startDate);
-          new Date(d.toLocaleDateString()) <=
-          new Date(new Date(offer?.endDate).toLocaleDateString());
-          d.setDate(d.getDate() + 1)
-        ) {
-          const index = days.findIndex((value) => value.day === d);
-          index === -1
-            ? days.push({ day: d.toLocaleDateString(), offers: [offer] })
-            : (days[index] = {
-                day: d.toLocaleDateString(),
-                offers: [...days[index].offers, offer],
-              });
+        if (new Date(offer?.endDate) > new Date()) {
+          for (
+            let d = new Date(offer?.startDate);
+            new Date(d.toLocaleDateString()) <=
+            new Date(new Date(offer?.endDate).toLocaleDateString());
+            d.setDate(d.getDate() + 1)
+          ) {
+            const index = days.findIndex(
+              (value) => value.day === d.toLocaleDateString()
+            );
+            index === -1
+              ? days.push({ day: d.toLocaleDateString(), offers: [offer] })
+              : (days[index] = {
+                  day: d.toLocaleDateString(),
+                  offers: [...days[index].offers, offer],
+                });
+          }
         }
       }
       setReservationDetail((prevState) => ({ ...prevState, days }));
