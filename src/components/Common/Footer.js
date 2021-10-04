@@ -50,6 +50,15 @@ const useStyles = () => ({
     color: "white",
     background: "#280813",
   },
+  paragraph: {
+    fontWeight: "normal",
+  },
+  allRights: {
+    fontWeight: "normal",
+    fontSize: "15px",
+    display: "flex",
+    textAlign: "left",
+  },
 });
 
 export default function Footer() {
@@ -60,30 +69,32 @@ export default function Footer() {
       <div style={styles.container}>
         <div className="flex-1 d-flex flex-column">
           <div style={styles.headingContainer} className="shadow-md">
-            <p>CI CHO SAN</p>
+            <p style={styles.paragraph}>CI CHO SAN</p>
           </div>
           <div
             style={styles.contentContainer}
             className="d-flex flex-column align-items-start flex-1"
           >
-            <p>
+            <p style={styles.paragraph}>
               <span className="font-weight-bold">VAT: </span>651354613161355
             </p>
-            <p>
+            <p style={styles.paragraph}>
               <span className="font-weight-bold">Registered Office: </span>Via
               ciccio gialli Milan Italy
             </p>
-            <p>
+            <p style={styles.paragraph}>
               <span className="font-weight-bold">PEC: </span>starters@cafe.com
             </p>
           </div>
         </div>
         <div className="flex-1">
           <div style={styles.headingContainer} className="shadow-md">
-            <p>NEWSLETTER</p>
+            <p style={styles.paragraph}>NEWSLETTER</p>
           </div>
           <div style={{ ...styles.contentContainer, ...styles.middleContent }}>
-            <p>Subscribe to get our amazing discounts and events!</p>
+            <p style={styles.paragraph}>
+              Subscribe to get our amazing discounts and events!
+            </p>
             <div className="d-flex flex-column align-items-center mt-3">
               <button style={styles.emailBtn}>Email</button>
               <button style={styles.subscribeBtn}>Subscribe</button>
@@ -92,10 +103,10 @@ export default function Footer() {
         </div>
         <div className="flex-1 d-flex flex-column">
           <div style={styles.headingContainer} className="shadow-md">
-            <p>USEFUL LINKS</p>
+            <p style={styles.paragraph}>USEFUL LINKS</p>
           </div>
           <div style={styles.contentContainer} className="flex-1">
-            <p>
+            <p style={styles.paragraph}>
               Cookie Policy
               <br />
               Terms & Conditions
@@ -116,7 +127,7 @@ export default function Footer() {
       </div>
       <div style={styles.bottomContainer}>
         <hr style={styles.divider} />
-        <small className="font-italic">
+        <small style={styles.allRights} className="font-italic">
           @2021 Restaurants Club. All Rights Reserved
         </small>
       </div>

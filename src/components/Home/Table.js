@@ -21,6 +21,7 @@ const styles = {
     padding: "10px 20px",
     textAlign: "center",
     border: "1px solid black",
+    fontWeight: "normal",
   },
 };
 

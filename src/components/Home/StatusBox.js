@@ -51,9 +51,20 @@ const styles = {
   },
   nowOpenTxt: {
     fontSize: "20px",
+    fontWeight: "bolder",
   },
   parag: {
-    fontSize: "15px",
+    fontStyle: "italic",
+    fontWeight: "normal",
+  },
+  clickForOpeningHour: {
+    fontWeight: "normal",
+  },
+  time: {
+    fontWeight: "bolder",
+  },
+  orderNow: {
+    fontWeight: "normal",
   },
 };
 
@@ -109,13 +120,13 @@ export default function StatusBox({ placeData }) {
           <h6 style={styles.nowOpenTxt}>
             {placeData?.opening_hours?.open_now ? "Now Open" : "Now Closed"}:
           </h6>
-          <h6>From 19:00 - To 23:30</h6>
+          <h6 style={styles.time}>From 19:00 - To 23:30</h6>
         </div>
         <button style={styles.orderButton} onClick={showDeliveryPage}>
-          <span>ORDER NOW</span>
+          <span style={styles.orderNow}>ORDER NOW</span>
         </button>
         <button style={styles.openHoursButton} onClick={showOpeningHours}>
-          <p style={styles.parag}>Click for Opening Hours</p>
+          <p style={styles.clickForOpeningHour}>Click for Opening Hours</p>
           <img className="mt-1" src="assets/arrow-down.png" alt="Arrow" />
         </button>
       </div>
