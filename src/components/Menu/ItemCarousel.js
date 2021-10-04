@@ -37,6 +37,9 @@ const useStyles = () => ({
     alignItems: "center",
     border: "5px solid #F49E0B",
   },
+  imgHeight: {
+    height: "100%",
+  },
 });
 
 export default function ItemCarousel({
@@ -86,6 +89,8 @@ export default function ItemCarousel({
             style={styles.itemContainer}
           >
             <img
+              style={styles.imgHeight}
+              alt=""
               src={`${process.env.REACT_APP_API_BASE_URL}/${menu.imageUrl}`}
               width={300}
               className="selector"

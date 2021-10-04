@@ -51,6 +51,20 @@ const styles = {
   },
   nowOpenTxt: {
     fontSize: "20px",
+    fontWeight: "bolder",
+  },
+  parag: {
+    fontStyle: "italic",
+    fontWeight: "normal",
+  },
+  clickForOpeningHour: {
+    fontWeight: "normal",
+  },
+  time: {
+    fontWeight: "bolder",
+  },
+  orderNow: {
+    fontWeight: "normal",
   },
 };
 
@@ -82,16 +96,17 @@ export default function StatusBox({ placeData }) {
             marginBottom: "10px",
           }}
         >
-          <p>Table Reservation</p>
+          <p style={styles.parag}>Table Reservation</p>
           <img src="assets/reservation.png" width={50} alt="Reservation" />
-          <p>
+          <p style={styles.parag}>
             <span>20</span> Sets Available
           </p>
         </div>
         <div style={{ ...styles.corner, ...styles.axisCorner }}>
-          <p>Address</p>
+          <p style={styles.parag}>Address</p>
           <img src="assets/map.png" width={50} alt="map" />
           <p
+            style={styles.parag}
             className="wrapTextIntoTwoLine"
             title={placeData?.formatted_address}
           >
@@ -105,13 +120,13 @@ export default function StatusBox({ placeData }) {
           <h6 style={styles.nowOpenTxt}>
             {placeData?.opening_hours?.open_now ? "Now Open" : "Now Closed"}:
           </h6>
-          <h6>From 19:00 - To 23:30</h6>
+          <h6 style={styles.time}>From 19:00 - To 23:30</h6>
         </div>
         <button style={styles.orderButton} onClick={showDeliveryPage}>
-          <span>ORDER NOW</span>
+          <span style={styles.orderNow}>ORDER NOW</span>
         </button>
         <button style={styles.openHoursButton} onClick={showOpeningHours}>
-          <p>Click for Opening Hours</p>
+          <p style={styles.clickForOpeningHour}>Click for Opening Hours</p>
           <img className="mt-1" src="assets/arrow-down.png" alt="Arrow" />
         </button>
       </div>
@@ -123,16 +138,16 @@ export default function StatusBox({ placeData }) {
             marginBottom: "10px",
           }}
         >
-          <p>Delivery</p>
+          <p style={styles.parag}>Delivery</p>
           <img src="assets/delivery-man.png" width={50} alt="Delivery" />
-          <p>
+          <p style={styles.parag}>
             Minium Order <span>15€</span>
           </p>
         </div>
         <div style={{ ...styles.corner, ...styles.mainCorner }}>
-          <p>Reviews</p>
+          <p style={styles.parag}>Reviews</p>
           <img src="assets/stars.png" width={60} alt="Stars" />
-          <p>
+          <p style={styles.parag}>
             <span>{placeData?.user_ratings_total}</span> Satisfied Clients
           </p>
         </div>

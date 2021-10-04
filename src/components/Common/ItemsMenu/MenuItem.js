@@ -53,27 +53,31 @@ export default function MenuItem({ product }) {
       </div>
       <div className={`mr-2 my-2 my-lg-0 ${classes.details}`}>
         <div className="d-flex justify-content-between">
-          <h4>{product?.title}</h4>
+          <h4 className={classes.productTitle}>{product?.title}</h4>
           <h4>{product?.sizes?.price}</h4>
         </div>
-        <div className={`d-flex ${classes.alignLeft}`}>
-          <p
-            className="wrapTextIntoTwoLine"
-            title={product?.ingredients.map((i) => i)}
-          >
-            <span className="font-weight-bold">Ingredients: </span>
-            {product?.ingredients.map((i) => `${i}, `)}
-          </p>
-        </div>
-        <div className={`d-flex ${classes.alignLeft}`}>
-          <p
-            className="wrapTextIntoTwoLine"
-            title={product?.allergies.map((i) => i)}
-          >
-            <span className="font-weight-bold">Allergeni: </span>
-            {product?.allergies.map((i) => `${i}, `)}
-          </p>
-        </div>
+        {product?.ingredients?.length > 0 && (
+          <div className={`d-flex ${classes.alignLeft}`}>
+            <p
+              className="wrapTextIntoTwoLine"
+              title={product?.ingredients.map((i) => i)}
+            >
+              <span className="font-weight-bold">Ingredients: </span>
+              {product?.ingredients.map((i) => `${i}, `)}
+            </p>
+          </div>
+        )}
+        {product?.allergies?.length > 0 && (
+          <div className={`d-flex ${classes.alignLeft}`}>
+            <p
+              className="wrapTextIntoTwoLine"
+              title={product?.allergies.map((i) => i)}
+            >
+              <span className="font-weight-bold">Allergeni: </span>
+              {product?.allergies.map((i) => `${i}, `)}
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
