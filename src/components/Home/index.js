@@ -100,7 +100,7 @@ function Home() {
             specialMenu={specialMenu}
             activeIndex={activeIndex}
             setActiveIndex={setActiveIndex}
-            showItems={{ xl: 6, lg: 5 }}
+            showItems={{ xl: 5, lg: 3 }}
           />
         </div>
         <div>
