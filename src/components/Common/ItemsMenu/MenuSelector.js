@@ -14,6 +14,9 @@ const styles = {
   image: {
     borderRadius: "50%",
   },
+  categoryName: {
+    fontWeight: "bolder",
+  },
 };
 
 export default function MenuSelector({
@@ -53,12 +56,13 @@ export default function MenuSelector({
             activeSection === index ? classes.active : classes.un_active
           }`}
         >
-          <h4>{item?.category?.name}</h4>
+          <h4 style={styles.categoryName}>{item?.category?.name}</h4>
           <img
             className="p-1 shadow-md selector"
             style={styles.image}
             src="assets/first-course.png"
             width={40}
+            alt=""
           />
         </div>
       ))}

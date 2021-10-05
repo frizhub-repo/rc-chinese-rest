@@ -32,6 +32,7 @@ const useStyles = () => ({
     borderRadius: "5px 5px 0px 0px",
     margin: "0px",
     minWidth: "200px",
+    fontWeight: "normal",
   },
   subscribeBtn: {
     padding: "10px",
@@ -39,6 +40,7 @@ const useStyles = () => ({
     borderRadius: "0px 0px 5px 5px",
     margin: "0px",
     minWidth: "200px",
+    fontWeight: "normal",
   },
   divider: {
     background: "white",
