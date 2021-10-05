@@ -88,7 +88,7 @@ export default function PeopleStep({
                   } shadow-md`}
                   onClick={() => updatePeople({ count, value })}
                 >
-                  <h4>{count}</h4>
+                  <h4 className={classes.countHeader}>{count}</h4>
                   <Discount
                     isActive={parameters?.people?.count === count}
                     offers={value}

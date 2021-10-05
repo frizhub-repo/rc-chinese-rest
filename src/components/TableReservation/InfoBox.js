@@ -137,7 +137,9 @@ export default function InfoBox({
         {reserving ? (
           <div className="d-flex flex-column justify-content-between align-items-stretch flex-fill">
             <div className={classes.reservingTextContainer}>
-              <h4>YOU'RE RESERVING A TABLE!</h4>
+              <h4 className={classes.reserveTableH4}>
+                YOU'RE RESERVING A TABLE!
+              </h4>
             </div>
             <div>
               <Stepper active={active} setActive={setActive} />
@@ -149,7 +151,7 @@ export default function InfoBox({
             d-flex justify-content-center align-items-center flex-fill`}
             onClick={() => setReserving(true)}
           >
-            <h4>RESERVE A TABLE</h4>
+            <h4 className={classes.reserveTableH4}>RESERVE A TABLE</h4>
           </div>
         )}
       </div>
@@ -164,7 +166,7 @@ export default function InfoBox({
           <div className={classes.reservingContainer}>
             {active !== 3 && (
               <button
-                style={{ border: 0, outline: "none" }}
+                style={{ border: 0, outline: "none", fontWeight: "normal" }}
                 className={`${classes.reservingNextBtn} shadow-md`}
                 onClick={() => {
                   incrementActive();

@@ -13,13 +13,13 @@ function DiscountCard({ content, isActive, handleClick }) {
         <div className={classes.detailsCardHeaderContainer}>
           {content?.discountPrice && (
             <div className={classes.detailsCardNameContainer}>
-              <h5>-{content?.discountPrice}%</h5>
+              <h5 className={classes.headingH5}>-{content?.discountPrice}%</h5>
             </div>
           )}
-          <h5 className={classes.detailsCardHeader}>{content?.title}</h5>
+          <h5 className={classes.headingH5}>{content?.title}</h5>
         </div>
         <div>
-          <p>{content?.description}</p>
+          <p className={classes.description}>{content?.description}</p>
         </div>
       </div>
       <div
