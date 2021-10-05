@@ -40,6 +40,9 @@ const useStyles = () => ({
   imgHeight: {
     height: "100%",
   },
+  itemTitle: {
+    fontWeight: "bolder",
+  },
 });
 
 export default function ItemCarousel({
@@ -100,13 +103,13 @@ export default function ItemCarousel({
                 index === activeIndex ? styles.selectedContent : styles.content
               }
             >
-              <h4>{menu.title.toUpperCase()}</h4>
+              <h4 style={styles.itemTitle}>{menu.title.toUpperCase()}</h4>
               <img
                 src="assets/restaurant.png"
                 alt="Restaurant"
                 className="selector"
               />
-              <h4>{getCount(menu?.items)}</h4>
+              <h4 style={styles.itemTitle}>{getCount(menu?.items)}</h4>
             </div>
           </div>
         ))}

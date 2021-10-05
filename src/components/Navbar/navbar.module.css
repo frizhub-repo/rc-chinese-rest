@@ -61,10 +61,12 @@
 
 .selected {
   text-decoration: underline;
+  font-weight: normal;
 }
 
 .unselect {
   text-decoration: none;
+  font-weight: normal;
 }
 
 .unselect:hover {

@@ -107,8 +107,8 @@ export default function PromotionContent({
         direction={direction}
       >
         {discounts?.length ? (
-          discounts?.map((item) => (
-            <Carousel.Item>
+          discounts?.map((item, index) => (
+            <Carousel.Item key={index}>
               <div style={styles.carouselItem}>
                 <div className="d-flex justify-content-between">
                   <a
@@ -137,8 +137,8 @@ export default function PromotionContent({
                         className="d-flex flex-column align-items-start custom-scroll"
                         style={styles.itemHeight}
                       >
-                        {item.items.map((dish) => (
-                          <p>{dish}</p>
+                        {item.items.map((dish, index) => (
+                          <p key={index}>{dish}</p>
                         ))}
                       </div>
                     </div>

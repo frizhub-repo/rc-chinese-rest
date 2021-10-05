@@ -22,6 +22,7 @@ const styles = {
   buttonText: {
     color: "#F49E0B",
     fontSize: "20px",
+    fontWeight: "normal",
   },
   backdrop: {
     zIndex: 1,
