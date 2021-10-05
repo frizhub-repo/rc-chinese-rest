@@ -33,7 +33,7 @@ const useDateStep = ({
     } else {
       let days = [];
       for (const offer of offers) {
-        if (new Date(offer?.endDate) > new Date()) {
+        if (new Date(offer?.endDate) >= new Date()) {
           for (
             let d = new Date(offer?.startDate);
             new Date(d.toLocaleDateString()) <=
