@@ -30,14 +30,15 @@ export default function Table({ openingHours }) {
     <table style={styles.table}>
       <thead>
         <th style={styles.header} colSpan={2}>
-          <img className="mx-auto" src="assets/clock.png" width={80} />
+          <img className="mx-auto" src="assets/clock.png" width={80} alt="" />
         </th>
       </thead>
       <tbody>
-        {openingHours.map((timing) => (
+        {openingHours.map((timing, index) => (
           <tr
             className={timing?.openTime ? classes.opened : classes.closed}
             style={styles.row}
+            key={index}
           >
             <td colSpan={1} style={styles.column}>
               {timing?.openDay}

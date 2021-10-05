@@ -19,9 +19,9 @@ export default function GalleryCarousel() {
 
   return (
     <Carousel style={styles.carousel}>
-      {images.map((image) => (
-        <Carousel.Item>
-          <img style={styles.img} src={image} />
+      {images.map((image, index) => (
+        <Carousel.Item key={index}>
+          <img style={styles.img} src={image} alt="" />
         </Carousel.Item>
       ))}
     </Carousel>

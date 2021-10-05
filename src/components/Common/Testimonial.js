@@ -26,14 +26,19 @@ export default function Testimonial({ reviews }) {
   return (
     <div className="d-flex justify-content-center w-100">
       <Carousel interval={1000} indicators={false}>
-        {reviews?.map((review) => {
+        {reviews?.map((review, index) => {
           return (
-            <Carousel.Item interval={500} style={styles.carouselItem}>
+            <Carousel.Item
+              key={index}
+              interval={500}
+              style={styles.carouselItem}
+            >
               <div style={styles.carouselContent}>
                 <img
                   src={review.profile_photo_url}
                   className="mb-3"
                   width={100}
+                  alt=""
                 />
                 <p style={styles.carouselMessage}>‘’{review.text}’’</p>
               </div>
