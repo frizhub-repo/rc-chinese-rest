@@ -122,7 +122,7 @@ export default function TimeStep({
                     } shadow-md`}
                     onClick={() => updateTime(name, slot, value)}
                   >
-                    <h4>{slot}</h4>
+                    <h4 className={classes.slot}>{slot}</h4>
                     <Discount
                       offers={value}
                       isActive={

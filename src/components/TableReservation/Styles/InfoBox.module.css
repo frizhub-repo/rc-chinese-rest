@@ -36,6 +36,11 @@
   color: #280813;
 }
 
+.reserveTableH4 {
+  font-size: 22px;
+  font-weight: bolder;
+}
+
 .map {
   border-radius: 10px;
   height: 40vh;

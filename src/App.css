@@ -166,3 +166,7 @@ img {
   -webkit-user-select: none;
   -ms-user-select: none;
 }
+
+span {
+  font-size: 25px;
+}
