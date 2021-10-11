@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { isEmpty } from "utils/common";
 import messages from "utils/messages";
 import classes from "./CourseItem.module.css";
+import { createDiscountStats } from "api/public";
 
 const styles = {
   container: {
@@ -94,7 +95,7 @@ export default function CourseItem({
 
   const discountedPrice = price > 0 ? price : 0;
 
-  const addToCart = () => {
+  const addToCart = async () => {
     try {
       const isDiscount = isEmpty(offer) ? false : offer.discountType;
       isDiscount && validateOffer(offer);
@@ -113,6 +114,16 @@ export default function CourseItem({
       dispatch(addItem(payload));
       dispatch(setTotal(discountedPrice * quantity));
       setQuantity(1);
+      if (!isEmpty(offer)) {
+        let discount_stat_click = {
+          type: "click",
+          discountType: "DeliveryDiscount",
+          discount: offer._id,
+        };
+        await createDiscountStats({
+          offers: [discount_stat_click],
+        });
+      }
     } catch (error) {
       if (error.message) {
         toast.error(error.message);

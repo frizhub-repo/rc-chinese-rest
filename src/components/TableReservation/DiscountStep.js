@@ -5,6 +5,7 @@ import * as React from "react";
 import { toast } from "react-toastify";
 import classes from "./Styles/Step.module.css";
 import { useHistory } from "react-router";
+import { createDiscountStats } from "api/public";
 
 function DiscountCard({ content, isActive, handleClick }) {
   return (
@@ -99,8 +100,16 @@ export default function DiscountStep({
     description: "No one Discounts will be used with this order",
   };
 
-  function updateDiscount(discount) {
+  async function updateDiscount(discount) {
     setParameters({ ...parameters, discount });
+    let discount_stat_click = {
+      type: "click",
+      discountType: "ReservationDiscount",
+      discount: discount,
+    };
+    await createDiscountStats({
+      offers: [discount_stat_click],
+    });
   }
 
   function updateSpecialMenu(menu) {
@@ -129,6 +138,16 @@ export default function DiscountStep({
           specialMenu: parameters?.menu,
         };
         await reserveTable(payload);
+        if (parameters.discount) {
+          let discount_stat_Usage = {
+            type: "usage",
+            discountType: "ReservationDiscount",
+            discount: parameters.discount,
+          };
+          await createDiscountStats({
+            offers: [discount_stat_Usage],
+          });
+        }
         toast.success("Reservation created successfully");
         setParameters({});
         setActive(0);

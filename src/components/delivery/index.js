@@ -6,9 +6,7 @@ import Course from "./Course";
 import Info from "./Info";
 
 export default function Delivery() {
-  const {
-    restaurant: { restaurant, placeData },
-  } = useRestaurantContext();
+  const { restaurant: { restaurant, placeData } = {} } = useRestaurantContext();
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
