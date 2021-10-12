@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { useRestaurantContext } from "Context/restaurantContext";
 
 const useStyles = () => ({
   itemContainer: {
@@ -52,6 +53,7 @@ export default function ItemCarousel({
   showItems = null,
 }) {
   const styles = useStyles();
+  const { restaurant = {} } = useRestaurantContext();
 
   const getCount = (items) => {
     let count = 0;
@@ -94,7 +96,11 @@ export default function ItemCarousel({
             <img
               style={styles.imgHeight}
               alt=""
-              src={`${process.env.REACT_APP_API_BASE_URL}/${menu.imageUrl}`}
+              src={
+                menu.imageUrl
+                  ? `${process.env.REACT_APP_API_BASE_URL}/${menu.imageUrl}`
+                  : `${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`
+              }
               width={300}
               className="selector"
             />

@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./MenuItem.module.css";
+import { useRestaurantContext } from "Context/restaurantContext";
 
 const styles = {
   itemImage: {
@@ -14,6 +15,8 @@ const styles = {
 };
 
 export default function MenuItem({ product }) {
+  const { restaurant = {} } = useRestaurantContext();
+
   return (
     <div className="d-flex justify-content-center mb-3">
       <div
@@ -22,7 +25,11 @@ export default function MenuItem({ product }) {
       >
         <img
           style={styles.itemImage}
-          src={`${process.env.REACT_APP_API_BASE_URL}/${product?.images[0]}`}
+          src={
+            product?.images[0]
+              ? `${process.env.REACT_APP_API_BASE_URL}/${product?.images[0]}`
+              : `${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`
+          }
           alt="Item"
         />
         <div
