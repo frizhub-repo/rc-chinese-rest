@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import classes from "./Styles/DailyMenuContent.module.css";
+import { useRestaurantContext } from "Context/restaurantContext";
 
 const styles = {
   divider: {
@@ -30,12 +31,17 @@ function DailyMenuItem({
   ingredients,
   allergies,
 }) {
+  const { restaurant = {} } = useRestaurantContext();
   return (
     <div className="d-flex justify-content-center mb-3">
       <div className="shadow-sm d-lg-flex flex-column align-items-center d-none">
         <img
           style={styles.itemImage}
-          src={`${process.env.REACT_APP_API_BASE_URL}/${images[0]}`}
+          src={
+            images[0]
+              ? `${process.env.REACT_APP_API_BASE_URL}/${images[0]}`
+              : `${process.env.REACT_APP_API_BASE_URL}/${restaurant?.restaurant?.logoUrl}`
+          }
           alt="product"
         />
         <div

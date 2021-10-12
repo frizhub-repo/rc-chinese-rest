@@ -93,24 +93,32 @@ function Navbar({ showLinks = true }) {
                   MENU
                 </Link>
               </li>
-              <li
-                className={`nav-item ${
-                  pathname === "/tableRes" ? classes.selected : classes.unselect
-                }`}
-              >
-                <Link className="nav-link" to="/tableRes">
-                  TABLE RESERVATION
-                </Link>
-              </li>
-              <li
-                className={`nav-item ${
-                  pathname === "/delivery" ? classes.selected : classes.unselect
-                }`}
-              >
-                <Link className="nav-link" to="/delivery">
-                  DELIVERY
-                </Link>
-              </li>
+              {restaurant?.restaurant?.isReservationAvailable && (
+                <li
+                  className={`nav-item ${
+                    pathname === "/tableRes"
+                      ? classes.selected
+                      : classes.unselect
+                  }`}
+                >
+                  <Link className="nav-link" to="/tableRes">
+                    TABLE RESERVATION
+                  </Link>
+                </li>
+              )}
+              {restaurant?.restaurant?.isDeliveryAvailable && (
+                <li
+                  className={`nav-item ${
+                    pathname === "/delivery"
+                      ? classes.selected
+                      : classes.unselect
+                  }`}
+                >
+                  <Link className="nav-link" to="/delivery">
+                    DELIVERY
+                  </Link>
+                </li>
+              )}
               <li
                 className={`nav-item ${
                   pathname === "/contact" ? classes.selected : classes.unselect
