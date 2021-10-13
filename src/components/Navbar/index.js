@@ -59,8 +59,16 @@ function Navbar({ showLinks = true }) {
         <nav
           className={`navbar fixed-top navbar-expand-lg navbar-dark ${classes.navbar}`}
         >
-          <Link className="btn btn-outline-light navbar-brand" to="/">
-            Logo
+          <Link className={classes.logo} to="/">
+            <img
+              width="40"
+              src={
+                process.env.REACT_APP_API_BASE_URL +
+                "/" +
+                restaurant?.restaurant?.logoUrl
+              }
+              alt="logo"
+            />
           </Link>
           <button
             className="navbar-toggler"
