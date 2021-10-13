@@ -14,7 +14,14 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { addDeliveryItem } from "../../actions";
 
 const useStyles = makeStyles({
-  container: {},
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: "8%",
+    marginBottom: "2%",
+  },
   title: {
     fontWeight: "600",
     fontSize: "20px",
