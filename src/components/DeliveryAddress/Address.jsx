@@ -18,6 +18,7 @@ import { addOrderAddress } from "../../actions";
 const useStyles = makeStyles({
   container: {
     width: "50%",
+    marginTop: "8%",
   },
   title: {
     fontWeight: "600",

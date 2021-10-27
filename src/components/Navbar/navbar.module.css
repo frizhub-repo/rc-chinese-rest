@@ -2,6 +2,10 @@
   background-color: #280813;
 }
 
+.logo {
+  padding: 0 10px;
+}
+
 .trackOrderRoot {
   position: fixed !important;
   bottom: 20px;

@@ -84,7 +84,7 @@ const ChooseAddress = () => {
   };
 
   return (
-    <Box>
+    <Box mt="8%">
       <label className={classes.title}>Choose your Address</label>
       <Card className={classes.formContainer}>
         <RadioGroup

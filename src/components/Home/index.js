@@ -32,7 +32,7 @@ function Home() {
     formatOpeningHours();
   }, [placeData]);
 
-  const splitTime = (time) => time.slice(0, 2) + ":" + time.slice(2);
+  const splitTime = (time) => time?.slice(0, 2) + ":" + time?.slice(2);
 
   function formatOpeningHours() {
     if (!isEmpty(placeData)) {
